@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+.navbar-default {
+    background-color:#053275;
+    background-image: none;
+    background-repeat: no-repeat;
+   }
+
+body {
+    background: #031633  !important;
+  }
+
+h1{
+    color:#f7f7f7;
+}
+h2{
+    color:#f7f7f7;
+}
+.container{
+    margin-top:10px;
+}
+
+body{
+    padding:0px;
+    margin:0px;
+    
+}
+
+label{
+    color:#e3e3e3;
+}
+
+p{
+    color:#f7f7f7;
+}
+ul{
+    
+        color:#f7f7f7;
+    
+}
