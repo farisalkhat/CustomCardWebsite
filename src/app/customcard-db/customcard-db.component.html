@@ -1,1 +1,9 @@
-<p>customcard-db works!</p>
+<div class="container">
+
+<span *ngFor = "let card of cards">
+
+    <button class="btn btn-default" (click)="showDetails(card.id)" ><img src ={{card.image}}></button>
+    
+</span>
+
+</div>

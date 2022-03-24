@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomcardDbComponent } from './customcard-db/customcard-db.component';
 import { DownloadDbComponent } from './download-db/download-db.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,14 @@ const routes: Routes = [
 {
   path:'customcard-db',
   component:CustomcardDbComponent
+},
+{
+  path:'login',
+  component:LoginComponent
+},
+{
+  path:'signup',
+  component:SignupComponent
 },
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DebugElement, OnInit } from '@angular/core';
 import { CustomcardsService,Card } from '../customcards.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { CustomcardsService,Card } from '../customcards.service';
 })
 export class CustomcardDbComponent implements OnInit {
   cards!: Card[];
+  card: Card | undefined;
   constructor(private customcardsService:CustomcardsService) { }
 
   ngOnInit(): void {
@@ -20,6 +21,12 @@ export class CustomcardDbComponent implements OnInit {
 
     )
   }
+
+  showDetails(id:string){
+    this.card = this.cards.find(x => x.id == id);
+    console.log(this.card)
+    
+}
 
 
 }

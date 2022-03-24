@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {Router} from '@angular/router';
 
 export interface Card extends Document{
-  _id:string;
+  id:string;
   cardtype:string;
   name:string;
   type:string;
@@ -12,6 +12,7 @@ export interface Card extends Document{
   level:number;
   attribute:string;
   effect:string;
+  image:string;
 }
 
 
@@ -31,5 +32,9 @@ export class CustomcardsService {
 
   getCustomCards(){
     return this.http.get<any[]>(this._carddataUrl);
+  } 
+
+  getCustomCard(id:string){
+    return this.http.get<any>(`https://mm8bitdm.herokuapp.com/api/yugioh/customcards/${id}`);
   } 
 }

@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { DownloadDbComponent } from './download-db/download-db.component';
 import { CustomcardDbComponent } from './customcard-db/customcard-db.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DownloadDbComponent,
-    CustomcardDbComponent
+    CustomcardDbComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     HttpClientModule,
