@@ -1,0 +1,75 @@
+
+
+
+
+
+
+
+
+  <div class="container-fluid">
+
+    <div class="row">
+    
+            <div *ngIf = 'TurnPlayer==1' class="col-lg-9">
+
+                <span  *ngFor = "let card of p1SelectableCards">
+
+                    <button class="btn btn-default" (click)="showDetails(card)" >
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                          <div class="flip-card-front">
+                            <img src="\assets\cardimages\Default.png" >
+                          </div>
+                          <div class="flip-card-back">
+                            <img src={{card?.image}}>
+                          </div>
+                        </div>
+                      </div>
+    
+                    </button>
+                    
+                </span>
+            </div>
+
+            <!-- <div *ngIf = 'TurnPlayer==2' class="col-lg-9">
+
+                <span  *ngFor = "let card of p2SelectableCards">
+
+                    <button class="btn btn-default" (click)="showDetails(card.id)" >
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                          <div class="flip-card-front">
+                            <img src="\assets\cardimages\Default.png" >
+                          </div>
+                          <div class="flip-card-back">
+                            <img src={{card?.image}}>
+                          </div>
+                        </div>
+                      </div>
+    
+                    </button>
+                    
+                </span>
+            </div> -->
+    
+    
+            <div class="col-lg-3">
+                <img src = {{card?.image}}> 
+                <p>{{card?.name}}</p>
+                <p>{{card?.cardtype}}</p>
+    
+                <p *ngIf = "card?.cardtype!=undefined && card?.cardtype!='Spell' && card?.cardtype!='Trap'">
+                    Level {{card?.level}} {{card?.attribute}} {{card?.type}}
+                </p>
+    
+    
+                <p> {{card?.effect}}</p>
+            </div>
+    
+    
+    </div>
+    
+    
+    
+    
+    </div>

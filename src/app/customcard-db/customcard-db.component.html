@@ -1,9 +1,38 @@
-<div class="container">
 
-<span *ngFor = "let card of cards">
 
-    <button class="btn btn-default" (click)="showDetails(card.id)" ><img src ={{card.image}}></button>
-    
-</span>
+<div class="container-fluid">
+
+<div class="row">
+
+        <div class="col-lg-9">
+            <span *ngFor = "let card of cards">
+
+                <button class="btn btn-default" (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card.image}}></button>
+                
+            </span>
+        </div>
+
+
+        <div class="col-lg-3">
+            <img src = {{card?.image}}> 
+            <p>{{card?.name}}</p>
+            <p>{{card?.cardtype}}</p>
+
+            <p *ngIf = "card?.cardtype!=undefined && card?.cardtype!='Spell' && card?.cardtype!='Trap'">
+                Level {{card?.level}} {{card?.attribute}} {{card?.type}}
+            </p>
+
+
+            <p> {{card?.effect}}</p>
+        </div>
+
 
 </div>
+
+
+
+
+</div>
+
+
+

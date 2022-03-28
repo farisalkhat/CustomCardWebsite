@@ -1,0 +1,69 @@
+<div class="container">
+    <form [formGroup] = "draftData" (ngSubmit) = "onSubmit()">
+  
+        <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="draftTitle">Draft Title</label>
+                <input id="draftTitle" type="text" class="form-control" formControlName="draftTitle" [ngClass]="{'is-invalid': submitted && f['draftTitle'].errors}" placeholder="Game Title">
+                <div *ngIf="submitted && f['draftTitle'].errors" class="invalid-feedback">
+                    <div *ngIf="f['draftTitle'].errors['required']">
+                      <p class="red">Umm Game Title required idiot.</p>
+                    </div>
+                </div>
+              </div>
+            </div>
+        
+            
+
+            <div class="col">
+              <div class="form-group">
+                <label for="totalPlayers">Total Players</label>
+                        <select class="form-control"  id="totalPlayers" [ngClass]="{'is-invalid': submitted && f['totalPlayers'].errors}" formControlName="totalPlayers">
+                          <option value = 2>2</option>
+                          <option value = 3>3</option>
+                          <option value = 4>4</option>
+                        </select>
+                        <div *ngIf="submitted && f['totalPlayers'].errors" class="invalid-feedback">
+                          <div *ngIf="f['totalPlayers'].errors['required']">
+                            <p class="red">Player amount required.</p>
+                          </div>
+                      </div>
+              </div>
+            </div>
+            
+            
+        
+        
+        
+        
+        
+        
+        </div> 
+        
+        
+        
+        
+        
+            
+            
+        
+            <!-- <app-gameform #gameForm [submitted] = "submitted" [match] = "gameData"></app-gameform> -->
+            <button class="btn btn-primary" type="submit">Submit</button>
+        
+        
+        
+            <div *ngIf="submitfail && submitted" class="submit-text-fail" >
+              Submission failed! Fix errors above. 
+            </div>
+          
+            <div *ngIf="!submitfail && submitted" class="submit-text-success">
+              Match submitted!
+            </div>
+            
+        
+        
+          </form>
+
+
+</div>

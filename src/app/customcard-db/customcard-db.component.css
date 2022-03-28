@@ -1,2 +1,7 @@
-.ygocard{
+.smallcard{
+    width:100px;
+}
+p{
+    padding:0;
+    margin:0;
 }

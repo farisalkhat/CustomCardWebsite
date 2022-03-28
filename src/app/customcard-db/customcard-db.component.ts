@@ -16,7 +16,7 @@ export class CustomcardDbComponent implements OnInit {
       res => {
         if(res){}
         this.cards = res;
-      console.log(this.cards[0])}
+      console.log(this.card?.level)}
 
 
     )

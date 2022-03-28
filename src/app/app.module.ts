@@ -8,6 +8,9 @@ import { DownloadDbComponent } from './download-db/download-db.component';
 import { CustomcardDbComponent } from './customcard-db/customcard-db.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { DraftsComponent } from './drafts/drafts.component';
+import { DraftmodeComponent } from './drafts/draftmode/draftmode.component';
+import { DraftFormComponent } from './drafts/draft-form/draft-form.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { SignupComponent } from './signup/signup.component';
     DownloadDbComponent,
     CustomcardDbComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    DraftsComponent,
+    DraftmodeComponent,
+    DraftFormComponent
   ],
   imports: [
     HttpClientModule,
