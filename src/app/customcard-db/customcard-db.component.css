@@ -5,3 +5,14 @@ p{
     padding:0;
     margin:0;
 }
+button{
+    padding:0;
+    margin:0;
+}
+.bigcard{
+    width:60%;
+}
+.fixed{
+    position: fixed;
+    left:1200px;
+}

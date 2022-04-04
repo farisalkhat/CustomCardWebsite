@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DraftmodeComponent } from './drafts/draftmode/draftmode.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   {
@@ -46,7 +47,8 @@ component:DraftmodeComponent}
 @NgModule({
   imports: [RouterModule.forRoot(routes),
     FormsModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    BrowserAnimationsModule],
   exports: [RouterModule,FormsModule,
     ReactiveFormsModule]
 })

@@ -4,7 +4,7 @@
 
 <div class="row">
 
-        <div class="col-lg-9">
+        <div class="col-lg-8">
             <span *ngFor = "let card of cards">
 
                 <button class="btn btn-default" (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card.image}}></button>
@@ -13,8 +13,8 @@
         </div>
 
 
-        <div class="col-lg-3">
-            <img src = {{card?.image}}> 
+        <div class="col-lg-3 fixed">
+            <img class="bigcard" src = {{card?.image}}> 
             <p>{{card?.name}}</p>
             <p>{{card?.cardtype}}</p>
 
