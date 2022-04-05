@@ -13,6 +13,7 @@ export interface Card extends Document{
   attribute:string;
   effect:string;
   image:string;
+  creator:string;
 }
 
 
@@ -37,4 +38,10 @@ export class CustomcardsService {
   getCustomCard(id:string){
     return this.http.get<any>(`https://mm8bitdm.herokuapp.com/api/yugioh/customcards/${id}`);
   } 
+
+  getFilteredCards(data: any){
+    return this.http.post<Card[]>('http://127.0.0.1:8080/api/yugioh/searchresult',data);
+  }
+
+  
 }

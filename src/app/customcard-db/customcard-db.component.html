@@ -1,32 +1,179 @@
 
 
-<div class="container-fluid">
+<div class="container">
+    
+
+<div class="row">
+        <div class="col-auto">
+            <label for="Name">Name</label>
+            <input class="form-control" type="text" [(ngModel)] = "filters.name">
+        </div>
+        <div class="col-auto">
+            <label for="Desc">Desc</label>
+            <input class="form-control" type="text" [(ngModel)] = "filters.desc" >
+        </div>
+        <div class="col-auto">
+            <label for="Creator">Creator</label>
+            <input class="form-control" type="text" [(ngModel)] = "filters.creator" >
+        </div>
+
+
+        <div class="col-auto">
+            <label for="cardtype">Card</label>
+            <select class="form-control"   id="initial" [(ngModel)] = "filters.initial" >
+                <option value = "">   </option>
+                <option value = "Monster">Monster</option>
+                <option value ="Spell">Spell</option>
+                <option value ="Trap">Trap</option>
+            </select>
+        </div>
+
+        <div class="col-auto">
+            <label for="cardtype">Card Type 2</label>
+            <select class="form-control"  [disabled]="filters.initial==''" id="cardtype" [(ngModel)] = "filters.cardtype" >
+                <option *ngIf = 'filters.initial=="Monster"' value ="">  </option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="Effect">Effect</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="Flip">Flip</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="Fusion">Fusion</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="Ritual">Ritual</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="Union">Union</option>
+
+                <option *ngIf = 'filters.initial=="Spell"' value = "Normal">Normal</option>
+                <option *ngIf = 'filters.initial=="Spell"' value ="Continuous">Continuous</option>
+                <option *ngIf = 'filters.initial=="Spell"' value ="Quick">Quick</option>
+                <option *ngIf = 'filters.initial=="Spell"' value ="Ritual">Ritual</option>
+                <option *ngIf = 'filters.initial=="Spell"' value ="Equip">Equip</option>
+                <option *ngIf = 'filters.initial=="Spell"' value ="Field">Field</option>
+
+                <option *ngIf = 'filters.initial=="Trap"' value = "Monster">Normal</option>
+                <option *ngIf = 'filters.initial=="Trap"' value ="Spell">Continuous</option>
+                <option *ngIf = 'filters.initial=="Trap"' value ="Trap">Counter</option>
+            </select>
+        </div>
+
+
+        <div class="col-auto">
+            <label for="gamemode">Monster Type</label>
+            <select class="form-control"   [disabled]="filters.initial!='Monster'" id="monstertype" [(ngModel)] = "filters.monstertype">
+                <option value = "">  </option>
+                <option value ="Aqua">Aqua</option>
+                <option value ="Beast">Beast</option>
+                <option value ="Beast-Warrior">Beast-Warrior</option>
+                <option value ="Dinosaur">Dinosaur</option>
+                <option value ="Dragon">Dragon</option>
+                <option value ="Fairy">Fairy</option>
+                <option value ="Fiend">Fiend</option>
+                <option value ="Fish">Fish</option>
+                <option value ="Insect">Insect</option>
+                <option value ="Machine">Machine</option>
+                <option value ="Plant">Plant</option>
+                <option value ="Psychic">Psychic</option>
+                <option value ="Pyro">Pyro</option>
+                <option value ="Reptile">Reptile</option>
+                <option value ="Rock">Rock</option>
+                <option value ="Sea Serpent">Sea Serpent</option>
+                <option value ="Spellcaster">Spellcaster</option>
+                <option value ="Thunder">Thunder</option>
+                <option value ="Warrior">Warrior</option>
+                <option value ="Winged-Beast">Winged-Beast</option>
+                <option value ="Zombie">Zombie</option>
+              </select>
+        </div>
+
+        <div class="col-auto">
+            <label for="attribute">Attribute</label>
+            <select class="form-control"   [disabled]="filters.initial!='Monster'" id="attribute" [(ngModel)] = "filters.attribute">
+                <option value = "">  </option>
+                <option value ="DARK">DARK</option>
+                <option value ="DIVINE">DIVINE</option>
+                <option value ="EARTH">EARTH</option>
+                <option value ="FIRE">FIRE</option>
+                <option value ="LIGHT">LIGHT</option>
+                <option value ="WATER">WATER</option>
+                <option value ="WIND">WIND</option>
+              </select>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+</div>
+
+<div class="row">
+    <div class="col-auto">
+        <label for="levellow">Level &#60;= </label>
+        <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.levellow" type="number" >
+    </div>
+    <div class="col-auto">
+        <label for="levelhigh"> Level   </label>
+        <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.levelhigh" type="number" >
+    </div>
+
+    <div class="col-auto">
+        <label for="atklow">Atk &#60;=</label>
+        <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.atklow" type="number" >
+    </div>
+    <div class="col-auto">
+        <label for="atkhigh">Atk</label>
+        <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.atkhigh" type="number" >
+    </div>
+
+    <div class="col-auto">
+        <label for="deflow">Def &#60;=</label>
+        <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.deflow "type="number" >
+    </div>
+    <div class="col-auto">
+        <label for="defhigh">Def</label>
+        <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.defhigh "type="number" >
+    </div>
+
+    <button class="btn btn-primary" (click)="submitSearch()">Search</button>
+
+
+</div>
 
 <div class="row">
 
-        <div class="col-lg-8">
-            <span *ngFor = "let card of cards">
+    <div class="col-lg-5">
+
+            <span *ngFor = "let card of currentCards">
 
                 <button class="btn btn-default" (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card.image}}></button>
                 
             </span>
+
+        <div class="row">
+            <button class="btn btn-primary" (click)="nextPage()">Next</button><button class="btn btn-primary" (click)="prevPage()">Previous</button>
         </div>
+        
+    </div>
 
 
-        <div class="col-lg-3 fixed">
-            <img class="bigcard" src = {{card?.image}}> 
-            <p>{{card?.name}}</p>
-            <p>{{card?.cardtype}}</p>
+    <div class="col-lg-3 fixed">
+        <img class="bigcard" src = {{card?.image}}> 
+        <p>{{card?.name}}</p>
+        <p>{{card?.cardtype}}</p>
 
-            <p *ngIf = "card?.cardtype!=undefined && card?.cardtype!='Spell' && card?.cardtype!='Trap'">
-                Level {{card?.level}} {{card?.attribute}} {{card?.type}}
-            </p>
-
-
-            <p> {{card?.effect}}</p>
-        </div>
+        <p *ngIf = "card?.cardtype!=undefined && card?.cardtype!='Spell' && card?.cardtype!='Trap'">
+            Level {{card?.level}} {{card?.attribute}} {{card?.type}}
+        </p>
 
 
+        <p> {{card?.effect}}</p>
+
+        
+    </div>
 </div>
 
 
