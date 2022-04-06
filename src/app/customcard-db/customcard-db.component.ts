@@ -59,7 +59,7 @@ export class CustomcardDbComponent implements OnInit {
     //   err=>{console.log(err)}
     // )                                  
 
-    this.customcardsService.getFilteredCards(this.filters).subscribe(
+    this.customcardsService.getFilteredCards2(this.filters).subscribe(
       res=>{
         
         console.log(res)

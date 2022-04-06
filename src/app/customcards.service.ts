@@ -43,7 +43,7 @@ export class CustomcardsService {
     return this.http.post<Card[]>('https://mm8bitdm.herokuapp.com/api/yugioh/searchresult',data);
   }
   getFilteredCards2(data: any){
-    return this.http.post<Card[]>('https://mm8bitdm.herokuapp.com/api/yugioh/searchresult',data);
+    return this.http.post<Card[]>('http://127.0.0.1:8080/api/yugioh/searchresult',data);
   }
 
   
