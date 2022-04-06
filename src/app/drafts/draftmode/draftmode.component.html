@@ -8,10 +8,11 @@
 
   <div class="container-fluid">
     <div class="row">
+      <h1 class="text-center">Coming Soon</h1>
       <div class="container">
         
         <p>Turn Player: <span *ngIf='TurnPlayer==1'>Player 1</span><span *ngIf='TurnPlayer==2'>Player 2</span></p>
-        <button class="btn btn-default"(click)="revealCards()">Reveal Cards</button>
+        <button class="btn btn-dark"(click)="revealCards()">Reveal Cards</button>
         <button class="btn btn-dark" [disabled]="card==undefined" (click)="selectCard()">Select Card</button>
 
       </div>

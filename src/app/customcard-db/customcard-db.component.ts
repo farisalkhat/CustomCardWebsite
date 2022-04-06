@@ -48,6 +48,17 @@ export class CustomcardDbComponent implements OnInit {
   submitSearch(){
     console.log(this.filters)
     this.cards = [] 
+    // this.customcardsService.getFilteredCards2().subscribe(
+    //   res=>{
+        
+    //     console.log(res)
+    //     this.cards = res;
+    //     this.currentPage = 1
+    //     this.getCardNumbers(this.currentPage);
+    //   },
+    //   err=>{console.log(err)}
+    // )                                  
+
     this.customcardsService.getFilteredCards(this.filters).subscribe(
       res=>{
         

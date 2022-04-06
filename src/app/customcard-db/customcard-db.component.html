@@ -32,11 +32,11 @@
             <label for="cardtype">Card Type 2</label>
             <select class="form-control"  [disabled]="filters.initial==''" id="cardtype" [(ngModel)] = "filters.cardtype" >
                 <option *ngIf = 'filters.initial=="Monster"' value ="">  </option>
-                <option *ngIf = 'filters.initial=="Monster"' value ="Effect">Effect</option>
-                <option *ngIf = 'filters.initial=="Monster"' value ="Flip">Flip</option>
-                <option *ngIf = 'filters.initial=="Monster"' value ="Fusion">Fusion</option>
-                <option *ngIf = 'filters.initial=="Monster"' value ="Ritual">Ritual</option>
-                <option *ngIf = 'filters.initial=="Monster"' value ="Union">Union</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="Effect Monster">Effect</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="Flip Monster">Flip</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="Fusion Monster">Fusion</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="Ritual Monster">Ritual</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="Union Monster">Union</option>
 
                 <option *ngIf = 'filters.initial=="Spell"' value = "Normal">Normal</option>
                 <option *ngIf = 'filters.initial=="Spell"' value ="Continuous">Continuous</option>

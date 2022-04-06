@@ -42,6 +42,10 @@ export class CustomcardsService {
   getFilteredCards(data: any){
     return this.http.post<Card[]>('https://mm8bitdm.herokuapp.com/api/yugioh/searchresult',data);
   }
+  getFilteredCards2(data: any){
+    return this.http.post<Card[]>('https://mm8bitdm.herokuapp.com/api/yugioh/searchresult',data);
+  }
 
+  
   
 }

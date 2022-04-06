@@ -16,10 +16,10 @@ body {
   }
 
 h1{
-    color:#f7f7f7;
+    color:black;
 }
 h2{
-    color:#f7f7f7;
+    color:black;
 }
 .container{
     margin-top:10px;
@@ -46,5 +46,4 @@ ul{
 
 .wretched{
     width:50%;
-    margin-top:20px;
 }
