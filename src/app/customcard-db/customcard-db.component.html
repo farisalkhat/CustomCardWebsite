@@ -17,6 +17,50 @@
             <input class="form-control" type="text" [(ngModel)] = "filters.creator" >
         </div>
 
+        <div class="col-auto">
+            <label for="attribute">Tag</label>
+            <select class="form-control"  id="attribute" [(ngModel)] = "filters.tag">
+                <option value =""></option>
+                <option value ="Attack Directly">Attack Directly</option>
+                <option value ="Battle">Battle</option>
+                <option value ="Boost">Boost</option>
+                <option value ="Bounce">Bounce</option>
+                <option value ="Burn">Burn</option>
+                <option value ="Counters">Counters</option>
+                <option value ="Cripple">Cripple</option>
+                <option value ="Draw">Draw  </option>
+                <option value ="Disrupt">Disrupt</option>
+                <option value ="Equip">Equip</option>
+                <option value ="Excavate">Excavate</option>
+                <option value ="Flip">Flip</option>
+                <option value ="Fusion">Fusion</option>
+                <option value ="Gain">Gain</option>
+                <option value ="Gamble">Gamble</option>
+                <option value ="Hand Protection">Hand Protection</option>
+                <option value ="Ignore">Ignore</option>
+
+                <option value ="Lingering">Lingering</option>
+                <option value ="Lockdown">Lockdown</option>
+                <option value ="Mill">Mill</option>
+                <option value ="Mimic">Mimic</option>
+                <option value ="Non-Targeted Removal">Non-Targeted Removal</option>
+                <option value ="Piercing">Piercing</option>
+                <option value ="Position">Position</option>
+                <option value ="Protection">Protection</option>
+                <option value ="Quick">Quick</option>
+                <option value ="Recycle">Recycle</option>
+                <option value ="Restriction">Restriction</option>
+                <option value ="Ritual">Ritual</option>
+                <option value ="Searcher">Searcher</option>
+                <option value ="Special Summon">Special Summon</option>
+                <option value ="Spin">Spin</option>
+                <option value ="Targeted Removal">Targeted Removal</option>
+                <option value ="Token">Token</option>
+                <option value ="Tribute">Tribute</option>
+
+              </select>
+        </div>
+
 
         <div class="col-auto">
             <label for="cardtype">Card</label>
@@ -107,6 +151,7 @@
 
 
 
+
         
 
 
@@ -139,6 +184,23 @@
         <label for="defhigh">Def</label>
         <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.defhigh "type="number" >
     </div>
+    <div class="col-auto">
+        <label for="sort">Sort By</label>
+        <select class="form-control"   id="initial" [(ngModel)] = "filters.sort" >
+            <option value ="c.id ASC">Release Date ASC</option>
+            <option value ="c.id DESC">Release Date DESC</option>
+            <option value ="c.name ASC">Alphabetical ASC</option>
+            <option value ="c.name DESC">Alphabetical DESC</option>
+
+            <option *ngIf = 'filters.initial=="Monster"' value ="c.level ASC">Level ASC</option>
+            <option *ngIf = 'filters.initial=="Monster"' value ="c.level DESC">Level DESC</option>
+            <option *ngIf = 'filters.initial=="Monster"' value ="c.ATK ASC">ATK ASC</option>
+            <option *ngIf = 'filters.initial=="Monster"' value ="c.ATK DESC">ATK DESC</option>
+            <option *ngIf = 'filters.initial=="Monster"' value ="c.DEF ASC">DEF ASC</option>
+            <option *ngIf = 'filters.initial=="Monster"' value ="c.DEF DESC">DEF DESC</option>
+
+        </select>
+    </div>
 
     <button class="btn btn-primary" (click)="submitSearch()">Search</button>
 
@@ -162,19 +224,33 @@
     </div>
 
 
-    <div class="col-lg-3 fixed">
+    <div class="col">
         <img class="bigcard" src = {{card?.image}}> 
-        <p>{{card?.name}}</p>
-        <p>{{card?.cardtype}}</p>
+    </div>
 
-        <p *ngIf = "card?.cardtype!=undefined && card?.cardtype!='Spell' && card?.cardtype!='Trap'">
-            Level {{card?.level}} {{card?.attribute}} {{card?.type}}
-        </p>
+    <div class="col-lg-4 cardeffect">
+        <b><p *ngIf="monster==true">
+            <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
+        </p></b>
 
+        <b><p *ngIf="monster==false">
+            <img class="attribute" src={{attribute}}> {{card?.attribute}}
+        </p></b>
 
-        <p> {{card?.effect}}</p>
-
+        <h3>{{card?.name}}</h3>
+        <h4 *ngIf="monster==false"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
+        <h4 *ngIf="monster==true"> {{card?.cardtype}} </h4>
         
+
+
+        <b>
+            
+            <p *ngIf="monster==true"><img class="type" src={{mType}}> {{card?.type}}</p>
+        
+        
+            <p *ngIf="monster==true">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
+            <p> {{card?.effect}}</p>
+        </b>
     </div>
 </div>
 

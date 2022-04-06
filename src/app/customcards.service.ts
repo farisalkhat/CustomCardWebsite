@@ -14,6 +14,7 @@ export interface Card extends Document{
   effect:string;
   image:string;
   creator:string;
+  tag:string;
 }
 
 

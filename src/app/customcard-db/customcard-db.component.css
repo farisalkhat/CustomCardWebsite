@@ -11,7 +11,16 @@ button{
     margin:0;
 }
 .bigcard{
-    width:60%;
+    width:316px;
+    padding-top:5px;
+}
+.cardeffect{
+    padding-top:10px;
+    padding-left:20px;
+}
+.col{
+    width:320px;
+    flex: .6 1 0%;
 }
 .fixed{
     position: fixed;
@@ -23,4 +32,17 @@ button{
 
 .number{
     width:65px;
+}
+
+.star{
+    width:34px;
+    height:34px;
+}
+.attribute{
+    width:34px;
+    height:34px;
+}
+.type{
+    width:34px;
+    height:34px;
 }
