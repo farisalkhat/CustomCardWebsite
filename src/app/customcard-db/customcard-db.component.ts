@@ -11,8 +11,6 @@ export class CustomcardDbComponent implements OnInit {
   currentPage = 1;
   currentCards!:Card[];
 
-  card: Card | undefined;
-  monster!:boolean;
   constructor(private customcardsService:CustomcardsService) { }
 
   filters = {
@@ -33,6 +31,9 @@ export class CustomcardDbComponent implements OnInit {
     'sort':'c.name ASC',
 
   }
+
+  card: Card | undefined;
+  monster!:string;
   attribute!:string;
   stType!:string;
   mType!:string;
@@ -54,6 +55,10 @@ export class CustomcardDbComponent implements OnInit {
   submitSearch(){
     console.log(this.filters)
     this.cards = [] 
+    this.attribute ='';
+    this.stType=''
+    this.mType='';
+    this.monster='None';
     // this.customcardsService.getFilteredCards2().subscribe(
     //   res=>{
         
@@ -64,30 +69,31 @@ export class CustomcardDbComponent implements OnInit {
     //   },
     //   err=>{console.log(err)}
     // )                                  
+    if(this.filters['initial']==''){
+        this.filters['cardtype']=='';
+        this.filters['defhigh']=='';
+        this.filters['deflow']=='';
+        this.filters['levelhigh']=='';
+        this.filters['levellow']=='';
+        this.filters['monstertype']=='';
+        this.filters['atkhigh']=='';
+        this.filters['atklow']=='';
+      }
+      if(this.filters['initial']!='Monster'){
+        if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' || 
+        this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' || 
+        this.filters['sort']=='c.DEF ASC' || this.filters['sort']=='c.DEF DESC'){
+          this.filters['sort'] = 'c.name ASC';
+        }
+      }
 
     this.customcardsService.getFilteredCards(this.filters).subscribe(
       res=>{
         
         console.log(res)
-        if(this.filters['initial']==''){
-          this.filters['cardtype']=='';
-          this.filters['defhigh']=='';
-          this.filters['deflow']=='';
-          this.filters['levelhigh']=='';
-          this.filters['levellow']=='';
-          this.filters['monstertype']=='';
-          this.filters['atkhigh']=='';
-          this.filters['atklow']=='';
-        }
-        if(this.filters['initial']!='Monster'){
-          if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' || 
-          this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' || 
-          this.filters['sort']=='c.DEF ASC' || this.filters['sort']=='c.DEF DESC'){
-            this.filters['sort'] = 'c.name ASC';
-          }
-        }
         this.cards = res;
         this.currentPage = 1
+        this.card=undefined;
         this.getCardNumbers(this.currentPage);
       },
       err=>{console.log(err)}
@@ -122,10 +128,33 @@ export class CustomcardDbComponent implements OnInit {
   showDetails(id:string){
     this.card = this.cards.find(x => x.id == id);
     console.log(this.card)
+    this.attribute=''
+    this.stType =''
+    this.mType= ''
 
-    if(this.card?.cardtype=="Normal Spell" || this.card?.cardtype=="Quick Spell" || this.card?.cardtype=="Continuous Spell" ||
+    if(this.card?.cardtype=="Normal Trap" || this.card?.cardtype=="Counter Trap" || this.card?.cardtype=="Continuous Trap"){
+      this.monster='False';
+      this.attribute="assets/cardstats/TRAP.png";
+      
+      switch (this.card?.cardtype) {
+        case "Normal Trap":
+            this.stType = "assets/cardstats/Normal.png";
+            break;
+        case "Continuous Trap":
+            this.stType = "assets/cardstats/Continuous.png";
+            break;
+        case "Counter Trap":
+            this.stType = "assets/cardstats/Counter.png";
+            break;
+        default:
+            this.stType
+            break;
+    }
+    }
+
+    else if(this.card?.cardtype=="Normal Spell" || this.card?.cardtype=="Quick Spell" || this.card?.cardtype=="Continuous Spell" ||
     this.card?.cardtype=="Ritual Spell" || this.card?.cardtype=="Field Spell" || this.card?.cardtype=="Equip Spell" ){
-      this.monster=false;
+      this.monster='False';
       this.attribute="assets/cardstats/SPELL.png";
       
       switch (this.card?.cardtype) {
@@ -153,27 +182,10 @@ export class CustomcardDbComponent implements OnInit {
     }
     }
 
-    else if(this.card?.cardtype=="Normal Trap" || this.card?.cardtype=="Continuous Trap" || this.card?.cardtype=="Counter Trap" ){
-      this.monster=false;
-      this.attribute= "assets/cardstats/Trap.png"
-      switch (this.card?.cardtype) {
-        case "Normal Trap":
-            this.stType = "assets/cardstats/Normal.png";
-            break; 
-        case "Continuous Trap":
-            this.stType = "assets/cardstats/Continuous.png";
-            break;
-        case "Counter Trap":
-            this.stType = "assets/cardstats/Counter.png";
-            break;
-        default:
-            this.stType = "assets/cardstats/Normal.png";
-            break;
-    }
-    }
+
     
     else{
-      this.monster=true;
+      this.monster='True';
       switch(this.card?.attribute){
         case "FIRE":
             this.attribute = "assets/cardstats/FIRE.png";

@@ -213,7 +213,7 @@
 
             <span *ngFor = "let card of currentCards">
 
-                <button class="btn btn-default" (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card.image}}></button>
+                <button class="btn btn-default" (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card?.image}}></button>
                 
             </span>
 
@@ -229,26 +229,26 @@
     </div>
 
     <div class="col-lg-4 cardeffect">
-        <b><p *ngIf="monster==true">
+        <b><p *ngIf="monster=='True'">
             <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
         </p></b>
 
-        <b><p *ngIf="monster==false">
+        <p *ngIf="monster=='False'">
             <img class="attribute" src={{attribute}}> {{card?.attribute}}
-        </p></b>
+        </p>
 
         <h3>{{card?.name}}</h3>
-        <h4 *ngIf="monster==false"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
-        <h4 *ngIf="monster==true"> {{card?.cardtype}} </h4>
+        <h4 *ngIf="monster=='False'"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
+        <h4 *ngIf="monster=='True'"> {{card?.cardtype}} </h4>
         
 
 
         <b>
             
-            <p *ngIf="monster==true"><img class="type" src={{mType}}> {{card?.type}}</p>
+            <p *ngIf="monster=='True'"><img class="type" src={{mType}}> {{card?.type}}</p>
         
         
-            <p *ngIf="monster==true">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
+            <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
             <p> {{card?.effect}}</p>
         </b>
     </div>

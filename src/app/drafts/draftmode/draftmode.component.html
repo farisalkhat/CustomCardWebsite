@@ -19,27 +19,31 @@
 
     </div>
     <div class="row">
-    
-            <div *ngIf = 'TurnPlayer==1' class="col-lg-9">
+          <div class="col-lg-7">
+            <div *ngIf = 'TurnPlayer==1'>
 
-                <span  *ngFor = "let card of p1SelectableCards">
+              <span  *ngFor = "let card of p1SelectableCards">
 
-                    <button class="btn btn-default" (click)="showDetails(card)" >
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                          <div class="flip-card-front">
-                            <img src="\assets\cardimages\Default.png" >
-                          </div>
-                          <div class="flip-card-back">
-                            <img src={{card?.image}}>
-                          </div>
+                  <button class="btn btn-default" (click)="showDetails(card)" >
+                  <div class="flip-card">
+                      <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                          <img src="/assets/cardimages/Default.png" >
+                        </div>
+                        <div class="flip-card-back">
+                          <img src={{card?.image}}>
                         </div>
                       </div>
-    
-                    </button>
-                    
-                </span>
-            </div>
+                    </div>
+  
+                  </button>
+                  
+              </span>
+          </div>
+          </div>
+
+
+
 
             <!-- <div *ngIf = 'TurnPlayer==2' class="col-lg-9">
 
@@ -62,7 +66,11 @@
                 </span>
             </div> -->
     
-    
+            <div class="col-md-1">
+              <span *ngFor = "let card of p1CardList">
+                <p>{{card?.name}}</p>
+              </span>
+            </div>
             <div class="col-lg-3">
                 <img src = {{card?.image}}> 
                 <p>{{card?.name}}</p>

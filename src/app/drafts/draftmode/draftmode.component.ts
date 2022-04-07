@@ -21,7 +21,6 @@ export class DraftmodeComponent implements OnInit {
   state: string = 'default';
   cards!: Card[];
   card: Card | undefined;
-  cardElement!: HTMLElement | null;
 
   p1CardList: Card[] = new Array();
   p2CardList: Card[] = new Array();
@@ -57,8 +56,6 @@ export class DraftmodeComponent implements OnInit {
 
     showDetails(card:Card){
       this.card = card
-      this.cardElement = <HTMLElement>document.getElementById("myElementID");
-      console.log(this.cardElement)
     }
 
 
@@ -80,41 +77,34 @@ export class DraftmodeComponent implements OnInit {
           else{
             this.p2CardList.push(this.card)
           }
-          this.removeCardFromList()
+          this.removeCardFromList(this.card.id)
           this.card= undefined
-          if(this.cardElement!=null){ 
-            console.log('removing card element')
-            this.cardElement.parentNode!.removeChild(this.cardElement);
-            this.cardElement = null
-          }
-          
-          
-          
-
       }
       
 
     }
 
-    removeCardFromList(){
+    removeCardFromList(id:string){
       if(this.TurnPlayer==1){
-        this.p1SelectableCards.forEach((element,index)=>{
-          if(element.id==this.card?.id) this.cards.splice(index,1);
-       });
+        this.p1SelectableCards = this.p1SelectableCards.filter((item) => item.id != id)
+        if(this.p1SelectableCards.length==0){
+          this.shuffleCards();
+        }
       }
-      else{
-        this.p2SelectableCards.forEach((element,index)=>{
-          if(element.id==this.card?.id) this.cards.splice(index,1);
-       });
-      }
+      // else{
+      //   this.p2SelectableCards.forEach((element,index)=>{
+      //     if(element.id==this.card?.id) this.cards.splice(index,1);
+      //  });
+      // }
 
+  
 
     }
 
     shuffleCards(){
       let cardCounter = 0
       console.log(this.cards.length)
-      while(cardCounter<8){
+      while(cardCounter<3){
 
         const randID = this.randomIntFromInterval(0,this.cards.length-1)
         console.log(randID)
