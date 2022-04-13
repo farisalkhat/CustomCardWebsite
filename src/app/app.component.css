@@ -2,3 +2,12 @@ button{
     padding:5px;
     margin:3px;
 }
+
+nav{
+    font-family: 'Oswald', sans-serif;
+    font-size: x-large;
+}
+button{
+    font-size:1.5rem;
+
+}

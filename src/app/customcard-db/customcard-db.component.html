@@ -1,6 +1,7 @@
 
 
 <div class="container">
+
     
 
 <div class="row">
@@ -158,6 +159,19 @@
 </div>
 
 <div class="row">
+    <div class="col-auto">
+        <label for="attribute">Attribute</label>
+        <select class="form-control"   [disabled]="filters.initial!='Monster'" id="attribute" [(ngModel)] = "filters.attribute">
+            <option value = "">  </option>
+            <option value ="DARK">DARK</option>
+            <option value ="DIVINE">DIVINE</option>
+            <option value ="EARTH">EARTH</option>
+            <option value ="FIRE">FIRE</option>
+            <option value ="LIGHT">LIGHT</option>
+            <option value ="WATER">WATER</option>
+            <option value ="WIND">WIND</option>
+          </select>
+    </div>
     <div class="col-auto">
         <label for="levellow">Level &#60;= </label>
         <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.levellow" type="number" >

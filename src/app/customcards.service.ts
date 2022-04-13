@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
 
 export interface Card extends Document{
@@ -15,6 +15,12 @@ export interface Card extends Document{
   image:string;
   creator:string;
   tag:string;
+}
+
+
+export interface Draft {
+  title: string;
+  cardIDs:string[];
 }
 
 
@@ -44,9 +50,21 @@ export class CustomcardsService {
     return this.http.post<Card[]>('https://mm8bitdm.herokuapp.com/api/yugioh/searchresult',data);
   }
   getFilteredCards2(data: any){
-    return this.http.post<Card[]>('http://127.0.0.1:8080/api/yugioh/searchresult',data);
+    return this.http.post<Card[]>('https://mm8bitdm.herokuapp.com/api/yugioh/searchresult',data);
   }
 
+
+  submitDraft(draft:Draft){
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitdraft',draft,
+      {
+        headers: new HttpHeaders({
+             'Content-Type':  'application/json',
+           })
+      }
+      
+      
+      )
+  }
   
   
 }

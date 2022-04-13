@@ -11,6 +11,11 @@ import { SignupComponent } from './signup/signup.component';
 import { DraftsComponent } from './drafts/drafts.component';
 import { DraftmodeComponent } from './drafts/draftmode/draftmode.component';
 import { DraftFormComponent } from './drafts/draft-form/draft-form.component';
+import { DraftMakerComponent } from './drafts/draft-maker/draft-maker.component';
+import { DecklistsComponent } from './decklists/decklists.component';
+import { BanlistComponent } from './banlist/banlist.component';
+import { ArticlesComponent } from './articles/articles.component';
+import { BindersComponent } from './binders/binders.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,12 @@ import { DraftFormComponent } from './drafts/draft-form/draft-form.component';
     SignupComponent,
     DraftsComponent,
     DraftmodeComponent,
-    DraftFormComponent
+    DraftFormComponent,
+    DraftMakerComponent,
+    DecklistsComponent,
+    BanlistComponent,
+    ArticlesComponent,
+    BindersComponent
   ],
   imports: [
     HttpClientModule,

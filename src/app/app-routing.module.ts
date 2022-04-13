@@ -9,6 +9,13 @@ import { SignupComponent } from './signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DraftmodeComponent } from './drafts/draftmode/draftmode.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthModule } from './auth/auth.module';
+import { DraftMakerComponent } from './drafts/draft-maker/draft-maker.component';
+import { DraftFormComponent } from './drafts/draft-form/draft-form.component';
+import { DecklistsComponent } from './decklists/decklists.component';
+import { BanlistComponent } from './banlist/banlist.component';
+import { ArticlesComponent } from './articles/articles.component';
+import { BindersComponent } from './binders/binders.component';
 
 const routes: Routes = [
   {
@@ -39,7 +46,19 @@ const routes: Routes = [
 {path:'drafts',
 component:DraftsComponent},
 {path:'draftmode',
-component:DraftmodeComponent}
+component:DraftmodeComponent},
+{path:'draft-maker',
+component:DraftMakerComponent},
+{path:'draft-form',
+component:DraftFormComponent},
+{path:'decklists',
+component:DecklistsComponent},
+{path:'banlist',
+component:BanlistComponent},
+{path:'articles',
+component:ArticlesComponent},
+{path:'binders',
+component:BindersComponent}
 
 ];
 
@@ -48,7 +67,8 @@ component:DraftmodeComponent}
   imports: [RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule],
+    BrowserAnimationsModule,
+    AuthModule],
   exports: [RouterModule,FormsModule,
     ReactiveFormsModule]
 })
