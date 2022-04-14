@@ -17,7 +17,14 @@ export class DraftMakerComponent implements OnInit {
 
 
   draftName!:string;
+
+
   currentDraft: Card[] = [];
+
+
+
+
+
   draftCard!:Card | undefined;
 
 

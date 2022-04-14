@@ -43,7 +43,10 @@ ul{
 .wretched{
     width:50%;
 }
-
+h2{
+    font-family: 'Oswald', sans-serif;
+    color:#1f1a1f;
+}
 h3{
     font-family: 'Oswald', sans-serif;
     color:#1f1a1f;
@@ -56,8 +59,16 @@ p{
     font-family: 'Oswald', sans-serif;
     color:#1f1a1f;
 }
+label{
+    font-family: 'Oswald', sans-serif;
+    color:#1f1a1f;
+}
 
-
+.btn-success{
+    font-family: 'Oswald', sans-serif;
+    color:white;
+    font-size: x-large;
+}
 
 button{
     padding:5px;

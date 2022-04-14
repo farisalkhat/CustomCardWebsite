@@ -16,6 +16,9 @@ import { DecklistsComponent } from './decklists/decklists.component';
 import { BanlistComponent } from './banlist/banlist.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { BindersComponent } from './binders/binders.component';
+import { PacksComponent } from './packs/packs.component';
+import { PackMakerComponent } from './packs/pack-maker/pack-maker.component';
+import { PackOpenerComponent } from './packs/pack-opener/pack-opener.component';
 
 const routes: Routes = [
   {
@@ -58,7 +61,13 @@ component:BanlistComponent},
 {path:'articles',
 component:ArticlesComponent},
 {path:'binders',
-component:BindersComponent}
+component:BindersComponent},
+{path:'packs',
+component:PacksComponent},
+{path:'pack-maker',
+component:PackMakerComponent},
+{path:'pack-opener',
+component:PackOpenerComponent}
 
 ];
 

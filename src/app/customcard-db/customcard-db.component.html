@@ -216,7 +216,7 @@
         </select>
     </div>
 
-    <button class="btn btn-primary" (click)="submitSearch()">Search</button>
+    <button class="btn btn-success" (click)="submitSearch()">Search</button>
 
 
 </div>
@@ -227,12 +227,12 @@
 
             <span *ngFor = "let card of currentCards">
 
-                <button class="btn btn-default" (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card?.image}}></button>
+                <button class="btn btn-success" (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card?.image}}></button>
                 
             </span>
 
         <div class="row">
-            <button class="btn btn-primary" (click)="nextPage()">Next</button><button class="btn btn-primary" (click)="prevPage()">Previous</button>
+            <button class="btn btn-success" (click)="nextPage()">Next</button><button class="btn btn-success" (click)="prevPage()">Previous</button>
         </div>
         
     </div>

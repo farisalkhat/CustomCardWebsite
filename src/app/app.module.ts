@@ -16,6 +16,9 @@ import { DecklistsComponent } from './decklists/decklists.component';
 import { BanlistComponent } from './banlist/banlist.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { BindersComponent } from './binders/binders.component';
+import { PacksComponent } from './packs/packs.component';
+import { PackOpenerComponent } from './packs/pack-opener/pack-opener.component';
+import { PackMakerComponent } from './packs/pack-maker/pack-maker.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { BindersComponent } from './binders/binders.component';
     DecklistsComponent,
     BanlistComponent,
     ArticlesComponent,
-    BindersComponent
+    BindersComponent,
+    PacksComponent,
+    PackOpenerComponent,
+    PackMakerComponent
   ],
   imports: [
     HttpClientModule,

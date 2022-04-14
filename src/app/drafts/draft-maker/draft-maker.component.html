@@ -219,7 +219,7 @@
             </select>
         </div>
     
-        <button class="btn btn-primary" (click)="submitSearch()">Search</button>
+        <button class="btn btn-success" (click)="submitSearch()">Search</button>
     
     
     </div>
@@ -235,7 +235,7 @@
                 </span>
     
             <div class="row">
-                <button class="btn btn-primary" (click)="nextPage()">Next</button><button class="btn btn-primary" (click)="prevPage()">Previous</button>
+                <button class="btn btn-success" (click)="nextPage()">Next</button><button class="btn btn-success" (click)="prevPage()">Previous</button>
             </div>
             
         </div>
@@ -270,7 +270,7 @@
             </b>
 
             <div class="row">
-                <button type="button" *ngIf="card!=undefined"class="btn btn-primary addcard" (click)="addCard()">Add Card</button>
+                <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard()">Add Card</button>
             </div>
 
         </div>
@@ -281,27 +281,51 @@
 
         <h1><b>Current Draft</b></h1>
 
+
+
+
         <div class="col-lg-12">
-    
+            <h2>Monsters</h2>
             <span *ngFor = "let card of currentDraft">
-
-                <button class="btn btn-default" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}></button>
-                
+                <button class="btn btn-default" *ngIf="card.cardtype=='Effect Monster' or card.cardtype=='Flip Monster' or card.cardtype=='Ritual Monster' or card.cardtype=='Union Monster'" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}></button>
             </span>
+        </div>
 
-        
-    </div>
+
+        <div class="col-lg-12">
+            <h2>Spells</h2>
+            <span *ngFor = "let card of currentDraft">
+                <button class="btn btn-default" *ngIf="card.cardtype.includes('Spell')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}></button>
+            </span>
+        </div>
+
+        <div class="col-lg-12">
+            <h2>Traps</h2>
+            <span *ngFor = "let card of currentDraft">
+                <button class="btn btn-default" *ngIf="card.cardtype.includes('Trap')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}></button>
+            </span>
+        </div>
+
+        <div class="col-lg-12">
+            <h2>Extra</h2>
+            <span *ngFor = "let card of currentDraft">
+                <button class="btn btn-default" *ngIf="card.cardtype.includes('Fusion')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}></button>
+            </span>
+        </div>
+
+
+
     </div>
 
 
     <div class="row">
-        <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-primary addcard" (click)="saveDraft()">Save Draft</button>
+        <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-success addcard" (click)="saveDraft()">Save Draft</button>
         <div *ngIf="submitfail && submitted" class="submit-text-fail" >
             Submission failed! Fix errors above. 
           </div>
 
 
-        <button type="button"  *ngIf="draftCard!=undefined"class="btn btn-primary addcard" (click)="deleteDraftCard()">Delete Card</button>
+        <button type="button"  *ngIf="draftCard!=undefined"class="btn btn-success addcard" (click)="deleteDraftCard()">Delete Card</button>
     </div>
     
     </div>
