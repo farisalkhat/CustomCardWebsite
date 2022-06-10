@@ -19,6 +19,9 @@ body {
 .container{
     margin-top:10px;
 }
+.extra-space{
+    height:200px;
+}
 
 body{
     padding:0px;

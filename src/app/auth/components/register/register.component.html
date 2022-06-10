@@ -1,1 +1,43 @@
-<p>register works!</p>
+<body class="text-center">
+  <div class="container-sm">
+
+    
+  <form  [formGroup] = "registerInfo" (ngSubmit)="registerUser()">
+      <img class="wretched" src="https://i.imgur.com/VaqZnwF.png">
+    <h1 class="h3 mb-3 font-weight-normal">Input information below.</h1>
+
+
+    <label for="inputUser" class="sr-only">Username</label>
+
+    <input  formControlName = "username" name="username" type="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus
+    [ngClass]="{'is-invalid': submitted && f['username'].errors}">
+
+    <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+      peepee
+    </div>
+
+
+
+    <label for="inputEmail" class="sr-only">Email address</label>
+
+    <input  formControlName = "email" name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus
+    [ngClass]="{'is-invalid': submitted && f['email'].errors}">
+
+    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+      peepee
+    </div>
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input  formControlName = "password" name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required
+    [ngClass]="{'is-invalid': submitted && f['password'].errors}">
+
+    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+      poopoo
+    </div>
+
+    <button  class="btn btn-lg btn-success btn-block" type="submit">Register</button>
+    <p class="mt-5 mb-3 text-muted">Faris Al-khatahtbeh &copy; 2017-2018</p>
+  </form>
+</div>
+<div class="extra-space"></div>
+</body>
