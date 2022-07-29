@@ -1,6 +1,6 @@
 <div class="container">
-    <h1 class="text-center">This is still a work in progress.</h1>
-    <h1 class="text-center">This will simply reveal 10 random cards from the ENTIRE database at a time.</h1>
+    <h1 class="text-center">This is a Pseudo Draft. You open a pack of 15 from the entire database, select 1, then open a pack with one less card, and you repeat the process until you have 60 cards. </h1>
+    
 </div>
 
 
@@ -35,7 +35,7 @@
     
                     <div class="card" [@cardFlip]="this.state">
                       <div class="face back">
-                        <img src="/assets/cardimages/Default.png" />
+                        <img src="\assets\cardimages\Default.png" />
                       </div>
                         <div class="face front">
                           <img src={{card?.image}}>
@@ -133,7 +133,7 @@
     <div class="col-lg-12">
       <h2>Card List</h2>
       <ul *ngFor = "let card of currentDraft">
-        <li>• <b>{{card?.name}}</b>, {{card?.cardtype}}, <b>{{card?.creator}}</b></li>
+        <li> <b>{{card?.name}}</b>, {{card?.cardtype}}, <b>{{card?.creator}}</b></li>
       </ul>
 
 
