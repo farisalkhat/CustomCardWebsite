@@ -1,1 +1,371 @@
-<p>pack-maker works!</p>
+
+
+<div class="container">
+    <form [formGroup] = "draftData" (ngSubmit)="saveDraft()">
+
+        <div class="row">
+            <div class="col-auto">
+                <label for="Name">Pack Name</label>
+                <input id ="drafTitle" formControlName ="draftTitle" [ngClass]="{'is-invalid': submitted && f['draftTitle'].errors}" class="form-control" type="text" [(ngModel)] = "draftName">
+                
+
+                <div *ngIf="submitted && f['draftTitle'].errors" class="invalid-feedback">
+                    <div *ngIf="f['draftTitle'].errors['required']">
+                      <p class="red">Umm Draft Title required idiot.</p>
+                    </div>
+                </div>
+            
+            
+            </div>
+        </div>
+
+ 
+
+    </form>
+
+
+
+    <div class="row">
+            <div class="col-auto">
+                <label for="Name">Name</label>
+                <input class="form-control" type="text" [(ngModel)] = "filters.name">
+            </div>
+            <div class="col-auto">
+                <label for="Desc">Desc</label>
+                <input class="form-control" type="text" [(ngModel)] = "filters.desc" >
+            </div>
+            <div class="col-auto">
+                <label for="Creator">Creator</label>
+                <input class="form-control" type="text" [(ngModel)] = "filters.creator" >
+            </div>
+    
+            <div class="col-auto">
+                <label for="attribute">Tag</label>
+                <select class="form-control"  id="attribute" [(ngModel)] = "filters.tag">
+                    <option value =""></option>
+                    <option value ="Attack Directly">Attack Directly</option>
+                    <option value ="Battle">Battle</option>
+                    <option value ="Boost">Boost</option>
+                    <option value ="Bounce">Bounce</option>
+                    <option value ="Burn">Burn</option>
+                    <option value ="Counters">Counters</option>
+                    <option value ="Cripple">Cripple</option>
+                    <option value ="Draw">Draw  </option>
+                    <option value ="Disrupt">Disrupt</option>
+                    <option value ="Equip">Equip</option>
+                    <option value ="Excavate">Excavate</option>
+                    <option value ="Flip">Flip</option>
+                    <option value ="Fusion">Fusion</option>
+                    <option value ="Gain">Gain</option>
+                    <option value ="Gamble">Gamble</option>
+                    <option value ="Hand Protection">Hand Protection</option>
+                    <option value ="Ignore">Ignore</option>
+    
+                    <option value ="Lingering">Lingering</option>
+                    <option value ="Lockdown">Lockdown</option>
+                    <option value ="Mill">Mill</option>
+                    <option value ="Mimic">Mimic</option>
+                    <option value ="Non-Targeted Removal">Non-Targeted Removal</option>
+                    <option value ="Piercing">Piercing</option>
+                    <option value ="Position">Position</option>
+                    <option value ="Protection">Protection</option>
+                    <option value ="Quick">Quick</option>
+                    <option value ="Recycle">Recycle</option>
+                    <option value ="Restriction">Restriction</option>
+                    <option value ="Ritual">Ritual</option>
+                    <option value ="Searcher">Searcher</option>
+                    <option value ="Special Summon">Special Summon</option>
+                    <option value ="Spin">Spin</option>
+                    <option value ="Targeted Removal">Targeted Removal</option>
+                    <option value ="Token">Token</option>
+                    <option value ="Tribute">Tribute</option>
+    
+                  </select>
+            </div>
+    
+    
+            <div class="col-auto">
+                <label for="cardtype">Card</label>
+                <select class="form-control"   id="initial" [(ngModel)] = "filters.initial" >
+                    <option value = "">   </option>
+                    <option value = "Monster">Monster</option>
+                    <option value ="Spell">Spell</option>
+                    <option value ="Trap">Trap</option>
+                </select>
+            </div>
+    
+            <div class="col-auto">
+                <label for="cardtype">Card Type 2</label>
+                <select class="form-control"  [disabled]="filters.initial==''" id="cardtype" [(ngModel)] = "filters.cardtype" >
+                    <option *ngIf = 'filters.initial=="Monster"' value ="">  </option>
+                    <option *ngIf = 'filters.initial=="Monster"' value ="Effect Monster">Effect</option>
+                    <option *ngIf = 'filters.initial=="Monster"' value ="Flip Monster">Flip</option>
+                    <option *ngIf = 'filters.initial=="Monster"' value ="Fusion Monster">Fusion</option>
+                    <option *ngIf = 'filters.initial=="Monster"' value ="Ritual Monster">Ritual</option>
+                    <option *ngIf = 'filters.initial=="Monster"' value ="Union Monster">Union</option>
+    
+                    <option *ngIf = 'filters.initial=="Spell"' value ="">  </option>
+                    <option *ngIf = 'filters.initial=="Spell"' value = "Normal Spell">Normal</option>
+                    <option *ngIf = 'filters.initial=="Spell"' value ="Continuous Spell">Continuous</option>
+                    <option *ngIf = 'filters.initial=="Spell"' value ="Quick Spell">Quick</option>
+                    <option *ngIf = 'filters.initial=="Spell"' value ="Ritual Spell">Ritual</option>
+                    <option *ngIf = 'filters.initial=="Spell"' value ="Equip Spell">Equip</option>
+                    <option *ngIf = 'filters.initial=="Spell"' value ="Field Spell">Field</option>
+    
+                    <option *ngIf = 'filters.initial=="Trap"' value ="">  </option>
+                    <option *ngIf = 'filters.initial=="Trap"' value = "Normal Trap">Normal</option>
+                    <option *ngIf = 'filters.initial=="Trap"' value ="Continuous Trap">Continuous</option>
+                    <option *ngIf = 'filters.initial=="Trap"' value ="Counter Trap">Counter</option>
+                </select>
+            </div>
+    
+    
+            <div class="col-auto">
+                <label for="gamemode">Monster Type</label>
+                <select class="form-control"   [disabled]="filters.initial!='Monster'" id="monstertype" [(ngModel)] = "filters.monstertype">
+                    <option value = "">  </option>
+                    <option value ="Aqua">Aqua</option>
+                    <option value ="Beast">Beast</option>
+                    <option value ="Beast-Warrior">Beast-Warrior</option>
+                    <option value ="Dinosaur">Dinosaur</option>
+                    <option value ="Dragon">Dragon</option>
+                    <option value ="Fairy">Fairy</option>
+                    <option value ="Fiend">Fiend</option>
+                    <option value ="Fish">Fish</option>
+                    <option value ="Insect">Insect</option>
+                    <option value ="Machine">Machine</option>
+                    <option value ="Plant">Plant</option>
+                    <option value ="Psychic">Psychic</option>
+                    <option value ="Pyro">Pyro</option>
+                    <option value ="Reptile">Reptile</option>
+                    <option value ="Rock">Rock</option>
+                    <option value ="Sea Serpent">Sea Serpent</option>
+                    <option value ="Spellcaster">Spellcaster</option>
+                    <option value ="Thunder">Thunder</option>
+                    <option value ="Warrior">Warrior</option>
+                    <option value ="Winged-Beast">Winged-Beast</option>
+                    <option value ="Zombie">Zombie</option>
+                  </select>
+            </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            
+    
+    
+    </div>
+    
+    <div class="row">
+        <div class="col-auto">
+            <label for="attribute">Attribute</label>
+            <select class="form-control"   [disabled]="filters.initial!='Monster'" id="attribute" [(ngModel)] = "filters.attribute">
+                <option value = "">  </option>
+                <option value ="DARK">DARK</option>
+                <option value ="DIVINE">DIVINE</option>
+                <option value ="EARTH">EARTH</option>
+                <option value ="FIRE">FIRE</option>
+                <option value ="LIGHT">LIGHT</option>
+                <option value ="WATER">WATER</option>
+                <option value ="WIND">WIND</option>
+              </select>
+        </div>
+        <div class="col-auto">
+            <label for="levellow">Level &#60;= </label>
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.levellow" type="number" >
+        </div>
+        <div class="col-auto">
+            <label for="levelhigh"> Level   </label>
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.levelhigh" type="number" >
+        </div>
+    
+        <div class="col-auto">
+            <label for="atklow">Atk &#60;=</label>
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.atklow" type="number" >
+        </div>
+        <div class="col-auto">
+            <label for="atkhigh">Atk</label>
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.atkhigh" type="number" >
+        </div>
+    
+        <div class="col-auto">
+            <label for="deflow">Def &#60;=</label>
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.deflow "type="number" >
+        </div>
+        <div class="col-auto">
+            <label for="defhigh">Def</label>
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.defhigh "type="number" >
+        </div>
+        <div class="col-auto">
+            <label for="sort">Sort By</label>
+            <select class="form-control"   id="initial" [(ngModel)] = "filters.sort" >
+                <option value ="c.id ASC">Release Date ASC</option>
+                <option value ="c.id DESC">Release Date DESC</option>
+                <option value ="c.name ASC">Alphabetical ASC</option>
+                <option value ="c.name DESC">Alphabetical DESC</option>
+    
+                <option *ngIf = 'filters.initial=="Monster"' value ="c.level ASC">Level ASC</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="c.level DESC">Level DESC</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="c.ATK ASC">ATK ASC</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="c.ATK DESC">ATK DESC</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="c.DEF ASC">DEF ASC</option>
+                <option *ngIf = 'filters.initial=="Monster"' value ="c.DEF DESC">DEF DESC</option>
+    
+            </select>
+        </div>
+    
+        <button class="btn btn-success" (click)="submitSearch()">Search</button>
+    
+    
+    </div>
+    
+    <div class="row">
+    
+        <div class="col-lg-6">
+    
+                <span *ngFor = "let card of currentCards">
+    
+                    <button class="btn btn-default"   (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card?.image}}></button>
+                    
+                </span>
+    
+            <div class="row">
+                <button class="btn btn-success" (click)="nextPage()">Next</button><button class="btn btn-success" (click)="prevPage()">Previous</button>
+            </div>
+            
+        </div>
+    
+    
+
+    
+        <div class="col cardeffect">
+            <div class="row">
+                <img class="bigcard" src = {{card?.image}}> 
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5"></div>
+                <b><p *ngIf="monster=='True'">
+                    <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
+                </p></b>
+        
+                <p *ngIf="monster=='False'">
+                    <img class="attribute" src={{attribute}}> {{card?.attribute}}
+                </p>
+        
+                <h3>{{card?.name}}</h3>
+                <h4 *ngIf="monster=='False'"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
+                <h4 *ngIf="monster=='True'"> {{card?.cardtype}} </h4>
+                
+        
+        
+                <b>
+                    
+                    <p *ngIf="monster=='True'"><img class="type" src={{mType}}> {{card?.type}}</p>
+                
+                
+                    <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
+                    <p> {{card?.effect}}</p>
+                </b>
+    
+                
+            </div>
+
+            
+            
+
+        </div>
+        <div class="col">
+            <div class="row">
+                <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('common')">Add Common</button>
+            </div>
+
+            <div class="row">
+                <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('rare')">Add Rare</button>
+            </div>
+
+            <div class="row">
+                <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('super')">Add Super</button>
+            </div>
+
+            <div class="row">
+                <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('ultra')">Add Ultra</button>
+            </div>
+
+            <div class="row">
+                <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('secret')">Add Secret</button>
+            </div>
+
+
+        </div>
+    </div>
+    
+    
+    <div class="row">
+
+        <h1><b>Current Pack</b></h1>
+
+
+
+
+        <div class="col-lg-12">
+            <h2>Commons</h2>
+            <span *ngFor = "let card of currentCommons">
+                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'common')" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}></button>
+            </span>
+        </div>
+
+        <div class="col-lg-12">
+            <h2>Rares</h2>
+            <span *ngFor = "let card of currentRare">
+                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'rare')" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}></button>
+            </span>
+        </div>
+
+        <div class="col-lg-12">
+            <h2>Super</h2>
+            <span *ngFor = "let card of currentSuper">
+                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'super')" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}></button>
+            </span>
+        </div>
+
+        <div class="col-lg-12">
+            <h2>Ultra</h2>
+            <span *ngFor = "let card of currentUltra">
+                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'ultra')" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}></button>
+            </span>
+        </div>
+
+        <div class="col-lg-12">
+            <h2>Secret</h2>
+            <span *ngFor = "let card of currentSecret">
+                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'secret')" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}></button>
+            </span>
+        </div>
+        
+
+
+
+    </div>
+
+
+    <div class="row">
+        <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-success addcard" (click)="saveDraft()">Save Draft</button>
+        <div *ngIf="submitfail && submitted" class="submit-text-fail" >
+            Submission failed! Fix errors above. 
+          </div>
+
+
+        <!-- <button type="button"  *ngIf="draftCard!=undefined"class="btn btn-success addcard" (click)="deleteDraftCard()">Delete Card</button> -->
+    </div>
+    
+    </div>
+    
+    
+    
+    

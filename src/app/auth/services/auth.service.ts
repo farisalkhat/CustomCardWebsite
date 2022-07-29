@@ -7,10 +7,9 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private _registerUrl = "https://mm8bitdm.herokuapp.com/api/register-yugioh"
-  private _loginUrl = "https://mm8bitdm.herokuapp.com/api/loginyugioh"
-  private _userUrl = "https://mm8bitdm.herokuapp.com/api/userdata"
-
+  private _registerUrl = "http://127.0.0.1:8080/api/register-yugioh"
+  private _loginUrl = "http://127.0.0.1:8080/api/loginyugioh"
+  private _userUrl = "http://127.0.0.1:8080/api/userdata"
   constructor(private http:HttpClient, private router:Router) { 
   }
 
@@ -22,7 +21,11 @@ export class AuthService {
 
   loginUser(user:any){
     console.log(user)
-    return this.http.post<any>(this._loginUrl,user)
+    return this.http.post<any>(this._loginUrl,user, )
+
+
+
+
   }
 
   getToken(){

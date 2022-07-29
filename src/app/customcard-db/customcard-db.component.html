@@ -223,7 +223,7 @@
 
 <div class="row">
 
-    <div class="col-lg-5">
+    <div class="col-lg-6">
 
             <span *ngFor = "let card of currentCards">
 
@@ -238,11 +238,10 @@
     </div>
 
 
-    <div class="col">
-        <img class="bigcard" src = {{card?.image}}> 
-    </div>
+
 
     <div class="col-lg-4 cardeffect">
+        <img class="bigcard" src = {{card?.image}}> 
         <b><p *ngIf="monster=='True'">
             <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
         </p></b>

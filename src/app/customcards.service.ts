@@ -55,12 +55,7 @@ export class CustomcardsService {
 
 
   submitDraft(draft:Draft){
-    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitdraft',draft,
-      {
-        headers: new HttpHeaders({
-             'Content-Type':  'application/json',
-           })
-      }
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitdraft',draft
       
       
       )

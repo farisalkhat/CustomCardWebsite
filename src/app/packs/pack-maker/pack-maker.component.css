@@ -1,0 +1,60 @@
+.smallcard{
+    width:100px;
+}
+p{
+    padding:0;
+    margin:0;
+    color: black;
+}
+.container{
+    height:1600px;
+}
+button{
+    padding:0;
+    margin:0;
+}
+.btn-success{
+    margin:3px;
+}
+.bigcard{
+    width:316px;
+    padding-top:5px;
+}
+.cardeffect{
+    padding-top:10px;
+    padding-left:20px;
+}
+.col{
+    width:320px;
+    flex: .6 1 0%;
+}
+.fixed{
+    position: fixed;
+    left:1200px;
+}
+.container-fluid{
+    padding-top:50px;
+}
+
+.number{
+    width:65px;
+}
+
+.star{
+    width:34px;
+    height:34px;
+}
+.attribute{
+    width:34px;
+    height:34px;
+}
+.type{
+    width:34px;
+    height:34px;
+}
+
+.addcard{
+    width:100px;
+    height:40px;
+    margin-left:5px;
+}

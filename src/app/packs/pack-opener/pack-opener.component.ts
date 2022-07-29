@@ -7,19 +7,21 @@ import { Card, CustomcardsService } from 'src/app/customcards.service';
   templateUrl: './pack-opener.component.html',
   styleUrls: ['./pack-opener.component.css'],
   animations: [
-    trigger('cardFlip', [
-      state('default', style({
-        transform: 'none'
-      })),
-      state('flipped', style({
-        transform: 'rotateY(180deg)'
-      })),
-      transition('default => flipped', [
-        animate('400ms')
-      ]),
-      transition('flipped => default', [
-        animate('200ms')
-      ])
+    trigger("cardFlip", [
+      state(
+        "default",
+        style({
+          transform: "none"
+        })
+      ),
+      state(
+        "flipped",
+        style({
+          transform: "rotateY(180deg)"
+        })
+      ),
+      transition("default => flipped", [animate("400ms")]),
+      transition("flipped => default", [animate("0ms")]),
     ])
   ]
 })
@@ -33,7 +35,43 @@ export class PackOpenerComponent implements OnInit {
   stType!:string;
   mType!:string;
 
-  randomCards!:Card[];
+  randomCards!:Card[] | undefined;
+
+
+  round = 0;
+  cardsRemaining = 15;
+  currentDraft: Card[] = [];
+
+  state: string = 'default';
+  rotate(){
+    if (this.state === "default") {
+        this.state = "flipped";
+      } else {
+        this.state = "default";
+      }
+  }
+
+  addCard(){
+    if(this.card){
+      this.currentDraft.push(this.card);
+      this.card = undefined;
+      this.cardsRemaining--;
+      if(this.cardsRemaining<=0){
+        this.round++;
+        if(this.round>=5){this.clearCards();}
+        else{this.cardsRemaining=15; this.shuffleCards()}
+      }
+      else{
+        this.shuffleCards();
+      }
+    }
+    
+  }
+
+  clearCards(){
+    this.randomCards=undefined;
+  }
+
 
   ngOnInit(): void {
     this.customcardsService.getCustomCards().subscribe(
@@ -45,10 +83,14 @@ export class PackOpenerComponent implements OnInit {
     )
   }
   shuffleCards(){
+    if (this.state === "flipped") {
+        this.state = "default";
+      }
+
     this.randomCards=[]
     let cardCounter = 0
     console.log(this.cards.length)
-    while(cardCounter<10){
+    while(cardCounter<this.cardsRemaining){
 
       const randID = this.randomIntFromInterval(0,this.cards.length-1)
       const newCard = this.cards[randID]
@@ -62,13 +104,19 @@ export class PackOpenerComponent implements OnInit {
 
   revealCards(){
     console.log("Does NOTHING!")
+    this.rotate();
   }
 
   openNextPack(){
     this.shuffleCards()
+    this.rotate();
   }
 
   showDetails(card:Card){
+    if(this.state=="default"){
+      return;
+    }
+
     this.card = card;
     this.attribute=''
     this.stType =''
