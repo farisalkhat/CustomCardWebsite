@@ -23,6 +23,15 @@ export interface Draft {
   cardIDs:string[];
 }
 
+export interface Pack {
+  title: string;
+  commonIDs:string[];
+  rareIDs:string[];
+  superIDs:string[];
+  ultraIDs:string[];
+  secretIDs:string[];
+}
+
 
 
 @Injectable({
@@ -56,6 +65,13 @@ export class CustomcardsService {
 
   submitDraft(draft:Draft){
     return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitdraft',draft
+      
+      
+      )
+  }
+
+  submitPack(pack:Pack){
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitpack',pack
       
       
       )

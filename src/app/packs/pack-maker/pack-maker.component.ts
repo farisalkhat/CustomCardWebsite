@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Card, CustomcardsService, Draft } from 'src/app/customcards.service';
+import { Card, CustomcardsService, Draft, Pack } from 'src/app/customcards.service';
 
 
 @Component({
@@ -414,7 +414,42 @@ export class PackMakerComponent implements OnInit {
   }
 
   deleteDraftCard(cardtype:string){
+
     if(this.draftCard!=undefined){
+      console.log(this.draftCard)
+      console.log(cardtype)
+      if(cardtype=="common"){
+        const index = this.currentCommons.findIndex(obj => obj.id === this.draftCard?.id)
+        if (index > -1) {
+          this.currentCommons.splice(index, 1);
+        }
+      }
+      else if(cardtype=="rare"){
+        
+        const index = this.currentRare.findIndex(obj => obj.id === this.draftCard?.id)
+        if (index > -1) {
+          this.currentRare.splice(index, 1);
+        }
+      }
+      else if(cardtype=="super"){
+        const index = this.currentSuper.findIndex(obj => obj.id === this.draftCard?.id)
+        if (index > -1) {
+          this.currentSuper.splice(index, 1);
+        }
+      }
+      else if(cardtype=="ultra"){
+        const index = this.currentUltra.findIndex(obj => obj.id === this.draftCard?.id)
+        if (index > -1) {
+          this.currentUltra.splice(index, 1);
+        }
+      }
+      else if(cardtype=="secret"){
+        const index = this.currentSecret.findIndex(obj => obj.id === this.draftCard?.id)
+        if (index > -1) {
+          this.currentSecret.splice(index, 1);
+        }
+      }
+
 
       const index = this.currentDraft.findIndex(obj => obj.id === this.draftCard?.id)
       if (index > -1) {
@@ -435,27 +470,57 @@ export class PackMakerComponent implements OnInit {
       console.log("Basic data not filled.")
       return;
     }
+    else if(this.currentCommons.length!= 48 || 
+        this.currentRare.length!= 25 ||
+        this.currentSuper.length!= 15 ||
+        this.currentUltra.length!= 10 ||
+        this.currentSecret.length!= 2)
+        {
+        this.submitfail = true;
+        return;
+    }
+
     else{ 
 
 
-      const finaldata = {} as Draft;
+      const finaldata = {} as Pack;
       finaldata['title'] = this.draftData.controls['draftTitle'].value;
 
-      const idList:string[] = []
+      const commonIDs:string[] = []
+      const rareIDs:string[] = []
+      const superIDs:string[] = []
+      const ultraIDs:string[] = []
+      const secretIDs:string[] = []
 
 
 
-      for (let i = 0; i <= this.currentDraft.length-1; i++) {
-        idList.push(this.currentDraft[i].id);
+      for (let i = 0; i <= this.currentCommons.length-1; i++) {
+        commonIDs.push(this.currentCommons[i].id);
+      }
+      for (let i = 0; i <= this.currentCommons.length-1; i++) {
+        rareIDs.push(this.currentRare[i].id);
+      }
+      for (let i = 0; i <= this.currentCommons.length-1; i++) {
+        superIDs.push(this.currentSuper[i].id);
+      }
+      for (let i = 0; i <= this.currentCommons.length-1; i++) {
+        ultraIDs.push(this.currentUltra[i].id);
+      }
+      for (let i = 0; i <= this.currentCommons.length-1; i++) {
+        secretIDs.push(this.currentSecret[i].id);
       }
 
-      finaldata['cardIDs'] = idList;
+      finaldata['commonIDs'] = commonIDs;
+      finaldata['rareIDs'] = rareIDs;
+      finaldata['superIDs'] = superIDs;
+      finaldata['ultraIDs'] = ultraIDs;
+      finaldata['secretIDs'] = secretIDs;
 
 
 
 
 
-      this.customcardsService.submitDraft(finaldata)
+      this.customcardsService.submitPack(finaldata)
       .subscribe(
         res=>{
           console.log(res);

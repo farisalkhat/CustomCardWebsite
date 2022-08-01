@@ -58,6 +58,7 @@
                     <option value ="Fusion">Fusion</option>
                     <option value ="Gain">Gain</option>
                     <option value ="Gamble">Gamble</option>
+                    <option value ="Generic">Generic</option>
                     <option value ="Hand Protection">Hand Protection</option>
                     <option value ="Ignore">Ignore</option>
     
@@ -278,7 +279,7 @@
 
             
             
-
+ 
         </div>
         <div class="col">
             <div class="row">
@@ -357,7 +358,14 @@
     <div class="row">
         <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-success addcard" (click)="saveDraft()">Save Draft</button>
         <div *ngIf="submitfail && submitted" class="submit-text-fail" >
-            Submission failed! Fix errors above. 
+            Submission failed! Fix the following errors:
+            <ul >
+                <li *ngIf="currentCommons.length!=48">Not enough commons!({{currentCommons.length}}/48)</li>
+                <li *ngIf="currentRare.length!=25">Not enough rares!({{currentRare.length}}/25)</li>
+                <li *ngIf="currentSuper.length!=15">Not enough supers!({{currentSuper.length}}/15)</li>
+                <li *ngIf="currentUltra.length!=10">Not enough ultras!({{currentUltra.length}}/10)</li>
+                <li *ngIf="currentSecret.length!=2">Not enough secrets!({{currentSecret.length}}/2)</li>
+            </ul>
           </div>
 
 

@@ -58,3 +58,15 @@ button{
     height:40px;
     margin-left:5px;
 }
+
+.submit-text-fail{
+    color:red;
+    font-weight:bold;
+    font-size: 20pt;
+}
+
+ul{
+    color:red;
+    font-weight:bold;
+    font-size: 20pt;
+}

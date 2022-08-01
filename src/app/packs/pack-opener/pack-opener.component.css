@@ -112,16 +112,13 @@
 }.bigcard{
     width:330px;
     padding-top:5px;
-    padding-right:5px;
-    margin-right:5px;
 }
 .cardeffect{
     padding-top:10px;
     padding-left:20px;
+    margin-left:10px;
 }
-.p{
-  padding:0;
-}
+
 ul{
   padding:0;
   margin:0;
