@@ -20,6 +20,21 @@
         </div>
 
  
+        <div class="row">
+            <div class="col-auto">
+                <label for="Name">Creator</label>
+                <input id ="creator" formControlName ="creator" [ngClass]="{'is-invalid': submitted && f['creator'].errors}" class="form-control" type="text" [(ngModel)] = "creator">
+                
+
+                <div *ngIf="submitted && f['creator'].errors" class="invalid-feedback">
+                    <div *ngIf="f['creator'].errors['required']">
+                      <p class="red">Umm WHO ARE YOU.</p>
+                    </div>
+                </div>
+            
+            
+            </div>
+        </div>
 
     </form>
 

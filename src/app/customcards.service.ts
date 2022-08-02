@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
 
+
 export interface Card extends Document{
   id:string;
   cardtype:string;
@@ -25,6 +26,7 @@ export interface Draft {
 
 export interface Pack {
   title: string;
+  creator:string;
   commonIDs:string[];
   rareIDs:string[];
   superIDs:string[];
@@ -64,17 +66,14 @@ export class CustomcardsService {
 
 
   submitDraft(draft:Draft){
-    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitdraft',draft
+    return this.http.post<any>('https://mm8bitdm.herokuapp.com/api/yugioh/submitdraft',draft
       
       
       )
   }
 
   submitPack(pack:Pack){
-    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitpack',pack
-      
-      
-      )
+    return this.http.post<any>('https://mm8bitdm.herokuapp.com/api/yugioh/submitpack',pack)
   }
   
   

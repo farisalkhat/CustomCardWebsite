@@ -19,6 +19,7 @@ export class PackMakerComponent implements OnInit {
 
 
   draftName!:string;
+  creator!:string;
 
 
   currentDraft: Card[] = [];
@@ -40,7 +41,15 @@ export class PackMakerComponent implements OnInit {
       Validators.minLength(1),
       Validators.maxLength(100)
 
+    ]),
+    creator: new FormControl(' ',[
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(100)
+
     ])
+
+
   })
 
 
@@ -485,6 +494,7 @@ export class PackMakerComponent implements OnInit {
 
       const finaldata = {} as Pack;
       finaldata['title'] = this.draftData.controls['draftTitle'].value;
+      finaldata['creator'] = this.draftData.controls['creator'].value;
 
       const commonIDs:string[] = []
       const rareIDs:string[] = []
@@ -497,16 +507,16 @@ export class PackMakerComponent implements OnInit {
       for (let i = 0; i <= this.currentCommons.length-1; i++) {
         commonIDs.push(this.currentCommons[i].id);
       }
-      for (let i = 0; i <= this.currentCommons.length-1; i++) {
+      for (let i = 0; i <= this.currentRare.length-1; i++) {
         rareIDs.push(this.currentRare[i].id);
       }
-      for (let i = 0; i <= this.currentCommons.length-1; i++) {
+      for (let i = 0; i <= this.currentSuper.length-1; i++) {
         superIDs.push(this.currentSuper[i].id);
       }
-      for (let i = 0; i <= this.currentCommons.length-1; i++) {
+      for (let i = 0; i <= this.currentUltra.length-1; i++) {
         ultraIDs.push(this.currentUltra[i].id);
       }
-      for (let i = 0; i <= this.currentCommons.length-1; i++) {
+      for (let i = 0; i <= this.currentSecret.length-1; i++) {
         secretIDs.push(this.currentSecret[i].id);
       }
 
