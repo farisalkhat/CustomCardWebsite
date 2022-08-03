@@ -46,6 +46,12 @@ export class CustomcardsService {
 
 
   private _carddataUrl = "https://mm8bitdm.herokuapp.com/api/yugioh/customcards"
+  private _cardMonsters = "https://mm8bitdm.herokuapp.com/api/yugioh/monsters"
+  private _cardSpells = "https://mm8bitdm.herokuapp.com/api/yugioh/spells"
+  private _cardTraps = "https://mm8bitdm.herokuapp.com/api/yugioh/traps"
+  private _cardST = "https://mm8bitdm.herokuapp.com/api/yugioh/spellstraps"
+
+
 
   constructor(private http:HttpClient,private _router:Router) {}
 
@@ -56,6 +62,29 @@ export class CustomcardsService {
   getCustomCard(id:string){
     return this.http.get<any>(`https://mm8bitdm.herokuapp.com/api/yugioh/customcards/${id}`);
   } 
+
+
+  
+
+  getCustomMonsters(){
+    return this.http.get<any[]>(this._carddataUrl);
+  } 
+  getCustomSpells(){
+    return this.http.get<any[]>(this._carddataUrl);
+  } 
+  getCustomTraps(){
+    return this.http.get<any[]>(this._carddataUrl);
+  } 
+  getCustomSpellsTraps(){
+    return this.http.get<any[]>(this._carddataUrl);
+  } 
+  getCustomCardsByCreator(id:string){
+    return this.http.get<any[]>(`https://mm8bitdm.herokuapp.com/api/yugioh/customcards/creator/${id}`);
+  } 
+
+
+
+
 
   getFilteredCards(data: any){
     return this.http.post<Card[]>('https://mm8bitdm.herokuapp.com/api/yugioh/searchresult',data);

@@ -30,6 +30,16 @@ export class DraftFormComponent implements OnInit {
 
   constructor(private customcardsService:CustomcardsService) { }
   cards!: Card[];
+  monsters!: Card[];
+  spells!: Card[];
+  traps!: Card[];
+  spellstraps!: Card[];
+  swampus!: Card[];
+  gergoos!: Card[];
+  afres!: Card[];
+
+
+
   card: Card | undefined;
   monster!:string;
   attribute!:string;
@@ -75,6 +85,53 @@ export class DraftFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.customcardsService.getCustomMonsters().subscribe(
+      res => {
+        if(res){}
+        this.monsters = res;
+      }
+    )
+    this.customcardsService.getCustomSpells().subscribe(
+      res => {
+        if(res){}
+        this.spells = res;
+        
+      }
+    )
+    this.customcardsService.getCustomTraps().subscribe(
+      res => {
+        if(res){}
+        this.traps = res;
+        
+      }
+    )
+    this.customcardsService.getCustomSpellsTraps().subscribe(
+      res => {
+        if(res){}
+        this.spellstraps = res;
+        
+      }
+    )
+
+    this.customcardsService.getCustomCardsByCreator('Afres').subscribe(
+      res => {
+        if(res){}
+        this.afres = res;
+      }
+    )
+    this.customcardsService.getCustomCardsByCreator('Gergoos').subscribe(
+      res => {
+        if(res){}
+        this.gergoos = res;
+      }
+    )
+    this.customcardsService.getCustomCardsByCreator('jirai_gumo_2200').subscribe(
+      res => {
+        if(res){}
+        this.swampus = res;
+      }
+    )
     this.customcardsService.getCustomCards().subscribe(
       res => {
         if(res){}
@@ -82,6 +139,9 @@ export class DraftFormComponent implements OnInit {
         this.shuffleCards()
       }
     )
+
+
+    
   }
   shuffleCards(){
     if (this.state === "flipped") {
@@ -112,6 +172,8 @@ export class DraftFormComponent implements OnInit {
     this.shuffleCards()
     this.rotate();
   }
+
+
 
   showDetails(card:Card){
     if(this.state=="default"){
