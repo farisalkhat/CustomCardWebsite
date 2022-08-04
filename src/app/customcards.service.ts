@@ -45,11 +45,11 @@ export class CustomcardsService {
 
 
 
-  private _carddataUrl = "https://mm8bitdm.herokuapp.com/api/yugioh/customcards"
-  private _cardMonsters = "https://mm8bitdm.herokuapp.com/api/yugioh/monsters"
-  private _cardSpells = "https://mm8bitdm.herokuapp.com/api/yugioh/spells"
-  private _cardTraps = "https://mm8bitdm.herokuapp.com/api/yugioh/traps"
-  private _cardST = "https://mm8bitdm.herokuapp.com/api/yugioh/spellstraps"
+  private _carddataUrl = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards"
+  private _cardMonsters = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/monsters"
+  private _cardSpells = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/spells"
+  private _cardTraps = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/traps"
+  private _cardST = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/spellstraps"
 
 
 
@@ -60,7 +60,7 @@ export class CustomcardsService {
   } 
 
   getCustomCard(id:string){
-    return this.http.get<any>(`https://mm8bitdm.herokuapp.com/api/yugioh/customcards/${id}`);
+    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/${id}`);
   } 
 
 
@@ -79,7 +79,7 @@ export class CustomcardsService {
     return this.http.get<any[]>(this._cardST);
   } 
   getCustomCardsByCreator(name:string){
-    return this.http.get<any[]>(`https://mm8bitdm.herokuapp.com/api/yugioh/customcards/creator/${name}`);
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/creator/${name}`);
   } 
 
 
@@ -87,22 +87,22 @@ export class CustomcardsService {
 
 
   getFilteredCards(data: any){
-    return this.http.post<Card[]>('https://mm8bitdm.herokuapp.com/api/yugioh/searchresult',data);
+    return this.http.post<Card[]>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/searchresult',data);
   }
   getFilteredCards2(data: any){
-    return this.http.post<Card[]>('https://mm8bitdm.herokuapp.com/api/yugioh/searchresult',data);
+    return this.http.post<Card[]>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/searchresult',data);
   }
 
 
   submitDraft(draft:Draft){
-    return this.http.post<any>('https://mm8bitdm.herokuapp.com/api/yugioh/submitdraft',draft
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitdraft',draft
       
       
       )
   }
 
   submitPack(pack:Pack){
-    return this.http.post<any>('https://mm8bitdm.herokuapp.com/api/yugioh/submitpack',pack)
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitpack',pack)
   }
   
   
