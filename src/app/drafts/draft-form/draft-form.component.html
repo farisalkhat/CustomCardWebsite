@@ -19,6 +19,25 @@
         
         
         <button class="btn btn-success"(click)="revealCards()">Reveal Cards</button>
+
+
+          <button *ngIf="customButton1=='afres'" class="btn btn-success"(click)="shuffleUnique('afres')">Afres Pack</button>
+          <button *ngIf="customButton1=='gergoos'" class="btn btn-success"(click)="shuffleUnique('gergoos')">Gergoos Pack</button>
+          <button *ngIf="customButton1=='swampus'" class="btn btn-success"(click)="shuffleUnique('swampus')">jirai_gumo_2200 Pack</button>
+          <button *ngIf="customButton1=='monsters'" class="btn btn-success"(click)="shuffleUnique('monsters')">Monster Pack</button>
+          <button *ngIf="customButton1=='spells'" class="btn btn-success"(click)="shuffleUnique('spells')">Spell Pack</button>
+          <button *ngIf="customButton1=='traps'" class="btn btn-success"(click)="shuffleUnique('traps')">Trap Pack</button>
+
+          <button *ngIf="customButton2=='afres'" class="btn btn-success"(click)="shuffleUnique('afres')">Afres Pack</button>
+          <button *ngIf="customButton2=='gergoos'" class="btn btn-success"(click)="shuffleUnique('gergoos')">Gergoos Pack</button>
+          <button *ngIf="customButton2=='swampus'" class="btn btn-success"(click)="shuffleUnique('swampus')">jirai_gumo_2200 Pack</button>
+          <button *ngIf="customButton2=='monsters'" class="btn btn-success"(click)="shuffleUnique('monsters')">Monster Pack</button>
+          <button *ngIf="customButton2=='spells'" class="btn btn-success"(click)="shuffleUnique('spells')">Spell Pack</button>
+          <button *ngIf="customButton2=='traps'" class="btn btn-success"(click)="shuffleUnique('traps')">Trap Pack</button>
+
+        
+
+
         <!-- <button class="btn btn-success"(click)="shuffleCards()">Open Next Pack</button> -->
         
  
@@ -48,7 +67,7 @@
           </div>
           </div>
 
-
+ 
 
 
             <!-- <div *ngIf = 'TurnPlayer==2' class="col-lg-9">

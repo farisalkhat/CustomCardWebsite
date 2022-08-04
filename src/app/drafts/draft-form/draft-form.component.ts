@@ -13,7 +13,7 @@ import { Card, CustomcardsService } from 'src/app/customcards.service';
         style({
           transform: "none"
         })
-      ),
+      ), 
       state(
         "flipped",
         style({
@@ -49,11 +49,19 @@ export class DraftFormComponent implements OnInit {
   randomCards!:Card[] | undefined;
 
 
+  shuffleStyle:string = "nothing";
+  customButton1:string = "nothing";
+  customButton2:string = "nothing";
+
   round = 0;
   cardsRemaining = 15;
   currentDraft: Card[] = [];
 
   state: string = 'default';
+
+
+  firstTime = true;
+
   rotate(){
     if (this.state === "default") {
         this.state = "flipped";
@@ -88,27 +96,27 @@ export class DraftFormComponent implements OnInit {
 
     this.customcardsService.getCustomMonsters().subscribe(
       res => {
-        if(res){}
+        
         this.monsters = res;
       }
     )
     this.customcardsService.getCustomSpells().subscribe(
       res => {
-        if(res){}
-        this.spells = res;
         
+        this.spells = res;
+        console.log(res)
       }
     )
     this.customcardsService.getCustomTraps().subscribe(
       res => {
-        if(res){}
+        
         this.traps = res;
         
       }
     )
     this.customcardsService.getCustomSpellsTraps().subscribe(
       res => {
-        if(res){}
+        
         this.spellstraps = res;
         
       }
@@ -118,6 +126,7 @@ export class DraftFormComponent implements OnInit {
       res => {
         if(res){}
         this.afres = res;
+        console.log(this.afres)
       }
     )
     this.customcardsService.getCustomCardsByCreator('Gergoos').subscribe(
@@ -129,7 +138,7 @@ export class DraftFormComponent implements OnInit {
     this.customcardsService.getCustomCardsByCreator('jirai_gumo_2200').subscribe(
       res => {
         if(res){}
-        this.swampus = res;
+        this.swampus = res;  
       }
     )
     this.customcardsService.getCustomCards().subscribe(
@@ -143,6 +152,14 @@ export class DraftFormComponent implements OnInit {
 
     
   }
+
+  shuffleUnique(shuffleStyle:string){
+    this.shuffleStyle = shuffleStyle;
+    this.customButton1 = "nothing"
+    this.customButton2 = "nothing"
+    this.shuffleCards();
+  }
+
   shuffleCards(){
     if (this.state === "flipped") {
         this.state = "default";
@@ -150,15 +167,186 @@ export class DraftFormComponent implements OnInit {
 
     this.randomCards=[]
     let cardCounter = 0
-    console.log(this.cards.length)
-    while(cardCounter<this.cardsRemaining){
+    console.log(this.shuffleStyle)
 
-      const randID = this.randomIntFromInterval(0,this.cards.length-1)
-      const newCard = this.cards[randID]
-      this.randomCards.push(newCard)
-      cardCounter++;
+
+
+    switch(this.shuffleStyle){
+      case "nothing":
+        while(cardCounter<this.cardsRemaining){
+          const randID = this.randomIntFromInterval(0,this.cards.length-1)
+          const newCard = this.cards[randID]
+          this.randomCards.push(newCard)
+          cardCounter++;
+        }
+        if(this.firstTime){this.firstTime=false}
+        else{
+          this.randomizeButtons();
+          this.shuffleStyle="nothing"
+        }
+
+        break;
+      case "afres":
+          while(cardCounter<this.cardsRemaining){
+            const randID = this.randomIntFromInterval(0,this.afres.length-1)
+            const newCard = this.afres[randID]
+            this.randomCards.push(newCard)
+            cardCounter++;
+          }
+          this.shuffleStyle="nothing"
+          break;
+      case "gergoos":
+          while(cardCounter<this.cardsRemaining){
+            const randID = this.randomIntFromInterval(0,this.gergoos.length-1)
+            const newCard = this.gergoos[randID]
+            this.randomCards.push(newCard)
+            cardCounter++;
+          }
+          this.shuffleStyle="nothing"
+          break;
+      case "swampus":
+          while(cardCounter<this.cardsRemaining){
+            const randID = this.randomIntFromInterval(0,this.swampus.length-1)
+            const newCard = this.swampus[randID]
+            this.randomCards.push(newCard)
+            cardCounter++;
+          }
+          this.shuffleStyle="nothing"
+          break;
+
+      case "spells":
+        console.log("IN CASE SPELLS");
+          while(cardCounter<this.cardsRemaining){
+            const randID = this.randomIntFromInterval(0,this.spells.length-1)
+            const newCard = this.spells[randID]
+            this.randomCards.push(newCard)
+            cardCounter++;
+          }
+          this.shuffleStyle="nothing"
+          break;
+
+      case "traps":
+        console.log("IN CASE traps");
+          while(cardCounter<this.cardsRemaining){
+            const randID = this.randomIntFromInterval(0,this.traps.length-1)
+            const newCard = this.traps[randID]
+            this.randomCards.push(newCard)
+            cardCounter++;
+          }
+          this.shuffleStyle="nothing"
+          break;
+
+      case "monsters":
+        console.log("IN CASE monsters");
+          while(cardCounter<this.cardsRemaining){
+            const randID = this.randomIntFromInterval(0,this.monsters.length-1)
+            const newCard = this.monsters[randID]
+            this.randomCards.push(newCard)
+            cardCounter++;
+          }
+          this.shuffleStyle="nothing"
+          break;
+
+
+
+
+      default: { 
+        while(cardCounter<this.cardsRemaining){
+          const randID = this.randomIntFromInterval(0,this.cards.length-1)
+          const newCard = this.cards[randID]
+          this.randomCards.push(newCard)
+          cardCounter++;
+        }
+        this.shuffleStyle="nothing"
+        this.randomizeButtons();
+         } 
     }
+
   }
+
+  randomizeButtons(){
+    let button1 = this.randomIntFromInterval(0,12)
+    let button2 = this.randomIntFromInterval(0,12)
+    while(button2==button1){ button2 = this.randomIntFromInterval(0,12)} 
+    this.findButton(1,button1);
+    this.findButton(2,button2);
+
+
+  }
+  
+  findButton(button:number,buttonStyle:number){
+    switch(buttonStyle) { 
+      case 0: { 
+        if(button==1){
+          this.customButton1 = "nothing"
+        }
+        else{
+          this.customButton2 = "nothing"
+        }
+         break; 
+      } 
+      case 1: { 
+        if(button==1){
+          this.customButton1 = "afres"
+        }
+        else{
+          this.customButton2 = "afres"
+        }
+         break; 
+      } 
+      case 2: { 
+        if(button==1){
+          this.customButton1 = "gergoos"
+        }
+        else{
+          this.customButton2 = "gergoos"
+        }
+         break; 
+      } 
+      case 3: { 
+        if(button==1){
+          this.customButton1 = "swampus"
+        }
+        else{
+          this.customButton2 = "swampus"
+        }
+         break; 
+      } 
+      case 4: { 
+        if(button==1){
+          this.customButton1 = "spells"
+        }
+        else{
+          this.customButton2 = "spells"
+        }
+         break; 
+      } 
+      case 5: { 
+        if(button==1){
+          this.customButton1 = "traps"
+        }
+        else{
+          this.customButton2 = "traps"
+        }
+         break;  
+      } 
+      case 6: { 
+        if(button==1){
+          this.customButton1 = "monsters"
+        }
+        else{
+          this.customButton2 = "monsters"
+        }
+         break; 
+      } 
+      default: { 
+         this.customButton1 = "nothing"
+         break; 
+      } 
+   }
+  }
+
+
   randomIntFromInterval(min:number, max:number) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
   }

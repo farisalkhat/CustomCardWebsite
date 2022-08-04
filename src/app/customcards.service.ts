@@ -67,19 +67,19 @@ export class CustomcardsService {
   
 
   getCustomMonsters(){
-    return this.http.get<any[]>(this._carddataUrl);
+    return this.http.get<any[]>(this._cardMonsters);
   } 
   getCustomSpells(){
-    return this.http.get<any[]>(this._carddataUrl);
+    return this.http.get<any[]>(this._cardSpells);
   } 
   getCustomTraps(){
-    return this.http.get<any[]>(this._carddataUrl);
+    return this.http.get<any[]>(this._cardTraps);
   } 
   getCustomSpellsTraps(){
-    return this.http.get<any[]>(this._carddataUrl);
+    return this.http.get<any[]>(this._cardST);
   } 
-  getCustomCardsByCreator(id:string){
-    return this.http.get<any[]>(`https://mm8bitdm.herokuapp.com/api/yugioh/customcards/creator/${id}`);
+  getCustomCardsByCreator(name:string){
+    return this.http.get<any[]>(`https://mm8bitdm.herokuapp.com/api/yugioh/customcards/creator/${name}`);
   } 
 
 
