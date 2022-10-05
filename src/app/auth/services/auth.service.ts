@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private _registerUrl = "http://127.0.0.1:8080/api/register-yugioh"
-  private _loginUrl = "http://127.0.0.1:8080/api/loginyugioh"
-  private _userUrl = "http://127.0.0.1:8080/api/userdata"
+  private _registerUrl = "https://mm8bitdm-ygo.herokuapp.com/api/register-yugioh"
+  private _loginUrl = "https://mm8bitdm-ygo.herokuapp.com/api/loginyugioh"
+  private _userUrl = "https://mm8bitdm-ygo.herokuapp.com/api/userdata"
   constructor(private http:HttpClient, private router:Router) { 
   }
 
