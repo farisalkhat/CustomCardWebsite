@@ -57,7 +57,7 @@
                         <img src="assets/cardimages/Default.png" />
                       </div>
                         <div class="face front">
-                          <img src={{card?.image}}>
+                          <img src={{card?.image}}.png>
                       </div>
                         </div>
   
@@ -81,7 +81,7 @@
                             <img src="\assets\cardimages\Default.png" >
                           </div>
                           <div class="flip-card-back">
-                            <img src={{card?.image}}>
+                            <img src={{card?.image}}.png>
                           </div>
                         </div>
                       </div>
@@ -93,7 +93,7 @@
     
 
             <!-- <div class="col-lg-3">
-                <img src = {{card?.image}}> 
+                <img src = {{card?.image}}.png> 
                 <p>{{card?.name}}</p>
                 <p>{{card?.cardtype}}</p>
     
@@ -108,7 +108,7 @@
 
 
     <div class="row" *ngIf = "card!= undefined">
-      <div class="col-sm-3"><img class="bigcard" src = {{card?.image}}> </div>
+      <div class="col-sm-3"><img class="bigcard" src = {{card?.image}}.png> </div>
       <div class="col-md-5 cardeffect">
         
         <b><p *ngIf="monster=='True'">
@@ -145,7 +145,7 @@
     <div class="col-lg-12">
       <h2>Current Cards</h2>
       <span *ngFor = "let card of currentDraft">
-          <img class ="smallcard" src ={{card?.image}}>
+          <img class ="smallcard" src ={{card?.image}}.png>
       </span>
     </div>
 
