@@ -2,7 +2,7 @@
 
 <div class="container">
 
-    
+<h2>Look at the card text and NOT the card image when reading effects, as custom cards are always changing.</h2>    
 
 <div class="row">
         <div class="col-auto">
@@ -23,6 +23,9 @@
             <select class="form-control"  id="attribute" [(ngModel)] = "filters.tag">
                 <option value =""></option>
                 <option value ="Attack Directly">Attack Directly</option>
+                <option value ="Attribute-Generic">Attribute-Generic</option>
+                
+
                 <option value ="Battle">Battle</option>
                 <option value ="Boost">Boost</option>
                 <option value ="Bounce">Bounce</option>
@@ -59,6 +62,7 @@
                 <option value ="Targeted Removal">Targeted Removal</option>
                 <option value ="Token">Token</option>
                 <option value ="Tribute">Tribute</option>
+                <option value ="Type-Generic">Type-Generic</option>
 
               </select>
         </div>
@@ -228,7 +232,7 @@
 
             <span *ngFor = "let card of currentCards">
 
-                <button class="btn btn-success" (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card?.image}}></button>
+                <button class="btn btn-success" (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card?.image}}.png></button>
                 
             </span>
 
@@ -242,7 +246,7 @@
 
 
     <div class="col-lg-4 cardeffect">
-        <img class="bigcard" src = {{card?.image}}> 
+        <img class="bigcard" src = {{card?.image}}.png> 
         <b><p *ngIf="monster=='True'">
             <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
         </p></b>
@@ -264,6 +268,7 @@
         
             <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
             <p> {{card?.effect}}</p>
+            <p>{{card?.id}}</p>
         </b>
     </div>
 </div>
