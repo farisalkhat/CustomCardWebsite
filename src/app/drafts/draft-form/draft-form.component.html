@@ -52,7 +52,7 @@
 
               <span  *ngFor = "let card of randomCards">
 
-                  <button class=" btn btn-default btncard" (click)="showDetails(card)" >
+                  <button class=" btn btn-default btncard" (contextmenu)="rightAddDraftCard($event,card)" (click)="showDetails(card)" >
     
                     <div class="card" [@cardFlip]="this.state">
                       <div class="face back">
@@ -69,14 +69,15 @@
           </div>
           </div>
           <div class="colDraft col">
-            <h2>Current Cards</h2> 
+            <h2>Current Cards ( {{cardsSelected}}/60)</h2> 
               <span *ngFor = "let card of currentDraft">
-                  <img class ="smallcard" src ={{card?.image}}.png>
+                <button class=" btn btn-default btncard" (click)="showDetails2(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
+                   
               </span>
           </div>
           
           <div class="col colCardInfo cardeffect">
-            <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard()">Add</button>
+            <button type="button" *ngIf="draftCardSelected==true"class="btn btn-success addcard" (click)="addCard()">Add</button>
             <div *ngIf = "card!= undefined">
               <h3>{{card?.name}}   
                 <span *ngIf="monster=='False'"> / {{card?.cardtype}} <img class="attribute" src={{attribute}}> <img class="type" src={{stType}}>{{card?.attribute}}</span>
@@ -140,7 +141,7 @@
 
     <div class="col-lg-12">
       <h2>Card List</h2>
-      <ul *ngFor = "let card of currentDraft">
+      <ul *ngFor = "let card of sortedList">
         <li> <b>{{card?.name}}</b>, {{card?.cardtype}}, <b>{{card?.creator}}</b></li>
       </ul>
 
