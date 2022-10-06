@@ -37,6 +37,7 @@ export class DraftFormComponent implements OnInit {
   swampus!: Card[];
   gergoos!: Card[];
   afres!: Card[];
+  richie!: Card[];
 
 
 
@@ -112,6 +113,12 @@ export class DraftFormComponent implements OnInit {
         
         this.traps = res;
         
+      }
+    )
+    this.customcardsService.getCustomCardsByCreator('charge301').subscribe(
+      res => {
+        if(res){}
+        this.richie = res;  
       }
     )
     this.customcardsService.getCustomSpellsTraps().subscribe(
