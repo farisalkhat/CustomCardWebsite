@@ -52,9 +52,8 @@
     width:1000px;
   } */
 
-  .bigcard{
-    width:371px;
-    height: 546px;
+  .bigcard img{
+    width:10px;
   }
   .col{
     width: 371px;
@@ -64,14 +63,25 @@
 }
   .card {
     box-shadow: 10px 10px 43px -18px rgba(0, 0, 0, 0.75);
-    border-radius: 5px;
-    height: 300px;
-    width: 200px;
+    border-radius: 1px;
+    width:150px;
+    height:225px;
     cursor: pointer;
     position: relative;
     transform-style: preserve-3d;
   }
-  
+
+  .colRand{
+    width:850px;
+  }
+
+  .colDraft{
+    width:500px;
+  }
+  .colCardInfo{
+    width:400px;
+  }
+
   .face {
     display: block;
     position: absolute;
@@ -83,10 +93,15 @@
   
   }
   
+.btncard{
+  padding:0;
+  margin:0;
+}
+
   .face img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;;
     border-radius: inherit;
   }
 
