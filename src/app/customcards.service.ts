@@ -42,7 +42,14 @@ export interface Pack {
 
 
 export class CustomcardsService {
+  setDraft(draftType: string) {
+    this.draft= draftType;
+  }
+  getDraft(){
+    return this.draft;
+  }
 
+  draft:string = "default"
 
 
   private _carddataUrl = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards"
@@ -80,7 +87,10 @@ export class CustomcardsService {
   } 
   getCustomCardsByCreator(name:string){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/creator/${name}`);
-  } 
+  }
+  getCustomCardsByTag(name:string){
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/tags/${name}`);
+  }  
 
 
 

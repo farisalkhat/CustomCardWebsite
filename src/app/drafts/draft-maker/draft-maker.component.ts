@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Card, CustomcardsService, Draft } from 'src/app/customcards.service';
-
+import { CommonModule } from '@angular/common';  
+import { BrowserModule } from '@angular/platform-browser';
 @Component({
   selector: 'app-draft-maker',
   templateUrl: './draft-maker.component.html',
@@ -338,6 +339,11 @@ export class DraftMakerComponent implements OnInit {
   
   addCard(){
     if(this.card!=undefined){
+      const index = this.currentDraft.findIndex(obj => obj.id === this.card?.id)
+      console.log(index)
+        if (index > -1) {
+          return;
+        }
       this.currentDraft.push(this.card);
     }
     
@@ -365,7 +371,7 @@ export class DraftMakerComponent implements OnInit {
   }
   saveDraft(){
     this.submitted=true;
-    if(this.draftData.invalid){
+    if(this.draftData.invalid || this.currentDraft.length<100){
       this.submitfail = true;
       console.log("Basic data not filled.")
       return;
@@ -393,6 +399,7 @@ export class DraftMakerComponent implements OnInit {
       this.customcardsService.submitDraft(finaldata)
       .subscribe(
         res=>{
+          console.log("JOBS DONE");
           console.log(res);
         },
           
@@ -401,7 +408,7 @@ export class DraftMakerComponent implements OnInit {
       this.submitfail = false;
       this._router.navigate(['/drafts']);
 
-
+ 
 
     }
   }

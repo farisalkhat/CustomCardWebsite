@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
+import { Card, CustomcardsService } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-drafts',
@@ -8,7 +9,7 @@ import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
 })
 export class DraftsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private customcardsService:CustomcardsService) { }
 
   draftData= new FormGroup({
     draftTitle: new FormControl(undefined,[
@@ -53,6 +54,12 @@ export class DraftsComponent implements OnInit {
     this.draft = {}
     // this.draft['title']=123;
     // this.draft['players'] = this.players
+
+  }
+
+
+  setDraft(draftType:string){
+    this.customcardsService.setDraft(draftType);
 
   }
 

@@ -29,7 +29,11 @@ import { Card, CustomcardsService } from 'src/app/customcards.service';
 export class DraftFormComponent implements OnInit {
 
   constructor(private customcardsService:CustomcardsService) { }
+  draftMode:string="generic"
+
   cards!: Card[];
+
+  database!: Card[];
   monsters!: Card[];
   spells!: Card[];
   traps!: Card[];
@@ -38,10 +42,16 @@ export class DraftFormComponent implements OnInit {
   gergoos!: Card[];
   afres!: Card[];
   richie!: Card[];
+  generic!:Card[];
+  genericT!:Card[];
+  genericA!:Card[];
+  genericAll!:Card[];
 
 
 
-  card: Card | undefined;
+  card: Card | undefined; // Selected Card
+
+
   monster!:string;
   attribute!:string;
   stType!:string;
@@ -115,6 +125,8 @@ export class DraftFormComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.draftMode = this.customcardsService.getDraft()
+
     this.customcardsService.getCustomMonsters().subscribe(
       res => {
         
@@ -125,7 +137,7 @@ export class DraftFormComponent implements OnInit {
       res => {
         
         this.spells = res;
-        console.log(res)
+
       }
     )
     this.customcardsService.getCustomTraps().subscribe(
@@ -151,32 +163,80 @@ export class DraftFormComponent implements OnInit {
 
     this.customcardsService.getCustomCardsByCreator('Afres').subscribe(
       res => {
-        if(res){}
-        this.afres = res;
-        console.log(this.afres)
+        if(res){this.afres = res;}
+        
       }
     )
     this.customcardsService.getCustomCardsByCreator('Gergoos').subscribe(
       res => {
-        if(res){}
-        this.gergoos = res;
+        if(res){this.gergoos = res;}
+        
       }
     )
     this.customcardsService.getCustomCardsByCreator('jirai_gumo_2200').subscribe(
       res => {
-        if(res){}
-        this.swampus = res;  
+        if(res){this.swampus = res;  }
+        
+      }
+    )
+    this.customcardsService.getCustomCardsByTag('Generic').subscribe(
+      res => {
+        if(res){this.generic = res;  }
+        
+      }
+    )
+    this.customcardsService.getCustomCardsByTag('Attribute-Generic').subscribe(
+      res => {
+        if(res){this.genericA = res; }
+        
+      }
+    )
+    this.customcardsService.getCustomCardsByTag('Type-Generic').subscribe(
+      res => {
+        if(res){        
+          this.genericT = res;  
+          
+
+          
+          
+
+        }
+
+
       }
     )
     this.customcardsService.getCustomCards().subscribe(
       res => {
-        if(res){}
-        this.cards = res;
-        this.shuffleCards()
+        if(res)
+        this.database = res;
+        this.genericAll =  this.generic,this.genericA,this.genericT;
+        this.cards = this.database
+        this.decideCardPool();
+        this.shuffleCards();
+        console.log(this.genericAll);
+        
+        
       }
     )
 
+      
+      
+    
+  }
 
+  decideCardPool(){
+    switch(this.draftMode){
+      case "default":
+        this.cards = this.database
+        break;
+      
+      case "generic":
+        this.cards = this.genericAll
+        break;
+        
+      default:
+        this.cards = this.database
+    }
     
   }
 

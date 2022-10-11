@@ -1,6 +1,7 @@
 
 
 <div class="container">
+    <h2>Drafts require <i>at least 100 cards.</i> Submission will not work otherwise.</h2>
     <form [formGroup] = "draftData" (ngSubmit)="saveDraft()">
 
         <div class="row">
@@ -279,7 +280,7 @@
     
     <div class="row">
 
-        <h1><b>Current Draft</b></h1>
+        <h1><b>Current Draft ({{currentDraft.length}})</b></h1>
 
 
 
@@ -287,7 +288,7 @@
         <div class="col-lg-12">
             <h2>Monsters</h2>
             <span *ngFor = "let card of currentDraft">
-                <button class="btn btn-default" *ngIf="card.cardtype=='Effect Monster' or card.cardtype=='Flip Monster' or card.cardtype=='Ritual Monster' or card.cardtype=='Union Monster'" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
+                <button class="btn btn-default" *ngIf="card.cardtype.includes('Monster')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
             </span>
         </div>
 

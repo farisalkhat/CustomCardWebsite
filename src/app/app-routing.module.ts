@@ -17,6 +17,7 @@ import { BindersComponent } from './binders/binders.component';
 import { PacksComponent } from './packs/packs.component';
 import { PackMakerComponent } from './packs/pack-maker/pack-maker.component';
 import { PackOpenerComponent } from './packs/pack-opener/pack-opener.component';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {
@@ -68,7 +69,7 @@ component:PackOpenerComponent}
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AuthModule],
+    AuthModule,CommonModule ],
   exports: [RouterModule,FormsModule,
     ReactiveFormsModule]
 })
