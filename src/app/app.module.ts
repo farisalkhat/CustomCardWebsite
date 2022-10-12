@@ -22,6 +22,7 @@ import { SharedComponent } from './shared/shared.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
 import { BottomNavComponent } from './shared/bottom-nav/bottom-nav.component';
 import { AuthGuard } from './auth/auth.guard';
+import { ExportxmlComponent } from './exportxml/exportxml.component';
 
 
 
@@ -44,7 +45,8 @@ import { AuthGuard } from './auth/auth.guard';
     PackMakerComponent,
     SharedComponent,
     NavigationComponent,
-    BottomNavComponent
+    BottomNavComponent,
+    ExportxmlComponent
   ],
   imports: [
     HttpClientModule,

@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Card, CustomcardsService } from 'src/app/customcards.service';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-draft-form',
@@ -27,6 +28,7 @@ import { Card, CustomcardsService } from 'src/app/customcards.service';
 })
 
 export class DraftFormComponent implements OnInit {
+  xml_file: string = "";
 
   constructor(private customcardsService:CustomcardsService) { }
   draftMode:string="generic"
@@ -817,4 +819,37 @@ export class DraftFormComponent implements OnInit {
     
 }
 
+
+
+
+exportList(){
+
+   this.xml_file = '<?xml version="1.0" encoding="utf-8" ?> <deck name=".TriType"><main>';
+
+  for(const card of this.currentDraft){
+    if(card.cardtype!="Fusion Monster"){
+      this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
+    }
+
+  }
+  this.xml_file+="</main><side></side><extra>"
+  for(const card of this.currentDraft){
+    if(card.cardtype=="Fusion Monster"){
+      this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
+    }
+  }
+  this.xml_file+="</extra></deck>"
+  console.log(this.xml_file);
+
+  let blob = new Blob([this.xml_file], {type: "text/xml"});
+
+  FileSaver.saveAs(blob, "cardlist.xml");
+
+
+  
+  
+
+
+
+  }
 }

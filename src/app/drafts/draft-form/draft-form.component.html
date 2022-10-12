@@ -19,6 +19,8 @@
         
         
         <button class="btn btn-success"(click)="revealCards()">Reveal Cards</button>
+        
+        
 
 
           <button *ngIf="customButton1=='afres'" class="btn btn-success"(click)="shuffleUnique('afres')">Afres Pack</button>
@@ -140,6 +142,7 @@
     </div> -->
 
     <div class="col-lg-12">
+      <button class="btn btn-success"(click)="exportList()">Export XML</button>
       <h2>Card List</h2>
       <ul *ngFor = "let card of sortedList">
         <li> <b>{{card?.name}}</b>, {{card?.cardtype}}, <b>{{card?.creator}}</b></li>
