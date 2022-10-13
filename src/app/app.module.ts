@@ -23,6 +23,7 @@ import { NavigationComponent } from './shared/navigation/navigation.component';
 import { BottomNavComponent } from './shared/bottom-nav/bottom-nav.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ExportxmlComponent } from './exportxml/exportxml.component';
+import { DeckEditorComponent } from './deck-editor/deck-editor.component';
 
 
 
@@ -46,7 +47,8 @@ import { ExportxmlComponent } from './exportxml/exportxml.component';
     SharedComponent,
     NavigationComponent,
     BottomNavComponent,
-    ExportxmlComponent
+    ExportxmlComponent,
+    DeckEditorComponent
   ],
   imports: [
     HttpClientModule,
