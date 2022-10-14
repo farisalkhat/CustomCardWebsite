@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
-import { Card, CustomcardsService } from 'src/app/customcards.service';
+import { Router } from '@angular/router';
+import { Card, CustomcardsService,Draft } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-drafts',
@@ -9,7 +10,14 @@ import { Card, CustomcardsService } from 'src/app/customcards.service';
 })
 export class DraftsComponent implements OnInit {
 
-  constructor(private customcardsService:CustomcardsService) { }
+  constructor(private customcardsService:CustomcardsService,private _router:Router) { 
+
+
+
+
+
+
+  }
 
   draftData= new FormGroup({
     draftTitle: new FormControl(undefined,[
@@ -21,7 +29,6 @@ export class DraftsComponent implements OnInit {
     ])
   })
 
-  draft = {}
   players = {}
   playernames: any[] = [];
   public totalPlayers = 4;
@@ -30,10 +37,20 @@ export class DraftsComponent implements OnInit {
   submitfail: boolean = false;
 
 
+  draft={};
 
+  drafts:Draft[] = [];
 
   ngOnInit(): void {
+    this.customcardsService.getDrafts().subscribe(
+      res => {
+        if(res){}
+          this.drafts = res;
+          console.log(this.drafts)
+      }
 
+
+    )
   }
 
   get f(){return this.draftData.controls;}
@@ -59,8 +76,11 @@ export class DraftsComponent implements OnInit {
 
 
   setDraft(draftType:string){
-    this.customcardsService.setDraft(draftType);
+    this.customcardsService.setDraft(draftType,false);
+  }
 
+  setCustomDraft(draftType:string){
+    this.customcardsService.setDraft(draftType,true);
   }
 
 }

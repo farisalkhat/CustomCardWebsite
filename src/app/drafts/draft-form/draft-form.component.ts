@@ -32,6 +32,7 @@ export class DraftFormComponent implements OnInit {
 
   constructor(private customcardsService:CustomcardsService) { }
   draftMode:string="generic"
+  customEnabled:boolean = false;
 
   cards!: Card[];
 
@@ -60,6 +61,7 @@ export class DraftFormComponent implements OnInit {
   mType!:string;
 
   randomCards!:Card[] | undefined;
+  customDraft:Card[] = [];
 
 
   shuffleStyle:string = "nothing";
@@ -78,6 +80,9 @@ export class DraftFormComponent implements OnInit {
   draftCardSelected = false;
 
   firstTime = true;
+
+
+  draftArray:[] =[]
 
   rotate(){
     if (this.state === "default") {
@@ -126,13 +131,23 @@ export class DraftFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.draftMode=this.customcardsService.getDraftType();
+    this.customEnabled = this.customcardsService.getCustomEnabled();
+    console.log(this.draftMode);
+    console.log(this.customEnabled)
 
-    this.draftMode = this.customcardsService.getDraft()
+
+    this.customcardsService.getCustomCardsByDraft(this.draftMode).subscribe(
+      res => {
+        this.customDraft = res;
+      }
+    )
 
     this.customcardsService.getCustomMonsters().subscribe(
       res => {
         
         this.monsters = res;
+        
       }
     )
     this.customcardsService.getCustomSpells().subscribe(
@@ -212,10 +227,11 @@ export class DraftFormComponent implements OnInit {
         if(res)
         this.database = res;
         this.genericAll =  this.generic,this.genericA,this.genericT;
-        this.cards = this.database
+        this.cards = this.database;
         this.decideCardPool();
+
+        
         this.shuffleCards();
-        console.log(this.genericAll);
         
         
       }
@@ -227,18 +243,28 @@ export class DraftFormComponent implements OnInit {
   }
 
   decideCardPool(){
-    switch(this.draftMode){
-      case "default":
-        this.cards = this.database
-        break;
-      
-      case "generic":
-        this.cards = this.genericAll
-        break;
-        
-      default:
-        this.cards = this.database
+    console.log(this.customEnabled);
+    if(this.customEnabled == true){
+      this.cards = this.customDraft;
     }
+    else{
+      switch(this.draftMode){
+
+        case "default":
+          this.cards = this.database
+
+          break;
+
+        case "generic":
+          this.cards = this.genericAll
+          break;
+          
+        default:
+          this.cards = this.database
+      }
+    }
+
+
     
   }
 

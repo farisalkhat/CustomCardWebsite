@@ -19,6 +19,7 @@ export interface Card extends Document{
 }
 
 
+
 export interface Draft {
   title: string;
   cardIDs:string[];
@@ -42,14 +43,19 @@ export interface Pack {
 
 
 export class CustomcardsService {
-  setDraft(draftType: string) {
+  setDraft(draftType: string,customDraft:boolean) {
     this.draft= draftType;
+    this.customDraft = customDraft;
   }
-  getDraft(){
+  getDraftType(){
     return this.draft;
+  }
+  getCustomEnabled(){
+    return this.customDraft;
   }
 
   draft:string = "default"
+  customDraft:boolean = false;
 
 
   private _carddataUrl = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards"
@@ -57,6 +63,8 @@ export class CustomcardsService {
   private _cardSpells = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/spells"
   private _cardTraps = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/traps"
   private _cardST = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/spellstraps"
+
+
 
 
 
@@ -70,8 +78,14 @@ export class CustomcardsService {
     return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/${id}`);
   } 
 
+  getCustomCardsByDraft(name:string){
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/${name}`);
+  } 
 
-  
+  getDrafts(){
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/drafts`);
+  }
+
 
   getCustomMonsters(){
     return this.http.get<any[]>(this._cardMonsters);
