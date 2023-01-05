@@ -225,7 +225,7 @@
 
     
         <div class="col-lg-4 cardeffect">
-            <img class="bigcard" src = {{card?.image}}.png> 
+            <a href='' (click)="goToLink(card.id)"><img class="bigcard" src = {{card?.image}}.png></a>
             <b><p *ngIf="monster=='True'">
                 <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
             </p></b>
@@ -263,7 +263,10 @@
     
     <div class="row">
 
-        <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b>      <button class="btn btn-success"(click)="exportList()">Export XML</button></h1>
+        <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b>      <button class="btn btn-success"(click)="exportList()">Export XML</button>
+        <button class="btn btn-success"(click)="uploadList()" *ngIf="_authService.loggedIn()">Upload Decklist</button><span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
+        
+        </h1>
 
 
 

@@ -5,6 +5,7 @@ import { Card, CustomcardsService, Draft } from 'src/app/customcards.service';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import * as FileSaver from 'file-saver';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-deck-editor',
@@ -35,7 +36,7 @@ export class DeckEditorComponent implements OnInit {
   sideCounter = 0;
 
 
-
+  uploadCorrectly: boolean = true;
 
 
   draftCard!:Card ;
@@ -58,7 +59,7 @@ export class DeckEditorComponent implements OnInit {
   get f(){return this.draftData.controls;}
 
 
-  constructor(private customcardsService:CustomcardsService,private _router:Router) { }
+  constructor(public _authService:AuthService,private customcardsService:CustomcardsService,private _router:Router) { }
 
   filters = {
     'name':'',
@@ -171,7 +172,10 @@ export class DeckEditorComponent implements OnInit {
     this.getCardNumbers(this.currentPage);
   }
 
-
+  goToLink(url: string){
+    const newurl = 'https://www.duelingbook.com/card?id='+url
+    window.open(newurl, "_blank");
+}
 
 
   showDetails(card:Card){
@@ -515,6 +519,14 @@ export class DeckEditorComponent implements OnInit {
   }
 
 
+
+  uploadList(){
+    if(this.mainDeck.length!=60){
+      this.uploadCorrectly = false;
+      return;
+    }
+    this.uploadCorrectly = true;
+  }
 
   exportList(){
 
