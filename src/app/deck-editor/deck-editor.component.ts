@@ -353,7 +353,7 @@ export class DeckEditorComponent implements OnInit {
   
   addCard(card:Card){
     if(card!=undefined){
-      if(card.cardtype=="Fusion Monster" && this.extraDeck.length!=15){
+      if((card.cardtype=="Fusion Monster" || card.cardtype=="Xyz Monster") && this.extraDeck.length!=15){
         var duplicates= 0;
         for(const cardFrom of this.extraDeck){
           if(card.name== cardFrom.name){
@@ -397,7 +397,7 @@ export class DeckEditorComponent implements OnInit {
 
   addSideCard(card:Card){
     if(card!=undefined){
-      if(card.cardtype=="Fusion Monster"){
+      if(card.cardtype=="Fusion Monster" || card.cardtype=="Xyz Monster"){
         var duplicates= 0;
         for(const cardFrom of this.extraDeck){
           if(card.name== cardFrom.name){
@@ -484,7 +484,7 @@ export class DeckEditorComponent implements OnInit {
     console.log("in deleteDraftCard!")
     if(card!=undefined){
 
-      if(card.cardtype=="Fusion Monster"){
+      if(card.cardtype=="Fusion Monster" || card.cardtype=="Xyz Monster"){
         const index = this.extraDeck.findIndex(obj => obj.id === card?.id)
         if (index > -1) {
           this.extraDeck.splice(index, 1);
