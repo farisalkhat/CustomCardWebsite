@@ -135,7 +135,7 @@ export class CustomcardsService {
   }
 
   deleteDecklists(id:number){
-    return this.http.post<any>(`http://127.0.0.1:8080/api/delete-decklists`,id);
+    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/delete-decklists`,id);
 
   }
 
