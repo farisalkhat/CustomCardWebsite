@@ -113,7 +113,9 @@ export class DeckEditorComponent implements OnInit {
       },
       err => {
         console.log(err)
-        this._router.navigate(['/drafts']);
+        this.creator = ''
+        this.creatorid = ''
+
       }
     )
   }
