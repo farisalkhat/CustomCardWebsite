@@ -19,6 +19,7 @@ import { PackMakerComponent } from './packs/pack-maker/pack-maker.component';
 import { PackOpenerComponent } from './packs/pack-opener/pack-opener.component';
 import { CommonModule } from '@angular/common';
 import { DeckEditorComponent } from './deck-editor/deck-editor.component';
+import { DecklistDetailsComponent } from './decklists/decklist-details/decklist-details.component';
 
 const routes: Routes = [
   {
@@ -62,7 +63,10 @@ component:PackMakerComponent},
 {path:'pack-opener',
 component:PackOpenerComponent},
 {path:'deck-editor',
-component:DeckEditorComponent}
+component:DeckEditorComponent},
+{path:'decklist/:deckid',
+component:DecklistDetailsComponent},
+
 
 ];
 

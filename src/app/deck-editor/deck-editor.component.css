@@ -17,6 +17,7 @@ button{
 .bigcard{
     width:316px;
     padding-top:5px;
+    cursor: pointer;
 }
 .cardeffect{
     padding-top:10px;

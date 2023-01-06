@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Card, CustomcardsService, Draft } from 'src/app/customcards.service';
+import { Card, CustomcardsService, Draft, Decklist } from 'src/app/customcards.service';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import * as FileSaver from 'file-saver';
@@ -61,6 +61,9 @@ export class DeckEditorComponent implements OnInit {
 
   constructor(public _authService:AuthService,private customcardsService:CustomcardsService,private _router:Router) { }
 
+  deckname:string = "placeholder";
+  deckdescription:string = "placeholder";
+
   filters = {
     'name':'',
     'desc':'',
@@ -87,6 +90,9 @@ export class DeckEditorComponent implements OnInit {
   mType!:string;
 
 
+  creator!:string;
+  creatorid!:string;
+
 
   ngOnInit(): void {
     this.customcardsService.getCustomCards().subscribe(
@@ -97,6 +103,18 @@ export class DeckEditorComponent implements OnInit {
       }
 
 
+    )
+
+    this._authService.getUser().subscribe(
+      res =>{
+        console.log(res['username'])
+        this.creator = res['username']
+        this.creatorid = res['id']
+      },
+      err => {
+        console.log(err)
+        this._router.navigate(['/drafts']);
+      }
     )
   }
 
@@ -521,11 +539,66 @@ export class DeckEditorComponent implements OnInit {
 
 
   uploadList(){
-    if(this.mainDeck.length!=60){
+    if(this.mainDeck.length<40 || this.mainDeck.length>60){
       this.uploadCorrectly = false;
       return;
     }
     this.uploadCorrectly = true;
+
+
+    const decklist = {} as Decklist;
+    decklist.title = this.deckname;
+    decklist.desc = this.deckdescription;
+
+    this.xml_file = '<?xml version="1.0" encoding="utf-8" ?> <deck name=".TriType"><main>';
+ 
+    const idList1:string[] = []
+    const idList2:string[] = []
+    const idList3:string[] = []
+
+
+
+    for(const card of this.mainDeck){
+        this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
+        idList1.push(card.id)
+    }
+    this.xml_file+="</main><side>"   
+    for(const card of this.sideDeck){
+     this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
+     idList2.push(card.id)
+    }
+    this.xml_file+="</side><extra>"   
+    
+    for(const card of this.extraDeck){
+        this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
+        idList3.push(card.id)
+    }
+    this.xml_file+="</extra></deck>"
+
+    decklist['mainDeck'] = idList1;
+    decklist['sideDeck'] = idList2;
+    decklist['extraDeck'] = idList3;
+
+    decklist['decklist'] = this.xml_file;
+    decklist['creator']=this.creator;
+    decklist['creatorid']=Number(this.creatorid);
+    console.log(decklist);
+
+
+
+
+
+    this.customcardsService.submitDecklist(decklist)
+    .subscribe(
+      res=>{
+        console.log("JOBS DONE");
+        console.log(res);
+      },
+        
+      err=>{console.log(err)}
+    )
+    this.submitfail = false;
+    this._router.navigate(['/drafts']);
   }
 
   exportList(){

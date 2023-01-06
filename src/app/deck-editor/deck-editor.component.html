@@ -3,6 +3,18 @@
 <div class="container">
 
 
+    <div class="row">
+        <div class="col-auto">
+        <label for="Name">Deck Name</label>
+                <input id ="drafTitle"  class="form-control" type="text" [(ngModel)] = "deckname">
+        </div>
+
+        <div class="col-auto">
+            <label for="Desc">Deck Description</label>
+            <input class="form-control" type="text" [(ngModel)] = "deckdescription" >
+        </div>
+
+    </div>
 
 
     <div class="row">
@@ -226,7 +238,7 @@
 
     
         <div class="col-lg-4 cardeffect">
-            <a href='' (click)="goToLink(card.id)"><img class="bigcard" src = {{card?.image}}.png></a>
+            <img href='' (click)="goToLink(card.id)" class="bigcard" src = {{card?.image}}.png>
             <b><p *ngIf="monster=='True'">
                 <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
             </p></b>

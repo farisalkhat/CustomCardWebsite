@@ -11,6 +11,7 @@ export class NavigationComponent implements OnInit {
   constructor(public _authService:AuthService) { }
 
   username:string | undefined;
+  id:number | undefined
 
   ngOnInit(): void {
     if (this._authService.loggedIn()){
@@ -19,14 +20,18 @@ export class NavigationComponent implements OnInit {
         res =>{
           console.log(res['username'])
           this.username = res['username']
+          this.id = res['id']
         },
         err => {console.log(err)
-        this.username = undefined}
+        this.username = undefined
+        this.id = undefined
+      }
       )
 
     }
     else{
       this.username = undefined
+      this.id = undefined
     }
 
   }

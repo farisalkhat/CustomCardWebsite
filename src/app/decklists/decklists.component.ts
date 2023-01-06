@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomcardsService, Decklist, importDecklist } from '../customcards.service';
 
 @Component({
   selector: 'app-decklists',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DecklistsComponent implements OnInit {
 
-  constructor() { }
+
+  decklists!:importDecklist[];
+
+
+  constructor(private customcardsService: CustomcardsService) { }
 
   ngOnInit(): void {
+    this.customcardsService.getDecklists().subscribe(
+      res => {
+        if(res){}
+        this.decklists = res;
+      }
+
+
+    )
+
+
   }
 
 }

@@ -19,10 +19,48 @@ export interface Card extends Document{
 }
 
 
+export interface DeckListCard extends Document{
+  id:string;
+  cardtype:string;
+  name:string;
+  type:string;
+  atk:number;
+  def:number;
+  level:number;
+  attribute:string;
+  effect:string;
+  image:string;
+  creator:string;
+  tag:string;
+  deck:string;
+}
+
+
 
 export interface Draft {
   title: string;
   cardIDs:string[];
+}
+
+export interface Decklist{
+  title:string;
+  creator:string;
+  creatorid:number;
+
+  desc:string;
+  decklist:string;
+
+  mainDeck:string[];
+  sideDeck:string[];
+  extraDeck:string[];
+}
+
+export interface importDecklist{
+  id:number;
+  name:string;
+  description:string;
+  creator:string;
+  creatorid:number;
 }
 
 export interface Pack {
@@ -73,6 +111,17 @@ export class CustomcardsService {
   getCustomCards(){
     return this.http.get<any[]>(this._carddataUrl);
   } 
+  getDecklists(){
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists`);
+  }
+
+  getDecklist(id:number){
+    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists/${id}`);
+  } 
+
+  getDecklistInfo(id:number){
+    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists-info/${id}`);
+  }
 
   getCustomCard(id:string){
     return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/${id}`);
@@ -81,11 +130,14 @@ export class CustomcardsService {
   getCustomCardsByDraft(name:string){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/${name}`);
   } 
-
   getDrafts(){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/drafts`);
   }
 
+  deleteDecklists(id:number){
+    return this.http.post<any>(`http://127.0.0.1:8080/api/delete-decklists`,id);
+
+  }
 
   getCustomMonsters(){
     return this.http.get<any[]>(this._cardMonsters);
@@ -117,9 +169,12 @@ export class CustomcardsService {
     return this.http.post<Card[]>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/searchresult',data);
   }
 
-
+  submitDecklist(decklist:Decklist){
+    console.log("help!")
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitdeck',decklist);
+  }
   submitDraft(draft:Draft){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitdraft',draft
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitdraft',draft
       
       
       )
@@ -128,6 +183,7 @@ export class CustomcardsService {
   submitPack(pack:Pack){
     return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitpack',pack)
   }
+
   
   
 }

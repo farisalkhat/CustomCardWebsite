@@ -1,1 +1,22 @@
-<p>decklists works!</p>
+
+<div class="container">
+    <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Creator</th>
+            <th scope="col">Decklist</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let decklist of decklists ">
+            <tr>
+              <td>{{decklist?.creator}}</td>
+              <td><a routerLink='/decklist/{{decklist.id}}'>{{decklist?.name}}</a></td>
+              <td>{{decklist?.description}}</td>    
+    
+            </tr>
+          </tbody>
+      </table>
+
+</div>
+
