@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Card, CustomcardsService,Draft } from 'src/app/customcards.service';
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
   selector: 'app-drafts',
@@ -10,11 +11,11 @@ import { Card, CustomcardsService,Draft } from 'src/app/customcards.service';
 })
 export class DraftsComponent implements OnInit {
 
-  constructor(private customcardsService:CustomcardsService,private _router:Router) { 
+  constructor(private customcardsService:CustomcardsService,private _router:Router, public _authService:AuthService) { 
 
 
 
-
+    
 
 
   }
@@ -36,12 +37,13 @@ export class DraftsComponent implements OnInit {
   submitted = false;
   submitfail: boolean = false;
 
-
   draft={};
 
   drafts:Draft[] = [];
 
   ngOnInit(): void {
+    this.editDraft(false);
+    this.customcardsService.setEditDraftID(-1);
     this.customcardsService.getDrafts().subscribe(
       res => {
         if(res){}
@@ -74,6 +76,9 @@ export class DraftsComponent implements OnInit {
 
   }
 
+  editDraft(edit:boolean){
+    this.customcardsService.editDraft(edit);
+  }
 
   setDraft(draftType:string){
     this.customcardsService.setDraft(draftType,false);

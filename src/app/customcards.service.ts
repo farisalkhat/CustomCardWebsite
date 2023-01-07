@@ -38,8 +38,10 @@ export interface DeckListCard extends Document{
 
 
 export interface Draft {
+  id:number;
   title: string;
   cardIDs:string[];
+  ownerid:number;
 }
 
 export interface Decklist{
@@ -92,8 +94,33 @@ export class CustomcardsService {
     return this.customDraft;
   }
 
+  editDraft(edit:boolean){
+    this.editDrafts=edit;
+  }
+  getEditDraft(){
+    return this.editDrafts;
+  }
+
+  setEditDraftID(editDraftID:number){
+    this.editDraftID=editDraftID;
+  }
+  getEditDraftID(){
+    return this.editDraftID;
+  }
+
+  setEditDraftName(editDraftName:string){
+    this.editDraftName = editDraftName;
+  }
+
+  getEditDraftName(){
+    return this.editDraftName;
+  }
   draft:string = "default"
   customDraft:boolean = false;
+
+  editDrafts:boolean=false;
+  editDraftID!:number;
+  editDraftName!:string;
 
 
   private _carddataUrl = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards"
@@ -132,6 +159,14 @@ export class CustomcardsService {
   } 
   getDrafts(){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/drafts`);
+  }
+
+  getDraftsbyOwner(id:number){
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/drafts/${id}`);
+  }
+
+  getDraftCardsbyID(id:number){
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/draft/${id}`);
   }
 
   deleteDecklists(id:number){
@@ -174,10 +209,13 @@ export class CustomcardsService {
     return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitdeck',decklist);
   }
   submitDraft(draft:Draft){
-    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitdraft',draft
-      
-      
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitdraft',draft
       )
+  }
+
+  resubmitDraft(draft:Draft){
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editdraft',draft   
+    )
   }
 
   submitPack(pack:Pack){

@@ -10,6 +10,9 @@ export class AuthService {
   private _registerUrl = "https://mm8bitdm-ygo.herokuapp.com/api/register-yugioh"
   private _loginUrl = "https://mm8bitdm-ygo.herokuapp.com/api/loginyugioh"
   private _userUrl = "https://mm8bitdm-ygo.herokuapp.com/api/userdata"
+
+  id!:number;
+  username!:number;
   constructor(private http:HttpClient, private router:Router) { 
   }
 

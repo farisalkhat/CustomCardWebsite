@@ -2,7 +2,9 @@
 
 
 <div class="container justify-content-center">
-    <button type="button" class="btn btn-success"  routerLink="/draft-maker" routerLinkActive = "active">Create a Draft List</button>
+    <button type="button" class="btn btn-success"  *ngIf="_authService.loggedIn()" routerLink="/draft-maker" routerLinkActive = "active">Create a Draft List</button>
+    <button type="button" class="btn btn-success"  *ngIf="_authService.loggedIn()" (click) ="editDraft(true)" routerLink="/draftmode" routerLinkActive = "active">Edit a Draft List</button>
+
     <button type="button" class="btn btn-success"  (click) ="setDraft('default')"   routerLink="/draft-form" routerLinkActive = "active">Start a Draft</button>
 
     <button type="button" class="btn btn-success"  (click) ="setDraft('generic')" routerLink="/draft-form" routerLinkActive = "active">Start a Generic Draft</button>

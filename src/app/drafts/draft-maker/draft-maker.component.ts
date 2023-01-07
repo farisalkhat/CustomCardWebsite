@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Card, CustomcardsService, Draft } from 'src/app/customcards.service';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
+import { AuthService } from 'src/app/auth/services/auth.service';
 @Component({
   selector: 'app-draft-maker',
   templateUrl: './draft-maker.component.html',
@@ -46,7 +47,7 @@ export class DraftMakerComponent implements OnInit {
   get f(){return this.draftData.controls;}
 
 
-  constructor(private customcardsService:CustomcardsService,private _router:Router) { }
+  constructor(public _authService:AuthService, public customcardsService:CustomcardsService,private _router:Router) { }
 
   filters = {
     'name':'',
@@ -73,18 +74,65 @@ export class DraftMakerComponent implements OnInit {
   stType!:string;
   mType!:string;
 
+  username!:string;
+  id!:number;
+
 
 
   ngOnInit(): void {
-    this.customcardsService.getCustomCards().subscribe(
-      res => {
-        if(res){}
-        this.cards = res;
-        this.getCardNumbers(this.currentPage);
+    if (this._authService.loggedIn()){
+
+      this._authService.getUser().subscribe(
+        res =>{
+          console.log(res['username'])
+          this.username = res['username']
+          this.id = res['id']
+
+
+          if(this.customcardsService.getEditDraft() && this.customcardsService.getEditDraftID()!=-1){
+            this.customcardsService.getDraftCardsbyID(this.customcardsService.getEditDraftID()).subscribe(
+              res => {
+                if(res){
+                  this.currentDraft=res;
+
+                  // for (let i = 0; i <= res.length-1; i++) {
+                  //   this.addCardfromDraft(res[i]);
+                  // }
+                  // console.log(this.currentDraft)
+
+                  this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDraftName());
+                }
+      
+              }
+            )
+          }
+
+        },
+        err => {console.log(err)
+        this.username = ''
+        this.id = -99999
+        this._router.navigate(['/drafts']);
       }
+      )
+
+    }
+    
+
+ 
 
 
-    )
+      this.customcardsService.getCustomCards().subscribe(
+        res => {
+          if(res){
+            this.cards = res;
+            this.getCardNumbers(this.currentPage);
+          }
+          
+        }
+      )
+    
+
+
   }
 
   submitSearch(){
@@ -164,8 +212,8 @@ export class DraftMakerComponent implements OnInit {
   }
 
 
-  showDetails(id:string){
-    this.card = this.cards.find(x => x.id == id);
+  showDetails(card:Card){
+    this.card = card;
     console.log(this.card)
     this.attribute=''
     this.stType =''
@@ -349,6 +397,20 @@ export class DraftMakerComponent implements OnInit {
     
   }
 
+
+  addCardfromDraft(card:Card){
+    if(card!=undefined){
+      const index = this.currentDraft.findIndex(obj => obj.id === card?.id)
+      console.log(index)
+        if (index > -1) {
+          return;
+        }
+      this.currentDraft.push(card);
+    }
+    
+  }
+
+
   selectDraftCard(card:Card){
     // this.draftCard = this.currentDraft.find(x => x.id == id);
     this.draftCard = card;
@@ -380,7 +442,15 @@ export class DraftMakerComponent implements OnInit {
 
 
       const finaldata = {} as Draft;
-      finaldata['title'] = this.draftData.controls['draftTitle'].value;
+      finaldata['ownerid']=this.id;
+      
+      if(!this.customcardsService.getEditDraft()){
+        finaldata['title'] = this.draftData.controls['draftTitle'].value;
+      }
+      else{
+        finaldata['id']=this.customcardsService.getEditDraftID();
+      }
+      
 
       const idList:string[] = []
 
@@ -393,20 +463,40 @@ export class DraftMakerComponent implements OnInit {
       finaldata['cardIDs'] = idList;
 
 
+      console.log("this is finaldata id:"+finaldata['id']);
+      console.log("this is final data");
+      console.log(finaldata);
 
 
+      if(this.customcardsService.getEditDraft()){
+        this.customcardsService.resubmitDraft(finaldata)
+        .subscribe(
+          res=>{
+            console.log("JOBS DONE");
+            console.log(res);
+            this._router.navigate(['/drafts']);
+          },
+            
+          err=>{console.log(err)}
+        )
+        this.submitfail = false;
 
-      this.customcardsService.submitDraft(finaldata)
-      .subscribe(
-        res=>{
-          console.log("JOBS DONE");
-          console.log(res);
-        },
-          
-        err=>{console.log(err)}
-      )
-      this.submitfail = false;
-      this._router.navigate(['/drafts']);
+      }
+      else{
+        this.customcardsService.submitDraft(finaldata)
+        .subscribe(
+          res=>{
+            console.log("JOBS DONE");
+            console.log(res);
+            this._router.navigate(['/drafts']);
+          },
+            
+          err=>{console.log(err)}
+        )
+        this.submitfail = false;
+
+      }
+
 
  
 
