@@ -189,7 +189,7 @@ export class CustomcardsService {
   }
 
   getPacks(){
-    return this.http.get<PackButton[]>(`http://127.0.0.1:8080/api/yugioh/packs`);
+    return this.http.get<PackButton[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/packs`);
   }
 
   getDraftsbyOwner(id:number){
@@ -234,7 +234,7 @@ export class CustomcardsService {
 
   }
   getCustomCardsByPack(id:number){
-    return (this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/customcards/pack/${id}`));
+    return (this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/pack/${id}`));
   } 
 
   getPackAmount(){
@@ -265,7 +265,7 @@ export class CustomcardsService {
   }
 
   submitPack(pack:Pack){
-    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitpack',pack)
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitpack',pack)
   }
 
   
