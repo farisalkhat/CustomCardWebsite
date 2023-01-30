@@ -4,3 +4,15 @@ button{
     font-size:1.5rem;
     font-family: 'Oswald', sans-serif;
 }
+
+input{
+    width:100px;
+}
+
+select{
+    width:100px;
+}
+
+p{
+    font-size: 32px;
+}

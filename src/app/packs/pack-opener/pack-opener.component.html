@@ -1,7 +1,4 @@
-<div class="container">
-    <h1 class="text-center">This is a Pseudo Draft. You open a pack of 15 from the entire database, select 1, then open a pack with one less card, and you repeat the process until you have 60 cards. </h1>
-    
-</div>
+
 
 
 
@@ -14,19 +11,12 @@
 
 <div class="container-fluid">
     <div class="row">
-      <h1 class="text-center">Coming Soon</h1>
-      <div class="container">
-        
-        
-        <button class="btn btn-success"(click)="revealCards()">Reveal Cards</button>
-        <!-- <button class="btn btn-success"(click)="shuffleCards()">Open Next Pack</button> -->
-        
- 
-      </div>
+      
+
 
     </div>
-    <div class="row">
-          <div class="col">
+    <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
             <div>
 
               <span  *ngFor = "let card of randomCards">
@@ -41,8 +31,11 @@
                           <img src={{card?.image}}.png>
                       </div>
                         </div>
-  
+
+                      
+                        <span *ngIf="revealed==true"><b>{{card?.rarity}}</b></span>
                   </button>
+                  
                   
               </span>
           </div>
@@ -87,10 +80,17 @@
     
     </div>
 
+    <div class="container">
+        
+        
+      <button class="btn btn-success" [disabled]="packsOpened>packAmount || revealed==true" (click)="revealCards()">Open Pack {{packsOpened}}/{{packAmount}}</button>
+      <button class="btn btn-success" [disabled]="revealed==false || packsOpened==packAmount" (click)="openNextPack()">Open Next Pack</button>
+      
 
-    <div class="row" *ngIf = "card!= undefined">
-      <div class="col-sm-3"><img class="bigcard" src = {{card?.image}}.png> </div>
-      <div class="col-md-5 cardeffect">
+    </div>
+    <div class="row justify-content-center" *ngIf = "card!= undefined">
+      <div class="col-sm-2"><img class="bigcard" href='' (click)="goToLink(card.id)" src = {{card?.image}}.png> </div>
+      <div class="col-md-4 cardeffect">
         
         <b><p *ngIf="monster=='True'">
             <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
@@ -114,7 +114,7 @@
             <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
             <p> {{card?.effect}}</p>
         </b>
-        <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard()">Add</button>
+        
       </div>
 
     </div>
@@ -125,14 +125,14 @@
 
     <div class="col-lg-12">
       <h2>Current Cards</h2>
-      <span *ngFor = "let card of currentDraft">
-          <img class ="smallcard" src ={{card?.image}}.png>
+      <span *ngFor = "let card of currentOpened">
+          <img class ="smallcard" href='' (click)="goToLink(card.id)" src ={{card?.image}}.png>
       </span>
     </div>
 
     <div class="col-lg-12">
       <h2>Card List</h2>
-      <ul *ngFor = "let card of currentDraft">
+      <ul *ngFor = "let card of currentOpened">
         <li> <b>{{card?.name}}</b>, {{card?.cardtype}}, <b>{{card?.creator}}</b></li>
       </ul>
 

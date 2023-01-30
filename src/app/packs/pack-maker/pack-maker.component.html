@@ -21,21 +21,7 @@
         </div>
  
  
-        <div class="row">
-            <div class="col-auto">
-                <label for="Name">Creator</label>
-                <input id ="creator" formControlName ="creator" [ngClass]="{'is-invalid': submitted && f['creator'].errors}" class="form-control" type="text" [(ngModel)] = "creator">
-                
 
-                <div *ngIf="submitted && f['creator'].errors" class="invalid-feedback">
-                    <div *ngIf="f['creator'].errors['required']">
-                      <p class="red">Umm WHO ARE YOU.</p>
-                    </div>
-                </div>
-            
-            
-            </div>
-        </div>
 
     </form>
 
@@ -241,14 +227,31 @@
     
     
     </div>
+
+    <div class="row">
+
+        
+        <div class="col">
+            <button type="button" class="btn btn-success addcard" (click)="autoSelect('common')">Add Common</button>
+
+            <button type="button" class="btn btn-success addcard" (click)="autoSelect('rare')">Add Rare</button>
+
+            <button type="button" class="btn btn-success addcard" (click)="autoSelect('super')">Add Super</button>
+
+            <button type="button" class="btn btn-success addcard" (click)="autoSelect('ultra')">Add Ultra</button>
+
+            <button type="button" class="btn btn-success addcard" (click)="autoSelect('secret')">Add Secret</button>
+        </div>
+    </div>
+    
     
     <div class="row">
     
-        <div class="col-lg-6">
+        <div class="col-lg-7">
     
                 <span *ngFor = "let card of currentCards">
     
-                    <button class="btn btn-default"   (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card?.image}}.png></button>
+                    <button class="btn btn-default"   (contextmenu)="rightAddPackCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
                     
                 </span>
     
@@ -261,13 +264,38 @@
     
 
     
-        <div class="col cardeffect">
+        <div class="col-md-4">
             <div class="row">
-                <img class="bigcard" src = {{card?.image}}.png> 
+                <div class="col"><img class="bigcard" src = {{card?.image}}.png></div>
+                
+                
+                <div class="col">
+                    <div class="row">
+                        <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('common')">Add Common</button>
+                    </div>
+        
+                    <div class="row">
+                        <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('rare')">Add Rare</button>
+                    </div>
+        
+                    <div class="row">
+                        <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('super')">Add Super</button>
+                    </div>
+        
+                    <div class="row">
+                        <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('ultra')">Add Ultra</button>
+                    </div>
+        
+                    <div class="row">
+                        <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('secret')">Add Secret</button>
+                    </div>
+        
+        
+                </div>
             </div>
 
             <div class="row">
-                <div class="col-lg-5"></div>
+                
                 <b><p *ngIf="monster=='True'">
                     <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
                 </p></b>
@@ -288,39 +316,20 @@
                 
                 
                     <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
-                    <p> {{card?.effect}}</p>
+                    
                 </b>
-    
+
                 
             </div>
-
             
-            
- 
+            <div class="row extrapadding">
+                <p> {{card?.effect}}</p>
+                
+            </div>
         </div>
-        <div class="col">
-            <div class="row">
-                <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('common')">Add Common</button>
-            </div>
-
-            <div class="row">
-                <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('rare')">Add Rare</button>
-            </div>
-
-            <div class="row">
-                <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('super')">Add Super</button>
-            </div>
-
-            <div class="row">
-                <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('ultra')">Add Ultra</button>
-            </div>
-
-            <div class="row">
-                <button type="button" *ngIf="card!=undefined"class="btn btn-success addcard" (click)="addCard('secret')">Add Secret</button>
-            </div>
 
 
-        </div>
+
     </div>
     
     
@@ -334,35 +343,35 @@
         <div class="col-lg-12">
             <h2>Commons ({{currentCommons.length}}/48)</h2>
             <span *ngFor = "let card of currentCommons">
-                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'common')" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
+                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'common')" (click)="showDetails(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Rares ({{currentRare.length}}/25)</h2>
             <span *ngFor = "let card of currentRare">
-                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'rare')" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
+                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'rare')" (click)="showDetails(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Super ({{currentSuper.length}}/15)</h2>
             <span *ngFor = "let card of currentSuper">
-                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'super')" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
+                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'super')" (click)="showDetails(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Ultra ({{currentUltra.length}}/10)</h2>
             <span *ngFor = "let card of currentUltra">
-                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'ultra')" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
+                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'ultra')" (click)="showDetails(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Secret({{currentSecret.length}}/2)</h2>
             <span *ngFor = "let card of currentSecret">
-                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'secret')" (click)="selectDraftCard(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
+                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'secret')" (click)="showDetails(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
             </span>
         </div>
         
@@ -373,7 +382,7 @@
 
 
     <div class="row">
-        <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-success addcard" (click)="saveDraft()">Save Draft</button>
+        <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-success addcard" (click)="saveDraft()">Save Pack</button>
         <div *ngIf="submitfail && submitted" class="submit-text-fail" >
             Submission failed! Fix the following errors:
             <ul >

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { Card, CustomcardsService, Draft, Pack } from 'src/app/customcards.service';
 
 
@@ -32,6 +33,8 @@ export class PackMakerComponent implements OnInit {
 
 
 
+  rarity:string="common";
+
   draftCard!:Card | undefined;
 
 
@@ -41,15 +44,7 @@ export class PackMakerComponent implements OnInit {
       Validators.minLength(1),
       Validators.maxLength(100)
 
-    ]),
-    creator: new FormControl(' ',[
-      Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(100)
-
     ])
-
-
   })
 
 
@@ -60,7 +55,7 @@ export class PackMakerComponent implements OnInit {
   get f(){return this.draftData.controls;}
 
 
-  constructor(private customcardsService:CustomcardsService,private _router:Router) { }
+  constructor(public _authService: AuthService,private customcardsService:CustomcardsService,private _router:Router) { }
 
   filters = {
     'name':'',
@@ -95,9 +90,51 @@ export class PackMakerComponent implements OnInit {
   secret:number= 0;
 
 
+  username!:string;
+  id!:number;
+
 
 
   ngOnInit(): void {
+    if (this._authService.loggedIn()){
+
+      this._authService.getUser().subscribe(
+        res =>{
+          console.log(res['username'])
+          this.username = res['username']
+          this.id = res['id']
+
+
+          if(this.customcardsService.getEditDraft() && this.customcardsService.getEditDraftID()!=-1){
+            this.customcardsService.getDraftCardsbyID(this.customcardsService.getEditDraftID()).subscribe(
+              res => {
+                if(res){
+                  this.currentDraft=res;
+
+                  // for (let i = 0; i <= res.length-1; i++) {
+                  //   this.addCardfromDraft(res[i]);
+                  // }
+                  // console.log(this.currentDraft)
+
+                  this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDraftName());
+                }
+      
+              }
+            )
+          }
+
+        },
+        err => {console.log(err)
+        this.username = ''
+        this.id = -99999
+        this._router.navigate(['/drafts']);
+      }
+      )
+
+    }
+
+
+
     this.customcardsService.getCustomCards().subscribe(
       res => {
         if(res){}
@@ -159,8 +196,8 @@ export class PackMakerComponent implements OnInit {
   }
   getCardNumbers(page:number){
     this.currentCards = [];
-    const cardmin = (page-1)*20;
-    const cardmax = (page * 20) - 1;
+    const cardmin = (page-1)*21;
+    const cardmax = (page * 21) - 1;
 
     for (let i = cardmin; i <= cardmax; i++) {
       console.log(cardmin,' ',cardmax);
@@ -186,9 +223,8 @@ export class PackMakerComponent implements OnInit {
   }
 
 
-  showDetails(id:string){
-    this.card = this.cards.find(x => x.id == id);
-    console.log(this.card)
+  showDetails(card:Card){
+    this.card = card
     this.attribute=''
     this.stType =''
     this.mType= ''
@@ -431,6 +467,7 @@ export class PackMakerComponent implements OnInit {
         const index = this.currentCommons.findIndex(obj => obj.id === this.draftCard?.id)
         if (index > -1) {
           this.currentCommons.splice(index, 1);
+          this.common--;
         }
       }
       else if(cardtype=="rare"){
@@ -438,24 +475,28 @@ export class PackMakerComponent implements OnInit {
         const index = this.currentRare.findIndex(obj => obj.id === this.draftCard?.id)
         if (index > -1) {
           this.currentRare.splice(index, 1);
+          this.rare--;
         }
       }
       else if(cardtype=="super"){
         const index = this.currentSuper.findIndex(obj => obj.id === this.draftCard?.id)
         if (index > -1) {
           this.currentSuper.splice(index, 1);
+          this.super--;
         }
       }
       else if(cardtype=="ultra"){
         const index = this.currentUltra.findIndex(obj => obj.id === this.draftCard?.id)
         if (index > -1) {
           this.currentUltra.splice(index, 1);
+          this.ultra--;
         }
       }
       else if(cardtype=="secret"){
         const index = this.currentSecret.findIndex(obj => obj.id === this.draftCard?.id)
         if (index > -1) {
           this.currentSecret.splice(index, 1);
+          this.secret--;
         }
       }
 
@@ -471,7 +512,18 @@ export class PackMakerComponent implements OnInit {
       this.draftCard = undefined;
     }
   }
+  rightAddPackCard($event: { preventDefault: () => void; },card:Card){
+    
+    $event.preventDefault();
+    this.card=card;
+    console.log(card.name);
+    this.addCard(this.rarity);
 
+  }
+
+  autoSelect(rarity:string){
+    this.rarity= rarity;
+  }
   saveDraft(){
     this.submitted=true;
     if(this.draftData.invalid){
@@ -491,10 +543,11 @@ export class PackMakerComponent implements OnInit {
 
     else{ 
 
-
+ 
       const finaldata = {} as Pack;
       finaldata['title'] = this.draftData.controls['draftTitle'].value;
-      finaldata['creator'] = this.draftData.controls['creator'].value;
+      finaldata['creator'] = this.username;
+      finaldata['creatorid'] = this.id;
 
       const commonIDs:string[] = []
       const rareIDs:string[] = []
@@ -534,12 +587,13 @@ export class PackMakerComponent implements OnInit {
       .subscribe(
         res=>{
           console.log(res);
+          this._router.navigate(['/packs']);
         },
           
         err=>{console.log(err)}
       )
       this.submitfail = false;
-      this._router.navigate(['/drafts']);
+      
 
 
 
@@ -566,4 +620,11 @@ export class PackMakerComponent implements OnInit {
 
 
 
+
 }
+// var map: {}; // You could also use an array
+// onkeydown = onkeyup = function(e){
+//     e = e || event; // to deal with IE
+//     map[e.key] = e.type == 'keydown';
+//     /* insert conditional here */
+// }

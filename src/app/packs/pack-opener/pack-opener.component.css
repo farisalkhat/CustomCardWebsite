@@ -61,6 +61,7 @@
   }
   .smallcard{
     width:100px;
+    cursor: pointer;
 }
   .card {
     box-shadow: 10px 10px 43px -18px rgba(0, 0, 0, 0.75);
@@ -112,6 +113,7 @@
 }.bigcard{
     width:330px;
     padding-top:5px;
+    cursor: pointer;
 }
 .cardeffect{
     padding-top:10px;
@@ -122,4 +124,12 @@
 ul{
   padding:0;
   margin:0;
+}
+
+span { text-transform: capitalize; }
+
+button{margin:1px;}
+
+div{
+  padding:1px;
 }

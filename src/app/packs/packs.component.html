@@ -1,4 +1,35 @@
 <div class="container justify-content-center">
-    <button type="button" class="btn btn-success"  routerLink="/pack-maker" routerLinkActive = "active">Create a Pack</button>
-    <button type="button" class="btn btn-success"  routerLink="/pack-opener" routerLinkActive = "active">Open Packs</button>
+    <!-- <button type="button" class="btn btn-success"  *ngIf="_authService.loggedIn()" routerLink="/pack-maker" routerLinkActive = "active">Create a Pack</button> -->
+
+    <div class="form-outline">
+        <p>Select how many packs you want to open, then click a pack to begin 
+            
+            <select class="form-control"  id="attribute" [(ngModel)] = "placeId">
+                <option value =1>1</option>
+                <option value =2>2</option>
+                <option value =3>3</option>
+                <option value =4>4</option>
+                <option value =5>5</option>
+                <option value =6>6</option>
+                <option value =7>7</option>
+                <option value =8>8</option>
+                <option value =9>9</option>
+                <option value =10>10</option>
+                <option value =12>12</option>
+                <option value =15>15</option>
+                <option value =24>24</option>
+                <option value =30>30</option>
+
+                
+                
+            </select>
+            
+            
+         
+    </div>
+
+    <span *ngFor = "let pack of packs">
+        <button class="btn btn-success"  (click)="SetPackNo(placeId,pack.packid)"  routerLink="/pack-opener/{{pack?.packid}}" routerLinkActive = "active">{{pack.title}}</button>
+    </span>
 </div>
+

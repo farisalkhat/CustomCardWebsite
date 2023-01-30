@@ -68,11 +68,37 @@ export interface importDecklist{
 export interface Pack {
   title: string;
   creator:string;
+  creatorid:number;
   commonIDs:string[];
   rareIDs:string[];
   superIDs:string[];
   ultraIDs:string[];
   secretIDs:string[];
+}
+
+
+export interface PackCard extends Document{
+  id:string;
+  cardtype:string;
+  name:string;
+  type:string;
+  atk:number;
+  def:number;
+  level:number;
+  attribute:string;
+  effect:string;
+  image:string;
+  creator:string;
+  tag:string;
+  rarity:string;
+}
+
+
+
+export interface PackButton{
+  packid:number;
+  title:string;
+  
 }
 
 
@@ -122,6 +148,7 @@ export class CustomcardsService {
   editDraftID!:number;
   editDraftName!:string;
 
+  packAmount = 6;
 
   private _carddataUrl = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards"
   private _cardMonsters = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/monsters"
@@ -161,6 +188,10 @@ export class CustomcardsService {
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/drafts`);
   }
 
+  getPacks(){
+    return this.http.get<PackButton[]>(`http://127.0.0.1:8080/api/yugioh/packs`);
+  }
+
   getDraftsbyOwner(id:number){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/drafts/${id}`);
   }
@@ -193,7 +224,22 @@ export class CustomcardsService {
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/tags/${name}`);
   }  
 
+  SetPackNo(value:number,packid:number){
+    if(value==undefined){
+      this.packAmount= 6
+    }
+    else{
+      this.packAmount=value;
+    }
 
+  }
+  getCustomCardsByPack(id:number){
+    return (this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/customcards/pack/${id}`));
+  } 
+
+  getPackAmount(){
+    return this.packAmount;
+  }
 
 
 
@@ -219,7 +265,7 @@ export class CustomcardsService {
   }
 
   submitPack(pack:Pack){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitpack',pack)
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitpack',pack)
   }
 
   

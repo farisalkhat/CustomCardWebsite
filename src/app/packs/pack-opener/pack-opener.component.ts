@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { Card, CustomcardsService } from 'src/app/customcards.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Card, CustomcardsService, Pack, PackCard } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-pack-opener',
@@ -27,20 +28,30 @@ import { Card, CustomcardsService } from 'src/app/customcards.service';
 })
 export class PackOpenerComponent implements OnInit {
 
-  constructor(private customcardsService:CustomcardsService) { }
-  cards!: Card[];
-  card: Card | undefined;
+  constructor(private customcardsService:CustomcardsService,private route: ActivatedRoute) { }
+  cards!: PackCard[];
+  card: PackCard | undefined;
   monster!:string;
   attribute!:string;
   stType!:string;
   mType!:string;
 
-  randomCards!:Card[] | undefined;
+  randomCards: PackCard[] = [];
 
+  commonCards: PackCard[] = [];
+  rareCards: PackCard[] = [];
+  superCards: PackCard[] = [];
+  ultraCards: PackCard[] = [];
+  secretCards: PackCard[] = [];
 
-  round = 0;
-  cardsRemaining = 15;
-  currentDraft: Card[] = [];
+  packsOpened = 0; //Total Packs opened since starting the pack simulator
+  packAmount = 0; //Total amount of packs that need to be opened
+  packID:number = 1;
+
+  cardsRemaining = 9; //Amount of cards in each pack
+  currentOpened: PackCard[] = []; //List of cards received
+
+  revealed:boolean = false;
 
   state: string = 'default';
   rotate(){
@@ -51,37 +62,63 @@ export class PackOpenerComponent implements OnInit {
       }
   }
 
-  addCard(){
-    if(this.card){
-      this.currentDraft.push(this.card);
-      this.card = undefined;
-      this.cardsRemaining--;
-      if(this.cardsRemaining<=0){
-        this.round++;
-        if(this.round>=5){this.clearCards();}
-        else{this.cardsRemaining=15; this.shuffleCards()}
-      }
-      else{
-        this.shuffleCards();
-      }
-    }
-    
-  }
 
-  clearCards(){
-    this.randomCards=undefined;
-  }
+
+
+
+
+
+
 
 
   ngOnInit(): void {
-    this.customcardsService.getCustomCards().subscribe(
-      res => {
-        if(res){}
-        this.cards = res;
-        this.shuffleCards()
-      }
-    )
+
+    this.route.paramMap.subscribe((paramMap)=>{
+      this.packID= Number(paramMap.get('packid'));
+      this.customcardsService.getCustomCardsByPack(this.packID).subscribe(
+        res => {
+          this.cards = res;
+          console.log(this.cards)
+
+          let counter = 0;
+          for(counter; counter!=10;counter++){
+            this.ultraCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=25;counter++){
+            this.superCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=27;counter++){
+            this.secretCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=52;counter++){
+            this.rareCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=100;counter++){
+            this.commonCards.push(this.cards[counter])
+          }
+
+
+
+          this.shuffleCards();
+        }
+      )
+      this.packAmount = this.customcardsService.getPackAmount();
+  
+      
+    })
+
+
+      
   }
+
+  goToLink(url: string){
+    const newurl = 'https://www.duelingbook.com/card?id='+url
+    window.open(newurl, "_blank");
+}
   shuffleCards(){
     if (this.state === "flipped") {
         this.state = "default";
@@ -92,27 +129,82 @@ export class PackOpenerComponent implements OnInit {
     console.log(this.cards.length)
     while(cardCounter<this.cardsRemaining){
 
-      const randID = this.randomIntFromInterval(0,this.cards.length-1)
-      const newCard = this.cards[randID]
-      this.randomCards.push(newCard)
+      if(cardCounter<=6){
+        const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
+        let newCard = this.commonCards[randID]
+
+        while(this.randomCards.findIndex(obj => obj.id === newCard?.id)>-1){
+          const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
+          newCard = this.commonCards[randID]
+        }
+
+        this.randomCards.push(newCard)
+      }
+      if(cardCounter==7){
+        const randID = this.randomIntFromInterval(0,this.rareCards.length-1)
+        const newCard = this.rareCards[randID]
+
+        
+        this.randomCards.push(newCard)
+      }
+      if(cardCounter==8){
+        const randID1 = this.randomIntFromInterval(0,5)
+        const randID2 = this.randomIntFromInterval(0,11)
+        const randID3 = this.randomIntFromInterval(0,30)
+        const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
+        let newCard = this.commonCards[randID]
+        while(this.randomCards.findIndex(obj => obj.id === newCard?.id)>-1){
+          const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
+          newCard = this.commonCards[randID]
+        }
+        console.log(randID1,randID2,randID3)
+        if(randID1==0){
+          const randID = this.randomIntFromInterval(0,this.superCards.length-1)
+          newCard = this.superCards[randID]
+          
+        }
+        if(randID2==0){
+          const randID = this.randomIntFromInterval(0,this.ultraCards.length-1)
+           newCard = this.ultraCards[randID]
+          
+        }
+        if(randID3==0){
+          const randID = this.randomIntFromInterval(0,this.secretCards.length-1)
+          newCard = this.secretCards[randID]
+        }
+
+        this.randomCards.push(newCard)
+      
+        
+      }
       cardCounter++;
+
     }
+
+    this.packsOpened++;
   }
   randomIntFromInterval(min:number, max:number) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
   revealCards(){
-    console.log("Does NOTHING!")
     this.rotate();
+    this.revealed=true;
+    for(const card of this.randomCards){
+      this.currentOpened.push(card)
+    }
+    this.currentOpened.sort((a, b) => a.name.localeCompare(b.name))
+    this.currentOpened.sort((a, b) => a.creator.localeCompare(b.creator))
   }
 
   openNextPack(){
-    this.shuffleCards()
     this.rotate();
+    this.shuffleCards();
+    this.revealed = false;
+    this.card = undefined;
   }
 
-  showDetails(card:Card){
+  showDetails(card:PackCard){
     if(this.state=="default"){
       return;
     }
