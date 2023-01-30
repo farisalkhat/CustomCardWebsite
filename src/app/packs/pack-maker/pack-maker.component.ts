@@ -179,15 +179,50 @@ export class PackMakerComponent implements OnInit {
         this.filters['sort']=='c.DEF ASC' || this.filters['sort']=='c.DEF DESC'){
           this.filters['sort'] = 'c.name ASC';
         }
+        
+
+
+
+
+      
       }
 
+      if(this.filters['initial']=='Monster'){
+        if(this.filters['cardtype']!="Effect Monster" &&
+        this.filters['cardtype']!="Flip Monster"&&
+        this.filters['cardtype']!="Fusion Monster"&&
+        this.filters['cardtype']!="Ritual Monster"&&
+        this.filters['cardtype']!="Union Monster" &&
+        this.filters['cardtype']!="Xyz Monster"){
+          this.filters['cardtype']=''
+        }
+      }
+
+      if(this.filters['initial']=='Spell'){
+        if(this.filters['cardtype']!="Normal Spell" &&
+        this.filters['cardtype']!="Continuous Spell"&&
+        this.filters['cardtype']!="Quick Spell"&&
+        this.filters['cardtype']!="Ritual Spell"&&
+        this.filters['cardtype']!="Equip Spell" &&
+        this.filters['cardtype']!="Field Spell"){
+          this.filters['cardtype']=''
+        }
+      }
+
+      if(this.filters['initial']=='Trap'){
+        if(this.filters['cardtype']!="Normal Trap" &&
+        this.filters['cardtype']!="Continuous Trap"&&
+        this.filters['cardtype']!="Counter Trap"){
+          this.filters['cardtype']=''
+        }
+      }
     this.customcardsService.getFilteredCards(this.filters).subscribe(
       res=>{
         
         console.log(res)
         this.cards = res;
         this.currentPage = 1
-        this.card=undefined;
+
         this.getCardNumbers(this.currentPage);
       },
       err=>{console.log(err)}

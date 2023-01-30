@@ -26,7 +26,7 @@
 
 
 
-    <div class="row">
+    <div (keydown.enter)="submitSearch()" class="row">
             <div class="col-auto">
                 <label for="Name">Name</label>
                 <input class="form-control" type="text" [(ngModel)] = "filters.name">
@@ -164,7 +164,7 @@
     
     </div>
     
-    <div class="row">
+    <div (keydown.enter)="submitSearch()" class="row">
         <div class="col-auto">
             <label for="attribute">Attribute</label>
             <select class="form-control"   [disabled]="filters.initial!='Monster'" id="attribute" [(ngModel)] = "filters.attribute">
