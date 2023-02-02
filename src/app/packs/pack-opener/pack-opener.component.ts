@@ -112,7 +112,7 @@ export class PackOpenerComponent implements OnInit {
     })
 
 
-      
+      console.log(this.cards);
   }
 
   goToLink(url: string){
@@ -182,6 +182,7 @@ export class PackOpenerComponent implements OnInit {
     }
 
     this.packsOpened++;
+    console.log(this.randomCards);
   }
   randomIntFromInterval(min:number, max:number) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)

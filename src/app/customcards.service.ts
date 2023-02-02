@@ -13,7 +13,6 @@ export interface Card extends Document{
   level:number;
   attribute:string;
   effect:string;
-  image:string;
   creator:string;
   tag:string;
 }
@@ -29,7 +28,6 @@ export interface DeckListCard extends Document{
   level:number;
   attribute:string;
   effect:string;
-  image:string;
   creator:string;
   tag:string;
   deck:string;
@@ -87,7 +85,6 @@ export interface PackCard extends Document{
   level:number;
   attribute:string;
   effect:string;
-  image:string;
   creator:string;
   tag:string;
   rarity:string;
@@ -98,6 +95,7 @@ export interface PackCard extends Document{
 export interface PackButton{
   packid:number;
   title:string;
+  pack:string;
   
 }
 
@@ -168,6 +166,11 @@ export class CustomcardsService {
   getDecklists(){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists`);
   }
+
+
+  getDeckMasters(){
+    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/deckmaster`);
+  } 
 
   getDecklist(id:number){
     return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists/${id}`);

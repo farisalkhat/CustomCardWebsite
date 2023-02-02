@@ -61,7 +61,7 @@
                         <img src="assets/cardimages/Default.png" />
                       </div>
                         <div class="face front">
-                          <img src={{card?.image}}.png>
+                          <img src = '/assets/cardimages/{{card?.id}}.png'.png>
                       </div>
                         </div>
   
@@ -73,7 +73,7 @@
           <div class="colDraft col">
             <h2>Current Cards ( {{cardsSelected}}/60)</h2> 
               <span *ngFor = "let card of currentDraft">
-                <button class=" btn btn-default btncard" (click)="showDetails2(card)" ><img class ="smallcard" src ={{card?.image}}.png></button>
+                <button class=" btn btn-default btncard" (click)="showDetails2(card)" ><img class ="smallcard" src = '/assets/cardimages/{{card?.id}}.png'></button>
                    
               </span>
           </div>
@@ -111,7 +111,7 @@
               </b>
               
             
-            <img class="bigcard" src = {{card?.image}}.png>
+            <img class="bigcard" src = '/assets/cardimages/{{card?.id}}.png'>
 
             </div>
 
@@ -137,7 +137,7 @@
     <!-- <div class="col-lg-12">
       <h2>Current Cards</h2>
       <span *ngFor = "let card of currentDraft">
-          <img class ="smallcard" src ={{card?.image}}.png>
+          <img class ="smallcard" src = '/assets/cardimages/{{card?.id}}.png'>
       </span>
     </div> -->
 

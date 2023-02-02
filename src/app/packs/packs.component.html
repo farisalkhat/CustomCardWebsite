@@ -29,7 +29,8 @@
     </div>
 
     <span *ngFor = "let pack of packs">
-        <button class="btn btn-success"  (click)="SetPackNo(placeId,pack.packid)"  routerLink="/pack-opener/{{pack?.packid}}" routerLinkActive = "active">{{pack.title}}</button>
+        <img (click)="SetPackNo(placeId,pack.packid)"  *ngIf="pack?.pack!='placeholder'" routerLink="/pack-opener/{{pack?.packid}}" routerLinkActive = "active" class="pack"src = '/assets/packs/{{pack?.pack}}'>
+        <button class="btn btn-success"  *ngIf="pack?.pack=='placeholder'"(click)="SetPackNo(placeId,pack.packid)"  routerLink="/pack-opener/{{pack?.packid}}" routerLinkActive = "active">{{pack.title}}</button>
     </span>
 </div>
 

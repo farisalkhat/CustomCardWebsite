@@ -28,7 +28,7 @@
                         <img src="assets/cardimages/Default.png" />
                       </div>
                         <div class="face front">
-                          <img src={{card?.image}}.png>
+                          <img src = '/assets/cardimages/{{card?.id}}.png'>
                       </div>
                         </div>
 
@@ -55,7 +55,7 @@
                             <img src="\assets\cardimages\Default.png" >
                           </div>
                           <div class="flip-card-back">
-                            <img src={{card?.image}}.png>
+                            <img src = '/assets/cardimages/{{card?.id}}.png'.png>
                           </div>
                         </div>
                       </div>
@@ -67,7 +67,7 @@
     
 
             <!-- <div class="col-lg-3">
-                <img src = {{card?.image}}.png> 
+                <img src = '/assets/cardimages/{{card?.id}}.png'> 
                 <p>{{card?.name}}</p>
                 <p>{{card?.cardtype}}</p>
     
@@ -85,11 +85,12 @@
         
       <button class="btn btn-success" [disabled]="packsOpened>packAmount || revealed==true" (click)="revealCards()">Open Pack {{packsOpened}}/{{packAmount}}</button>
       <button class="btn btn-success" [disabled]="revealed==false || packsOpened==packAmount" (click)="openNextPack()">Open Next Pack</button>
+      <!-- <button class="btn btn-success" [disabled]="revealed==false || packsOpened==packAmount" (click)="openNextPack()">Save to Collection</button> -->
       
 
     </div>
     <div class="row justify-content-center" *ngIf = "card!= undefined">
-      <div class="col-sm-2"><img class="bigcard" href='' (click)="goToLink(card.id)" src = {{card?.image}}.png> </div>
+      <div class="col-sm-2"><img class="bigcard" href='' (click)="goToLink(card.id)" src = '/assets/cardimages/{{card?.id}}.png'> </div>
       <div class="col-md-4 cardeffect">
         
         <b><p *ngIf="monster=='True'">
@@ -126,7 +127,7 @@
     <div class="col-lg-12">
       <h2>Current Cards</h2>
       <span *ngFor = "let card of currentOpened">
-          <img class ="smallcard" href='' (click)="goToLink(card.id)" src ={{card?.image}}.png>
+          <img class ="smallcard" href='' (click)="goToLink(card.id)" src = '/assets/cardimages/{{card?.id}}.png'>
       </span>
     </div>
 

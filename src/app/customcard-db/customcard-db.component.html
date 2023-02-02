@@ -233,7 +233,7 @@
 
             <span *ngFor = "let card of currentCards">
 
-                <button class="btn btn-success" (click)="showDetails(card.id)" ><img class ="smallcard" src ={{card?.image}}.png></button>
+                <button class="btn btn-success" (click)="showDetails(card.id)" ><img class ="smallcard" src = '/assets/cardimages/{{card?.id}}.png'></button>
                 
             </span>
 
@@ -247,7 +247,7 @@
 
 
     <div class="col-lg-4 cardeffect">
-        <img class="bigcard" src = {{card?.image}}.png> 
+        <img class="bigcard" src = '/assets/cardimages/{{card?.id}}.png'> 
         <b><p *ngIf="monster=='True'">
             <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
         </p></b>

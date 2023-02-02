@@ -1,0 +1,33 @@
+<div class ="container-fluid">
+    <div class="row justify-content-center">
+        <button class="smallbutton btn btn-default btn-success" [disabled]="this.state=='flipped'" (click)="rotate()">Reveal Cards</button>
+        <button class="smallbutton btn btn-default btn-success" [disabled]="this.state=='default'" (click)="shuffleCards()">Shuffle Cards</button>
+    </div>
+    <div class="row justify-content-center">
+        
+        <div class="col-lg-8 text-center">
+          <div>
+
+            <span  *ngFor = "let card of randomCards">
+
+                <button class="btn btn-default" href='' (click)="goToLink(card.id)">
+  
+                  <div class="card" [@cardFlip]="this.state">
+                    <div class="face back">
+                      <img src="assets/cardimages/Default.png" />
+                    </div>
+                      <div class="face front">
+                        <img src = '/assets/cardimages/{{card?.id}}.png'>
+                    </div>
+                      </div>
+
+                    
+                      
+                </button>
+                
+                
+            </span>
+        </div>
+        </div>
+  </div>
+</div>

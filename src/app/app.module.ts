@@ -25,6 +25,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { ExportxmlComponent } from './exportxml/exportxml.component';
 import { DeckEditorComponent } from './deck-editor/deck-editor.component';
 import { DecklistDetailsComponent } from './decklists/decklist-details/decklist-details.component';
+import { DeckMasterComponent } from './deck-master/deck-master.component';
 
 
 
@@ -50,7 +51,8 @@ import { DecklistDetailsComponent } from './decklists/decklist-details/decklist-
     BottomNavComponent,
     ExportxmlComponent,
     DeckEditorComponent,
-    DecklistDetailsComponent
+    DecklistDetailsComponent,
+    DeckMasterComponent
   ],
   imports: [
     HttpClientModule,
