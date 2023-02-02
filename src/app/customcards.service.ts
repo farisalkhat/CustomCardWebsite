@@ -169,7 +169,7 @@ export class CustomcardsService {
 
 
   getDeckMasters(){
-    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/deckmaster`);
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/deckmaster`);
   } 
 
   getDecklist(id:number){
