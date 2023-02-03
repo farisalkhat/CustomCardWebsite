@@ -26,14 +26,29 @@
                     <div class="card" [@cardFlip]="this.state">
                       <div class="face back">
                         <img src="assets/cardimages/Default.png" />
+                        
                       </div>
-                        <div class="face front">
+                        <div class="face front" *ngIf="card.rarity=='common'">
                           <img src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
-                      </div>
+                        </div>
+
+                        <div class="face front rare-card" *ngIf="card.rarity!='common'">
+                          <img class = "sparkle" *ngIf="card.rarity=='secret'" src ='/assets/effects/giphy.gif'>
+                          <img class = "sparkle" *ngIf="card.rarity=='super'" src ='/assets/effects/super.gif'>
+                          <img class = "sparkle" *ngIf="card.rarity=='ultra'" src ='/assets/effects/fireworks.gif'>
+                          <img src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                        </div>
+                        
+
+
                         </div>
 
                       
-                        <span *ngIf="revealed==true"><b>{{card?.rarity}}</b></span>
+                        <span  *ngIf="revealed==true && card.rarity=='common'"><b>{{card?.rarity}}</b></span>
+                        <span style="color:blue;" *ngIf="revealed==true && card.rarity=='rare' "><b>{{card?.rarity}}</b></span>
+                        <span style="color:orangered;" *ngIf="revealed==true && card.rarity=='super'"><b>{{card?.rarity}}</b></span>
+                        <span style="color:red;" *ngIf="revealed==true && card.rarity=='ultra'"><b>{{card?.rarity}}</b></span>
+                        <span style="color:purple;" *ngIf="revealed==true && card.rarity=='secret'"><b>{{card?.rarity}}</b></span>
                   </button>
                   
                   
