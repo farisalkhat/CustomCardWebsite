@@ -31,7 +31,7 @@ export class PackMakerComponent implements OnInit {
   currentUltra: Card[] = [];
   currentSecret: Card[] = [];
 
-
+  packSize = 'medium'
 
   rarity:string="common";
 
@@ -89,6 +89,11 @@ export class PackMakerComponent implements OnInit {
   ultra:number= 0;
   secret:number= 0;
 
+  maxCommon:number = 48;
+  maxRare:number = 25;
+  maxSuper:number = 15;
+  maxUltra: number = 10;
+  maxSecret:number = 2;
 
   username!:string;
   id!:number;
@@ -430,6 +435,47 @@ export class PackMakerComponent implements OnInit {
     
 }
   
+  resetPack(size:string){
+
+    console.log("Ah!")
+    this.packSize = size;
+    this.currentDraft=[]
+    this.currentCommons = []
+    this.currentRare =[]
+    this.currentSuper = []
+    this.currentUltra = []
+    this.currentSecret = []
+    this.common= 0
+    this.rare=0
+    this.super=0
+    this.ultra=0
+    this.secret=0
+
+    if(size=='small'){
+      console.log("smallfry")
+      this.maxCommon=9
+      this.maxRare= 5
+      this.maxSuper = 3
+      this.maxUltra = 2
+      this.maxSecret = 1
+    }
+    if(size=='medium'){
+      this.maxCommon=48
+      this.maxRare= 25
+      this.maxSuper = 15
+      this.maxUltra = 10
+      this.maxSecret = 2
+    }
+    if(size=='large'){
+      this.maxCommon=100
+      this.maxRare= 60
+      this.maxSuper = 20
+      this.maxUltra = 14
+      this.maxSecret = 6
+    }
+
+  }
+
   addCard(cardtype:string){
 
     const index = this.currentDraft.findIndex(obj => obj.id === this.card?.id)
@@ -441,7 +487,7 @@ export class PackMakerComponent implements OnInit {
 
     if(this.card!=undefined){
       if(cardtype=="common"){
-        if(this.common==48){
+        if(this.common==this.maxCommon){
           return;
         }
         this.currentCommons.push(this.card);
@@ -449,7 +495,7 @@ export class PackMakerComponent implements OnInit {
         this.common++;
       }
       else if(cardtype=="rare"){
-        if(this.rare==25){
+        if(this.rare==this.maxRare){
           return;
         }
         this.currentRare.push(this.card);
@@ -457,7 +503,7 @@ export class PackMakerComponent implements OnInit {
         this.rare++;
       }
       else if(cardtype=="super"){
-        if(this.super==15){
+        if(this.super==this.maxSuper){
           return;
         }
         this.currentSuper.push(this.card);
@@ -465,7 +511,7 @@ export class PackMakerComponent implements OnInit {
         this.super++;
       }
       else if(cardtype=="ultra"){
-        if(this.ultra==10){
+        if(this.ultra==this.maxUltra){
           return;
         }
         this.currentUltra.push(this.card);
@@ -473,7 +519,7 @@ export class PackMakerComponent implements OnInit {
         this.ultra++;
       }
       else if(cardtype=="secret"){
-        if(this.secret==2){
+        if(this.secret==this.maxSecret){
           return;
         }
         this.currentSecret.push(this.card);
@@ -566,11 +612,11 @@ export class PackMakerComponent implements OnInit {
       console.log("Basic data not filled.")
       return;
     }
-    else if(this.currentCommons.length!= 48 || 
-        this.currentRare.length!= 25 ||
-        this.currentSuper.length!= 15 ||
-        this.currentUltra.length!= 10 ||
-        this.currentSecret.length!= 2)
+    else if(this.currentCommons.length!= this.maxCommon || 
+        this.currentRare.length!= this.maxRare ||
+        this.currentSuper.length!= this.maxSuper ||
+        this.currentUltra.length!= this.maxUltra ||
+        this.currentSecret.length!= this.maxSecret)
         {
         this.submitfail = true;
         return;
@@ -613,6 +659,7 @@ export class PackMakerComponent implements OnInit {
       finaldata['superIDs'] = superIDs;
       finaldata['ultraIDs'] = ultraIDs;
       finaldata['secretIDs'] = secretIDs;
+      finaldata['packSize'] = this.packSize;
 
 
 

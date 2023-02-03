@@ -72,6 +72,16 @@ export interface Pack {
   superIDs:string[];
   ultraIDs:string[];
   secretIDs:string[];
+  packSize:string;
+}
+
+export interface PackInfo{
+  id:number;
+  title:string;
+  creator:string;
+  creatorid:number;
+  pack:string;
+  packsize:string;
 }
 
 
@@ -96,6 +106,7 @@ export interface PackButton{
   packid:number;
   title:string;
   pack:string;
+  packsize:string;
   
 }
 
@@ -147,6 +158,7 @@ export class CustomcardsService {
   editDraftName!:string;
 
   packAmount = 6;
+  packSize = 'medium'
 
   private _carddataUrl = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards"
   private _cardMonsters = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/monsters"
@@ -193,6 +205,10 @@ export class CustomcardsService {
 
   getPacks(){
     return this.http.get<PackButton[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/packs`);
+  }
+
+  getPackInfoByID(id:number){
+    return this.http.get<PackInfo>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/packs/${id}`);
   }
 
   getDraftsbyOwner(id:number){

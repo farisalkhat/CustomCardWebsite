@@ -1,7 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Card, CustomcardsService, Pack, PackCard } from 'src/app/customcards.service';
+import { forkJoin } from 'rxjs';
+import { Card, CustomcardsService, Pack, PackCard, PackInfo } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-pack-opener',
@@ -36,6 +37,7 @@ export class PackOpenerComponent implements OnInit {
   stType!:string;
   mType!:string;
 
+  packInfo!: PackInfo;
   randomCards: PackCard[] = [];
 
   commonCards: PackCard[] = [];
@@ -75,11 +77,46 @@ export class PackOpenerComponent implements OnInit {
 
     this.route.paramMap.subscribe((paramMap)=>{
       this.packID= Number(paramMap.get('packid'));
-      this.customcardsService.getCustomCardsByPack(this.packID).subscribe(
-        res => {
-          this.cards = res;
-          console.log(this.cards)
 
+      forkJoin(
+        this.customcardsService.getPackInfoByID(this.packID),
+        this.customcardsService.getCustomCardsByPack(this.packID),
+      ).subscribe(([packInfo,packCards])=>{
+        this.packInfo = packInfo;
+        console.log(this.packInfo)
+        this.cards = packCards;
+
+        if(this.packInfo['packsize']=='small'){
+          this.cardsRemaining=3
+
+          let counter = 0;
+          for(counter; counter!=2;counter++){
+            this.ultraCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=5;counter++){
+            this.superCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=6;counter++){
+            this.secretCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=11;counter++){
+            this.rareCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=20;counter++){
+            this.commonCards.push(this.cards[counter])
+          }
+
+          
+        
+        
+        }
+        if(this.packInfo['packsize']=='medium'){
+          this.cardsRemaining=9
+        
           let counter = 0;
           for(counter; counter!=10;counter++){
             this.ultraCards.push(this.cards[counter])
@@ -103,9 +140,37 @@ export class PackOpenerComponent implements OnInit {
 
 
 
-          this.shuffleCards();
+          
         }
-      )
+        if(this.packInfo['packsize']=='large'){
+          this.cardsRemaining=13
+          let counter = 0;
+          for(counter; counter!=14;counter++){
+            this.ultraCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=34;counter++){
+            this.superCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=40;counter++){
+            this.secretCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=100;counter++){
+            this.rareCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=200;counter++){
+            this.commonCards.push(this.cards[counter])
+          }
+        }
+
+
+        this.shuffleCards();
+
+      })
+
       this.packAmount = this.customcardsService.getPackAmount();
   
       
@@ -129,7 +194,7 @@ export class PackOpenerComponent implements OnInit {
     console.log(this.cards.length)
     while(cardCounter<this.cardsRemaining){
 
-      if(cardCounter<=6){
+      if(cardCounter<this.cardsRemaining-2){
         const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
         let newCard = this.commonCards[randID]
 
@@ -140,14 +205,14 @@ export class PackOpenerComponent implements OnInit {
 
         this.randomCards.push(newCard)
       }
-      if(cardCounter==7){
+      if(cardCounter==this.cardsRemaining-2){
         const randID = this.randomIntFromInterval(0,this.rareCards.length-1)
         const newCard = this.rareCards[randID]
 
         
         this.randomCards.push(newCard)
       }
-      if(cardCounter==8){
+      if(cardCounter==this.cardsRemaining-1){
         const randID1 = this.randomIntFromInterval(0,5)
         const randID2 = this.randomIntFromInterval(0,11)
         const randID3 = this.randomIntFromInterval(0,30)
