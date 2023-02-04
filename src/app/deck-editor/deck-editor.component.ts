@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Card, CustomcardsService, Draft, Decklist } from 'src/app/customcards.service';
@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import * as FileSaver from 'file-saver';
 import { AuthService } from 'src/app/auth/services/auth.service';
+
 
 @Component({
   selector: 'app-deck-editor',
@@ -34,6 +35,15 @@ export class DeckEditorComponent implements OnInit {
   trapCounter =0;
   edCounter = 0;
   sideCounter = 0;
+
+  isHovering: boolean = false;
+  hoveredCard!:Card;
+  hovermonster!:string;
+  hoverattribute!:string;
+  hoverstType!:string;
+  hovermType!:string;
+  leftPosition = 100
+  rightPosition = 100
 
 
   uploadCorrectly: boolean = true;
@@ -127,16 +137,17 @@ export class DeckEditorComponent implements OnInit {
     this.stType=''
     this.mType='';
     this.monster='None';
-    // this.customcardsService.getFilteredCards2().subscribe(
-    //   res=>{
-        
-    //     console.log(res)
-    //     this.cards = res;
-    //     this.currentPage = 1
-    //     this.getCardNumbers(this.currentPage);
-    //   },
-    //   err=>{console.log(err)}
-    // )                                  
+    
+    if(this.filters.levelhigh==null){this.filters.levelhigh=''}
+    if(this.filters.levellow==null){this.filters.levellow=''}
+    if(this.filters.atklow==null){this.filters.atklow=''}
+    if(this.filters.atkhigh==null){this.filters.atkhigh=''}
+    if(this.filters.deflow==null){this.filters.deflow=''}
+    if(this.filters.defhigh==null){this.filters.defhigh=''}
+
+    
+
+                              
     if(this.filters['initial']==''){
         this.filters['cardtype']=='';
         this.filters['defhigh']=='';
@@ -167,6 +178,7 @@ export class DeckEditorComponent implements OnInit {
         this.filters['cardtype']!="Fusion Monster"&&
         this.filters['cardtype']!="Ritual Monster"&&
         this.filters['cardtype']!="Union Monster" &&
+        this.filters['cardtype']!="Synchro Monster" &&
         this.filters['cardtype']!="Xyz Monster"){
           this.filters['cardtype']=''
         }
@@ -205,8 +217,8 @@ export class DeckEditorComponent implements OnInit {
   }
   getCardNumbers(page:number){
     this.currentCards = [];
-    const cardmin = (page-1)*21;
-    const cardmax = (page * 21) - 1;
+    const cardmin = (page-1)*30;
+    const cardmax = (page * 30) - 1;
 
     for (let i = cardmin; i <= cardmax; i++) {
       console.log(cardmin,' ',cardmax);
@@ -230,6 +242,203 @@ export class DeckEditorComponent implements OnInit {
   goToLink(url: string){
     const newurl = 'https://www.duelingbook.com/card?id='+url
     window.open(newurl, "_blank");
+}
+
+mouseHovering(card:Card,e:MouseEvent) {
+
+console.log(e.clientX);
+console.log(e.clientY);
+
+  this.isHovering = true; 
+  this.hoveredCard = card 
+
+  if(e.clientX>=900){
+    this.leftPosition = e.clientX-200;
+  }
+
+  else{
+    this.leftPosition = e.clientX+2;
+  }
+  
+  this.rightPosition =e.clientY-170;
+  
+  
+  this.getHoveredCardDetails()
+  
+}
+mouseLeft() {
+    this.isHovering = false;
+}
+getHoveredCardDetails(){
+  
+  this.hoverattribute=''
+  this.hoverstType =''
+  this.hovermType= ''
+
+  if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
+    this.hovermonster='False';
+    this.hoverattribute="assets/cardstats/TRAP.png";
+    
+    switch (this.hoveredCard?.cardtype) {
+      case "Normal Trap":
+          this.hoverstType = "assets/cardstats/Normal.png";
+          break;
+      case "Continuous Trap":
+          this.hoverstType = "assets/cardstats/Continuous.png";
+          break;
+      case "Counter Trap":
+          this.hoverstType = "assets/cardstats/Counter.png";
+          break;
+      default:
+          this.hoverstType
+          break;
+  }
+  }
+
+  else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
+  this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
+    this.hovermonster='False';
+    this.hoverattribute="assets/cardstats/SPELL.png";
+    
+    switch (this.hoveredCard?.cardtype) {
+      case "Normal Spell":
+          this.hoverstType = "assets/cardstats/Normal.png";
+          break;
+      case "Quick Spell":
+          this.hoverstType = "assets/cardstats/Quick.png";
+          break;
+      case "Field Spell":
+          this.hoverstType = "assets/cardstats/Field.png";
+          break;
+      case "Continuous Spell":
+          this.hoverstType = "assets/cardstats/Continuous.png";
+          break;
+      case "Equip Spell":
+          this.hoverstType = "assets/cardstats/Equip.png";
+          break;
+      case "Ritual Spell":
+          this.hoverstType = "assets/cardstats/Ritual.png";
+          break;
+      default:
+          this.hoverstType
+          break;
+  }
+  }
+
+
+  
+  else{
+    this.hovermonster='True';
+    switch(this.hoveredCard?.attribute){
+      case "FIRE":
+          this.hoverattribute = "assets/cardstats/FIRE.png";
+          break;
+      case "DARK":
+          this.hoverattribute = "assets/cardstats/DARK.png";
+          break;
+      case "WIND":
+          this.hoverattribute = "assets/cardstats/WIND.png";
+          break;
+      case "WATER":
+          this.hoverattribute = "assets/cardstats/WATER.png";
+          break;
+      case "LIGHT":
+          this.hoverattribute = "assets/cardstats/LIGHT.png";
+          break;
+      case "DIVINE":
+          this.hoverattribute = "assets/cardstats/DIVINE.png";
+          break;
+      case "EARTH":
+          this.hoverattribute = "assets/cardstats/EARTH.png";
+          break;
+      default:
+          this.hoverattribute = "assets/cardstats/EARTH.png";
+          break;
+      
+    
+    }
+
+    switch (this.hoveredCard?.type) {
+      case "Aqua":
+          this.hovermType = "assets/monstertypes/Aqua.png";
+          break;
+      case "Beast-Warrior":
+          this.hovermType = "assets/monstertypes/Beast-Warrior.png";
+          break;
+      case "Beast":
+          this.hovermType = "assets/monstertypes/Beast.png";
+          break;
+      case "Dinosaur":
+          this.hovermType = "assets/monstertypes/Dinosaur.png";
+          break;
+      case "Divine-Beast":
+          this.hovermType = "assets/monstertypes/Divine-Beast.png";
+          break;
+      case "Dragon":
+          this.hovermType = "assets/monstertypes/Dragon.png";
+          break;
+
+      case "Fairy":
+          this.hovermType = "assets/monstertypes/Fairy.png";
+          break;
+      case "Fiend":
+          this.hovermType = "assets/monstertypes/Fiend.png";
+          break;
+      case "Fish":
+          this.hovermType = "assets/monstertypes/Fish.png";
+          break;
+      case "Insect":
+          this.hovermType = "assets/monstertypes/Insect.png";
+          break;
+      case "Machine":
+          this.hovermType = "assets/monstertypes/Machine.png";
+          break;
+      case "Plant":
+          this.hovermType = "assets/monstertypes/Plant.png";
+          break;
+
+      case "Psychic":
+          this.hovermType = "assets/monstertypes/Psychic.png";
+          break;
+      case "Pyro":
+          this.hovermType = "assets/monstertypes/Pyro.png";
+          break;
+      case "Reptile":
+          this.hovermType = "assets/monstertypes/Reptile.png";
+          break;
+      case "Rock":
+          this.hovermType = "assets/monstertypes/Rock.png";
+          break;
+      case "Sea Serpent":
+          this.hovermType = "assets/monstertypes/Serpent.png";
+          break;
+      case "Spellcaster":
+          this.hovermType = "assets/monstertypes/Spellcaster.png";
+          break;
+
+      case "Thunder":
+          this.hovermType = "assets/monstertypes/Thunder.png";
+          break;
+      case "Warrior":
+          this.hovermType = "assets/monstertypes/Warrior.png";
+          break;
+      case "Winged-Beast":
+          this.hovermType = "assets/monstertypes/Winged-Beast.png";
+          break;
+      case "Zombie":
+          this.hovermType = "assets/monstertypes/Zombie.png";
+          break;
+      
+      default:
+          this.hovermType = "assets/monstertypes/Zombie.png";
+          break;
+  }
+
+
+
+
+  }
+  
 }
 
 

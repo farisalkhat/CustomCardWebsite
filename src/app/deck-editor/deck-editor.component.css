@@ -57,3 +57,20 @@ button{
     height:40px;
     margin-left:5px;
 }
+
+.hovering{
+    background-color:rgba(5, 163, 90, 0.758);
+    color:white;
+    width:300px;
+    position: fixed;
+    padding:2px;
+    pointer-events: none;
+    
+}
+
+/* .hovering:hover{
+opacity: 1;
+}
+.hovering:not(:hover){
+    opacity:0;
+} */

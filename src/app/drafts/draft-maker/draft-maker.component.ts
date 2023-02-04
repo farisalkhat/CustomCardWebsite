@@ -142,6 +142,16 @@ export class DraftMakerComponent implements OnInit {
     this.stType=''
     this.mType='';
     this.monster='None';
+    
+    if(this.filters.levelhigh==null){this.filters.levelhigh=''}
+    if(this.filters.levellow==null){this.filters.levellow=''}
+    if(this.filters.atklow==null){this.filters.atklow=''}
+    if(this.filters.atkhigh==null){this.filters.atkhigh=''}
+    if(this.filters.deflow==null){this.filters.deflow=''}
+    if(this.filters.defhigh==null){this.filters.defhigh=''}
+
+    
+
     // this.customcardsService.getFilteredCards2().subscribe(
     //   res=>{
         
@@ -182,6 +192,7 @@ export class DraftMakerComponent implements OnInit {
         this.filters['cardtype']!="Fusion Monster"&&
         this.filters['cardtype']!="Ritual Monster"&&
         this.filters['cardtype']!="Union Monster" &&
+        this.filters['cardtype']!="Synchro Monster" &&
         this.filters['cardtype']!="Xyz Monster"){
           this.filters['cardtype']=''
         }
