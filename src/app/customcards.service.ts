@@ -330,22 +330,22 @@ export class CustomcardsService {
   
 
   getBindersByOwner(id:number){
-    return this.http.get<Binder[]>(`http://127.0.0.1:8080/api/yugioh/binders/${id}`);
+    return this.http.get<Binder[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/binders/${id}`);
   }
 
   submitBinder(binderInfo:BinderInfo){
-    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitbinder',binderInfo   
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitbinder',binderInfo   
     )
   }
 
   addToBinder(addToBinder:AddToBinder){
-    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/addtobinder',addToBinder   
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/addtobinder',addToBinder   
     )
   }
 
   getCardsByBinderID(id:number){
 
-    return this.http.get<BinderCard[]>(`http://127.0.0.1:8080/api/yugioh/customcards/binders/${id}`);
+    return this.http.get<BinderCard[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/binders/${id}`);
     
   }
 }
