@@ -33,6 +33,27 @@ export interface DeckListCard extends Document{
   deck:string;
 }
 
+export interface Binder extends Document{
+  id:number;
+  title:string;
+  creatorid:number;
+}
+
+
+
+export interface BinderInfo extends Document{
+  title:string;
+  creatorid:number;
+  cards:PackCard[];
+  packid:number;
+}
+
+export interface AddToBinder extends Document{
+  creatorid:number;
+  cards:PackCard[];
+  packid:number;
+  binderid:number;
+}
 
 
 export interface Draft {
@@ -101,6 +122,21 @@ export interface PackCard extends Document{
 }
 
 
+export interface BinderCard extends Document{
+  id:number;
+  cardtype:string;
+  name:string;
+  type:string;
+  atk:number;
+  def:number;
+  level:number;
+  attribute:string;
+  effect:string;
+  creator:string;
+  rarity:string;
+  packtitle:string;
+  packid:number;
+}
 
 export interface PackButton{
   packid:number;
@@ -215,6 +251,8 @@ export class CustomcardsService {
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/drafts/${id}`);
   }
 
+  
+
   getDraftCardsbyID(id:number){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/draft/${id}`);
   }
@@ -288,5 +326,26 @@ export class CustomcardsService {
   }
 
   
+ 
   
+
+  getBindersByOwner(id:number){
+    return this.http.get<Binder[]>(`http://127.0.0.1:8080/api/yugioh/binders/${id}`);
+  }
+
+  submitBinder(binderInfo:BinderInfo){
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitbinder',binderInfo   
+    )
+  }
+
+  addToBinder(addToBinder:AddToBinder){
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/addtobinder',addToBinder   
+    )
+  }
+
+  getCardsByBinderID(id:number){
+
+    return this.http.get<BinderCard[]>(`http://127.0.0.1:8080/api/yugioh/customcards/binders/${id}`);
+    
+  }
 }

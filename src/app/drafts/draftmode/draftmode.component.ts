@@ -24,11 +24,12 @@ export class DraftmodeComponent implements OnInit {
   username!:string;
   id!:number;
 
-  drafts!:Draft[];
+  drafts!:Draft[]; 
 
   constructor(private _router: Router, private _authService: AuthService, private customcardsService:CustomcardsService) { }
 
   ngOnInit(): void {
+    this.customcardsService.editDraft(false);
     if (this._authService.loggedIn()){
 
       this._authService.getUser().subscribe(
@@ -50,9 +51,13 @@ export class DraftmodeComponent implements OnInit {
         err => {console.log(err)
         this.username = ''
         this.id = -99999
-        this._router.navigate(['/drafts']);
+        this._router.navigate(['/login']);
       }
       )
+
+    }
+    else{
+      this._router.navigate(['/login']);
 
     }
 
@@ -65,6 +70,7 @@ export class DraftmodeComponent implements OnInit {
 
     
   editDraft(id:number,draft:string){
+    this.customcardsService.editDraft(true);
     this.customcardsService.setEditDraftID(id);
     this.customcardsService.setEditDraftName(draft)
     this._router.navigate(['/draft-maker']);

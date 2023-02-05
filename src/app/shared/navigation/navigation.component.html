@@ -13,21 +13,41 @@
         </li>
   
         <li class="nav-item">
-          <a class="nav-link" routerLink="/packs">Packs</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/pack-maker" >Pack Maker</a>
-        </li>
-  
-  
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/drafts">Drafts</a>
-        </li>
-  
-        <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/binders"  >Binders</a>
         </li>
+
+        
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Packs
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="nav-link" routerLink="/packs">Pack Opener</a></li>
+            <li><a class="nav-link" routerLink="/pack-maker" >Pack Maker</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Drafts
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="nav-link" routerLink="/draft-maker">Create a Draft </a></li>
+            <li><a class="nav-link" routerLink="/draftmode" >Edit a Draft</a></li>
+            <li><a class="nav-link" routerLink="/drafts" >Start a Draft</a></li>
+          </ul>
+        </li>
+  
+  
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="/drafts">Drafts</a>
+        </li> -->
+ 
+        
+  
+        <!-- 
         <li class="nav-item">
           <a class="nav-link" routerLink="/decklists"  >Decklists</a>
         </li>
@@ -76,4 +96,7 @@
       
       
     </div>
+
+    
   </nav>
+

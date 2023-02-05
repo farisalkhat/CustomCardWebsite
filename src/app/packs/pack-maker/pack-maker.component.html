@@ -1,4 +1,30 @@
+<div [style.left.px]="leftPosition" [style.top.px]="rightPosition" class="hovering" *ngIf="isHovering===true">
+    <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
+        <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
+    <b><p *ngIf="hovermonster=='True'">
+        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}  
+    </p></b>
 
+    <span *ngIf="hovermonster=='False'">
+        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
+    </span>
+
+    
+    
+    
+
+
+    <b>
+        
+        <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
+    
+    
+        <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}}  DEF/{{hoveredCard?.def}}</p>
+        <p> {{hoveredCard?.effect}}</p>
+        <p>ID: {{hoveredCard?.id}}</p>
+    </b>
+
+</div>
 
 <div class="container">
     <div class="row">
@@ -240,10 +266,10 @@
     
     </div>
 
-    <div class="row">
+    <div class="row text-center" >
 
         
-        <div class="col">
+        <div >
             <button type="button" class="btn btn-success addcard" (click)="autoSelect('common')">Add Common</button>
 
             <button type="button" class="btn btn-success addcard" (click)="autoSelect('rare')">Add Rare</button>
@@ -257,13 +283,13 @@
     </div>
     
     
-    <div class="row">
+    <div class="row text-center">
     
-        <div class="col-lg-7">
+        <div class="col-auto">
     
                 <span *ngFor = "let card of currentCards">
     
-                    <button class="btn btn-default"   (contextmenu)="rightAddPackCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
+                    <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"   (contextmenu)="rightAddPackCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
                     
                 </span>
     
@@ -276,7 +302,7 @@
     
 
     
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
             <div class="row">
                 <div class="col"><img class="bigcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></div>
                 
@@ -338,7 +364,7 @@
                 <p> {{card?.effect}}</p>
                 
             </div>
-        </div>
+        </div> -->
 
 
 

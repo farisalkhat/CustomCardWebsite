@@ -1,8 +1,10 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import { Card, CustomcardsService, Pack, PackCard, PackInfo } from 'src/app/customcards.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { AddToBinder, Binder, BinderInfo, Card, CustomcardsService, Pack, PackCard, PackInfo } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-pack-opener',
@@ -29,7 +31,7 @@ import { Card, CustomcardsService, Pack, PackCard, PackInfo } from 'src/app/cust
 })
 export class PackOpenerComponent implements OnInit {
 
-  constructor(private customcardsService:CustomcardsService,private route: ActivatedRoute) { }
+  constructor(public authService:AuthService, private customcardsService:CustomcardsService,private route: ActivatedRoute, private router:Router) { }
   cards!: PackCard[];
   card: PackCard | undefined;
   monster!:string;
@@ -55,7 +57,17 @@ export class PackOpenerComponent implements OnInit {
 
   revealed:boolean = false;
 
+  username!:string;
+  id!:number;
   state: string = 'default';
+ 
+  binderName!:string;
+  submitted:boolean = false;
+  submitfail:boolean = false;
+  binderID!:number;
+
+  get f(){return this.binderData.controls;}
+
   rotate(){
     if (this.state === "default") {
         this.state = "flipped";
@@ -66,25 +78,246 @@ export class PackOpenerComponent implements OnInit {
 
 
 
+  binders:Binder [] = [];
 
 
+  binderData= new FormGroup({
+    binderName: new FormControl(' ',[
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(100)
 
+    ])
+  })
 
+  isHovering: boolean = false;
+  hoveredCard!:Card;
+  hovermonster!:string;
+  hoverattribute!:string;
+  hoverstType!:string;
+  hovermType!:string;
+  leftPosition = 100
+  rightPosition = 100
 
+  mouseHovering(card:Card,e:MouseEvent) {
 
-
+    console.log(e.clientX);
+    console.log(e.clientY);
+    if(this.state!='flipped'){
+      return;
+    }
+    
+      this.isHovering = true; 
+      this.hoveredCard = card 
+    
+      if(e.clientX>=900){
+        this.leftPosition = e.clientX-200;
+      }
+    
+      else{
+        this.leftPosition = e.clientX+2;
+      }
+      
+      this.rightPosition =e.clientY-170;
+      
+      
+      this.getHoveredCardDetails()
+      
+    }
+    mouseLeft() {
+        this.isHovering = false;
+    }
+    getHoveredCardDetails(){
+      
+      this.hoverattribute=''
+      this.hoverstType =''
+      this.hovermType= ''
+    
+      if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
+        this.hovermonster='False';
+        this.hoverattribute="assets/cardstats/TRAP.png";
+        
+        switch (this.hoveredCard?.cardtype) {
+          case "Normal Trap":
+              this.hoverstType = "assets/cardstats/Normal.png";
+              break;
+          case "Continuous Trap":
+              this.hoverstType = "assets/cardstats/Continuous.png";
+              break;
+          case "Counter Trap":
+              this.hoverstType = "assets/cardstats/Counter.png";
+              break;
+          default:
+              this.hoverstType
+              break;
+      }
+      }
+    
+      else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
+      this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
+        this.hovermonster='False';
+        this.hoverattribute="assets/cardstats/SPELL.png";
+        
+        switch (this.hoveredCard?.cardtype) {
+          case "Normal Spell":
+              this.hoverstType = "assets/cardstats/Normal.png";
+              break;
+          case "Quick Spell":
+              this.hoverstType = "assets/cardstats/Quick.png";
+              break;
+          case "Field Spell":
+              this.hoverstType = "assets/cardstats/Field.png";
+              break;
+          case "Continuous Spell":
+              this.hoverstType = "assets/cardstats/Continuous.png";
+              break;
+          case "Equip Spell":
+              this.hoverstType = "assets/cardstats/Equip.png";
+              break;
+          case "Ritual Spell":
+              this.hoverstType = "assets/cardstats/Ritual.png";
+              break;
+          default:
+              this.hoverstType
+              break;
+      }
+      }
+    
+    
+      
+      else{
+        this.hovermonster='True';
+        switch(this.hoveredCard?.attribute){
+          case "FIRE":
+              this.hoverattribute = "assets/cardstats/FIRE.png";
+              break;
+          case "DARK":
+              this.hoverattribute = "assets/cardstats/DARK.png";
+              break;
+          case "WIND":
+              this.hoverattribute = "assets/cardstats/WIND.png";
+              break;
+          case "WATER":
+              this.hoverattribute = "assets/cardstats/WATER.png";
+              break;
+          case "LIGHT":
+              this.hoverattribute = "assets/cardstats/LIGHT.png";
+              break;
+          case "DIVINE":
+              this.hoverattribute = "assets/cardstats/DIVINE.png";
+              break;
+          case "EARTH":
+              this.hoverattribute = "assets/cardstats/EARTH.png";
+              break;
+          default:
+              this.hoverattribute = "assets/cardstats/EARTH.png";
+              break;
+          
+        
+        }
+    
+        switch (this.hoveredCard?.type) {
+          case "Aqua":
+              this.hovermType = "assets/monstertypes/Aqua.png";
+              break;
+          case "Beast-Warrior":
+              this.hovermType = "assets/monstertypes/Beast-Warrior.png";
+              break;
+          case "Beast":
+              this.hovermType = "assets/monstertypes/Beast.png";
+              break;
+          case "Dinosaur":
+              this.hovermType = "assets/monstertypes/Dinosaur.png";
+              break;
+          case "Divine-Beast":
+              this.hovermType = "assets/monstertypes/Divine-Beast.png";
+              break;
+          case "Dragon":
+              this.hovermType = "assets/monstertypes/Dragon.png";
+              break;
+    
+          case "Fairy":
+              this.hovermType = "assets/monstertypes/Fairy.png";
+              break;
+          case "Fiend":
+              this.hovermType = "assets/monstertypes/Fiend.png";
+              break;
+          case "Fish":
+              this.hovermType = "assets/monstertypes/Fish.png";
+              break;
+          case "Insect":
+              this.hovermType = "assets/monstertypes/Insect.png";
+              break;
+          case "Machine":
+              this.hovermType = "assets/monstertypes/Machine.png";
+              break;
+          case "Plant":
+              this.hovermType = "assets/monstertypes/Plant.png";
+              break;
+    
+          case "Psychic":
+              this.hovermType = "assets/monstertypes/Psychic.png";
+              break;
+          case "Pyro":
+              this.hovermType = "assets/monstertypes/Pyro.png";
+              break;
+          case "Reptile":
+              this.hovermType = "assets/monstertypes/Reptile.png";
+              break;
+          case "Rock":
+              this.hovermType = "assets/monstertypes/Rock.png";
+              break;
+          case "Sea Serpent":
+              this.hovermType = "assets/monstertypes/Serpent.png";
+              break;
+          case "Spellcaster":
+              this.hovermType = "assets/monstertypes/Spellcaster.png";
+              break;
+    
+          case "Thunder":
+              this.hovermType = "assets/monstertypes/Thunder.png";
+              break;
+          case "Warrior":
+              this.hovermType = "assets/monstertypes/Warrior.png";
+              break;
+          case "Winged-Beast":
+              this.hovermType = "assets/monstertypes/Winged-Beast.png";
+              break;
+          case "Zombie":
+              this.hovermType = "assets/monstertypes/Zombie.png";
+              break;
+          
+          default:
+              this.hovermType = "assets/monstertypes/Zombie.png";
+              break;
+      }
+    
+    
+    
+    
+      }
+      
+    }
   ngOnInit(): void {
 
-    this.route.paramMap.subscribe((paramMap)=>{
+    this.authService.getUser().subscribe(
+      res =>{
+        console.log(res['username'])
+        this.username = res['username']
+        this.id = res['id']
+
+      this.route.paramMap.subscribe((paramMap)=>{
       this.packID= Number(paramMap.get('packid'));
 
       forkJoin(
         this.customcardsService.getPackInfoByID(this.packID),
         this.customcardsService.getCustomCardsByPack(this.packID),
-      ).subscribe(([packInfo,packCards])=>{
+        this.customcardsService.getBindersByOwner(this.id)
+      ).subscribe(([packInfo,packCards,binders])=>{
         this.packInfo = packInfo;
-        console.log(this.packInfo)
         this.cards = packCards;
+        this.binders = binders;
+        console.log(this.binders.length)
 
         if(this.packInfo['packsize']=='small'){
           this.cardsRemaining=3
@@ -174,7 +407,7 @@ export class PackOpenerComponent implements OnInit {
       this.packAmount = this.customcardsService.getPackAmount();
   
       
-    })
+    })})
 
 
       console.log(this.cards);
@@ -444,6 +677,50 @@ export class PackOpenerComponent implements OnInit {
 
     }
     
+}
+
+submitBinder(){
+  this.submitted=true;
+  if(this.binderData.invalid){
+    this.submitfail = true;
+    console.log("Basic data not filled.")
+    return;
+  }
+  const binderInfo = {} as BinderInfo;
+  binderInfo['title']=this.binderData.controls['binderName'].value;
+  binderInfo['creatorid'] = this.id;
+  binderInfo['cards'] = this.currentOpened;
+  binderInfo['packid'] = this.packID;
+
+  this.customcardsService.submitBinder(binderInfo).subscribe(
+    res=>{
+      console.log(res);
+      this.router.navigate(['/packs']);
+    },
+      
+    err=>{console.log(err)}
+  )
+}
+
+
+addToBinder(){
+  const binderInfo = {} as AddToBinder;
+  binderInfo['cards'] = this.currentOpened;
+  binderInfo['packid'] = this.packID;
+  binderInfo['creatorid'] = this.id
+  binderInfo['binderid'] = this.binderID;
+
+
+  this.customcardsService.addToBinder(binderInfo).subscribe(
+    res=>{
+      console.log(res);
+      this.router.navigate(['/packs']);
+    },
+      
+    err=>{console.log(err)}
+  )
+
+
 }
 
 }

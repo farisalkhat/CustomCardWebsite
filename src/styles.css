@@ -62,6 +62,10 @@ p{
     font-family: 'Oswald', sans-serif;
     color:#1f1a1f;
 }
+span{
+    font-family: 'Oswald', sans-serif;
+    color:#1f1a1f;
+}
 label{
     font-family: 'Oswald', sans-serif;
     color:#1f1a1f;
@@ -88,4 +92,33 @@ nav{
 h1{
     font-family: 'Oswald', sans-serif;
     font-size: x-large;
+}
+.hovering{
+    background-color:rgba(5, 163, 90, 0.858);
+    color:white;
+    width:350px;
+    position: fixed;
+    padding:2px;
+    pointer-events: none;
+    z-index: 100000;
+    
+}
+
+.star{
+    width:34px;
+    height:34px;
+}
+.attribute{
+    width:34px;
+    height:34px;
+}
+.type{
+    width:34px;
+    height:34px;
+}
+
+.addcard{
+    width:100px;
+    height:40px;
+    margin-left:5px;
 }

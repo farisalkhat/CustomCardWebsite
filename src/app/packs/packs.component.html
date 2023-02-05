@@ -1,3 +1,4 @@
+<div class="selectedPacks ">Test</div>
 <div class="container justify-content-center">
     <!-- <button type="button" class="btn btn-success"  *ngIf="_authService.loggedIn()" routerLink="/pack-maker" routerLinkActive = "active">Create a Pack</button> -->
 
@@ -23,6 +24,8 @@
                 
                 
             </select>
+            <button class="btn btn-success" [disabled] = "packSelected==true">Open Packs</button>
+
             
             
          

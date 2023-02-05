@@ -1,13 +1,13 @@
 <div [style.left.px]="leftPosition" [style.top.px]="rightPosition" class="hovering" *ngIf="isHovering===true">
-    <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'"><img class="type" src={{hoverstType}}> /{{hoveredCard?.cardtype}} </span>
+    <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
         <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
     <b><p *ngIf="hovermonster=='True'">
         <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}  
     </p></b>
 
-    <p *ngIf="hovermonster=='False'">
+    <span *ngIf="hovermonster=='False'">
         <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
-    </p>
+    </span>
 
     
     
@@ -246,11 +246,11 @@
     
     </div>
     
-    <div class="row">
+    <div class="row text-center"  >
         
     
         <div class="col-auto">
-    
+     
                 <span *ngFor = "let card of currentCards">
     
                     <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card)"  (click)="goToLink(card.id)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
