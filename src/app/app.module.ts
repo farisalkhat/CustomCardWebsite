@@ -26,6 +26,7 @@ import { ExportxmlComponent } from './exportxml/exportxml.component';
 import { DeckEditorComponent } from './deck-editor/deck-editor.component';
 import { DecklistDetailsComponent } from './decklists/decklist-details/decklist-details.component';
 import { DeckMasterComponent } from './deck-master/deck-master.component';
+import { CollectionsComponent } from './collections/collections.component';
 
 
 
@@ -52,7 +53,8 @@ import { DeckMasterComponent } from './deck-master/deck-master.component';
     ExportxmlComponent,
     DeckEditorComponent,
     DecklistDetailsComponent,
-    DeckMasterComponent
+    DeckMasterComponent,
+    CollectionsComponent
   ],
   imports: [
     HttpClientModule,

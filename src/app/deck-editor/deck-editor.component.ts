@@ -103,6 +103,11 @@ export class DeckEditorComponent implements OnInit {
   creator!:string;
   creatorid!:string;
 
+  
+
+
+
+
 
   ngOnInit(): void {
     this.customcardsService.getCustomCards().subscribe(

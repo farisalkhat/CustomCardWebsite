@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 import { DeckEditorComponent } from './deck-editor/deck-editor.component';
 import { DecklistDetailsComponent } from './decklists/decklist-details/decklist-details.component';
 import { DeckMasterComponent } from './deck-master/deck-master.component';
+import { CollectionsComponent } from './collections/collections.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,8 @@ component:DeckEditorComponent},
 component:DecklistDetailsComponent},
 {path:'deck-master',
 component:DeckMasterComponent},
+{path:'collections',
+component:CollectionsComponent}
 
 
 ];

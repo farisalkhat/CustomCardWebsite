@@ -3,6 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
 
 
+
+
+
+
 export interface Card extends Document{
   id:string;
   cardtype:string;
@@ -94,6 +98,7 @@ export interface Pack {
   ultraIDs:string[];
   secretIDs:string[];
   packSize:string;
+  cost: number;
 }
 
 export interface PackInfo{
@@ -103,6 +108,7 @@ export interface PackInfo{
   creatorid:number;
   pack:string;
   packsize:string;
+  cost:number;
 }
 
 
@@ -136,6 +142,7 @@ export interface BinderCard extends Document{
   rarity:string;
   packtitle:string;
   packid:number;
+  copies:number;
 }
 
 export interface PackButton{
@@ -143,7 +150,19 @@ export interface PackButton{
   title:string;
   pack:string;
   packsize:string;
+  cost:number;
   
+}
+
+export interface PackSelected{
+  [details:string] :any[];
+}
+
+export interface PackSelectedData{
+  packid:number;
+  title:string;
+  cost:number;
+  amount:number;
 }
 
 
@@ -202,11 +221,18 @@ export class CustomcardsService {
   private _cardTraps = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/traps"
   private _cardST = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/spellstraps"
 
-
+  PackQueue:PackSelectedData[] =[];
 
 
 
   constructor(private http:HttpClient,private _router:Router) {}
+
+  setPackQueue(packQueue:PackSelectedData[]){
+    this.PackQueue = packQueue;
+  }
+  getPackQueue(){
+    return this.PackQueue;
+  }
 
   getCustomCards(){
     return this.http.get<any[]>(this._carddataUrl);
@@ -343,9 +369,18 @@ export class CustomcardsService {
     )
   }
 
+  addToCollection(addToBinder:AddToBinder){
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/addtocollection',addToBinder   
+    )
+  }
+
   getCardsByBinderID(id:number){
 
     return this.http.get<BinderCard[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/binders/${id}`);
     
+  }
+
+  getCollectionCardsByCreatorID(id:number){
+    return this.http.get<BinderCard[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/collections/${id}`);
   }
 }

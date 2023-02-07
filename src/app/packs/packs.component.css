@@ -10,14 +10,18 @@ input{
 }
 
 select{
-    width:100px;
+    display:inline;
+    max-width: 60px;
+    margin-left:10px;
+ 
+
 }
 
 p{
     font-size: 32px;
 }
 .pack{
-    width:15%;
+    width:200px;
     cursor: pointer;
 }
 
@@ -30,4 +34,15 @@ p{
   height:150px;
   display: none;
     
+}
+
+.packtracker{
+    width:200px;
+    height:600px;
+    background-color: gray;
+    padding:5px;
+}
+
+.tinytext{
+    font-size: medium;
 }

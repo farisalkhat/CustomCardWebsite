@@ -36,7 +36,7 @@
 <div class="container-fluid">
     <div class="row">
       
-
+      <h1 class="text-center">{{currentPack.title}}</h1>
 
     </div>
     <div class="row justify-content-center">
@@ -85,13 +85,13 @@
     
     </div>
 <div class="container">
-  <button class="btn btn-success" [disabled]="packsOpened>packAmount || revealed==true" (click)="revealCards()">Open Pack {{packsOpened}}/{{packAmount}}</button>
-      <button class="btn btn-success" [disabled]="revealed==false || packsOpened==packAmount" (click)="openNextPack()">Open Next Pack</button>
+  <button class="btn btn-success" [disabled]="finishedPacks==true || revealed==true" (click)="revealCards()">Open Pack {{packsOpened}}/{{packAmount}}</button>
+      <button class="btn btn-success" [disabled]="finishedPacks==true || revealed==false" (click)="openNextPack()">Open Next Pack</button>
 
       <select  [(ngModel)] = "binderID" *ngIf="binders.length>0"  aria-label="Default select example">
         <option  *ngFor = "let binder of binders" value="{{binder.id}}">{{binder.title}}</option>
       </select>
-      <button class="btn btn-success" (click)= "addToBinder()"[disabled]="packsOpened<packAmount ||revealed==false" >Save to collection</button>
+      <button class="btn btn-success" *ngIf="binders.length>0" (click)= "addToBinder()"[disabled]="finishedPacks==false ||revealed==false" >Save to binder</button>
 </div>
 
     <div class="container">
@@ -130,7 +130,7 @@
 
 
 
-          <button class="btn btn-success"  [disabled]="packsOpened<packAmount ||revealed==false">Save new collection</button>
+          <button class="btn btn-success"  [disabled]="finishedPacks==false ||revealed==false">Save new binder</button>
 
 
       </form>

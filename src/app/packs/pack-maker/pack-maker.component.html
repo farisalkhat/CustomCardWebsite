@@ -55,6 +55,21 @@
             
             
             </div>
+
+
+            <div class="col-auto">
+                <label for="Name">Pack Cost</label>
+                <input id ="cost" formControlName ="cost" [ngClass]="{'is-invalid': submitted && f['cost'].errors}" class="form-control" type="text" [(ngModel)] = "cost">
+                
+
+                <div *ngIf="submitted && f['cost'].errors" class="invalid-feedback">
+                    <div *ngIf="f['cost'].errors['cost']">
+                      <p class="red">Umm input a cost dumbo</p>
+                    </div>
+                </div>
+            
+            
+            </div>
         </div>
  
  

@@ -12,6 +12,7 @@ export class NavigationComponent implements OnInit {
 
   username:string | undefined;
   id:number | undefined
+  currency!:number;
 
   ngOnInit(): void {
     if (this._authService.loggedIn()){
@@ -21,6 +22,7 @@ export class NavigationComponent implements OnInit {
           console.log(res['username'])
           this.username = res['username']
           this.id = res['id']
+          this.currency = res['currency']
         },
         err => {console.log(err)
         this.username = undefined

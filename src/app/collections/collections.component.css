@@ -65,6 +65,6 @@
   /* animation */
   
   @keyframes slide {
-    0% {transform:translateX(-100%);}
-    100% {transform:translateX(80%);}
+    0% {transform:translateX(-400%);}
+    100% {transform:translateX(-50%);}
   }

@@ -38,8 +38,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     else{
-      console.log(this.loginInfo.controls['email'].value);
-      console.log(this.loginInfo.controls['password'].value);
+
 
       const userData = {
         "email": this.loginInfo.controls['email'].value,
@@ -50,7 +49,7 @@ export class LoginComponent implements OnInit {
       this._auth.loginUser(userData)
         .subscribe(
           res => {
-          console.log(res['token'])
+
           localStorage.setItem('token',res['token'])
           this._router.navigate(['/home']).then(() => {
             window.location.reload();

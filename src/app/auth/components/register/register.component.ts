@@ -41,9 +41,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
     else{
-      console.log(this.registerInfo.controls['username'].value);
-      console.log(this.registerInfo.controls['email'].value);
-      console.log(this.registerInfo.controls['password'].value);
+
 
       const userData = {
         "username": this.registerInfo.controls['username'].value,
@@ -54,7 +52,6 @@ export class RegisterComponent implements OnInit {
       this._auth.registerUser(userData)
         .subscribe(
           res =>{
-            console.log(res['token'])
             localStorage.setItem('token',res['token'])
             this._router.navigate(['/home']).then(() => {
               window.location.reload();

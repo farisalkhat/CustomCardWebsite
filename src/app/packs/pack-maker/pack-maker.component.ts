@@ -32,6 +32,7 @@ export class PackMakerComponent implements OnInit {
   currentSecret: Card[] = [];
 
   packSize = 'medium'
+  cost = 100
 
   rarity:string="common";
 
@@ -44,7 +45,8 @@ export class PackMakerComponent implements OnInit {
       Validators.minLength(1),
       Validators.maxLength(100)
 
-    ])
+    ]),
+    cost: new FormControl(100,[Validators.required])
   })
 
 
@@ -847,6 +849,7 @@ export class PackMakerComponent implements OnInit {
       finaldata['title'] = this.draftData.controls['draftTitle'].value;
       finaldata['creator'] = this.username;
       finaldata['creatorid'] = this.id;
+      finaldata['cost'] = this.draftData.controls['cost'].value;
 
       const commonIDs:string[] = []
       const rareIDs:string[] = []
@@ -878,6 +881,7 @@ export class PackMakerComponent implements OnInit {
       finaldata['ultraIDs'] = ultraIDs;
       finaldata['secretIDs'] = secretIDs;
       finaldata['packSize'] = this.packSize;
+      
 
 
 

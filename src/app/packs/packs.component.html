@@ -1,8 +1,8 @@
 <div class="selectedPacks ">Test</div>
-<div class="container justify-content-center">
+<div *ngIf="openingPacks==false"class="container justify-content-center">
     <!-- <button type="button" class="btn btn-success"  *ngIf="_authService.loggedIn()" routerLink="/pack-maker" routerLinkActive = "active">Create a Pack</button> -->
 
-    <div class="form-outline">
+    <!-- <div class="form-outline">
         <p>Select how many packs you want to open, then click a pack to begin 
             
             <select class="form-control"  id="attribute" [(ngModel)] = "placeId">
@@ -26,14 +26,56 @@
             </select>
             <button class="btn btn-success" [disabled] = "packSelected==true">Open Packs</button>
 
-            
+             
             
          
+    </div> -->
+
+    <div class="row align-items-center">
+        <div class="col"*ngFor = "let pack of packs">
+            <img    routerLinkActive = "active" class="pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/HUMBLEBEGINNINGS.png'>
+           
+            
+            <!-- *ngIf="pack?.pack!='placeholder'"  (click)="SetPackNo(placeId,pack.packid)" routerLink="/pack-opener/{{pack?.packid}}"--> 
+            <!-- <button class="btn btn-success"  *ngIf="pack?.pack=='placeholder'"(click)="SetPackNo(placeId,pack.packid)"  routerLink="/pack-opener/{{pack?.packid}}" routerLinkActive = "active">{{pack.title}}</button>
+             -->
+             <p>Cost: {{pack.cost}}<select class="form-control form-control-lg"  id="attribute" [ngModel]="chosenPack" (ngModelChange)="queuePack(pack,$event)">
+                <option value =0>0</option>
+                <option value =1>1</option>
+                <option value =2>2</option>
+                <option value =3>3</option>
+                <option value =4>4</option>
+                <option value =5>5</option>
+                <option value =6>6</option>
+                <option value =7>7</option>
+                <option value =8>8</option>
+                <option value =9>9</option>
+                <option value =10>10</option>
+                <option value =12>12</option>
+                <option value =15>15</option>
+                <option value =24>24</option>
+                <option value =30>30</option>
+            </select></p>
+             
+             
+            </div>
     </div>
 
-    <span *ngFor = "let pack of packs">
-        <img (click)="SetPackNo(placeId,pack.packid)"  *ngIf="pack?.pack!='placeholder'" routerLink="/pack-opener/{{pack?.packid}}" routerLinkActive = "active" class="pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/{{pack?.pack}}'>
-        <button class="btn btn-success"  *ngIf="pack?.pack=='placeholder'"(click)="SetPackNo(placeId,pack.packid)"  routerLink="/pack-opener/{{pack?.packid}}" routerLinkActive = "active">{{pack.title}}</button>
-    </span>
+
+
+    <div class="packtracker position-fixed bottom-0 end-0 ">
+        <p>Packs Selected</p>
+        <div *ngFor="let pack of packTrackerArray"> 
+
+            <p *ngIf="pack!=undefined" class="tinytext">{{pack.title}} x{{pack.amount}}</p>
+
+        </div>
+        
+
+        <p class="tinytext position-fixed bottom-1">Total Cost: {{totalCost}}</p>
+        <button (click)="openPack()" [disabled]="packLength==0 || totalCost>currency"class="btn position-fixed bottom-0">Open Packs</button>
+    </div>
 </div>
+
+<app-pack-opener [packQueue] = "packTrackerArray" *ngIf="openingPacks==true"></app-pack-opener>
 

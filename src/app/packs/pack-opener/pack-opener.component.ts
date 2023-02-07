@@ -1,10 +1,10 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { AddToBinder, Binder, BinderInfo, Card, CustomcardsService, Pack, PackCard, PackInfo } from 'src/app/customcards.service';
+import { AddToBinder, Binder, BinderInfo, Card, CustomcardsService, Pack, PackCard, PackInfo, PackSelectedData } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-pack-opener',
@@ -50,10 +50,11 @@ export class PackOpenerComponent implements OnInit {
 
   packsOpened = 0; //Total Packs opened since starting the pack simulator
   packAmount = 0; //Total amount of packs that need to be opened
-  packID:number = 1;
+  packID!:number;
 
   cardsRemaining = 9; //Amount of cards in each pack
   currentOpened: PackCard[] = []; //List of cards received
+  openedPack:PackCard[] = [];
 
   revealed:boolean = false;
 
@@ -66,6 +67,16 @@ export class PackOpenerComponent implements OnInit {
   submitfail:boolean = false;
   binderID!:number;
 
+  @Input() packQueue!:PackSelectedData[];
+
+  currentPack!:PackSelectedData;
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
+    this.queueNextPack()
+  }
+
+  
   get f(){return this.binderData.controls;}
 
   rotate(){
@@ -98,6 +109,122 @@ export class PackOpenerComponent implements OnInit {
   hovermType!:string;
   leftPosition = 100
   rightPosition = 100
+
+  finishedPacks:boolean=false;
+
+
+
+  queueNextPack(){
+    
+
+    
+    this.currentPack=this.packQueue[0]!;
+    this.packQueue = this.packQueue.slice(1)
+    console.log(this.packQueue)
+
+      let packID= this.currentPack?.packid
+      this.packID = packID;
+
+      forkJoin(
+        this.customcardsService.getPackInfoByID(this.packID),
+        this.customcardsService.getCustomCardsByPack(this.packID),
+      ).subscribe(([packInfo,packCards])=>{
+        this.packInfo = packInfo;
+        this.cards = packCards;
+        
+        
+
+        if(this.packInfo['packsize']=='small'){
+          this.cardsRemaining=3
+
+          let counter = 0;
+          for(counter; counter!=2;counter++){
+            this.ultraCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=5;counter++){
+            this.superCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=6;counter++){
+            this.secretCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=11;counter++){
+            this.rareCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=20;counter++){
+            this.commonCards.push(this.cards[counter])
+          }
+
+          
+        
+        
+        }
+        if(this.packInfo['packsize']=='medium'){
+          this.cardsRemaining=9
+        
+          let counter = 0;
+          for(counter; counter!=10;counter++){
+            this.ultraCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=25;counter++){
+            this.superCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=27;counter++){
+            this.secretCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=52;counter++){
+            this.rareCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=100;counter++){
+            this.commonCards.push(this.cards[counter])
+          }
+
+
+
+          
+        }
+        if(this.packInfo['packsize']=='large'){
+          this.cardsRemaining=13
+          let counter = 0;
+          for(counter; counter!=14;counter++){
+            this.ultraCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=34;counter++){
+            this.superCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=40;counter++){
+            this.secretCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=100;counter++){
+            this.rareCards.push(this.cards[counter])
+          }
+
+          for(counter; counter!=200;counter++){
+            this.commonCards.push(this.cards[counter])
+          }
+        }
+
+
+        this.shuffleCards();
+
+      })
+
+      this.packAmount = this.currentPack.amount;
+}
+
+
+
+
 
   mouseHovering(card:Card,e:MouseEvent) {
 
@@ -300,131 +427,43 @@ export class PackOpenerComponent implements OnInit {
     }
   ngOnInit(): void {
 
-    this.authService.getUser().subscribe(
-      res =>{
-        console.log(res['username'])
-        this.username = res['username']
-        this.id = res['id']
-
-      this.route.paramMap.subscribe((paramMap)=>{
-      this.packID= Number(paramMap.get('packid'));
-
-      forkJoin(
-        this.customcardsService.getPackInfoByID(this.packID),
-        this.customcardsService.getCustomCardsByPack(this.packID),
-        this.customcardsService.getBindersByOwner(this.id)
-      ).subscribe(([packInfo,packCards,binders])=>{
-        this.packInfo = packInfo;
-        this.cards = packCards;
-        this.binders = binders;
-        console.log(this.binders.length)
-
-        if(this.packInfo['packsize']=='small'){
-          this.cardsRemaining=3
-
-          let counter = 0;
-          for(counter; counter!=2;counter++){
-            this.ultraCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=5;counter++){
-            this.superCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=6;counter++){
-            this.secretCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=11;counter++){
-            this.rareCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=20;counter++){
-            this.commonCards.push(this.cards[counter])
-          }
-
-          
-        
-        
-        }
-        if(this.packInfo['packsize']=='medium'){
-          this.cardsRemaining=9
-        
-          let counter = 0;
-          for(counter; counter!=10;counter++){
-            this.ultraCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=25;counter++){
-            this.superCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=27;counter++){
-            this.secretCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=52;counter++){
-            this.rareCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=100;counter++){
-            this.commonCards.push(this.cards[counter])
-          }
-
-
-
-          
-        }
-        if(this.packInfo['packsize']=='large'){
-          this.cardsRemaining=13
-          let counter = 0;
-          for(counter; counter!=14;counter++){
-            this.ultraCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=34;counter++){
-            this.superCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=40;counter++){
-            this.secretCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=100;counter++){
-            this.rareCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=200;counter++){
-            this.commonCards.push(this.cards[counter])
-          }
-        }
-
-
-        this.shuffleCards();
-
-      })
-
-      this.packAmount = this.customcardsService.getPackAmount();
+    if (this.authService.loggedIn()){
+      this.authService.getUser().subscribe(
+        res =>{
+          console.log('this is user:'+res['id'])
+          this.username = res['username']
+          this.id = res['id']
   
+          this.customcardsService.getBindersByOwner(this.id).subscribe(res=>{this.binders=res})
+        })
+    }
+
+    else{
       
-    })})
+    }
+
 
 
       console.log(this.cards);
   }
 
+
+
+  
+
+  
   goToLink(url: string){
     const newurl = 'https://www.duelingbook.com/card?id='+url
     window.open(newurl, "_blank");
 }
   shuffleCards(){
+    this.revealed==false
     if (this.state === "flipped") {
         this.state = "default";
       }
 
     this.randomCards=[]
     let cardCounter = 0
-    console.log(this.cards.length)
     while(cardCounter<this.cardsRemaining){
 
       if(cardCounter<this.cardsRemaining-2){
@@ -491,16 +530,39 @@ export class PackOpenerComponent implements OnInit {
     this.revealed=true;
     for(const card of this.randomCards){
       this.currentOpened.push(card)
+      this.openedPack.push(card)
     }
+
+    this.authService.subtractCurrency(this.currentPack.cost)
+    this.addPackToCollection()
     this.currentOpened.sort((a, b) => a.name.localeCompare(b.name))
     this.currentOpened.sort((a, b) => a.creator.localeCompare(b.creator))
+
+    if(this.packQueue.length==0 && this.packsOpened==this.packAmount){
+      this.finishedPacks=true;
+      return
+    }
   }
 
   openNextPack(){
-    this.rotate();
-    this.shuffleCards();
-    this.revealed = false;
-    this.card = undefined;
+    this.revealed=false
+    this.openedPack = []
+    
+    
+
+    if(this.packsOpened==this.packAmount){
+      this.packsOpened = 0;
+      
+      this.queueNextPack();
+    }
+    else{
+      this.rotate();
+      this.shuffleCards();
+      
+      this.card = undefined;
+    }
+
+    
   }
 
   showDetails(card:PackCard){
@@ -702,6 +764,22 @@ submitBinder(){
   )
 }
 
+
+addPackToCollection(){
+  const binderInfo = {} as AddToBinder;
+  binderInfo['cards'] = this.openedPack;
+  binderInfo['packid'] = this.packID;
+  binderInfo['creatorid'] = this.id
+  binderInfo['binderid'] = this.binderID;
+
+
+  this.customcardsService.addToCollection(binderInfo).subscribe(
+    res=>{
+      console.log(res);
+    },
+    err=>{console.log(err)}
+  )
+}
 
 addToBinder(){
   const binderInfo = {} as AddToBinder;
