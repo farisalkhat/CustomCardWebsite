@@ -171,7 +171,7 @@ export class PackMakerComponent implements OnInit {
 
     console.log(new_url)
  
-    window.open(new_url +'/'+url, '_blank');
+    window.open(new_url +'/CustomCardWebsite/'+url, '_blank');
 
 
     // const newurl = 'https://www.duelingbook.com/card?id='+url
