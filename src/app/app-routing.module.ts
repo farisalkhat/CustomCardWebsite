@@ -22,6 +22,9 @@ import { DeckEditorComponent } from './deck-editor/deck-editor.component';
 import { DecklistDetailsComponent } from './decklists/decklist-details/decklist-details.component';
 import { DeckMasterComponent } from './deck-master/deck-master.component';
 import { CollectionsComponent } from './collections/collections.component';
+import { ChecklistComponent } from './checklist/checklist.component';
+import { CardDetailsComponent } from './card-details/card-details.component';
+import { PackDetailsComponent } from './packs/pack-details/pack-details.component';
 
 const routes: Routes = [
   {
@@ -71,7 +74,13 @@ component:DecklistDetailsComponent},
 {path:'deck-master',
 component:DeckMasterComponent},
 {path:'collections',
-component:CollectionsComponent}
+component:CollectionsComponent},
+{path:'checklist',
+component:ChecklistComponent},
+{path:'cards/:cardid',
+component:CardDetailsComponent},
+{path:'packs/:packid',
+component:PackDetailsComponent}
 
 
 ];

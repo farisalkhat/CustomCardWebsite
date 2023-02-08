@@ -78,7 +78,19 @@ export class BindersComponent implements OnInit {
 
     }
     
+    goToLink(url: number){
 
+        const new_url = this.router.serializeUrl(
+          this.router.createUrlTree(['/cards']));
+    
+        console.log(new_url)
+     
+        window.open(new_url +'/'+url, '_blank');
+    
+    
+        // const newurl = 'https://www.duelingbook.com/card?id='+url
+        // window.open(newurl, "_blank");
+    }
 
     mouseHovering(card:BinderCard,e:MouseEvent) {
 

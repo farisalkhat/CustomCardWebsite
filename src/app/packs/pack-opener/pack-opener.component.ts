@@ -142,19 +142,19 @@ export class PackOpenerComponent implements OnInit {
             this.ultraCards.push(this.cards[counter])
           }
 
-          for(counter; counter!=5;counter++){
+          for(counter; counter!=6;counter++){
             this.superCards.push(this.cards[counter])
           }
 
-          for(counter; counter!=6;counter++){
+          for(counter; counter!=7;counter++){
             this.secretCards.push(this.cards[counter])
           }
 
-          for(counter; counter!=11;counter++){
+          for(counter; counter!=16;counter++){
             this.rareCards.push(this.cards[counter])
           }
 
-          for(counter; counter!=20;counter++){
+          for(counter; counter!=31;counter++){
             this.commonCards.push(this.cards[counter])
           }
 

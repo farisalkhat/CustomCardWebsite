@@ -26,6 +26,9 @@ export class CollectionsComponent implements OnInit {
   leftPosition = 100
   rightPosition = 100
 
+  currentCards!:BinderCard[];
+  currentPage = 1;
+
   constructor(public customcardsService:CustomcardsService, public authService:AuthService, public router:Router) { }
 
   ngOnInit(): void {
@@ -42,6 +45,9 @@ export class CollectionsComponent implements OnInit {
             if(res){
               this.cards=res;
               console.log(this.binders)
+
+              this.currentPage = 1
+              this.getCardNumbers(this.currentPage);
     
     
             }
@@ -59,8 +65,42 @@ export class CollectionsComponent implements OnInit {
     console.log(this.creatorid)
 
     }
+  goToLink(url: number){
+
+    const new_url = this.router.serializeUrl(
+      this.router.createUrlTree(['/cards']));
+
+    console.log(new_url)
+ 
+    window.open(new_url +'/'+url, '_blank');
 
 
+    // const newurl = 'https://www.duelingbook.com/card?id='+url
+    // window.open(newurl, "_blank");
+}
+    getCardNumbers(page:number){
+        this.currentCards = [];
+        const cardmin = (page-1)*54;
+        const cardmax = (page * 54) - 1;
+    
+        for (let i = cardmin; i <= cardmax; i++) {
+          console.log(cardmin,' ',cardmax);
+          this.currentCards.push(this.cards[i]);
+        }
+    
+    
+    
+      }
+    
+      nextPage(){
+        this.currentPage +=1;
+        this.getCardNumbers(this.currentPage);
+      }
+    
+      prevPage(){
+        this.currentPage -=1;
+        this.getCardNumbers(this.currentPage);
+      }
 
 
     

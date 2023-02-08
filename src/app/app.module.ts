@@ -27,6 +27,9 @@ import { DeckEditorComponent } from './deck-editor/deck-editor.component';
 import { DecklistDetailsComponent } from './decklists/decklist-details/decklist-details.component';
 import { DeckMasterComponent } from './deck-master/deck-master.component';
 import { CollectionsComponent } from './collections/collections.component';
+import { ChecklistComponent } from './checklist/checklist.component';
+import { PackDetailsComponent } from './packs/pack-details/pack-details.component';
+import { CardDetailsComponent } from './card-details/card-details.component';
 
 
 
@@ -54,7 +57,10 @@ import { CollectionsComponent } from './collections/collections.component';
     DeckEditorComponent,
     DecklistDetailsComponent,
     DeckMasterComponent,
-    CollectionsComponent
+    CollectionsComponent,
+    ChecklistComponent,
+    PackDetailsComponent,
+    CardDetailsComponent
   ],
   imports: [
     HttpClientModule,

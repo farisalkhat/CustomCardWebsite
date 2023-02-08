@@ -1,0 +1,14 @@
+.cardeffect{
+    padding-top:10px;
+    padding-left:20px;
+}
+
+.largecard{
+    width:50%;
+}
+
+.bigcard{
+    width:316px;
+    padding-top:5px;
+    cursor: pointer;
+}

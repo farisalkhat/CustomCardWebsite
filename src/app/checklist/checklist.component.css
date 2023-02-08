@@ -40,6 +40,14 @@
     position: relative;
   }
    
+  .no-card {
+    -webkit-filter: grayscale(100%);
+       -moz-filter: grayscale(100%);
+         -o-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+            filter: grayscale(100%); 
+}
+
   .rare-card:after {
     content:'';
     top:0;
@@ -68,11 +76,3 @@
     0% {transform:translateX(-400%);}
     100% {transform:translateX(-50%);}
   }
-
-  button{
-    padding:0;
-    margin:0;
-}
-.btn-success{
-    margin:3px;
-}

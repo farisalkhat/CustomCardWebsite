@@ -124,7 +124,7 @@
                     <option *ngIf = 'filters.initial=="Monster"' value ="Ritual Monster">Ritual</option>
                     <option *ngIf = 'filters.initial=="Monster"' value ="Union Monster">Union</option>
                     <option *ngIf = 'filters.initial=="Monster"' value ="Xyz Monster">Xyz</option>
-                    <option *ngIf = 'filters.initial=="Monster"' value ="Synchro Monster">Synchro Monster</option>
+                    <option *ngIf = 'filters.initial=="Monster"' value ="Synchro Monster">Synchro</option>
     
                     <option *ngIf = 'filters.initial=="Spell"' value ="">  </option>
                     <option *ngIf = 'filters.initial=="Spell"' value = "Normal Spell">Normal</option>
@@ -247,6 +247,10 @@
     </div>
     
     <div class="row text-center"  >
+
+        <div><button (click)="addTo('Main')"class="btn btn-success small text-center">Main Deck</button>
+            <button (click)="addTo('Side')" class="btn btn-success small text-center">Side Deck</button></div>
+        
         
     
         <div class="col-auto">

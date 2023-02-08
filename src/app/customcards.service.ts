@@ -145,6 +145,22 @@ export interface BinderCard extends Document{
   copies:number;
 }
 
+export interface ChecklistCard extends Document{
+  id:number;
+  cardtype:string;
+  name:string;
+  type:string;
+  atk:number;
+  def:number;
+  level:number;
+  attribute:string;
+  effect:string;
+  creator:string;
+  rarity:string;
+  copies:number;
+}
+
+
 export interface PackButton{
   packid:number;
   title:string;
@@ -254,7 +270,7 @@ export class CustomcardsService {
     return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists-info/${id}`);
   }
 
-  getCustomCard(id:string){
+  getCustomCard(id:number){
     return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/${id}`);
   } 
 
@@ -382,5 +398,14 @@ export class CustomcardsService {
 
   getCollectionCardsByCreatorID(id:number){
     return this.http.get<BinderCard[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/collections/${id}`);
+  }
+
+  getChecklist(userid:number,packid:number){
+    return this.http.get<ChecklistCard[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/checklist/${userid}/${packid}`);
+  }
+
+
+  getCardDetails(id:number){
+    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/cards/details/${id}`);
   }
 }

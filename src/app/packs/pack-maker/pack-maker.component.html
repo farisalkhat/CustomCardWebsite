@@ -32,9 +32,11 @@
         <button type="button"  class="btn btn-success addcard" (click)="resetPack('medium')">Medium</button>
         <button type="button"  class="btn btn-success addcard" (click)="resetPack('large')">Large</button>
         <h4><ul>
-            <li>Small: 20 Cards, 3 per pack (9 Common, 5 Rare, 3 SR, 2 UR, 1 Secret)</li>
-            <li>Medium: 100 cards, 9 per pack (48 Common, 25 Rare, 15 SR, 10 UR, 2 Secret)</li>
-            <li>Large: 200 cards, 13 per pack (100 Common, 60 Rare, 20 SR, 14 UR, 6 Secret)</li>
+            <li>Small: 31 Cards, 3 per pack (15 Common, 9 Rare, 4 Super, 2 Ultra, 1 Secret)</li>
+            <li>Medium: 100 cards, 9 per pack (48 Common, 25 Rare, 15 Super, 10 Ultra, 2 Secret)</li>
+            <li>Large: 200 cards, 13 per pack (100 Common, 60 Rare, 20 Super, 14 Ultra, 6 Secret)</li>
+
+            <li>DISCLAIMER: Changing the pack size will remove ALL CARDS in your current pack. Be careful!</li>
         </ul>
 
         </h4>
@@ -64,7 +66,7 @@
 
                 <div *ngIf="submitted && f['cost'].errors" class="invalid-feedback">
                     <div *ngIf="f['cost'].errors['cost']">
-                      <p class="red">Umm input a cost dumbo</p>
+                      <p class="red">You need to input a value of at LEAST 100</p>
                     </div>
                 </div>
             
@@ -304,7 +306,7 @@
     
                 <span *ngFor = "let card of currentCards">
     
-                    <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"   (contextmenu)="rightAddPackCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
+                    <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"   (contextmenu)="rightAddPackCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
                     
                 </span>
     

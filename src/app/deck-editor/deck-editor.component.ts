@@ -20,6 +20,8 @@ export class DeckEditorComponent implements OnInit {
   currentCards!:Card[];
   currentID!:string;
 
+  mainOrSide:string = 'Main';
+
 
   draftName!:string;
 
@@ -222,8 +224,8 @@ export class DeckEditorComponent implements OnInit {
   }
   getCardNumbers(page:number){
     this.currentCards = [];
-    const cardmin = (page-1)*30;
-    const cardmax = (page * 30) - 1;
+    const cardmin = (page-1)*36;
+    const cardmax = (page * 36) - 1;
 
     for (let i = cardmin; i <= cardmax; i++) {
       console.log(cardmin,' ',cardmax);
@@ -245,8 +247,22 @@ export class DeckEditorComponent implements OnInit {
   }
 
   goToLink(url: string){
-    const newurl = 'https://www.duelingbook.com/card?id='+url
-    window.open(newurl, "_blank");
+
+    const new_url = this._router.serializeUrl(
+      this._router.createUrlTree(['/cards']));
+
+    console.log(new_url)
+ 
+    window.open(new_url +'/'+url, '_blank');
+
+
+    // const newurl = 'https://www.duelingbook.com/card?id='+url
+    // window.open(newurl, "_blank");
+}
+
+
+addTo(type:string){
+  this.mainOrSide = type;
 }
 
 mouseHovering(card:Card,e:MouseEvent) {
@@ -622,7 +638,10 @@ getHoveredCardDetails(){
   
   addCard(card:Card){
     if(card!=undefined){
-      if((card.cardtype=="Fusion Monster" || card.cardtype=="Xyz Monster") && this.extraDeck.length!=15){
+      if(card.cardtype=="Fusion Monster" || card.cardtype=="Xyz Monster" || card.cardtype=="Synchro Monster"){
+        if(this.extraDeck.length==15){
+          return;
+        }
         var duplicates= 0;
         for(const cardFrom of this.extraDeck){
           if(card.name== cardFrom.name){
@@ -665,6 +684,7 @@ getHoveredCardDetails(){
 
 
   addSideCard(card:Card){
+    console.log(card)
     if(card!=undefined){
       if(card.cardtype=="Fusion Monster" || card.cardtype=="Xyz Monster"){
         var duplicates= 0;
@@ -716,8 +736,15 @@ getHoveredCardDetails(){
   rightAddDraftCard($event: { preventDefault: () => void; },card:Card){
     
     $event.preventDefault();
-    console.log(card.name);
-    this.addCard(card);
+    this.card = card;
+
+    if(this.mainOrSide=='Side'){
+      this.addSideCard(this.card);
+    }
+    else{
+      this.addCard(this.card);
+    }
+    
 
   }
   leftAddDraftCard(){

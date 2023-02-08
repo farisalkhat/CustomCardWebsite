@@ -46,7 +46,7 @@ export class PackMakerComponent implements OnInit {
       Validators.maxLength(100)
 
     ]),
-    cost: new FormControl(100,[Validators.required])
+    cost: new FormControl(100,[Validators.required,Validators.min(100)])
   })
 
 
@@ -163,6 +163,20 @@ export class PackMakerComponent implements OnInit {
 
     )
   }
+
+  goToLink(url: string){
+
+    const new_url = this._router.serializeUrl(
+      this._router.createUrlTree(['/cards']));
+
+    console.log(new_url)
+ 
+    window.open(new_url +'/'+url, '_blank');
+
+
+    // const newurl = 'https://www.duelingbook.com/card?id='+url
+    // window.open(newurl, "_blank");
+}
   mouseHovering(card:Card,e:MouseEvent) {
 
     console.log(e.clientX);
@@ -673,9 +687,9 @@ export class PackMakerComponent implements OnInit {
 
     if(size=='small'){
       console.log("smallfry")
-      this.maxCommon=9
-      this.maxRare= 5
-      this.maxSuper = 3
+      this.maxCommon= 15
+      this.maxRare= 9
+      this.maxSuper = 4
       this.maxUltra = 2
       this.maxSecret = 1
     }

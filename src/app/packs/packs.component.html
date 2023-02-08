@@ -33,7 +33,7 @@
 
     <div class="row align-items-center">
         <div class="col"*ngFor = "let pack of packs">
-            <img    routerLinkActive = "active" class="pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/HUMBLEBEGINNINGS.png'>
+            <img   routerLink="/packs/{{pack.packid}}" routerLinkActive = "active" class="pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/HUMBLEBEGINNINGS.png'>
            
             
             <!-- *ngIf="pack?.pack!='placeholder'"  (click)="SetPackNo(placeId,pack.packid)" routerLink="/pack-opener/{{pack?.packid}}"--> 

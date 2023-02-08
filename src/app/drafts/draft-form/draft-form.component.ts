@@ -2,6 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit } from '@angular/core';
 import { Card, CustomcardsService } from 'src/app/customcards.service';
 import * as FileSaver from 'file-saver';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-draft-form',
@@ -30,7 +31,7 @@ import * as FileSaver from 'file-saver';
 export class DraftFormComponent implements OnInit {
   xml_file: string = "";
 
-  constructor(private customcardsService:CustomcardsService) { }
+  constructor(public router:Router,private customcardsService:CustomcardsService) { }
   draftMode:string="generic"
   customEnabled:boolean = false;
 
@@ -252,7 +253,19 @@ export class DraftFormComponent implements OnInit {
     
   }
 
+  goToLink(url: string){
 
+    const new_url = this.router.serializeUrl(
+      this.router.createUrlTree(['/cards']));
+
+    console.log(new_url)
+ 
+    window.open(new_url +'/'+url, '_blank');
+
+
+    // const newurl = 'https://www.duelingbook.com/card?id='+url
+    // window.open(newurl, "_blank");
+}
   mouseHovering(card:Card,e:MouseEvent) {
 
 

@@ -1,0 +1,60 @@
+<div class="container">
+
+
+
+
+<div class="row">
+    <div class="col-lg-4 cardeffect">
+        <img href='' (click)="goToLink(card.id)" class="bigcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+    </div>
+
+        <div class="col">
+            <div class="row">
+                <h1>{{card?.name}}</h1>
+                <h4 *ngIf="monster=='False'"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
+                <h4 *ngIf="monster=='True'"> {{card?.cardtype}} </h4>
+                <b><p *ngIf="monster=='True'">
+                    <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
+                </p></b>
+        
+                <p *ngIf="monster=='False'">
+                    <img class="attribute" src={{attribute}}> {{card?.attribute}}
+                </p>
+        
+                
+                
+        
+        
+                <b>
+                    
+                    <p *ngIf="monster=='True'"><img class="type" src={{mType}}> {{card?.type}}</p>
+                
+                
+                    <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
+                    <p> {{card?.effect}}</p>
+                    <p>ID: {{card?.id}}</p>
+                </b>
+            </div>
+            
+
+
+
+            <div class="row">
+                <h1>Released In:</h1>
+                <h3><p class="text-capitalize" *ngFor="let pack of carddetails['packdetails']">
+                    {{pack.rarity}} : <a class="text-decoration-none" routerLink="/packs/{{pack.id}}">{{pack.title}}</a>
+
+                </p></h3>
+            </div>
+        </div>
+
+
+
+
+
+
+</div>
+
+
+
+</div>

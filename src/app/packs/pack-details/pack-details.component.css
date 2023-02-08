@@ -68,11 +68,3 @@
     0% {transform:translateX(-400%);}
     100% {transform:translateX(-50%);}
   }
-
-  button{
-    padding:0;
-    margin:0;
-}
-.btn-success{
-    margin:3px;
-}

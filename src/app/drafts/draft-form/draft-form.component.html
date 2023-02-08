@@ -82,7 +82,7 @@
 
               <span  *ngFor = "let card of randomCards">
 
-                  <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class=" btn btn-default btncard" (contextmenu)="rightAddDraftCard($event,card)" (click)="showDetails(card)" >
+                  <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class=" btn btn-default btncard" (contextmenu)="rightAddDraftCard($event,card)" (click)="showDetails(card)" >
     
                     <div class="card" [@cardFlip]="this.state">
                       <div class="face back">

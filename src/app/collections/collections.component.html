@@ -42,9 +42,9 @@
     
     <div class="col justify-content-between">
  
-            <span *ngFor = "let card of cards">
+            <span *ngFor = "let card of currentCards">
 
-                <button  (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
+                <button  (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
 
                     <div class="relative"*ngIf="card.rarity=='common'">
                         <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
@@ -70,6 +70,11 @@
             </span>
 
 
+            <div class="row">
+                <button class="btn btn-success" (click)="nextPage()">Next</button><button class="btn btn-success" (click)="prevPage()">Previous</button>
+            </div>
+
+
 
 
         <!-- <div class="row">
@@ -77,5 +82,8 @@
         </div> -->
         
     </div>
+
+
+
 
 </div>
