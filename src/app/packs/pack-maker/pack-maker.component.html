@@ -398,35 +398,35 @@
         <div class="col-lg-12">
             <h2>Commons ({{currentCommons.length}}/{{maxCommon}})</h2>
             <span *ngFor = "let card of currentCommons">
-                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'common')" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
+                <button class="btn btn-default"  (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (contextmenu)="rightDeleteDraftCard($event,card,'common')" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Rares ({{currentRare.length}}/{{maxRare}})</h2>
             <span *ngFor = "let card of currentRare">
-                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'rare')" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
+                <button class="btn btn-default"  (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (contextmenu)="rightDeleteDraftCard($event,card,'rare')" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Super ({{currentSuper.length}}/{{maxSuper}})</h2>
             <span *ngFor = "let card of currentSuper">
-                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'super')" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
+                <button class="btn btn-default"  (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (contextmenu)="rightDeleteDraftCard($event,card,'super')" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Ultra ({{currentUltra.length}}/{{maxUltra}})</h2>
             <span *ngFor = "let card of currentUltra">
-                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'ultra')" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
+                <button class="btn btn-default"  (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (contextmenu)="rightDeleteDraftCard($event,card,'ultra')" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Secret({{currentSecret.length}}/{{maxSecret}})</h2>
             <span *ngFor = "let card of currentSecret">
-                <button class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card,'secret')" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
+                <button class="btn btn-default"  (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (contextmenu)="rightDeleteDraftCard($event,card,'secret')" (click)="showDetails(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
             </span>
         </div>
         

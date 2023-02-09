@@ -341,7 +341,7 @@ export class DraftMakerComponent implements OnInit {
 
 
   }
-  goToLink(url: number){
+  goToLink(url: string){
 
     const new_url = this._router.serializeUrl(
       this._router.createUrlTree(['/CustomCardWebsite/cards']));

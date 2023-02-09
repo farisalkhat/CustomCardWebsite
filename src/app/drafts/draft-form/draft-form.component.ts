@@ -253,7 +253,7 @@ export class DraftFormComponent implements OnInit {
     
   }
 
-  goToLink(url: number){
+  goToLink(url: string){
 
     const new_url = this.router.serializeUrl(
       this.router.createUrlTree(['/CustomCardWebsite/cards']));
