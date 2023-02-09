@@ -131,6 +131,11 @@ export class PackOpenerComponent implements OnInit {
       ).subscribe(([packInfo,packCards])=>{
         this.packInfo = packInfo;
         this.cards = packCards;
+        this.secretCards = []
+        this.ultraCards = []
+        this.superCards = []
+        this.rareCards = []
+        this.commonCards = []
         
         
 
