@@ -265,11 +265,11 @@ export class ChecklistComponent implements OnInit {
     goToLink(url: number){
 
         const new_url = this.router.serializeUrl(
-          this.router.createUrlTree(['/cards']));
+          this.router.createUrlTree(['/CustomCardWebsite/cards']));
     
         console.log(new_url)
      
-        window.open('/CustomCardWebsite'+new_url+ '/'+url, '_blank');
+        window.open(new_url +url, '_blank');
     
     
         // const newurl = 'https://www.duelingbook.com/card?id='+url

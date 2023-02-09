@@ -164,14 +164,14 @@ export class PackMakerComponent implements OnInit {
     )
   }
 
-  goToLink(url: string){
+  goToLink(url: number){
 
     const new_url = this._router.serializeUrl(
-      this._router.createUrlTree(['/cards']));
+      this._router.createUrlTree(['/CustomCardWebsite/cards']));
 
     console.log(new_url)
  
-    window.open('/CustomCardWebsite'+new_url+ '/'+url, '_blank');
+    window.open(new_url +url, '_blank');
 
 
     // const newurl = 'https://www.duelingbook.com/card?id='+url
