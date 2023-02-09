@@ -47,7 +47,7 @@
 
                   <button class="btn btn-default" (click)="showDetails(card)" >
     
-                    <div (click)="goToLink(card.id)"=(mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="card" [@cardFlip]="this.state">
+                    <div (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="card" [@cardFlip]="this.state">
                       <div class="face back">
                         <img src="assets/cardimages/Default.png" />
                         

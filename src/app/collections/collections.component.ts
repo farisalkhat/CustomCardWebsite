@@ -68,7 +68,7 @@ export class CollectionsComponent implements OnInit {
     goToLink(url: number){
 
       const new_url = this.router.serializeUrl(
-        this.router.createUrlTree(['/CustomCardWebsite/cards']));
+        this.router.createUrlTree(['/CustomCardWebsite/cards/']));
   
       console.log(new_url)
    

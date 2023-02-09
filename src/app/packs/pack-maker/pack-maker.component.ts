@@ -167,7 +167,7 @@ export class PackMakerComponent implements OnInit {
   goToLink(url: string){
 
     const new_url = this._router.serializeUrl(
-      this._router.createUrlTree(['/CustomCardWebsite/cards']));
+      this._router.createUrlTree(['/CustomCardWebsite/cards/']));
 
     console.log(new_url)
  

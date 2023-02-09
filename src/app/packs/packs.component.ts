@@ -94,6 +94,8 @@ packLength:number = 0;
 
 
     )
+
+    
   }
   SetPackNo(pack:number,packid:number){
     this.packSelected=true;

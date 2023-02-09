@@ -237,7 +237,7 @@ export class PackDetailsComponent implements OnInit {
     goToLink(url: string){
 
         const new_url = this.router.serializeUrl(
-          this.router.createUrlTree(['/CustomCardWebsite/cards']));
+          this.router.createUrlTree(['/CustomCardWebsite/cards/']));
     
         console.log(new_url)
      
