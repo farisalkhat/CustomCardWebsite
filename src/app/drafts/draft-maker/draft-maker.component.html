@@ -256,6 +256,11 @@
     <div class="row text-center">
     
         <div class="col-auto">
+            <div class="col-auto"><div class="d-flex justify-content-center">
+                <div id="Loading" class="spinner-border" role="status">
+                    <span class="sr-only" ></span>
+                </div>
+              </div></div>
     
                 <span *ngFor = "let card of currentCards">
     
@@ -307,7 +312,8 @@
     
     <div class="row">
 
-        <h1><b>Current Draft ({{currentDraft.length}})</b></h1>
+        <h1><b>Current Draft ({{currentDraft.length}})</b><button type="button"  class="btn btn-success addcard" (click)="addSearchResults()">Add Search Results</button></h1>
+        
 
 
 

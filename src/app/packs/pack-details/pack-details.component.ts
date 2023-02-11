@@ -29,6 +29,10 @@ export class PackDetailsComponent implements OnInit {
       this.customcardsService.getCustomCardsByPack(this.packid).subscribe(
         (data:any)=>{
           this.packcards = data;
+          this.packcards.sort((a, b) => a.name.localeCompare(b.name))
+          
+
+        
           console.log(this.packcards);
         } 
       )
@@ -236,10 +240,18 @@ export class PackDetailsComponent implements OnInit {
 
     goToLink(url: string){
 
-        const new_url = this.router.serializeUrl(
-          this.router.createUrlTree(['/CustomCardWebsite/cards/']));
+        let new_url =''
     
-        console.log(new_url)
+        if(this.router['location']._platformLocation.location.origin=='http://localhost:4200'){
+           new_url = this.router.serializeUrl(
+            this.router.createUrlTree(['/cards/']));
+        }
+        else{
+           new_url = this.router.serializeUrl(
+          this.router.createUrlTree(['/CustomCardWebsite/cards/']));
+        }
+        
+    
      
         window.open(new_url +'/'+url, '_blank');
     

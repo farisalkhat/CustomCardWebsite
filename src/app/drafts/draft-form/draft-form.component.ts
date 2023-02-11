@@ -61,7 +61,7 @@ export class DraftFormComponent implements OnInit {
   stType!:string;
   mType!:string;
 
-  randomCards!:Card[] | undefined;
+  randomCards!:any[] | undefined;
   customDraft:Card[] = [];
 
 
@@ -71,7 +71,7 @@ export class DraftFormComponent implements OnInit {
 
   round = 0;
   cardsRemaining = 15;
-  currentDraft: Card[] = [];
+  currentDraft: any[] = [];
   sortedList: Card[] = []
 
   state: string = 'default';
@@ -87,7 +87,7 @@ export class DraftFormComponent implements OnInit {
 
 
   isHovering: boolean = false;
-  hoveredCard!:Card;
+  hoveredCard!:any;
   hovermonster!:string;
   hoverattribute!:string;
   hoverstType!:string;
@@ -151,102 +151,105 @@ export class DraftFormComponent implements OnInit {
     this.customcardsService.getCustomCardsByDraft(this.draftMode).subscribe(
       res => {
         this.customDraft = res;
+        this.cards = res;
+        console.log(this.customDraft);
+        this.shuffleCards()
       }
     )
 
-    this.customcardsService.getCustomMonsters().subscribe(
-      res => {
+    // this.customcardsService.getCustomMonsters().subscribe(
+    //   res => {
         
-        this.monsters = res;
+    //     this.monsters = res;
         
-      }
-    )
-    this.customcardsService.getCustomSpells().subscribe(
-      res => {
+    //   }
+    // )
+    // this.customcardsService.getCustomSpells().subscribe(
+    //   res => {
         
-        this.spells = res;
+    //     this.spells = res;
 
-      }
-    )
-    this.customcardsService.getCustomTraps().subscribe(
-      res => {
+    //   }
+    // )
+    // this.customcardsService.getCustomTraps().subscribe(
+    //   res => {
         
-        this.traps = res;
+    //     this.traps = res;
         
-      }
-    )
-    this.customcardsService.getCustomCardsByCreator('charge301').subscribe(
-      res => {
-        if(res){}
-        this.richie = res;  
-      }
-    )
-    this.customcardsService.getCustomSpellsTraps().subscribe(
-      res => {
+    //   }
+    // )
+    // this.customcardsService.getCustomCardsByCreator('charge301').subscribe(
+    //   res => {
+    //     if(res){}
+    //     this.richie = res;  
+    //   }
+    // )
+    // this.customcardsService.getCustomSpellsTraps().subscribe(
+    //   res => {
         
-        this.spellstraps = res;
+    //     this.spellstraps = res;
         
-      }
-    )
+    //   }
+    // )
 
-    this.customcardsService.getCustomCardsByCreator('Afres').subscribe(
-      res => {
-        if(res){this.afres = res;}
+    // this.customcardsService.getCustomCardsByCreator('Afres').subscribe(
+    //   res => {
+    //     if(res){this.afres = res;}
         
-      }
-    )
-    this.customcardsService.getCustomCardsByCreator('Gergoos').subscribe(
-      res => {
-        if(res){this.gergoos = res;}
+    //   }
+    // )
+    // this.customcardsService.getCustomCardsByCreator('Gergoos').subscribe(
+    //   res => {
+    //     if(res){this.gergoos = res;}
         
-      }
-    )
-    this.customcardsService.getCustomCardsByCreator('jirai_gumo_2200').subscribe(
-      res => {
-        if(res){this.swampus = res;  }
+    //   }
+    // )
+    // this.customcardsService.getCustomCardsByCreator('jirai_gumo_2200').subscribe(
+    //   res => {
+    //     if(res){this.swampus = res;  }
         
-      }
-    )
-    this.customcardsService.getCustomCardsByTag('Generic').subscribe(
-      res => {
-        if(res){this.generic = res;  }
+    //   }
+    // )
+    // this.customcardsService.getCustomCardsByTag('Generic').subscribe(
+    //   res => {
+    //     if(res){this.generic = res;  }
         
-      }
-    )
-    this.customcardsService.getCustomCardsByTag('Attribute-Generic').subscribe(
-      res => {
-        if(res){this.genericA = res; }
+    //   }
+    // )
+    // this.customcardsService.getCustomCardsByTag('Attribute-Generic').subscribe(
+    //   res => {
+    //     if(res){this.genericA = res; }
         
-      }
-    )
-    this.customcardsService.getCustomCardsByTag('Type-Generic').subscribe(
-      res => {
-        if(res){        
-          this.genericT = res;  
+    //   }
+    // )
+    // this.customcardsService.getCustomCardsByTag('Type-Generic').subscribe(
+    //   res => {
+    //     if(res){        
+    //       this.genericT = res;  
           
 
           
           
 
-        }
+    //     }
 
 
-      }
-    )
-    this.customcardsService.getCustomCards().subscribe(
-      res => {
-        if(res)
-        this.database = res;
-        this.genericAll =  this.generic,this.genericA,this.genericT;
-        this.cards = this.database;
-        this.decideCardPool();
+    //   }
+    // )
+    // this.customcardsService.getCustomCards().subscribe(
+    //   res => {
+    //     if(res)
+    //     this.database = res;
+    //     this.genericAll =  this.generic,this.genericA,this.genericT;
+    //     this.cards = this.database;
+    //     this.decideCardPool();
 
         
-        this.shuffleCards();
+    //     this.shuffleCards();
         
         
-      }
-    )
+    //   }
+    // )
 
       
       
@@ -255,10 +258,18 @@ export class DraftFormComponent implements OnInit {
 
   goToLink(url: string){
 
-    const new_url = this.router.serializeUrl(
-      this.router.createUrlTree(['/CustomCardWebsite/cards/']));
+    let new_url =''
 
-    console.log(new_url)
+    if(this.router['location']._platformLocation.location.origin=='http://localhost:4200'){
+       new_url = this.router.serializeUrl(
+        this.router.createUrlTree(['/cards/']));
+    }
+    else{
+       new_url = this.router.serializeUrl(
+      this.router.createUrlTree(['/CustomCardWebsite/cards/']));
+    }
+    
+
  
     window.open(new_url +'/'+url, '_blank');
 
@@ -292,6 +303,24 @@ export class DraftFormComponent implements OnInit {
       
       
     }
+
+
+  mouseHoverDrafted(card:Card,e:MouseEvent){
+    this.isHovering = true; 
+    this.hoveredCard = card 
+  
+    if(e.clientX>=900){
+      this.leftPosition = e.clientX-200;
+    }
+  
+    else{
+      this.leftPosition = e.clientX+2;
+    }
+    
+    this.rightPosition =e.clientY-170;
+    
+
+    this.getHoveredCardDetails()}
     mouseLeft() {
         this.isHovering = false;
     }
@@ -466,31 +495,31 @@ export class DraftFormComponent implements OnInit {
       }
       
     }
-  decideCardPool(){
-    console.log(this.customEnabled);
-    if(this.customEnabled == true){
-      this.cards = this.customDraft;
-    }
-    else{
-      switch(this.draftMode){
+  // decideCardPool(){
+  //   console.log(this.customEnabled);
+  //   if(this.customEnabled == true){
+  //     this.cards = this.customDraft;
+  //   }
+  //   else{
+  //     switch(this.draftMode){
 
-        case "default":
-          this.cards = this.database
+  //       case "default":
+  //         this.cards = this.database
 
-          break;
+  //         break;
 
-        case "generic":
-          this.cards = this.genericAll
-          break;
+  //       case "generic":
+  //         this.cards = this.genericAll
+  //         break;
           
-        default:
-          this.cards = this.database
-      }
-    }
+  //       default:
+  //         this.cards = this.database
+  //     }
+  //   }
 
 
     
-  }
+  // }
 
   shuffleUnique(shuffleStyle:string){
     this.shuffleStyle = shuffleStyle;
@@ -609,6 +638,7 @@ export class DraftFormComponent implements OnInit {
         this.randomizeButtons();
          } 
     }
+    console.log(this.randomCards);
 
   }
 

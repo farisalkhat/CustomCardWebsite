@@ -161,6 +161,10 @@ export interface ChecklistCard extends Document{
 }
 
 
+
+
+
+
 export interface PackButton{
   packid:number;
   title:string;
@@ -257,6 +261,13 @@ export class CustomcardsService {
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists`);
   }
 
+  getPlayers(){
+    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/players`);
+  }
+
+  getBanlist(){
+    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/customcards/banlist`);
+  }
 
   getDeckMasters(){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/deckmaster`);

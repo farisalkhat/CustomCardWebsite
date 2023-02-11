@@ -30,6 +30,8 @@ import { CollectionsComponent } from './collections/collections.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { PackDetailsComponent } from './packs/pack-details/pack-details.component';
 import { CardDetailsComponent } from './card-details/card-details.component';
+import { PlayerComponent } from './player/player.component';
+import { PlayerDetailsComponent } from './player/player-details/player-details.component';
 
 
 
@@ -60,7 +62,9 @@ import { CardDetailsComponent } from './card-details/card-details.component';
     CollectionsComponent,
     ChecklistComponent,
     PackDetailsComponent,
-    CardDetailsComponent
+    CardDetailsComponent,
+    PlayerComponent,
+    PlayerDetailsComponent
   ],
   imports: [
     HttpClientModule,

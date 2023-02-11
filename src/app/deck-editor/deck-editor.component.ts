@@ -117,6 +117,7 @@ export class DeckEditorComponent implements OnInit {
         if(res){}
         this.cards = res;
         this.getCardNumbers(this.currentPage);
+        this.hideloader();
       }
 
 
@@ -138,6 +139,11 @@ export class DeckEditorComponent implements OnInit {
   }
 
   submitSearch(){
+    var div = document.getElementById('Loading')
+    if(div){
+      div.style.display = "block"
+      console.log(div)
+    }
     console.log(this.filters)
     this.cards = [] 
     this.attribute ='';
@@ -217,6 +223,7 @@ export class DeckEditorComponent implements OnInit {
         this.currentPage = 1
 
         this.getCardNumbers(this.currentPage);
+        this.hideloader();
       },
       err=>{console.log(err)}
     )
@@ -245,26 +252,42 @@ export class DeckEditorComponent implements OnInit {
     this.currentPage -=1;
     this.getCardNumbers(this.currentPage);
   }
+  hideloader() {
+    var div = document.getElementById('Loading')
+    if(div){
+      div.style.display = "none"
+      console.log(div)
+    }
 
-  goToLink(url: string){
+  } 
 
-    const new_url = this._router.serializeUrl(
-      this._router.createUrlTree(['/CustomCardWebsite/cards/']));
-
-    console.log(new_url)
- 
-    window.open(new_url +'/'+url, '_blank');
-
-
-    // const newurl = 'https://www.duelingbook.com/card?id='+url
-    // window.open(newurl, "_blank");
-}
 
 
 addTo(type:string){
   this.mainOrSide = type;
 }
 
+goToLink(url: string){
+
+  let new_url =''
+
+  if(this._router['location']._platformLocation.location.origin=='http://localhost:4200'){
+     new_url = this._router.serializeUrl(
+      this._router.createUrlTree(['/cards/']));
+  }
+  else{
+     new_url = this._router.serializeUrl(
+    this._router.createUrlTree(['/CustomCardWebsite/cards/']));
+  }
+  
+
+
+  window.open(new_url +'/'+url, '_blank');
+
+
+  // const newurl = 'https://www.duelingbook.com/card?id='+url
+  // window.open(newurl, "_blank");
+}
 mouseHovering(card:Card,e:MouseEvent) {
 
 console.log(e.clientX);

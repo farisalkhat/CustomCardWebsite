@@ -158,18 +158,34 @@ export class PackMakerComponent implements OnInit {
         if(res){}
         this.cards = res;
         this.getCardNumbers(this.currentPage);
+        this.hideloader();
       }
 
 
     )
   }
+  hideloader() {
+    var div = document.getElementById('Loading')
+    if(div){
+      div.style.display = "none"
+      console.log(div)
+    }
 
+  } 
   goToLink(url: string){
 
-    const new_url = this._router.serializeUrl(
-      this._router.createUrlTree(['/CustomCardWebsite/cards/']));
+    let new_url =''
 
-    console.log(new_url)
+    if(this._router['location']._platformLocation.location.origin=='http://localhost:4200'){
+       new_url = this._router.serializeUrl(
+        this._router.createUrlTree(['/cards/']));
+    }
+    else{
+       new_url = this._router.serializeUrl(
+      this._router.createUrlTree(['/CustomCardWebsite/cards/']));
+    }
+    
+
  
     window.open(new_url +'/'+url, '_blank');
 
@@ -374,6 +390,11 @@ export class PackMakerComponent implements OnInit {
       
     }
   submitSearch(){
+    var div = document.getElementById('Loading')
+    if(div){
+      div.style.display = "block"
+      console.log(div)
+    }
     console.log(this.filters)
     this.cards = [] 
     this.attribute ='';
@@ -463,6 +484,7 @@ export class PackMakerComponent implements OnInit {
         this.currentPage = 1
 
         this.getCardNumbers(this.currentPage);
+        this.hideloader();
       },
       err=>{console.log(err)}
     )
@@ -840,6 +862,11 @@ export class PackMakerComponent implements OnInit {
     this.rarity= rarity;
   }
   saveDraft(){
+    var div = document.getElementById('Loading')
+    if(div){
+      div.style.display = "block"
+      console.log(div)
+    }
     this.submitted=true;
     if(this.draftData.invalid){
       this.submitfail = true;

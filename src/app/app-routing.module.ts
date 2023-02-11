@@ -25,6 +25,8 @@ import { CollectionsComponent } from './collections/collections.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { CardDetailsComponent } from './card-details/card-details.component';
 import { PackDetailsComponent } from './packs/pack-details/pack-details.component';
+import { PlayerComponent } from './player/player.component';
+import { PlayerDetailsComponent } from './player/player-details/player-details.component';
 
 const routes: Routes = [
   {
@@ -80,7 +82,11 @@ component:ChecklistComponent},
 {path:'cards/:cardid',
 component:CardDetailsComponent},
 {path:'packs/:packid',
-component:PackDetailsComponent}
+component:PackDetailsComponent},
+{path:'players',
+component:PlayerComponent},
+{path:'players/:playerid',
+component:PlayerDetailsComponent}
 
 
 ];

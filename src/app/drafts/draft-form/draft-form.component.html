@@ -21,7 +21,7 @@
   
       <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}}  DEF/{{hoveredCard?.def}}</p>
       <p> {{hoveredCard?.effect}}</p>
-      <p>ID: {{hoveredCard?.id}}</p>
+      <p>ID: {{hoveredCard?.cardid}}</p>
   </b>
 
 </div>
@@ -42,7 +42,6 @@
 
 <div class="container-fluid">
     <div class="row">
-      <h1 class="text-center">Coming Soon</h1>
       <div class="container">
         
         
@@ -77,36 +76,38 @@
 
     </div>
     <div class="row">
-          <div class="col-md-6 colRand">
+          <div class="col-md-8 text-center colRand">
             <div>
 
               <span  *ngFor = "let card of randomCards">
 
-                  <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class=" btn btn-default btncard" (contextmenu)="rightAddDraftCard($event,card)" (click)="showDetails(card)" >
+                  <button (click)="goToLink(card.cardid)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class=" btn btn-default btncard" (contextmenu)="rightAddDraftCard($event,card)" >
     
                     <div class="card" [@cardFlip]="this.state">
                       <div class="face back">
                         <img src="assets/cardimages/Default.png" />
                       </div>
                         <div class="face front">
-                          <img src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                          <img src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.cardid}}.png'>
                       </div>
                         </div>
   
                   </button>
                   
               </span>
+
+              
           </div>
           </div>
           <div class="colDraft col">
             <h2>Current Cards ( {{cardsSelected}}/60)</h2> 
               <span *ngFor = "let card of currentDraft">
-                <button class=" btn btn-default btncard" (click)="showDetails2(card)" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'></button>
+                <button (click)="goToLink(card.cardid)" (mouseenter)="mouseHoverDrafted(card,$event)" (mouseleave)="mouseLeft()" class=" btn btn-default btncard" ><img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.cardid}}.png'></button>
                    
               </span>
           </div>
           
-          <div class="col colCardInfo cardeffect">
+          <!-- <div class="col colCardInfo cardeffect">
             <button type="button" *ngIf="draftCardSelected==true"class="btn btn-success addcard" (click)="addCard()">Add</button>
             <div *ngIf = "card!= undefined">
               <h3>{{card?.name}}   
@@ -115,8 +116,8 @@
 
               </h3>
 
-              <!-- <h4 *ngIf="monster=='False'"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
-              <h4 *ngIf="monster=='True'"> {{card?.cardtype}} </h4> -->
+              <h4 *ngIf="monster=='False'"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
+              <h4 *ngIf="monster=='True'"> {{card?.cardtype}} </h4>
 
                 <p>
               <b *ngIf="monster=='True'">
@@ -149,7 +150,7 @@
         
               
 
-          </div>
+          </div> -->
 
 
 

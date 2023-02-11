@@ -67,10 +67,18 @@ export class CollectionsComponent implements OnInit {
     }
     goToLink(url: number){
 
-      const new_url = this.router.serializeUrl(
-        this.router.createUrlTree(['/CustomCardWebsite/cards/']));
+      let new_url =''
   
-      console.log(new_url)
+      if(this.router['location']._platformLocation.location.origin=='http://localhost:4200'){
+         new_url = this.router.serializeUrl(
+          this.router.createUrlTree(['/cards/']));
+      }
+      else{
+         new_url = this.router.serializeUrl(
+        this.router.createUrlTree(['/CustomCardWebsite/cards/']));
+      }
+      
+  
    
       window.open(new_url +'/'+url, '_blank');
   
