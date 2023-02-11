@@ -262,11 +262,11 @@ export class CustomcardsService {
   }
 
   getPlayers(){
-    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/players`);
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/players`);
   }
 
   getBanlist(){
-    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/customcards/banlist`);
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/banlist`);
   }
 
   getDeckMasters(){
