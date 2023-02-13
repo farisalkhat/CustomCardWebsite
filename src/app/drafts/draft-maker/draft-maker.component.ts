@@ -291,23 +291,31 @@ export class DraftMakerComponent implements OnInit {
           this.id = res['id']
 
 
-          if(this.customcardsService.getEditDraft() && this.customcardsService.getEditDraftID()!=-1){
-            this.customcardsService.getDraftCardsbyID(this.customcardsService.getEditDraftID()).subscribe(
-              res => {
-                if(res){
-                  this.currentDraft=res;
-
-                  // for (let i = 0; i <= res.length-1; i++) {
-                  //   this.addCardfromDraft(res[i]);
-                  // }
-                  // console.log(this.currentDraft)
-
-                  this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDraftName());
+          if(this.customcardsService.getProcessingDraft()==false){
+            if(this.customcardsService.getEditDraft() && this.customcardsService.getEditDraftID()!=-1){
+              this.customcardsService.getDraftCardsbyID(this.customcardsService.getEditDraftID()).subscribe(
+                res => {
+                  if(res){
+                    this.currentDraft=res;
+  
+                    this.customcardsService.setProcessingDraft(true)
+  
+                    this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDraftName());
+                  }
+        
                 }
-      
-              }
-            )
+              )
+            }
           }
+          else{
+            this.customcardsService.setProcessingDraft(false);
+            this.customcardsService.editDraft(false);
+            this.customcardsService.setEditDraftID(-1);
+            this.customcardsService.setEditDraftName('')
+          }
+
+
+          
 
         },
         err => {console.log(err)
@@ -773,8 +781,10 @@ export class DraftMakerComponent implements OnInit {
         this.customcardsService.resubmitDraft(finaldata)
         .subscribe(
           res=>{
-            console.log("JOBS DONE");
-            console.log(res);
+            this.customcardsService.setProcessingDraft(false);
+            this.customcardsService.editDraft(false);
+            this.customcardsService.setEditDraftID(-1);
+            this.customcardsService.setEditDraftName('')
             this._router.navigate(['/drafts']);
           },
             

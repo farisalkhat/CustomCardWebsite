@@ -285,6 +285,8 @@ export class CustomcardsService {
   getEditDraftName(){
     return this.editDraftName;
   }
+
+
   draft:string = "default"
   customDraft:boolean = false;
 
@@ -299,6 +301,27 @@ export class CustomcardsService {
   editPacks:boolean=false;
   editPackID!:number;
   editPackName!:string;
+
+  processingDraftEdit = false;
+  processingPackEdit = false;
+
+
+  getProcessingPack(){
+    return this.processingPackEdit;
+  }
+  getProcessingDraft(){
+    return this.processingDraftEdit;
+  }
+  setProcessingDraft(process:boolean){
+    
+    this.processingDraftEdit=process;
+  }
+  setProcessingPack(process:boolean){
+    this.processingPackEdit=process;
+    
+  }
+
+
 
 
   packAmount = 6;

@@ -122,154 +122,168 @@ export class PackMakerComponent implements OnInit {
           this.id = res['id']
 
 
-          if(this.customcardsService.getEditPack() && this.customcardsService.getEditPackID()!=-1){
-            forkJoin(
-              this.customcardsService.getPackInfoByID(this.customcardsService.getEditPackID()),
-              this.customcardsService.getCustomCardsByPack(this.customcardsService.getEditPackID()),
-            ).subscribe(([packInfo,packCards])=>{
-              this.packInfo = packInfo;
-              this.cards = packCards;
-
-              
-              
-      
-              if(this.packInfo['packsize']=='small'){
-
-                this.maxCommon=15
-                this.maxRare=9
-                this.maxSuper=4
-                this.maxUltra=2
-                this.maxSecret=1
-
-                this.common=15
-                this.rare=9
-                this.super=4
-                this.ultra=2
-                this.secret=1
-
-      
-                let counter = 0;
-                for(counter; counter!=2;counter++){
-                  this.currentUltra.push(this.cards[counter])
-      
-                }
-      
-                for(counter; counter!=6;counter++){
-                  this.currentSuper.push(this.cards[counter])
-                }
-      
-                for(counter; counter!=7;counter++){
-                  this.currentSecret.push(this.cards[counter])
-                }
-      
-                for(counter; counter!=16;counter++){
-                  this.currentRare.push(this.cards[counter])
-                }
-      
-                for(counter; counter!=31;counter++){
-                  this.currentCommons.push(this.cards[counter])
-                }
-      
+          if(this.customcardsService.getProcessingPack()==false){
+            if(this.customcardsService.getEditPack() && this.customcardsService.getEditPackID()!=-1){
+              forkJoin(
+                this.customcardsService.getPackInfoByID(this.customcardsService.getEditPackID()),
+                this.customcardsService.getCustomCardsByPack(this.customcardsService.getEditPackID()),
+              ).subscribe(([packInfo,packCards])=>{
+                this.packInfo = packInfo;
+                this.cards = packCards;
+  
+                this.customcardsService.setProcessingPack(true);
+  
                 
-              
-              
-              }
-              if(this.packInfo['packsize']=='medium'){
-                this.maxCommon=48
-                this.maxRare=25
-                this.maxSuper=15
-                this.maxUltra=10
-                this.maxSecret=2
-
-                this.common=48
-                this.rare=25
-                this.super=15
-                this.ultra=10
-                this.secret=2
-
-                let counter = 0;
-                for(counter; counter!=10;counter++){
-                  this.currentUltra.push(this.cards[counter])
-                }
-      
-                for(counter; counter!=25;counter++){
-                  this.currentSuper.push(this.cards[counter])
-                }
-      
-                for(counter; counter!=27;counter++){
-                  this.currentSecret.push(this.cards[counter])
-                }
-      
-                for(counter; counter!=52;counter++){
-                  this.currentRare.push(this.cards[counter])
-                }
-      
-                for(counter; counter!=100;counter++){
-                  this.currentCommons.push(this.cards[counter])
-                }
-      
-      
-      
                 
-              }
-              if(this.packInfo['packsize']=='large'){
-                this.maxCommon=100
-                this.maxRare=60
-                this.maxSuper=20
-                this.maxUltra=14
-                this.maxSecret=6
-
-                this.common=100
-                this.rare=60
-                this.super=20
-                this.ultra=14
-                this.secret=6
-
-                let counter = 0;
-                for(counter; counter!=14;counter++){
-                  this.currentUltra.push(this.cards[counter])
+        
+                if(this.packInfo['packsize']=='small'){
+  
+                  this.maxCommon=15
+                  this.maxRare=9
+                  this.maxSuper=4
+                  this.maxUltra=2
+                  this.maxSecret=1
+  
+                  this.common=15
+                  this.rare=9
+                  this.super=4
+                  this.ultra=2
+                  this.secret=1
+  
+        
+                  let counter = 0;
+                  for(counter; counter!=2;counter++){
+                    this.currentUltra.push(this.cards[counter])
+        
+                  }
+        
+                  for(counter; counter!=6;counter++){
+                    this.currentSuper.push(this.cards[counter])
+                  }
+        
+                  for(counter; counter!=7;counter++){
+                    this.currentSecret.push(this.cards[counter])
+                  }
+        
+                  for(counter; counter!=16;counter++){
+                    this.currentRare.push(this.cards[counter])
+                  }
+        
+                  for(counter; counter!=31;counter++){
+                    this.currentCommons.push(this.cards[counter])
+                  }
+        
+                  
+                
+                
                 }
-      
-                for(counter; counter!=34;counter++){
-                  this.currentSuper.push(this.cards[counter])
+                if(this.packInfo['packsize']=='medium'){
+                  this.maxCommon=48
+                  this.maxRare=25
+                  this.maxSuper=15
+                  this.maxUltra=10
+                  this.maxSecret=2
+  
+                  this.common=48
+                  this.rare=25
+                  this.super=15
+                  this.ultra=10
+                  this.secret=2
+  
+                  let counter = 0;
+                  for(counter; counter!=10;counter++){
+                    this.currentUltra.push(this.cards[counter])
+                  }
+        
+                  for(counter; counter!=25;counter++){
+                    this.currentSuper.push(this.cards[counter])
+                  }
+        
+                  for(counter; counter!=27;counter++){
+                    this.currentSecret.push(this.cards[counter])
+                  }
+        
+                  for(counter; counter!=52;counter++){
+                    this.currentRare.push(this.cards[counter])
+                  }
+        
+                  for(counter; counter!=100;counter++){
+                    this.currentCommons.push(this.cards[counter])
+                  }
+        
+        
+        
+                  
                 }
-      
-                for(counter; counter!=40;counter++){
-                  this.currentSecret.push(this.cards[counter])
+                if(this.packInfo['packsize']=='large'){
+                  this.maxCommon=100
+                  this.maxRare=60
+                  this.maxSuper=20
+                  this.maxUltra=14
+                  this.maxSecret=6
+  
+                  this.common=100
+                  this.rare=60
+                  this.super=20
+                  this.ultra=14
+                  this.secret=6
+  
+                  let counter = 0;
+                  for(counter; counter!=14;counter++){
+                    this.currentUltra.push(this.cards[counter])
+                  }
+        
+                  for(counter; counter!=34;counter++){
+                    this.currentSuper.push(this.cards[counter])
+                  }
+        
+                  for(counter; counter!=40;counter++){
+                    this.currentSecret.push(this.cards[counter])
+                  }
+        
+                  for(counter; counter!=100;counter++){
+                    this.currentRare.push(this.cards[counter])
+                  }
+        
+                  for(counter; counter!=200;counter++){
+                    this.currentCommons.push(this.cards[counter])
+                  }
                 }
-      
-                for(counter; counter!=100;counter++){
-                  this.currentRare.push(this.cards[counter])
+        
+        
+        
+              })
+  
+  
+  
+  
+              this.customcardsService.getCustomCardsByPack(this.customcardsService.getEditPackID()).subscribe(
+                res => {
+                  if(res){
+                    this.currentDraft=res;
+  
+                    // for (let i = 0; i <= res.length-1; i++) {
+                    //   this.addCardfromDraft(res[i]);
+                    // }
+                    // console.log(this.currentDraft)
+  
+                    this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDraftName());
+                  }
+        
                 }
-      
-                for(counter; counter!=200;counter++){
-                  this.currentCommons.push(this.cards[counter])
-                }
-              }
-      
-      
-      
-            })
+              )
 
+              this.customcardsService.setProcessingPack(true)
+            }
 
-
-
-            this.customcardsService.getCustomCardsByPack(this.customcardsService.getEditPackID()).subscribe(
-              res => {
-                if(res){
-                  this.currentDraft=res;
-
-                  // for (let i = 0; i <= res.length-1; i++) {
-                  //   this.addCardfromDraft(res[i]);
-                  // }
-                  // console.log(this.currentDraft)
-
-                  this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDraftName());
-                }
-      
-              }
-            )
           }
+          else{
+            this.customcardsService.setProcessingPack(false);
+            this.customcardsService.editPack(false);
+            this.customcardsService.setEditPackID(-1);
+            this.customcardsService.setEditPackName('')
+          }
+
 
         },
         err => {console.log(err)
@@ -1069,6 +1083,10 @@ export class PackMakerComponent implements OnInit {
         .subscribe(
           res=>{
             console.log(res);
+            this.customcardsService.setProcessingPack(false);
+            this.customcardsService.editPack(false);
+            this.customcardsService.setEditPackID(-1);
+            this.customcardsService.setEditPackName('')
             this._router.navigate(['/packs']);
           },
             

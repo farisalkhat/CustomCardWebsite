@@ -18,7 +18,7 @@ export class PackEditorComponent implements OnInit {
   constructor(private _router: Router, private _authService: AuthService, private customcardsService:CustomcardsService) { }
 
   ngOnInit(): void {
-    this.customcardsService.editPack(false);
+    this.resetPack();
     if (this._authService.loggedIn()){
 
       this._authService.getUser().subscribe(
@@ -57,7 +57,12 @@ export class PackEditorComponent implements OnInit {
 
   }
 
-    
+  resetPack(){
+    this.customcardsService.editPack(false);
+    this.customcardsService.setEditPackID(-1);
+    this.customcardsService.setEditPackName('')
+  }  
+
   editPack(id:number,pack:string){
     this.customcardsService.editPack(true);
     this.customcardsService.setEditPackID(id);
