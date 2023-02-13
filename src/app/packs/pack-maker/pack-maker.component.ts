@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Card, CustomcardsService, Draft, Pack } from 'src/app/customcards.service';
+import { Card, CustomcardsService, Draft, Pack, Pack2, PackInfo } from 'src/app/customcards.service';
 
 
 @Component({
@@ -109,6 +110,8 @@ export class PackMakerComponent implements OnInit {
   leftPosition = 100
   rightPosition = 100
 
+  packInfo!: PackInfo;
+
   ngOnInit(): void {
     if (this._authService.loggedIn()){
 
@@ -119,8 +122,103 @@ export class PackMakerComponent implements OnInit {
           this.id = res['id']
 
 
-          if(this.customcardsService.getEditDraft() && this.customcardsService.getEditDraftID()!=-1){
-            this.customcardsService.getDraftCardsbyID(this.customcardsService.getEditDraftID()).subscribe(
+          if(this.customcardsService.getEditPack() && this.customcardsService.getEditPackID()!=-1){
+            forkJoin(
+              this.customcardsService.getPackInfoByID(this.customcardsService.getEditPackID()),
+              this.customcardsService.getCustomCardsByPack(this.customcardsService.getEditPackID()),
+            ).subscribe(([packInfo,packCards])=>{
+              this.packInfo = packInfo;
+              this.cards = packCards;
+
+              
+              
+      
+              if(this.packInfo['packsize']=='small'){
+      
+                let counter = 0;
+                for(counter; counter!=2;counter++){
+                  this.currentUltra.push(this.cards[counter])
+      
+                }
+      
+                for(counter; counter!=6;counter++){
+                  this.currentSuper.push(this.cards[counter])
+                }
+      
+                for(counter; counter!=7;counter++){
+                  this.currentSecret.push(this.cards[counter])
+                }
+      
+                for(counter; counter!=16;counter++){
+                  this.currentRare.push(this.cards[counter])
+                }
+      
+                for(counter; counter!=31;counter++){
+                  this.currentCommons.push(this.cards[counter])
+                }
+      
+                
+              
+              
+              }
+              if(this.packInfo['packsize']=='medium'){
+              
+                let counter = 0;
+                for(counter; counter!=10;counter++){
+                  this.currentUltra.push(this.cards[counter])
+                }
+      
+                for(counter; counter!=25;counter++){
+                  this.currentSuper.push(this.cards[counter])
+                }
+      
+                for(counter; counter!=27;counter++){
+                  this.currentSecret.push(this.cards[counter])
+                }
+      
+                for(counter; counter!=52;counter++){
+                  this.currentRare.push(this.cards[counter])
+                }
+      
+                for(counter; counter!=100;counter++){
+                  this.currentCommons.push(this.cards[counter])
+                }
+      
+      
+      
+                
+              }
+              if(this.packInfo['packsize']=='large'){
+                let counter = 0;
+                for(counter; counter!=14;counter++){
+                  this.currentUltra.push(this.cards[counter])
+                }
+      
+                for(counter; counter!=34;counter++){
+                  this.currentSuper.push(this.cards[counter])
+                }
+      
+                for(counter; counter!=40;counter++){
+                  this.currentSecret.push(this.cards[counter])
+                }
+      
+                for(counter; counter!=100;counter++){
+                  this.currentRare.push(this.cards[counter])
+                }
+      
+                for(counter; counter!=200;counter++){
+                  this.currentCommons.push(this.cards[counter])
+                }
+              }
+      
+      
+      
+            })
+
+
+
+
+            this.customcardsService.getCustomCardsByPack(this.customcardsService.getEditPackID()).subscribe(
               res => {
                 if(res){
                   this.currentDraft=res;
@@ -885,58 +983,118 @@ export class PackMakerComponent implements OnInit {
 
     else{ 
 
+      if(this.packInfo){
+        const finaldata = {} as Pack2;
+        finaldata['packID'] = this.packInfo['id']
+        finaldata['title'] = this.draftData.controls['draftTitle'].value;
+        finaldata['creator'] = this.username;
+        finaldata['creatorid'] = this.id;
+        finaldata['cost'] = this.draftData.controls['cost'].value;
+  
+        const commonIDs:string[] = []
+        const rareIDs:string[] = []
+        const superIDs:string[] = []
+        const ultraIDs:string[] = []
+        const secretIDs:string[] = []
+  
+  
+  
+        for (let i = 0; i <= this.currentCommons.length-1; i++) {
+          commonIDs.push(this.currentCommons[i].id);
+        }
+        for (let i = 0; i <= this.currentRare.length-1; i++) {
+          rareIDs.push(this.currentRare[i].id);
+        }
+        for (let i = 0; i <= this.currentSuper.length-1; i++) {
+          superIDs.push(this.currentSuper[i].id);
+        }
+        for (let i = 0; i <= this.currentUltra.length-1; i++) {
+          ultraIDs.push(this.currentUltra[i].id);
+        }
+        for (let i = 0; i <= this.currentSecret.length-1; i++) {
+          secretIDs.push(this.currentSecret[i].id);
+        }
+  
+        finaldata['commonIDs'] = commonIDs;
+        finaldata['rareIDs'] = rareIDs;
+        finaldata['superIDs'] = superIDs;
+        finaldata['ultraIDs'] = ultraIDs;
+        finaldata['secretIDs'] = secretIDs;
+        finaldata['packSize'] = this.packSize;
+        
+  
+  
+  
+  
+   
+  
+        this.customcardsService.resubmitPack(finaldata)
+        .subscribe(
+          res=>{
+            console.log(res);
+            this._router.navigate(['/packs']);
+          },
+            
+          err=>{console.log(err)}
+        )
+      }
+      else{
+        const finaldata = {} as Pack;
+        finaldata['title'] = this.draftData.controls['draftTitle'].value;
+        finaldata['creator'] = this.username;
+        finaldata['creatorid'] = this.id;
+        finaldata['cost'] = this.draftData.controls['cost'].value;
+  
+        const commonIDs:string[] = []
+        const rareIDs:string[] = []
+        const superIDs:string[] = []
+        const ultraIDs:string[] = []
+        const secretIDs:string[] = []
+  
+  
+  
+        for (let i = 0; i <= this.currentCommons.length-1; i++) {
+          commonIDs.push(this.currentCommons[i].id);
+        }
+        for (let i = 0; i <= this.currentRare.length-1; i++) {
+          rareIDs.push(this.currentRare[i].id);
+        }
+        for (let i = 0; i <= this.currentSuper.length-1; i++) {
+          superIDs.push(this.currentSuper[i].id);
+        }
+        for (let i = 0; i <= this.currentUltra.length-1; i++) {
+          ultraIDs.push(this.currentUltra[i].id);
+        }
+        for (let i = 0; i <= this.currentSecret.length-1; i++) {
+          secretIDs.push(this.currentSecret[i].id);
+        }
+  
+        finaldata['commonIDs'] = commonIDs;
+        finaldata['rareIDs'] = rareIDs;
+        finaldata['superIDs'] = superIDs;
+        finaldata['ultraIDs'] = ultraIDs;
+        finaldata['secretIDs'] = secretIDs;
+        finaldata['packSize'] = this.packSize;
+        
+  
+  
+  
+  
+   
+  
+        this.customcardsService.submitPack(finaldata)
+        .subscribe(
+          res=>{
+            console.log(res);
+            this._router.navigate(['/packs']);
+          },
+            
+          err=>{console.log(err)}
+        )
+      }
+
  
-      const finaldata = {} as Pack;
-      finaldata['title'] = this.draftData.controls['draftTitle'].value;
-      finaldata['creator'] = this.username;
-      finaldata['creatorid'] = this.id;
-      finaldata['cost'] = this.draftData.controls['cost'].value;
 
-      const commonIDs:string[] = []
-      const rareIDs:string[] = []
-      const superIDs:string[] = []
-      const ultraIDs:string[] = []
-      const secretIDs:string[] = []
-
-
-
-      for (let i = 0; i <= this.currentCommons.length-1; i++) {
-        commonIDs.push(this.currentCommons[i].id);
-      }
-      for (let i = 0; i <= this.currentRare.length-1; i++) {
-        rareIDs.push(this.currentRare[i].id);
-      }
-      for (let i = 0; i <= this.currentSuper.length-1; i++) {
-        superIDs.push(this.currentSuper[i].id);
-      }
-      for (let i = 0; i <= this.currentUltra.length-1; i++) {
-        ultraIDs.push(this.currentUltra[i].id);
-      }
-      for (let i = 0; i <= this.currentSecret.length-1; i++) {
-        secretIDs.push(this.currentSecret[i].id);
-      }
-
-      finaldata['commonIDs'] = commonIDs;
-      finaldata['rareIDs'] = rareIDs;
-      finaldata['superIDs'] = superIDs;
-      finaldata['ultraIDs'] = ultraIDs;
-      finaldata['secretIDs'] = secretIDs;
-      finaldata['packSize'] = this.packSize;
-      
-
-
-
- 
-
-      this.customcardsService.submitPack(finaldata)
-      .subscribe(
-        res=>{
-          console.log(res);
-          this._router.navigate(['/packs']);
-        },
-          
-        err=>{console.log(err)}
-      )
       this.submitfail = false;
       
 

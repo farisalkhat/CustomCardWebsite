@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-expand-lg navbar-dark ">
+<nav class="navbar navbar-default navbar-expand-md navbar-dark ">
     <a class="navbar-brand" href="#">
       <img class="wretched" src="https://i.imgur.com/VaqZnwF.png">
     </a>
@@ -11,13 +11,10 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/home" routerLinkActive = "active">Home</a>
         </li>
-  
         <li class="nav-item">
-          <a class="nav-link" routerLink="/binders"  >Binders</a>
+          <a class="nav-link" routerLink="/banlist" >Banlist</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/collections" >Collection</a>
-        </li>
+
         <li class="nav-item">
           <a class="nav-link" routerLink="/checklist" >Checklist</a>
         </li>
@@ -25,6 +22,19 @@
         
 
 
+        
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Drafts
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="nav-link" routerLink="/drafts" >Draft</a></li>
+            <li><a class="nav-link" routerLink="/draft-maker">Draft Creator </a></li>
+            <li><a class="nav-link" routerLink="/draftmode" >Draft Editor</a></li>
+            
+          </ul>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Packs
@@ -32,17 +42,7 @@
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
             <li><a class="nav-link" routerLink="/packs">Pack Opener</a></li>
             <li><a class="nav-link" routerLink="/pack-maker" >Pack Maker</a></li>
-          </ul>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Drafts
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="nav-link" routerLink="/draft-maker">Create a Draft </a></li>
-            <li><a class="nav-link" routerLink="/draftmode" >Edit a Draft</a></li>
-            <li><a class="nav-link" routerLink="/drafts" >Start a Draft</a></li>
+            <li><a class="nav-link" routerLink="/pack-editor" >Pack Editor</a></li>
           </ul>
         </li>
   
@@ -51,9 +51,16 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/deck-editor" >Deck Editor</a>
         </li>
+
+        
+
         <li class="nav-item">
-          <a class="nav-link" routerLink="/banlist" >Banlist</a>
+          <a class="nav-link" routerLink="/decklists" >Decklists</a>
         </li>
+<!--         
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/players" >Players</a>
+        </li> -->
         <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/players" >Players</a>
         </li> -->
@@ -69,14 +76,28 @@
 
 
 
+
       <ul   class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li *ngIf="username!=undefined" class="nav-item">
-          <a class="nav-link">{{_authService.currency}} Chegger's Dollars™</a>
+
+          <li *ngIf="username!=undefined" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{_authService.username}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li class="nav-link">{{_authService.currency}} Chegger's Dollars™</li>
+              <li><a class="nav-link" routerLink="/submit-match">Submit Match</a></li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/binders"  >Binders</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/collections" >Collection</a>
+              </li>
+            </ul>
           </li>
 
-        <li *ngIf="username!=undefined" class="nav-item">
-            <a class="nav-link" routerLink="/home" >{{_authService.username}}</a>
-          </li>
+
+
+
           <form class="form-inline my-2 my-lg-0">
             <button type="button" *ngIf="!_authService.loggedIn()" class="btn btn-success"  routerLink="/login" routerLinkActive = "active">Login</button>
           </form>

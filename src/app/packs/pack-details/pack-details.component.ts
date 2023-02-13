@@ -29,7 +29,61 @@ export class PackDetailsComponent implements OnInit {
       this.customcardsService.getCustomCardsByPack(this.packid).subscribe(
         (data:any)=>{
           this.packcards = data;
-          this.packcards.sort((a, b) => a.name.localeCompare(b.name))
+          this.packcards.sort((a, b) => 
+          
+          {
+            if(a.cardtype.includes('Monster')){
+                if(b.cardtype.includes('Spell') || b.cardtype.includes('Trap')){
+                    return -1
+                }
+                else{
+                    if(a.name > b.name){
+                        return 1
+                    }
+                    else{
+                        return -1
+                    }
+                    
+                }
+            }
+            if(a.cardtype.includes('Spell')){
+                if(b.cardtype.includes('Monster')){
+                    return 1
+                }
+                else if(b.cardtype.includes('Trap')){
+                    return -1
+                }
+                else{
+                    if(a.name > b.name){
+                        return 1
+                    }
+                    else{
+                        return -1
+                    }
+                }
+
+            }
+            if(a.cardtype.includes('Trap')){
+                if(b.cardtype.includes('Monster') || b.cardtype.includes('Spell')){
+                    return 1
+                }
+                else{
+                    if(a.name > b.name){
+                        return 1
+                    }
+                    else{
+                        return -1
+                    }
+                }
+            }
+            
+            return 1}
+          
+
+          
+          
+          
+          )
           
 
         

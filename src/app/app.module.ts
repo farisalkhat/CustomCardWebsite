@@ -32,6 +32,8 @@ import { PackDetailsComponent } from './packs/pack-details/pack-details.componen
 import { CardDetailsComponent } from './card-details/card-details.component';
 import { PlayerComponent } from './player/player.component';
 import { PlayerDetailsComponent } from './player/player-details/player-details.component';
+import { SubmitMatchComponent } from './submit-match/submit-match.component';
+import { PackEditorComponent } from './packs/pack-editor/pack-editor.component';
 
 
 
@@ -64,7 +66,9 @@ import { PlayerDetailsComponent } from './player/player-details/player-details.c
     PackDetailsComponent,
     CardDetailsComponent,
     PlayerComponent,
-    PlayerDetailsComponent
+    PlayerDetailsComponent,
+    SubmitMatchComponent,
+    PackEditorComponent
   ],
   imports: [
     HttpClientModule,

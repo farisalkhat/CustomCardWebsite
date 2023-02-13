@@ -1,0 +1,51 @@
+<div class="container">
+
+    <form [formGroup] = "matchData" (ngSubmit)="saveMatch()">
+
+        <div class="row">
+            <div class="col-auto">
+                <label for="Name">Dueled Against:</label>
+                <select class="form-control" id="duelist" formControlName="duelist" [ngClass]="{'is-invalid': submitted && f['duelist'].errors}" >
+                    <option  *ngFor="let player of players" value="{{player.id}}" >{{player.username}}</option>
+                  </select>
+                
+
+                <div *ngIf="submitted && f['duelist'].errors" class="invalid-feedback">
+                    <div *ngIf="f['duelist'].errors['required']">
+                      <p class="red">Umm Duelist required idiot.</p>
+                    </div>
+                </div>
+            
+            
+            </div>
+
+
+            <div class="col-auto">
+                <label for="Name">Result</label>
+                <select class="form-control" id="result" formControlName="result" [ngClass]="{'is-invalid': submitted && f['result'].errors}" >
+                    <option value="WON">WON</option>
+                    <option value ="LOSS">LOSS</option>
+                  </select>
+                <div *ngIf="submitted && f['result'].errors" class="invalid-feedback">
+                    <div *ngIf="f['result'].errors['result']">
+                      <p class="red">You need to input a value of at LEAST 100</p>
+                    </div>
+                </div>
+                
+            
+            
+            </div>
+            
+            
+        </div>
+ 
+        <div class="row"><div class="col-auto"><button class="btn button btn-success" (click)="saveMatch()">Submit</button></div></div>
+        
+ 
+
+
+    </form>
+
+
+</div>
+

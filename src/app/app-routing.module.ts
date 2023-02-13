@@ -27,6 +27,8 @@ import { CardDetailsComponent } from './card-details/card-details.component';
 import { PackDetailsComponent } from './packs/pack-details/pack-details.component';
 import { PlayerComponent } from './player/player.component';
 import { PlayerDetailsComponent } from './player/player-details/player-details.component';
+import { SubmitMatchComponent } from './submit-match/submit-match.component';
+import { PackEditorComponent } from './packs/pack-editor/pack-editor.component';
 
 const routes: Routes = [
   {
@@ -86,7 +88,11 @@ component:PackDetailsComponent},
 {path:'players',
 component:PlayerComponent},
 {path:'players/:playerid',
-component:PlayerDetailsComponent}
+component:PlayerDetailsComponent},
+{path:'submit-match',
+component:SubmitMatchComponent},
+{path:'pack-editor',
+component:PackEditorComponent}
 
 
 ];

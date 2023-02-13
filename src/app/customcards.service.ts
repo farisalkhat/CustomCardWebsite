@@ -101,6 +101,21 @@ export interface Pack {
   cost: number;
 }
 
+
+export interface Pack2 {
+  title: string;
+  creator:string;
+  creatorid:number;
+  commonIDs:string[];
+  rareIDs:string[];
+  superIDs:string[];
+  ultraIDs:string[];
+  secretIDs:string[];
+  packSize:string;
+  cost: number;
+  packID:number;
+}
+
 export interface PackInfo{
   id:number;
   title:string;
@@ -185,6 +200,11 @@ export interface PackSelectedData{
   amount:number;
 }
 
+export interface DuelData{
+  duelist1:number;
+  duelist2:number;
+  result:string;
+}
 
 
 @Injectable({
@@ -193,6 +213,7 @@ export interface PackSelectedData{
 
 
 export class CustomcardsService {
+
   setDraft(draftType: string,customDraft:boolean) {
     this.draft= draftType;
     this.customDraft = customDraft;
@@ -210,6 +231,44 @@ export class CustomcardsService {
   getEditDraft(){
     return this.editDrafts;
   }
+
+  setPack(draftType: string,customPack:boolean) {
+    this.pack= draftType;
+    this.customPack = customPack;
+  }
+  getPackType(){
+    return this.pack;
+  }
+  getCustomPackEnabled(){
+    return this.customPack;
+  }
+
+  editPack(edit:boolean){
+    this.editPacks=edit;
+  }
+  getEditPack(){
+    return this.editPacks;
+  }
+
+  setEditPackID(editPackID:number){
+    this.editPackID=editPackID;
+  }
+  getEditPackID(){
+    return this.editPackID;
+  }
+
+  setEditPackName(editPackName:string){
+    this.editPackName = editPackName;
+  }
+
+  getEditPackName(){
+    return this.editPackName;
+  }
+
+
+
+
+
 
   setEditDraftID(editDraftID:number){
     this.editDraftID=editDraftID;
@@ -231,6 +290,15 @@ export class CustomcardsService {
   editDrafts:boolean=false;
   editDraftID!:number;
   editDraftName!:string;
+
+
+  pack:string = "default"
+  customPack:boolean = false;
+
+  editPacks:boolean=false;
+  editPackID!:number;
+  editPackName!:string;
+
 
   packAmount = 6;
   packSize = 'medium'
@@ -297,11 +365,15 @@ export class CustomcardsService {
   }
 
   getPackInfoByID(id:number){
+    //Input: Pack ID, Output: Pack Info
     return this.http.get<PackInfo>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/packs/${id}`);
   }
 
   getDraftsbyOwner(id:number){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/drafts/${id}`);
+  }
+  getPacksbyOwner(id:number){
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/packs/owner/${id}`);
   }
 
   
@@ -342,7 +414,7 @@ export class CustomcardsService {
       this.packAmount=value;
     }
 
-  }
+  }  
   getCustomCardsByPack(id:number){
     return (this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/pack/${id}`));
   } 
@@ -378,6 +450,11 @@ export class CustomcardsService {
     return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitpack',pack)
   }
 
+  resubmitPack(pack:Pack){
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editpack',pack   
+    )
+  }
+
   
  
   
@@ -400,6 +477,9 @@ export class CustomcardsService {
     return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/addtocollection',addToBinder   
     )
   }
+  submitDuel(dueldata:DuelData){
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submit-duel',dueldata)
+  }
 
   getCardsByBinderID(id:number){
 
@@ -419,4 +499,5 @@ export class CustomcardsService {
   getCardDetails(id:number){
     return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/cards/details/${id}`);
   }
+  
 }
