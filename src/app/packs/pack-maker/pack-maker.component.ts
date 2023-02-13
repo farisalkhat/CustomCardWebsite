@@ -134,6 +134,19 @@ export class PackMakerComponent implements OnInit {
               
       
               if(this.packInfo['packsize']=='small'){
+
+                this.maxCommon=15
+                this.maxRare=9
+                this.maxSuper=4
+                this.maxUltra=2
+                this.maxSecret=1
+
+                this.common=15
+                this.rare=9
+                this.super=4
+                this.ultra=2
+                this.secret=1
+
       
                 let counter = 0;
                 for(counter; counter!=2;counter++){
@@ -162,7 +175,18 @@ export class PackMakerComponent implements OnInit {
               
               }
               if(this.packInfo['packsize']=='medium'){
-              
+                this.maxCommon=48
+                this.maxRare=25
+                this.maxSuper=15
+                this.maxUltra=10
+                this.maxSecret=2
+
+                this.common=48
+                this.rare=25
+                this.super=15
+                this.ultra=10
+                this.secret=2
+
                 let counter = 0;
                 for(counter; counter!=10;counter++){
                   this.currentUltra.push(this.cards[counter])
@@ -189,6 +213,18 @@ export class PackMakerComponent implements OnInit {
                 
               }
               if(this.packInfo['packsize']=='large'){
+                this.maxCommon=100
+                this.maxRare=60
+                this.maxSuper=20
+                this.maxUltra=14
+                this.maxSecret=6
+
+                this.common=100
+                this.rare=60
+                this.super=20
+                this.ultra=14
+                this.secret=6
+
                 let counter = 0;
                 for(counter; counter!=14;counter++){
                   this.currentUltra.push(this.cards[counter])
@@ -990,6 +1026,7 @@ export class PackMakerComponent implements OnInit {
         finaldata['creator'] = this.username;
         finaldata['creatorid'] = this.id;
         finaldata['cost'] = this.draftData.controls['cost'].value;
+        finaldata['packurl'] = this.packInfo['pack']
   
         const commonIDs:string[] = []
         const rareIDs:string[] = []

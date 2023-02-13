@@ -114,6 +114,7 @@ export interface Pack2 {
   packSize:string;
   cost: number;
   packID:number;
+  packurl:string;
 }
 
 export interface PackInfo{
