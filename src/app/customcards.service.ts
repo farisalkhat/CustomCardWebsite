@@ -205,6 +205,7 @@ export interface DuelData{
   duelist1:number;
   duelist2:number;
   result:string;
+  replay:string;
 }
 
 
@@ -306,6 +307,16 @@ export class CustomcardsService {
   processingPackEdit = false;
 
 
+  sealedDraftMode = false;
+
+  getSealedDraftMode(){
+    return this.sealedDraftMode;
+  }
+  setSealedDraftMode(mode:boolean){
+    this.sealedDraftMode = mode;
+  }
+
+
   getProcessingPack(){
     return this.processingPackEdit;
   }
@@ -357,6 +368,9 @@ export class CustomcardsService {
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/players`);
   }
 
+  getMatches(){
+    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/matches`);
+  }
   getBanlist(){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/banlist`);
   }
@@ -502,7 +516,7 @@ export class CustomcardsService {
     )
   }
   submitDuel(dueldata:DuelData){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submit-duel',dueldata)
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submit-duel',dueldata)
   }
 
   getCardsByBinderID(id:number){

@@ -1,0 +1,9 @@
+a:hover{
+    cursor: pointer;
+}
+a{
+    color:white !important;
+    text-decoration: none !important;
+}a:hover{
+    color:green !important;
+}

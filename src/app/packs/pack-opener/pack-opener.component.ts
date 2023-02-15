@@ -67,6 +67,8 @@ export class PackOpenerComponent implements OnInit {
   submitfail:boolean = false;
   binderID!:number;
 
+  sealedmode:boolean = false;
+
   @Input() packQueue!:PackSelectedData[];
 
   currentPack!:PackSelectedData;
@@ -231,7 +233,7 @@ export class PackOpenerComponent implements OnInit {
 
 
 
-  mouseHovering(card:Card,e:MouseEvent) {
+mouseHovering(card:Card,e:MouseEvent) {
 
     console.log(e.clientX);
     console.log(e.clientY);
@@ -439,11 +441,16 @@ export class PackOpenerComponent implements OnInit {
           this.username = res['username']
           this.id = res['id']
   
-          this.customcardsService.getBindersByOwner(this.id).subscribe(res=>{this.binders=res})
+          this.sealedmode= this.customcardsService.getSealedDraftMode()
+          if(this.sealedmode==false){
+            this.customcardsService.getBindersByOwner(this.id).subscribe(res=>{this.binders=res})
+          }
+          
         })
     }
 
     else{
+
       
     }
 
@@ -569,6 +576,29 @@ export class PackOpenerComponent implements OnInit {
 
     
   }
+
+
+
+  revealDraftCards(){
+    this.rotate();
+    this.revealed=true;
+    for(const card of this.randomCards){
+      this.currentOpened.push(card)
+      this.openedPack.push(card)
+    }
+
+    
+    
+    this.currentOpened.sort((a, b) => a.name.localeCompare(b.name))
+    this.currentOpened.sort((a, b) => a.creator.localeCompare(b.creator))
+
+    if(this.packQueue.length==0 && this.packsOpened==this.packAmount){
+      this.finishedPacks=true;
+      return
+    }
+  }
+
+
 
   showDetails(card:PackCard){
     if(this.state=="default"){

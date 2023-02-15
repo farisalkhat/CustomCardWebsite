@@ -1,5 +1,5 @@
 .navbar-default {
-    background-color:#1f1a1f;
+    background-color:#212529;
     background-image: none;
     background-repeat: no-repeat;
    }
@@ -121,4 +121,14 @@ h1{
     width:100px;
     height:40px;
     margin-left:5px;
+}
+a{
+    
+    text-decoration: none !important;
+}
+a:hover{
+    color:green !important;
+}
+.table-dark{
+    background-color: blue !important;
 }

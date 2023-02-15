@@ -40,9 +40,10 @@
             Packs
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="nav-link" routerLink="/packs">Pack Opener</a></li>
+            <li><a class="nav-link" (click)="goToPackOpener()" routerLink="/packs">Pack Opener</a></li>
             <li><a class="nav-link" routerLink="/pack-maker" >Pack Maker</a></li>
             <li><a class="nav-link" routerLink="/pack-editor" >Pack Editor</a></li>
+            <li><a class="nav-link" (click)="goToSealedDraft()" routerLink="/packs">Sealed Draft</a></li>
           </ul>
         </li>
   
@@ -56,6 +57,9 @@
 
         <li class="nav-item">
           <a class="nav-link" routerLink="/decklists" >Decklists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/matches" >Matches</a>
         </li>
 <!--         
         <li class="nav-item">

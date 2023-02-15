@@ -1,0 +1,23 @@
+<div class="container">
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+              <th scope="col">Duelists</th>
+              <th scope="col">Result</th>
+              <th scope="col">Replay</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let match of matches">
+              <td><a routerLink="/players/{{match.duelist1}}">{{match.d1Name}}</a> vs <a routerLink="/players/{{match.duelist2}}">{{match.d2Name}}</a></td>
+              <td *ngIf="match.result=='WON'"><a routerLink="/players/{{match.duelist1}}">{{match.d1Name}}</a> WINS!</td>
+              <td *ngIf="match.result=='LOSS'"><a routerLink="/players/{{match.duelist2}}">{{match.d2Name}}</a> WINS!</td>
+
+              <td *ngIf="match.optional_link==null">N/A</td>
+              <td *ngIf="match.optional_link!=null"><a (click)="goToLink(match.optional_link)">LINK</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+</div>

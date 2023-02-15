@@ -29,6 +29,7 @@ import { PlayerComponent } from './player/player.component';
 import { PlayerDetailsComponent } from './player/player-details/player-details.component';
 import { SubmitMatchComponent } from './submit-match/submit-match.component';
 import { PackEditorComponent } from './packs/pack-editor/pack-editor.component';
+import { MatchesComponent } from './matches/matches.component';
 
 const routes: Routes = [
   {
@@ -92,7 +93,9 @@ component:PlayerDetailsComponent},
 {path:'submit-match',
 component:SubmitMatchComponent},
 {path:'pack-editor',
-component:PackEditorComponent}
+component:PackEditorComponent},
+{path:'matches',
+component:MatchesComponent}
 
 
 ];

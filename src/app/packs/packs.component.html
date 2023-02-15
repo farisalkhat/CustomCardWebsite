@@ -40,7 +40,25 @@
             <!-- *ngIf="pack?.pack!='placeholder'"  (click)="SetPackNo(placeId,pack.packid)" routerLink="/pack-opener/{{pack?.packid}}"--> 
             <!-- <button class="btn btn-success"  *ngIf="pack?.pack=='placeholder'"(click)="SetPackNo(placeId,pack.packid)"  routerLink="/pack-opener/{{pack?.packid}}" routerLinkActive = "active">{{pack.title}}</button>
              -->
-             <p>Cost: {{pack.cost}}<select class="form-control form-control-lg"  id="attribute" [ngModel]="chosenPack" (ngModelChange)="queuePack(pack,$event)">
+             <p *ngIf="sealedmode==false">Cost: {{pack.cost}}<select class="form-control form-control-lg"  id="attribute" [ngModel]="chosenPack" (ngModelChange)="queuePack(pack,$event)">
+                <option value =0>0</option>
+                <option value =1>1</option>
+                <option value =2>2</option>
+                <option value =3>3</option>
+                <option value =4>4</option>
+                <option value =5>5</option>
+                <option value =6>6</option>
+                <option value =7>7</option>
+                <option value =8>8</option>
+                <option value =9>9</option>
+                <option value =10>10</option>
+                <option value =12>12</option>
+                <option value =15>15</option>
+                <option value =24>24</option>
+                <option value =30>30</option>
+            </select></p>
+
+            <p *ngIf="sealedmode==true"><select class="form-control form-control-lg"  id="attribute" [ngModel]="chosenPack" (ngModelChange)="queuePack(pack,$event)">
                 <option value =0>0</option>
                 <option value =1>1</option>
                 <option value =2>2</option>
@@ -64,7 +82,7 @@
 
 
 
-    <div class="packtracker position-fixed bottom-0 end-0 ">
+    <div *ngIf="sealedmode==false" class="packtracker position-fixed bottom-0 end-0 ">
         <p>Packs Selected</p>
         <div *ngFor="let pack of packTrackerArray"> 
 
@@ -75,6 +93,19 @@
 
         <p class="tinytext position-fixed bottom-1">Total Cost: {{totalCost}}</p>
         <button (click)="openPack()" [disabled]="packLength==0 || totalCost>currency"class="btn position-fixed bottom-0">Open Packs</button>
+    </div>
+
+    <div *ngIf="sealedmode==true" class="packtracker position-fixed bottom-0 end-0 ">
+        <p>Packs Selected</p>
+        <div *ngFor="let pack of packTrackerArray"> 
+
+            <p *ngIf="pack!=undefined" class="tinytext">{{pack.title}} x{{pack.amount}}</p>
+
+        </div>
+        
+
+        
+        <button (click)="openPack()" [disabled]="packLength==0" class="btn position-fixed bottom-0">Open Packs</button>
     </div>
 </div>
 

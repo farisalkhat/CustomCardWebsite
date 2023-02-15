@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { CustomcardsService } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,7 +10,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(public _authService:AuthService) { }
+  constructor(public _router:Router, public _authService:AuthService, public customcardsService:CustomcardsService) { }
 
   username:string | undefined;
   id:number | undefined
@@ -38,6 +40,16 @@ export class NavigationComponent implements OnInit {
 
   }
 
+
+  goToSealedDraft(){
+    this.customcardsService.setSealedDraftMode(true)
+    this._router.navigate(['/packs'])
+  }
+
+  goToPackOpener(){
+    this.customcardsService.setSealedDraftMode(false)
+    this._router.navigate(['/packs'])
+  }
 
 
 }

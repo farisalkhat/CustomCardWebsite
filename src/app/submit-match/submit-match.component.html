@@ -25,6 +25,7 @@
                 <select class="form-control" id="result" formControlName="result" [ngClass]="{'is-invalid': submitted && f['result'].errors}" >
                     <option value="WON">WON</option>
                     <option value ="LOSS">LOSS</option>
+                    <option value ="DRAW">DRAW</option>
                   </select>
                 <div *ngIf="submitted && f['result'].errors" class="invalid-feedback">
                     <div *ngIf="f['result'].errors['result']">
@@ -34,6 +35,25 @@
                 
             
             
+            </div>
+
+
+            <div class="col-auto">
+                <label for="Name">Optional Replay</label>
+                <input id ="replay" formControlName ="replay" [ngClass]="{'is-invalid': submitted && f['replay'].errors}" class="form-control" type="text">
+                
+
+                <div *ngIf="submitted && f['replay'].errors" class="invalid-feedback">
+                    <div *ngIf="f['replay'].errors['replay']">
+                      <p class="red">Umm Draft Title required idiot.</p>
+                    </div>
+                </div>
+            
+             
+
+              
+          
+          
             </div>
             
             

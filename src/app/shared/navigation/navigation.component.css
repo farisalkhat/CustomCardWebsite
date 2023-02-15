@@ -6,8 +6,15 @@ button{
 nav{
     font-family: 'Oswald', sans-serif;
     font-size: x-large;
+    
 }
 button{
     font-size:1.5rem;
 
+}
+
+a{
+    color:white !important;
+}a:hover{
+    color:green !important;
 }

@@ -64,6 +64,12 @@ export class SubmitMatchComponent implements OnInit {
               if(res){}
                 this.players = res;
                 this.players.sort((a, b) => a.username.localeCompare(b.username))
+
+                const index = this.players.findIndex(obj => obj.id === this.id)
+                if (index > -1) {
+                  this.players.splice(index, 1);
+                }
+
                 console.log(this.players)
                 this.hideloader();
             }
@@ -107,6 +113,7 @@ export class SubmitMatchComponent implements OnInit {
       duel['duelist1'] = this.id
       duel['duelist2'] = this.matchData.controls['duelist'].value;
       duel['result'] = this.matchData.controls['result'].value;
+      duel['replay'] = this.matchData.controls['replay'].value;
 
 
             this.customcardsService.submitDuel(duel)

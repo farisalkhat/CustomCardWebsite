@@ -30,6 +30,8 @@ packLength:number = 0;
   packTrackerArray:PackSelectedData[]=[];
   totalCost:number = 0;
 
+  sealedmode:boolean=false
+
   queuePack(pack:PackButton,value:number){
     
 
@@ -67,7 +69,7 @@ packLength:number = 0;
 
   }
   ngOnInit(): void {
-
+    this.sealedmode = this.customcardsService.getSealedDraftMode()
     this._authService.getUser().subscribe(
       res =>{
         console.log(res['username'])
@@ -94,6 +96,8 @@ packLength:number = 0;
 
 
     )
+
+    
 
     
   }

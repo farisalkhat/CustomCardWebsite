@@ -85,13 +85,14 @@
     
     </div>
 <div class="container">
-  <button class="btn btn-success" [disabled]="finishedPacks==true || revealed==true" (click)="revealCards()">Open Pack {{packsOpened}}/{{packAmount}}</button>
+      <button *ngIf="sealedmode==false"class="btn btn-success" [disabled]="finishedPacks==true || revealed==true" (click)="revealCards()">Open Pack {{packsOpened}}/{{packAmount}}</button>
+      <button *ngIf="sealedmode==true" class="btn btn-success" [disabled]="finishedPacks==true || revealed==true" (click)="revealDraftCards()">Open Pack {{packsOpened}}/{{packAmount}}</button>
       <button class="btn btn-success" [disabled]="finishedPacks==true || revealed==false" (click)="openNextPack()">Open Next Pack</button>
 
-      <select  [(ngModel)] = "binderID" *ngIf="binders.length>0"  aria-label="Default select example">
+      <select   [(ngModel)] = "binderID" *ngIf="binders.length>0 && sealedmode==false"  aria-label="Default select example">
         <option  *ngFor = "let binder of binders" value="{{binder.id}}">{{binder.title}}</option>
       </select>
-      <button class="btn btn-success" *ngIf="binders.length>0" (click)= "addToBinder()"[disabled]="finishedPacks==false ||revealed==false" >Save to binder</button>
+      <button  class="btn btn-success" *ngIf="binders.length>0 && sealedmode==false" (click)= "addToBinder()"[disabled]="finishedPacks==false ||revealed==false" >Save to binder</button>
 </div>
 
     <div class="container">
@@ -99,7 +100,7 @@
         
       
 
-      <form [formGroup] = "binderData" (ngSubmit)="submitBinder()">
+      <form *ngIf="sealedmode==false" [formGroup] = "binderData" (ngSubmit)="submitBinder()">
 
 
 
