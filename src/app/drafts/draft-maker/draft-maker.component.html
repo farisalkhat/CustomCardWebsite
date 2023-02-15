@@ -353,7 +353,7 @@
 
 
     <div class="row">
-        <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-success addcard" (click)="saveDraft()">Save Draft</button>
+        <button type="button" [disabled] = "done==true" *ngIf="currentDraft!=[]"class="btn btn-success addcard" (click)="saveDraft()">Save Draft</button>
         <div *ngIf="submitfail && submitted" class="submit-text-fail" >
             Submission failed! Fix errors above. 
           </div>

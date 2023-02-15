@@ -37,6 +37,24 @@
             
             </div>
 
+            <div class="col-auto">
+              <label for="Name">Game Mode</label>
+              <select class="form-control" id="gamemode" formControlName="gamemode" [ngClass]="{'is-invalid': submitted && f['gamemode'].errors}" >
+                  <option value="Standard">Standard</option>
+                  <option value ="Sealed Draft">Sealed Draft</option>
+                  <option value ="Deck Master">Deck Master</option>
+                  <option value ="Cube">Cube</option>
+                </select>
+              <div *ngIf="submitted && f['gamemode'].errors" class="invalid-feedback">
+                  <div *ngIf="f['gamemode'].errors['gamemode']">
+                    <p class="red">Please input a game mode.</p>
+                  </div>
+              </div>
+              
+          
+          
+          </div>
+
 
             <div class="col-auto">
                 <label for="Name">Optional Replay</label>
@@ -59,7 +77,7 @@
             
         </div>
  
-        <div class="row"><div class="col-auto"><button class="btn button btn-success" (click)="saveMatch()">Submit</button></div></div>
+        <div class="row"><div class="col-auto"><button [disabled] = "done==true" class="btn button btn-success" (click)="saveMatch()">Submit</button></div></div>
         
  
 

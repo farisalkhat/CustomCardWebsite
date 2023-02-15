@@ -92,7 +92,7 @@
         
 
         <p class="tinytext position-fixed bottom-1">Total Cost: {{totalCost}}</p>
-        <button (click)="openPack()" [disabled]="packLength==0 || totalCost>currency"class="btn position-fixed bottom-0">Open Packs</button>
+        <button (click)="openPack()" [disabled]="packLength==0 || totalCost>currency || totalCost==0"class="btn position-fixed bottom-0">Open Packs</button>
     </div>
 
     <div *ngIf="sealedmode==true" class="packtracker position-fixed bottom-0 end-0 ">

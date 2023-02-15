@@ -112,6 +112,7 @@ export class PackMakerComponent implements OnInit {
 
   packInfo!: PackInfo;
 
+  done:boolean = false;
   ngOnInit(): void {
     if (this._authService.loggedIn()){
 
@@ -1032,7 +1033,7 @@ export class PackMakerComponent implements OnInit {
     }
 
     else{ 
-
+      this.done=true;
       if(this.packInfo){
         const finaldata = {} as Pack2;
         finaldata['packID'] = this.packInfo['id']

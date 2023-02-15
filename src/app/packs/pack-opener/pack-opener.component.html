@@ -181,7 +181,7 @@
     <div class="col-lg-12">
       <h2>Current Cards</h2>
       <span *ngFor = "let card of currentOpened">
-          <img class ="smallcard" href='' routerLink="/cards/{{card.id}}" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+          <img class ="smallcard" href='' (click)="goToLink(card.id)" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
       </span>
     </div>
 

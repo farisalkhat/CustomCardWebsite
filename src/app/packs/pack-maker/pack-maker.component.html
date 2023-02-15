@@ -41,7 +41,7 @@
 
         </h4>
     </div>
-    <form [formGroup] = "draftData" (ngSubmit)="saveDraft()">
+    <form [formGroup] = "draftData"  (ngSubmit)="saveDraft()">
 
         <div class="row">
             <div class="col-auto">
@@ -442,7 +442,7 @@
 
 
     <div class="row">
-        <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-success addcard" (click)="saveDraft()">Save Pack</button>
+        <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-success addcard" [disabled] = "done==true" (click)="saveDraft()">Save Pack</button>
         <div *ngIf="submitfail && submitted" class="submit-text-fail" >
             Submission failed! Fix the following errors:
             <ul >

@@ -25,6 +25,12 @@ export class SubmitMatchComponent implements OnInit {
 
     ]),
     replay: new FormControl(' ',[]),
+    gamemode: new FormControl(' ',[
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(100)
+
+    ]),
     decklist: new FormControl(' ',[]),
 
     
@@ -33,7 +39,7 @@ export class SubmitMatchComponent implements OnInit {
   submitVerified = false;
   submitted = false;
   submitfail: boolean = false;
-
+  done: boolean = false;
 
   players:any[] = []
   get f(){return this.matchData.controls;}
@@ -107,6 +113,7 @@ export class SubmitMatchComponent implements OnInit {
     
 
     else{ 
+      this.done= true;
 
  
       const duel = {} as DuelData
@@ -114,6 +121,7 @@ export class SubmitMatchComponent implements OnInit {
       duel['duelist2'] = this.matchData.controls['duelist'].value;
       duel['result'] = this.matchData.controls['result'].value;
       duel['replay'] = this.matchData.controls['replay'].value;
+      duel['gamemode'] = this.matchData.controls['gamemode'].value;
 
 
             this.customcardsService.submitDuel(duel)

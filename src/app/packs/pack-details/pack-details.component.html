@@ -55,7 +55,7 @@
     </span>
     <h2>Ultra Rares</h2>
     <span *ngFor = "let card of packcards">
-        <button  routerLink="/cards/{{card.id}}" *ngIf="card.rarity=='ultra'"(click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
+        <button   *ngIf="card.rarity=='ultra'"(click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
 
 
 
@@ -78,7 +78,7 @@
 
     <h2>Super Rares</h2>
     <span *ngFor = "let card of packcards">
-        <button  routerLink="/cards/{{card.id}}" *ngIf="card.rarity=='super'"(click)="goToLink(card.id)"(mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
+        <button   *ngIf="card.rarity=='super'"(click)="goToLink(card.id)"(mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
 
 
 
@@ -101,7 +101,7 @@
 
     <h2>Rares</h2>
     <span *ngFor = "let card of packcards">   
-        <button  routerLink="/cards/{{card.id}}" *ngIf="card.rarity=='rare'"(click)="goToLink(card.id)"(mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
+        <button   *ngIf="card.rarity=='rare'"(click)="goToLink(card.id)"(mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
 
 
 
@@ -124,7 +124,7 @@
     <h2>Commons</h2>
     <span *ngFor = "let card of packcards">
 
-        <button  *ngIf="card.rarity=='common'" routerLink="/cards/{{card.id}}" (click)="goToLink(card.id)"(mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
+        <button  *ngIf="card.rarity=='common'"  (click)="goToLink(card.id)"(mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
 
             <div  class="relative">
                 <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>

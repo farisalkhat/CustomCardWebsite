@@ -33,6 +33,7 @@ export class DraftMakerComponent implements OnInit {
   rightPosition = 100
 
 
+  done:boolean = false;
 
   draftCard!:Card | undefined;
 
@@ -748,6 +749,8 @@ export class DraftMakerComponent implements OnInit {
       return;
     }
     else{
+
+      this.done = true
 
 
       const finaldata = {} as Draft;
