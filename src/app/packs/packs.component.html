@@ -58,7 +58,7 @@
                 <option value =30>30</option>
             </select></p>
 
-            <p *ngIf="sealedmode==true"><select class="form-control form-control-lg"  id="attribute" [ngModel]="chosenPack" (ngModelChange)="queuePack(pack,$event)">
+            <p *ngIf="sealedmode==true">Amount:<select class="form-control form-control-lg"  id="attribute" [ngModel]="chosenPack" (ngModelChange)="queuePack(pack,$event)">
                 <option value =0>0</option>
                 <option value =1>1</option>
                 <option value =2>2</option>

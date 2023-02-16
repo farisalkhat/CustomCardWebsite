@@ -30,6 +30,7 @@ import { PlayerDetailsComponent } from './player/player-details/player-details.c
 import { SubmitMatchComponent } from './submit-match/submit-match.component';
 import { PackEditorComponent } from './packs/pack-editor/pack-editor.component';
 import { MatchesComponent } from './matches/matches.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {
@@ -95,7 +96,9 @@ component:SubmitMatchComponent},
 {path:'pack-editor',
 component:PackEditorComponent},
 {path:'matches',
-component:MatchesComponent}
+component:MatchesComponent},
+{path:'settings',
+component:SettingsComponent}
 
 
 ];

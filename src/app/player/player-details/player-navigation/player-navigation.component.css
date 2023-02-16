@@ -6,6 +6,7 @@ button{
 nav{
     font-family: 'Oswald', sans-serif;
     font-size: x-large;
+    margin-top:10px;
     
 }
 button{
@@ -19,7 +20,9 @@ a{
     color:green !important;
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0; /* remove the gap so it doesn't close */
+li{
+    margin: 0 5px;
+}
+a:hover{
+    cursor: pointer;
 }

@@ -1,0 +1,91 @@
+
+.spacing{
+    height:75px;
+}
+.container{
+    width:75%;
+}
+
+.favoritecard{
+    width:100px;
+    margin:0 5px;
+}
+
+.avatar{
+    width:100px;
+    height:100px;
+}
+
+.user{
+    font-size: x-large;
+
+}
+
+a:hover{
+    cursor: pointer;
+}
+a{
+    color:white !important;
+    text-decoration: none !important;
+}a:hover{
+    color:green !important;
+}
+
+
+.center-cropped {
+    width:100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size:140px;
+    background-position:center center;
+    overflow: hidden;
+  }
+
+  
+  /* Set the image to fill its parent and make transparent */
+  .center-cropped img {
+   
+    width:100%;
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    /* IE 5-7 */
+    filter: alpha(opacity=0);
+    /* modern browsers */
+    opacity: 0;
+
+    
+  }
+
+  .crop {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    
+}
+
+.crop img {
+    width:133%;
+    margin: -72px 500px 0px -33px;
+}
+
+/* .crop {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    margin-left:15px;
+    
+}
+
+.crop img {
+    width:175%;
+    margin: -35px 0px 0px -30px; 
+} */
+
+.pushdown{
+    position : absolute;
+    bottom   : 0;
+}
+
+h3{
+    padding-top:5px;
+}

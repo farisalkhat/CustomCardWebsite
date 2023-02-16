@@ -3,7 +3,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
 
 
+export interface UserDetails extends Document{
+  cards:Card[];
+  collection:any[];
+  decklists:importDecklist[];
+  details:any;
+  drafts:any[];
+  matches:any[];
+  packs:any[];
 
+}
 
 
 
@@ -207,6 +216,7 @@ export interface DuelData{
   result:string;
   replay:string;
   gamemode:string;
+  date:string;
 }
 
 
@@ -537,6 +547,14 @@ export class CustomcardsService {
 
   getCardDetails(id:number){
     return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/cards/details/${id}`);
+  }
+
+  getUserPageDetails(id:number){
+    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/users/${id}`);
+  }
+
+  editProfileImages(images:any){
+    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editprofile/images`,images);
   }
   
 }

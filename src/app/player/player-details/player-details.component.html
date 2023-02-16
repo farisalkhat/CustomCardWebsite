@@ -1,1 +1,84 @@
-<p>player-details works!</p>
+
+<div class="spacing">
+</div>
+
+
+<div class="container">
+<div class="row">
+    <div class="col-auto">
+        <div class="crop">
+            <img src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.profile_image}}.png" />
+        </div>
+    </div>
+    <div class="mt-auto col-auto">
+        <h1 >{{userDetails?.details?.username}}</h1>
+    </div>
+    <div class="mt-auto col flex-row-reverse d-flex">
+        <button routerLink ="/settings" *ngIf="loggedInID==userID" class="button btn btn-success">Edit Profile</button>
+    </div>
+
+    
+    
+    
+
+</div>
+    <app-player-navigation></app-player-navigation>
+
+
+<div class="row">
+    <div class="col-sm-1">
+            <h3>About</h3>
+        
+        
+    </div>
+    <div class="col">
+        <div class="container">
+            <h1>
+                Favorite Cards
+            </h1>
+
+            <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card1}}.png" />
+            <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card2}}.png" />
+            <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card3}}.png" />
+            <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card4}}.png" />
+            <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card5}}.png" />
+
+            <h1>Recent Matches</h1>
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                      <th scope="col">Date</th>
+                      <th scope="col">Game Mode</th>
+                      <th scope="col">Duelists</th>
+                      <th scope="col">Result</th>
+                      <th scope="col">Replay</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let match of userDetails?.matches">
+                      <td>{{match.date}}</td>
+                      <td>{{match.gamemode}}</td>
+                      <td><a routerLink="/players/{{match.duelist1}}">{{match.d1Name}}</a> vs <a routerLink="/players/{{match.duelist2}}">{{match.d2Name}}</a></td>
+                      <td *ngIf="match.result=='WON'"><a routerLink="/players/{{match.duelist1}}">{{match.d1Name}}</a> WINS!</td>
+                      <td *ngIf="match.result=='LOSS'"><a routerLink="/players/{{match.duelist2}}">{{match.d2Name}}</a> WINS!</td>
+                      <td *ngIf="match.result=='DRAW'">DRAW!</td>
+                      <td *ngIf="match.optional_link==null">N/A</td>
+                      <td *ngIf="match.optional_link!=null"><a (click)="goToLink(match.optional_link)">LINK</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+            <h1>
+                Pack Checklist
+            </h1>
+        
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+</div>
+

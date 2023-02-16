@@ -2,6 +2,7 @@
     <table class="table table-dark table-striped">
         <thead>
             <tr>
+              <th scope="col">Date</th>
               <th scope="col">Game Mode</th>
               <th scope="col">Duelists</th>
               <th scope="col">Result</th>
@@ -10,11 +11,12 @@
           </thead>
           <tbody>
             <tr *ngFor="let match of matches">
+              <td>{{match.date}}</td>
               <td>{{match.gamemode}}</td>
               <td><a routerLink="/players/{{match.duelist1}}">{{match.d1Name}}</a> vs <a routerLink="/players/{{match.duelist2}}">{{match.d2Name}}</a></td>
               <td *ngIf="match.result=='WON'"><a routerLink="/players/{{match.duelist1}}">{{match.d1Name}}</a> WINS!</td>
               <td *ngIf="match.result=='LOSS'"><a routerLink="/players/{{match.duelist2}}">{{match.d2Name}}</a> WINS!</td>
-
+              <td *ngIf="match.result=='DRAW'">DRAW!</td>
               <td *ngIf="match.optional_link==null">N/A</td>
               <td *ngIf="match.optional_link!=null"><a (click)="goToLink(match.optional_link)">LINK</a></td>
             </tr>

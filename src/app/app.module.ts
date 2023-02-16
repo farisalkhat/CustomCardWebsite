@@ -35,6 +35,9 @@ import { PlayerDetailsComponent } from './player/player-details/player-details.c
 import { SubmitMatchComponent } from './submit-match/submit-match.component';
 import { PackEditorComponent } from './packs/pack-editor/pack-editor.component';
 import { MatchesComponent } from './matches/matches.component';
+import { PlayerNavigationComponent } from './player/player-details/player-navigation/player-navigation.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { SettingsComponent } from './settings/settings.component';
 
 
 
@@ -70,14 +73,17 @@ import { MatchesComponent } from './matches/matches.component';
     PlayerDetailsComponent,
     SubmitMatchComponent,
     PackEditorComponent,
-    MatchesComponent
+    MatchesComponent,
+    PlayerNavigationComponent,
+    SettingsComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ImageCropperModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

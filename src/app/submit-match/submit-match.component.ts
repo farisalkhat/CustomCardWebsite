@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -42,6 +43,8 @@ export class SubmitMatchComponent implements OnInit {
   done: boolean = false;
 
   players:any[] = []
+  today!: Date;
+  jstoday: any;
   get f(){return this.matchData.controls;}
 
   username!:number;
@@ -114,7 +117,8 @@ export class SubmitMatchComponent implements OnInit {
 
     else{ 
       this.done= true;
-
+      this.today = new Date()
+      this.jstoday = formatDate(this.today, 'MM-dd-yyyy hh:mm:ss a zzzz', 'en-US', '-0400');
  
       const duel = {} as DuelData
       duel['duelist1'] = this.id
@@ -122,6 +126,8 @@ export class SubmitMatchComponent implements OnInit {
       duel['result'] = this.matchData.controls['result'].value;
       duel['replay'] = this.matchData.controls['replay'].value;
       duel['gamemode'] = this.matchData.controls['gamemode'].value;
+      duel['date'] = this.jstoday
+      
 
 
             this.customcardsService.submitDuel(duel)
