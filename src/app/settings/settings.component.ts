@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
 import { Card, CustomcardsService } from '../customcards.service';
@@ -11,6 +12,7 @@ import { Card, CustomcardsService } from '../customcards.service';
 export class SettingsComponent implements OnInit {
 
 
+  about!:string;
   cardSelected:number=0;
   newSettings= {
     id:0,
@@ -20,6 +22,7 @@ export class SettingsComponent implements OnInit {
     favorite_card3:0,
     favorite_card4:0,
     favorite_card5:0,
+    about:''
   }
 
   userdata!:any;
@@ -84,6 +87,25 @@ export class SettingsComponent implements OnInit {
 
   creator!:string;
   creatorid!:string;
+
+
+
+
+  aboutMe= new FormGroup({
+    about: new FormControl(' ',[
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(500)
+
+    ]),
+  })
+
+  submitVerified = false;
+  submitted = false;
+  submitfail: boolean = false;
+  done: boolean = false;
+  get f(){return this.aboutMe.controls;}
+
   constructor(public _authService:AuthService, public customcardsService:CustomcardsService, public _router:Router) { }
 
   ngOnInit(): void {
@@ -114,6 +136,8 @@ export class SettingsComponent implements OnInit {
             this.newSettings['favorite_card3'] = this.userdata['details']['favorite_card3'];
             this.newSettings['favorite_card4'] = this.userdata['details']['favorite_card4'];
             this.newSettings['favorite_card5'] = this.userdata['details']['favorite_card5'];
+            this.newSettings['about'] = this.userdata['details']['about'];
+            this.about = this.userdata['details']['about'];
         })
         
       },
@@ -131,8 +155,19 @@ export class SettingsComponent implements OnInit {
 
 
   saveImages(){
+
+    this.submitted=true;
+    if(this.aboutMe.invalid){
+      this.submitfail = true;
+      console.log("Basic data not filled.")
+      return;
+    }
+
+    this.done=true;
+
+    this.newSettings['about'] = this.aboutMe.controls['about'].value;;
     this.customcardsService.editProfileImages(this.newSettings).subscribe(res=>{
-      this._router.navigate(['/settings'])
+      window.location.reload()
     },
     err=>{
       this._router.navigate(['/home'])

@@ -7,6 +7,7 @@
 <div class="row">
     <div class="col-auto">
         <div class="crop">
+            
             <img src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.profile_image}}.png" />
         </div>
     </div>
@@ -22,63 +23,46 @@
     
 
 </div>
-    <app-player-navigation></app-player-navigation>
+<nav class="rounded navbar navbar-default navbar-expand-md navbar-dark ">
 
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
 
-<div class="row">
-    <div class="col-sm-1">
-            <h3>About</h3>
+        <li class="nav-item">
+          <a class="nav-link" (click)="setPage('Profile')">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="setPage('Collection')">Collection</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="setPage('Decklists')">Decklists</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="setPage('Packs')">Packs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="setPage('Matches')">Matches</a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" >Creations</a>
+        </li> -->
         
-        
-    </div>
-    <div class="col">
-        <div class="container">
-            <h1>
-                Favorite Cards
-            </h1>
+      </ul>
 
-            <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card1}}.png" />
-            <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card2}}.png" />
-            <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card3}}.png" />
-            <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card4}}.png" />
-            <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card5}}.png" />
-
-            <h1>Recent Matches</h1>
-            <table class="table table-dark table-striped">
-                <thead>
-                    <tr>
-                      <th scope="col">Date</th>
-                      <th scope="col">Game Mode</th>
-                      <th scope="col">Duelists</th>
-                      <th scope="col">Result</th>
-                      <th scope="col">Replay</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let match of userDetails?.matches">
-                      <td>{{match.date}}</td>
-                      <td>{{match.gamemode}}</td>
-                      <td><a routerLink="/players/{{match.duelist1}}">{{match.d1Name}}</a> vs <a routerLink="/players/{{match.duelist2}}">{{match.d2Name}}</a></td>
-                      <td *ngIf="match.result=='WON'"><a routerLink="/players/{{match.duelist1}}">{{match.d1Name}}</a> WINS!</td>
-                      <td *ngIf="match.result=='LOSS'"><a routerLink="/players/{{match.duelist2}}">{{match.d2Name}}</a> WINS!</td>
-                      <td *ngIf="match.result=='DRAW'">DRAW!</td>
-                      <td *ngIf="match.optional_link==null">N/A</td>
-                      <td *ngIf="match.optional_link!=null"><a (click)="goToLink(match.optional_link)">LINK</a></td>
-                    </tr>
-                  </tbody>
-                </table>
-            <h1>
-                Pack Checklist
-            </h1>
-        
-
-
-
-
-        </div>
     </div>
 
-</div>
+    
+  </nav>
+
+    <app-player-profile [userId] = "userID" *ngIf="page=='Profile'"></app-player-profile>
+    <app-player-collection [userId] = "userID" *ngIf="page=='Collection'"></app-player-collection>
+    <app-player-decklists [userId] = "userID" *ngIf="page=='Decklists'"></app-player-decklists>
+    <app-player-packs [userId] = "userID" *ngIf="page=='Packs'"></app-player-packs>
+    <app-player-matches [userId] = "userID" *ngIf="page=='Matches'"></app-player-matches>
+    
+
+
 
 </div>
 

@@ -30,7 +30,10 @@ a{
 }a:hover{
     color:green !important;
 }
-
+button{
+    margin:0;
+    padding:0;
+}
 
 .center-cropped {
     width:100px;
@@ -68,6 +71,17 @@ a{
     margin: -72px 500px 0px -33px;
 }
 
+.clickbutton{
+    margin-left:2px;
+    height:50px;
+    margin-bottom: 8px;
+    margin-right:10px;
+    width:100px;
+}
+.binder{
+    font-size: xx-large;
+}
+
 /* .crop {
     width: 100px;
     height: 100px;
@@ -88,4 +102,30 @@ a{
 
 h3{
     padding-top:5px;
+}
+
+button{
+    padding:5px;
+    margin:3px;
+}
+
+nav{
+    font-family: 'Oswald', sans-serif;
+    font-size: x-large;
+    margin-top:10px;
+    
+}
+
+
+a{
+    color:white !important;
+}a:hover{
+    color:green !important;
+}
+
+li{
+    margin: 0 5px;
+}
+a:hover{
+    cursor: pointer;
 }

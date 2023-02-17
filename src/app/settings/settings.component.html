@@ -49,10 +49,41 @@
             </div>
             
             <div class="row">
-                <button class=" smallbtn btn button btn-success"(click)="saveImages()">Save</button>
+                <form [formGroup]="aboutMe">
+                    <div class="form-group">
+                        <h2><label for="aboutMe">About</label></h2>
+                        <textarea formControlName="about" [ngClass]="{'is-invalid': submitted && f['about'].errors}" [(ngModel)]="about" class="form-control"  rows="3"></textarea>
+                      </div>
+
+                      <div *ngIf="submitted && f['about'].errors" class="invalid-feedback">
+                        asd
+                        <div *ngIf="f['about'].errors['required']">
+                          <p class="red">500 characters max for your About</p>
+                        </div>
+                    </div>
+                </form>
+
+
+
+                
+
+                
+
+
+
+
+
+
+                <button [disabled] = "done==true" class=" smallbtn btn button btn-success"(click)="saveImages()">Save</button>
             </div>
             
             
+
+
+
+
+
+
         </div>
             <div class="col-md-5 mr-auto text-center"  >
                 <div class="row" (keydown.enter)="submitSearch()">
@@ -88,5 +119,12 @@
 
 
 </div>
+
+
+
+
+
+
+
 
 

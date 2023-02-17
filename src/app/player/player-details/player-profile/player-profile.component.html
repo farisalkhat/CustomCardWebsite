@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col-sm-2">
+            <h3>About</h3>
+            <p>{{userDetails?.details?.about}}</p>
+        
+        
+    </div>
+    <div class="col-md-8">
+        <div class="container">
+            <div class="row">
+                <h1>
+                    Favorite Cards
+                </h1>
+    
+                <p>
+                    <button *ngIf="userDetails?.details?.favorite_card1!=undefined"class="btn " routerLink="/cards/{{userDetails?.details?.favorite_card1}}">
+                        <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card1}}.png" />
+                    </button>
+                    <button *ngIf="userDetails?.details?.favorite_card1!=undefined"class="btn " routerLink="/cards/{{userDetails?.details?.favorite_card2}}">
+                        <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card2}}.png" />
+                    </button>
+                    <button *ngIf="userDetails?.details?.favorite_card1!=undefined"class="btn " routerLink="/cards/{{userDetails?.details?.favorite_card3}}">
+                        <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card3}}.png" />
+                    </button>
+                    <button *ngIf="userDetails?.details?.favorite_card1!=undefined"class="btn " routerLink="/cards/{{userDetails?.details?.favorite_card4}}">
+                        <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card4}}.png" />
+                    </button>
+                    <button *ngIf="userDetails?.details?.favorite_card1!=undefined"class="btn " routerLink="/cards/{{userDetails?.details?.favorite_card5}}">
+                        <img class="favoritecard" src="https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{userDetails?.details?.favorite_card5}}.png" />
+                    </button>
+
+                </p>
+                
+
+
+
+                
+                
+                
+                
+            </div>
+
+
+
+            <div class="row">
+                <h1>Recent Matches</h1>
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                          <th scope="col">Date</th>
+                          <th scope="col">Game Mode</th>
+                          <th scope="col">Duelists</th>
+                          <th scope="col">Result</th>
+                          <th scope="col">Replay</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let match of userDetails?.matches">
+                          <td>{{match.date}}</td>
+                          <td>{{match.gamemode}}</td>
+                          <td><a routerLink="/players/{{match.duelist1}}">{{match.d1Name}}</a> vs <a routerLink="/players/{{match.duelist2}}">{{match.d2Name}}</a></td>
+                          <td *ngIf="match.result=='WON'"><a routerLink="/players/{{match.duelist1}}">{{match.d1Name}}</a> WINS!</td>
+                          <td *ngIf="match.result=='LOSS'"><a routerLink="/players/{{match.duelist2}}">{{match.d2Name}}</a> WINS!</td>
+                          <td *ngIf="match.result=='DRAW'">DRAW!</td>
+                          <td *ngIf="match.optional_link==null">N/A</td>
+                          <td *ngIf="match.optional_link!=null"><a (click)="goToLink(match.optional_link)">LINK</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+            </div>
+            
+            
+            
+            <div class="row">
+                    <h1>
+                        Pack Checklist
+                    </h1>
+
+                <div class="col">
+                    <span class="binder">Pack: </span> 
+                    <select  class="form-control-lg" [(ngModel)] = "packID" aria-label="Default select example">
+                        <option  *ngFor = "let pack of packs" value="{{pack.packid}}">{{pack.title}}</option>
+                    </select>
+                    <button class="clickbutton btn-success btn" (click)="selectPack()">Select Pack</button>
+                    <span *ngIf="userPackCollection!=undefined"class="binder">{{packOwned}} / {{packTotal}}</span>
+                </div>
+
+
+                
+            </div>
+
+
+            
+        
+
+
+
+
+        </div>
+    </div>
+
+</div>

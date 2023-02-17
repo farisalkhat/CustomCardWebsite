@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerNavigationComponent implements OnInit {
 
+  page="Profile"
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  setPage(page:string){
+    this.page=page;
   }
 
 }

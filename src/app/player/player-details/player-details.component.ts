@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CustomcardDbComponent } from 'src/app/customcard-db/customcard-db.component';
-import { CustomcardsService, UserDetails } from 'src/app/customcards.service';
+import { ChecklistCard, CustomcardsService, PackButton, UserDetails } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-player-details',
@@ -17,18 +17,26 @@ export class PlayerDetailsComponent implements OnInit {
 
   
   constructor(public authService: AuthService, public route:ActivatedRoute,public customcardsService:CustomcardsService) { }
-
+  page="Profile"
   userDetails!:UserDetails;
   details:any[]=[];
   userID!:number;
+  packID!:number;
 
+  userPackCollection!:ChecklistCard[];
   
   loggedInID!:number;
 
+  packs:PackButton[] = [];
+
+
+  packTotal!:number;
+  packOwned!:number;
 
 
 
   ngOnInit(): void {
+    this.page="Profile"
 
     if (this.authService.loggedIn()){
 
@@ -54,6 +62,16 @@ export class PlayerDetailsComponent implements OnInit {
       )
     })
 
+    this.customcardsService.getPacks().subscribe(
+      res => {
+        if(res){}
+          this.packs = res;
+          console.log(this.packs)
+      }
+
+
+    )
+
   }
 
 
@@ -68,4 +86,28 @@ export class PlayerDetailsComponent implements OnInit {
       console.log("Someone's been a naughty boy!")
     }
   }
+  setPage(page:string){
+    this.page=page;
+    console.log(this.page)
+  }
+  selectPack(){
+    this.customcardsService.getChecklist(this.userID,this.packID).subscribe(
+      res => {
+        if(res){}
+          this.userPackCollection = res;
+          
+          this.packTotal = this.userPackCollection.length
+          this.packOwned = 0
+
+          for(let card in this.userPackCollection){
+            if(this.userPackCollection[card].copies>0){
+              this.packOwned++;
+            }
+          }
+      }
+  
+  
+    )
+  }
 }
+

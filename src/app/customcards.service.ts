@@ -554,7 +554,7 @@ export class CustomcardsService {
   }
 
   editProfileImages(images:any){
-    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editprofile/images`,images);
+    return this.http.post<any>(`http://127.0.0.1:8080/api/yugioh/editprofile/images`,images);
   }
   
 }

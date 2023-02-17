@@ -38,6 +38,11 @@ import { MatchesComponent } from './matches/matches.component';
 import { PlayerNavigationComponent } from './player/player-details/player-navigation/player-navigation.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { SettingsComponent } from './settings/settings.component';
+import { PlayerProfileComponent } from './player/player-details/player-profile/player-profile.component';
+import { PlayerCollectionComponent } from './player/player-details/player-collection/player-collection.component';
+import { PlayerDecklistsComponent } from './player/player-details/player-decklists/player-decklists.component';
+import { PlayerPacksComponent } from './player/player-details/player-packs/player-packs.component';
+import { PlayerMatchesComponent } from './player/player-details/player-matches/player-matches.component';
 
 
 
@@ -75,7 +80,12 @@ import { SettingsComponent } from './settings/settings.component';
     PackEditorComponent,
     MatchesComponent,
     PlayerNavigationComponent,
-    SettingsComponent
+    SettingsComponent,
+    PlayerProfileComponent,
+    PlayerCollectionComponent,
+    PlayerDecklistsComponent,
+    PlayerPacksComponent,
+    PlayerMatchesComponent
   ],
   imports: [
     HttpClientModule,
