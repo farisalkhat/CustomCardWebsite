@@ -31,6 +31,7 @@ import { SubmitMatchComponent } from './submit-match/submit-match.component';
 import { PackEditorComponent } from './packs/pack-editor/pack-editor.component';
 import { MatchesComponent } from './matches/matches.component';
 import { SettingsComponent } from './settings/settings.component';
+import { DuelistDecklistsComponent } from './decklists/duelist-decklists/duelist-decklists.component';
 
 const routes: Routes = [
   {
@@ -71,8 +72,6 @@ component:BindersComponent},
 component:PacksComponent},
 {path:'pack-maker',
 component:PackMakerComponent},
-{path:'pack-opener/:packid',
-component:PackOpenerComponent},
 {path:'deck-editor',
 component:DeckEditorComponent},
 {path:'decklist/:deckid',
@@ -98,7 +97,9 @@ component:PackEditorComponent},
 {path:'matches',
 component:MatchesComponent},
 {path:'settings',
-component:SettingsComponent}
+component:SettingsComponent},
+{path:'duelist-decklists',
+component:DuelistDecklistsComponent}
 
 
 ];

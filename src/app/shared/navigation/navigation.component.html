@@ -56,14 +56,24 @@
   
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/deck-editor" >Deck Editor</a>
+          <a class="nav-link" (click)="customcardsService.resetDeck()"routerLink="/deck-editor" >Deck Editor</a>
         </li>
 
         
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/decklists" >Decklists</a>
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link" routerLink="/decklists" id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
+            Decklists
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="nav-link" routerLink="/decklists" >Public Decklists</a></li>
+            <li><a class="nav-link" routerLink="/duelist-decklists" >Your Decklists</a></li>
+          </ul>
         </li>
+
+        
  
 <!--         
         <li class="nav-item">

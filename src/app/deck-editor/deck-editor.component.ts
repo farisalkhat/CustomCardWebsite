@@ -1,11 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Card, CustomcardsService, Draft, Decklist } from 'src/app/customcards.service';
+import { Card, CustomcardsService, Draft, Decklist, DeckListCard, importDecklist } from 'src/app/customcards.service';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import * as FileSaver from 'file-saver';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class DeckEditorComponent implements OnInit {
   xml_file: string = "";
-  cards!: Card[];
+  @Input() cards!: Card[];
   currentPage = 1;
   currentCards!:Card[];
   currentID!:string;
@@ -105,23 +106,83 @@ export class DeckEditorComponent implements OnInit {
   creator!:string;
   creatorid!:string;
 
+  decklist!:DeckListCard[];
+  decklistinfo!:importDecklist;
   
 
 
 
+  @Input() drafting:boolean=true;
+
+  ngOnChanges(changes: SimpleChanges) {
+    for (const propName in changes) {
+      const chng = changes[propName];
+      const cur  = JSON.stringify(chng.currentValue);
+      const prev = JSON.stringify(chng.previousValue);
+      console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+    }
+  }
 
 
   ngOnInit(): void {
-    this.customcardsService.getCustomCards().subscribe(
-      res => {
-        if(res){}
-        this.cards = res;
-        this.getCardNumbers(this.currentPage);
-        this.hideloader();
+    if(this.customcardsService.getProcessingDeck()==false){
+      if(this.customcardsService.getEditDecklist() && this.customcardsService.getEditDeckID()!=-1){
+        forkJoin(
+          this.customcardsService.getDecklistInfo(this.customcardsService.getEditDeckID()),
+          this.customcardsService.getDecklist(this.customcardsService.getEditDeckID()),
+        ).subscribe(([deckInfo,decklist])=>{
+          this.decklistinfo = deckInfo;
+          this.decklist = decklist;
+          console.log(this.decklist)
+
+          for(let card in decklist){
+            if(decklist[card].deck=="maindeck" || decklist[card].deck=="extradeck"){
+              this.addCard(decklist[card])
+            }
+            else{
+              this.addSideCard(decklist[card])
+            }
+          }
+
+          
+          this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDeckName());
+
+
+
+
+          
+    
+  
+  
+  
+        })
+        this.customcardsService.setProcessingDeck(true);
       }
 
+    }
+    else{
+      this.customcardsService.setProcessingDeck(false);
+      this.customcardsService.editDeck(false);
+      this.customcardsService.setEditDeckID(-1);
+      this.customcardsService.setEditDeckName('')
+    }
 
-    )
+
+
+
+
+
+      this.customcardsService.getCustomCards().subscribe(
+        res => {
+          if(res){}
+          this.cards = res;
+          this.getCardNumbers(this.currentPage);
+          this.hideloader();
+        }
+      )
+    
+
+
 
     this._authService.getUser().subscribe(
       res =>{
@@ -883,23 +944,44 @@ getHoveredCardDetails(){
     decklist['decklist'] = this.xml_file;
     decklist['creator']=this.creator;
     decklist['creatorid']=Number(this.creatorid);
-    console.log(decklist);
+    
 
+    if(this.decklistinfo){
+      decklist['decklistid'] = this.decklistinfo.id
+      console.log("resubmitting decklist..")
+      this.customcardsService.resubmitDecklist(decklist)
+      .subscribe(
+        res=>{
+          console.log("JOBS DONE");
+          console.log(res);
+          this.customcardsService.setProcessingDeck(false);
+          this.customcardsService.editDeck(false);
+          this.customcardsService.setEditDeckID(-1);
+          this.customcardsService.setEditDeckName('')
+          this.submitfail = false;
+        this._router.navigate(['/decklists']);
+        },
+          
+        err=>{console.log(err)}
+      )
+    }
+    else{
+      console.log("submitting decklist..")
+      this.customcardsService.submitDecklist(decklist)
+      .subscribe(
+        res=>{
+          this.submitfail = false;
+          this._router.navigate(['/decklists']);
+        },
+          
+        err=>{console.log(err)}
+      )
+      
 
+    }
 
+  
 
-
-    this.customcardsService.submitDecklist(decklist)
-    .subscribe(
-      res=>{
-        console.log("JOBS DONE");
-        console.log(res);
-      },
-        
-      err=>{console.log(err)}
-    )
-    this.submitfail = false;
-    this._router.navigate(['/drafts']);
   }
 
   exportList(){

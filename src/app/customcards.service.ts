@@ -31,18 +31,7 @@ export interface Card extends Document{
 }
 
 
-export interface DeckListCard extends Document{
-  id:string;
-  cardtype:string;
-  name:string;
-  type:string;
-  atk:number;
-  def:number;
-  level:number;
-  attribute:string;
-  effect:string;
-  creator:string;
-  tag:string;
+export interface DeckListCard extends Card, Document{
   deck:string;
 }
 
@@ -87,6 +76,8 @@ export interface Decklist{
   mainDeck:string[];
   sideDeck:string[];
   extraDeck:string[];
+
+  decklistid?:number;
 }
 
 export interface importDecklist{
@@ -278,6 +269,33 @@ export class CustomcardsService {
     return this.editPackName;
   }
 
+  editDeck(edit:boolean){
+    this.editDecklist=edit;
+  }
+  getEditDecklist(){
+    return this.editDecklist;
+  }
+
+  setEditDeckID(editDeckID:number){
+    this.editDeckID=editDeckID;
+  }
+  getEditDeckID(){
+    return this.editDeckID;
+  }
+
+  setEditDeckName(editDeckName:string){
+    this.editDeckName = editDeckName;
+  }
+
+  getEditDeckName(){
+    return this.editDeckName;
+  }
+
+  resetDeck(){
+    this.editDeck(false);
+    this.setEditDeckID(-1);
+    this.setEditDeckName('')
+  } 
 
 
 
@@ -317,6 +335,10 @@ export class CustomcardsService {
   processingDraftEdit = false;
   processingPackEdit = false;
 
+  editDecklist:boolean = false;
+  editDeckID!:number;
+  editDeckName!:string;
+  processingDeckEdit = false;
 
   sealedDraftMode = false;
 
@@ -340,9 +362,10 @@ export class CustomcardsService {
   }
   setProcessingPack(process:boolean){
     this.processingPackEdit=process;
-    
   }
 
+  getProcessingDeck(){return this.processingDeckEdit;}
+  setProcessingDeck(process:boolean){this.processingDeckEdit = process;}
 
 
 
@@ -373,6 +396,13 @@ export class CustomcardsService {
   } 
   getDecklists(){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists`);
+  }
+  getDecklistsFromUser(id:number){
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists/creator/${id}`);
+  }
+
+  getMatchesFromUser(id:number){
+    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/matches/duelist/${id}`);
   }
 
   getPlayers(){
@@ -555,6 +585,10 @@ export class CustomcardsService {
 
   editProfileImages(images:any){
     return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editprofile/images`,images);
+  }
+
+  resubmitDecklist(decklist:Decklist){
+    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editdeck`,decklist);
   }
   
 }

@@ -43,6 +43,7 @@ import { PlayerCollectionComponent } from './player/player-details/player-collec
 import { PlayerDecklistsComponent } from './player/player-details/player-decklists/player-decklists.component';
 import { PlayerPacksComponent } from './player/player-details/player-packs/player-packs.component';
 import { PlayerMatchesComponent } from './player/player-details/player-matches/player-matches.component';
+import { DuelistDecklistsComponent } from './decklists/duelist-decklists/duelist-decklists.component';
 
 
 
@@ -85,7 +86,8 @@ import { PlayerMatchesComponent } from './player/player-details/player-matches/p
     PlayerCollectionComponent,
     PlayerDecklistsComponent,
     PlayerPacksComponent,
-    PlayerMatchesComponent
+    PlayerMatchesComponent,
+    DuelistDecklistsComponent
   ],
   imports: [
     HttpClientModule,

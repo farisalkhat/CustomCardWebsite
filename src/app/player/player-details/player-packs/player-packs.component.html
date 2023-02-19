@@ -1,1 +1,15 @@
-<p>player-packs works!</p>
+<div class="container">
+    <span *ngFor = "let pack of packs">
+      
+      <button *ngIf="pack.pack!='placeholder'" class="btn"   >
+        <img     class="pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/{{pack?.pack}}.png'>
+        <p>{{pack.title}}</p>
+      </button>
+
+      <button *ngIf="pack.pack=='placeholder'" class="btn"   >
+        <img     class="pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/placeholder.png'>
+        <p>{{pack.title}}</p>
+      </button>
+      
+  </span>
+  </div>

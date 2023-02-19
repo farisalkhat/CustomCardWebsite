@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CustomcardsService, PackInfo } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-player-packs',
@@ -7,9 +8,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PlayerPacksComponent implements OnInit {
   @Input() userId!:number;
-  constructor() { }
+  constructor(public customcardsService: CustomcardsService) { }
 
+  packs!:PackInfo[]; 
   ngOnInit(): void {
+    this.customcardsService.getPacksbyOwner(this.userId).subscribe(
+      res => {
+        if(res){
+          this.packs = res;
+        }
+      }
+    )
   }
 
 }

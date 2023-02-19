@@ -19,6 +19,7 @@ export class DecklistsComponent implements OnInit {
       res => {
         if(res){}
         this.decklists = res;
+        console.log(this.decklists)
       }
 
 
