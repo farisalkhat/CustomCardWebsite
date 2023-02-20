@@ -109,6 +109,9 @@ export class DeckEditorComponent implements OnInit {
   decklist!:DeckListCard[];
   decklistinfo!:importDecklist;
   
+  uploadedMain:any[] =[]
+  uploadedSide:any[]=[]
+  uploadedExtra:any[]=[]
 
 
 
@@ -125,61 +128,87 @@ export class DeckEditorComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if(this.customcardsService.getProcessingDeck()==false){
-      if(this.customcardsService.getEditDecklist() && this.customcardsService.getEditDeckID()!=-1){
-        forkJoin(
-          this.customcardsService.getDecklistInfo(this.customcardsService.getEditDeckID()),
-          this.customcardsService.getDecklist(this.customcardsService.getEditDeckID()),
-        ).subscribe(([deckInfo,decklist])=>{
-          this.decklistinfo = deckInfo;
-          this.decklist = decklist;
-          console.log(this.decklist)
 
-          for(let card in decklist){
-            if(decklist[card].deck=="maindeck" || decklist[card].deck=="extradeck"){
-              this.addCard(decklist[card])
-            }
-            else{
-              this.addSideCard(decklist[card])
-            }
-          }
+    this.uploadedMain= this.customcardsService.getUploadedMain()
+    this.uploadedSide= this.customcardsService.getUploadedSide()
+    this.uploadedExtra= this.customcardsService.getUploadedExtra()
+    this.customcardsService.getCustomCards().subscribe(
+      res => {
+        if(res){}
+        this.cards = res;
+        this.getCardNumbers(this.currentPage);
+        this.hideloader();
 
-          
-          this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDeckName());
-
-
-
-
-          
+        if(this.customcardsService.getProcessingDeck()==false){
+          if(this.customcardsService.getEditDecklist() && this.customcardsService.getEditDeckID()!=-1){
+            forkJoin(
+              this.customcardsService.getDecklistInfo(this.customcardsService.getEditDeckID()),
+              this.customcardsService.getDecklist(this.customcardsService.getEditDeckID()),
+            ).subscribe(([deckInfo,decklist])=>{
+              this.decklistinfo = deckInfo;
+              this.decklist = decklist;
     
-  
-  
-  
-        })
-        this.customcardsService.setProcessingDeck(true);
-      }
-
-    }
-    else{
-      this.customcardsService.setProcessingDeck(false);
-      this.customcardsService.editDeck(false);
-      this.customcardsService.setEditDeckID(-1);
-      this.customcardsService.setEditDeckName('')
-    }
-
-
-
-
-
-
-      this.customcardsService.getCustomCards().subscribe(
-        res => {
-          if(res){}
-          this.cards = res;
-          this.getCardNumbers(this.currentPage);
-          this.hideloader();
+              for(let card in decklist){
+                if(decklist[card].deck=="maindeck" || decklist[card].deck=="extradeck"){
+                  this.addCard(decklist[card])
+                }
+                else{
+                  this.addSideCard(decklist[card])
+                }
+              }
+    
+              
+              this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDeckName());
+    
+    
+    
+    
+              
+        
+      
+      
+      
+            })
+            this.customcardsService.setProcessingDeck(true);
+          }
+    
         }
-      )
+        else{
+          this.customcardsService.setProcessingDeck(false);
+          this.customcardsService.editDeck(false);
+          this.customcardsService.setEditDeckID(-1);
+          this.customcardsService.setEditDeckName('')
+        }
+
+        if(this.uploadedMain.length>0 || this.uploadedSide.length>0 || this.uploadedExtra.length>0){
+          console.log(this.uploadedMain);
+          for(let card in this.uploadedMain){
+              this.addCard(this.uploadedMain[card])
+          }
+          for(let card in this.uploadedSide){
+            this.addSideCard(this.uploadedSide[card])
+          }
+          for(let card in this.uploadedExtra){
+            this.addCard(this.uploadedExtra[card])
+          }
+    
+        }
+
+
+
+
+      }
+    )    
+
+
+
+    
+
+
+
+
+
+
     
 
 
@@ -722,6 +751,7 @@ getHoveredCardDetails(){
   
   addCard(card:Card){
     if(card!=undefined){
+      console.log(card)
       if(card.cardtype=="Fusion Monster" || card.cardtype=="Xyz Monster" || card.cardtype=="Synchro Monster"){
         if(this.extraDeck.length==15){
           return;
@@ -851,6 +881,7 @@ getHoveredCardDetails(){
 
   rightDeleteSideCard($event: { preventDefault: () => void; },card:Card){
     $event.preventDefault();
+    console.log(this.sideDeck)
     const index = this.sideDeck.findIndex(obj => obj.id === card?.id)
     if (index > -1) {
       this.sideDeck.splice(index, 1);
@@ -921,21 +952,21 @@ getHoveredCardDetails(){
 
 
     for(const card of this.mainDeck){
-        this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
+        this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
         idList1.push(card.id)
     }
     this.xml_file+="</main><side>"   
     for(const card of this.sideDeck){
-     this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
+     this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
      idList2.push(card.id)
     }
     this.xml_file+="</side><extra>"   
     
     for(const card of this.extraDeck){
-        this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
+        this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
         idList3.push(card.id)
     }
-    this.xml_file+="</extra></deck>"
+    this.xml_file+="</extra></deck>\n"
 
     decklist['mainDeck'] = idList1;
     decklist['sideDeck'] = idList2;
@@ -986,21 +1017,21 @@ getHoveredCardDetails(){
 
   exportList(){
 
-    this.xml_file = '<?xml version="1.0" encoding="utf-8" ?> <deck name=".TriType"><main>';
+    this.xml_file = '<?xml version="1.0" encoding="utf-8" ?>\n<deck name=".TriType">\n <main>\n';
  
    for(const card of this.mainDeck){
-       this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
+       this.xml_file+='  <card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
    }
-   this.xml_file+="</main><side>"   
+   this.xml_file+=" </main>\n <side>\n"   
    for(const card of this.sideDeck){
-    this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
+    this.xml_file+='  <card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
    }
-   this.xml_file+="</side><extra>"   
+   this.xml_file+=" </side>\n <extra>\n"   
    
    for(const card of this.extraDeck){
-       this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
+       this.xml_file+='  <card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
    }
-   this.xml_file+="</extra></deck>"
+   this.xml_file+=" </extra>\n</deck>\n"
    console.log(this.xml_file);
  
    let blob = new Blob([this.xml_file], {type: "text/xml"});

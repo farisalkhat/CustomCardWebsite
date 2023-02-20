@@ -32,6 +32,7 @@ import { PackEditorComponent } from './packs/pack-editor/pack-editor.component';
 import { MatchesComponent } from './matches/matches.component';
 import { SettingsComponent } from './settings/settings.component';
 import { DuelistDecklistsComponent } from './decklists/duelist-decklists/duelist-decklists.component';
+import { UploadDecklistComponent } from './upload-decklist/upload-decklist.component';
 
 const routes: Routes = [
   {
@@ -99,7 +100,9 @@ component:MatchesComponent},
 {path:'settings',
 component:SettingsComponent},
 {path:'duelist-decklists',
-component:DuelistDecklistsComponent}
+component:DuelistDecklistsComponent},
+{path:'upload-decklist',
+component:UploadDecklistComponent}
 
 
 ];

@@ -404,6 +404,7 @@ download(){
   this.customcardService.editDeck(true);
   this.customcardService.setEditDeckID(this.deckid);
   this.customcardService.setEditDeckName(this.decklistinfo.name)
+  this.customcardService.uploadDecklist([],[],[])
   this._router.navigate(['/deck-editor']);
 }
 }

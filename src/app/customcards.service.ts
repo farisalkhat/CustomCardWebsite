@@ -295,8 +295,26 @@ export class CustomcardsService {
     this.editDeck(false);
     this.setEditDeckID(-1);
     this.setEditDeckName('')
+
+    this.mainDeck= [];
+    this.sideDeck = [];
+    this.extraDeck = [];
   } 
 
+  uploadDecklist(mainDeck:any[],sideDeck:any[],extraDeck:any[]){
+    this.mainDeck=mainDeck;
+    this.sideDeck=sideDeck;
+    this.extraDeck=extraDeck;
+  }
+  getUploadedMain(){
+    return this.mainDeck;
+  }
+  getUploadedSide(){
+    return this.sideDeck;
+  }
+  getUploadedExtra(){
+    return this.extraDeck;
+  }
 
 
 
@@ -341,6 +359,13 @@ export class CustomcardsService {
   processingDeckEdit = false;
 
   sealedDraftMode = false;
+
+
+  mainDeck:string[]=[]
+  sideDeck:string[]=[]
+  extraDeck:string[]=[]
+
+
 
   getSealedDraftMode(){
     return this.sealedDraftMode;
@@ -393,6 +418,9 @@ export class CustomcardsService {
 
   getCustomCards(){
     return this.http.get<any[]>(this._carddataUrl);
+  } 
+  getCustomCardsIDs(){
+    return this.http.get<any[]>("http://127.0.0.1:8080/api/yugioh/customcards-ids");
   } 
   getDecklists(){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists`);
