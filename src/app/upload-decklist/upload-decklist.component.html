@@ -1,6 +1,5 @@
 <div class="container">
 <h1>Upload Decklist</h1>
-<label class="form-label" for="customFile">Default file input example</label>
 <input (change)="fileChanged($event)" [(ngModel)] ="xml_file" type="file" class="form-control" id="customFile" accept="text/xml"/>
 <button class="button btn btn-success" (click)="checkList()">Submit</button>
 </div>
