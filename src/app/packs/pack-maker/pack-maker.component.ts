@@ -33,7 +33,7 @@ export class PackMakerComponent implements OnInit {
   currentSecret: Card[] = [];
 
   packSize = 'medium'
-  cost = 100
+  cost = 50
 
   rarity:string="common";
 
@@ -47,7 +47,7 @@ export class PackMakerComponent implements OnInit {
       Validators.maxLength(100)
 
     ]),
-    cost: new FormControl(100,[Validators.required,Validators.min(100)])
+    cost: new FormControl(50,[Validators.required,Validators.min(50)])
   })
 
 
