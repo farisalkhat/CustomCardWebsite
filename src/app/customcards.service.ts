@@ -99,6 +99,7 @@ export interface Pack {
   secretIDs:string[];
   packSize:string;
   cost: number;
+  discordname:string;
 }
 
 
@@ -115,6 +116,7 @@ export interface Pack2 {
   cost: number;
   packID:number;
   packurl:string;
+  discordname:string;
 }
 
 export interface PackInfo{
@@ -420,7 +422,7 @@ export class CustomcardsService {
     return this.http.get<any[]>(this._carddataUrl);
   } 
   getCustomCardsIDs(){
-    return this.http.get<any[]>("http://127.0.0.1:8080/api/yugioh/customcards-ids");
+    return this.http.get<any[]>("https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards-ids");
   } 
   getDecklists(){
     return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists`);
@@ -554,7 +556,7 @@ export class CustomcardsService {
   }
 
   submitPack(pack:Pack){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitpack',pack)
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitpack',pack)
   }
 
   resubmitPack(pack:Pack){

@@ -21,6 +21,7 @@ export class PackMakerComponent implements OnInit {
 
 
   draftName!:string;
+  discordTag!:string;
   creator!:string;
 
 
@@ -42,6 +43,12 @@ export class PackMakerComponent implements OnInit {
 
   draftData= new FormGroup({
     draftTitle: new FormControl(' ',[
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(100)
+
+    ]),
+    discordTag:new FormControl(' ',[
       Validators.required,
       Validators.minLength(1),
       Validators.maxLength(100)
@@ -131,6 +138,7 @@ export class PackMakerComponent implements OnInit {
               ).subscribe(([packInfo,packCards])=>{
                 this.packInfo = packInfo;
                 this.cards = packCards;
+                this.packSize = this.packInfo['packsize']
   
                 this.customcardsService.setProcessingPack(true);
   
@@ -1038,6 +1046,7 @@ export class PackMakerComponent implements OnInit {
         const finaldata = {} as Pack2;
         finaldata['packID'] = this.packInfo['id']
         finaldata['title'] = this.draftData.controls['draftTitle'].value;
+        finaldata['discordname'] = this.draftData.controls['discordTag'].value;
         finaldata['creator'] = this.username;
         finaldata['creatorid'] = this.id;
         finaldata['cost'] = this.draftData.controls['cost'].value;
@@ -1100,6 +1109,7 @@ export class PackMakerComponent implements OnInit {
         finaldata['creator'] = this.username;
         finaldata['creatorid'] = this.id;
         finaldata['cost'] = this.draftData.controls['cost'].value;
+        finaldata['discordname'] = this.draftData.controls['discordTag'].value;
   
         const commonIDs:string[] = []
         const rareIDs:string[] = []

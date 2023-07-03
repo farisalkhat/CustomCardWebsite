@@ -58,6 +58,20 @@
             
             </div>
 
+            <div class="col-auto">
+                <label for="DiscordTag">Discord Name</label>
+                <input id ="discordTag" formControlName ="discordTag" [ngClass]="{'is-invalid': submitted && f['discordTag'].errors}" class="form-control" type="text" [(ngModel)] = "discordTag">
+                
+
+                <div *ngIf="submitted && f['discordTag'].errors" class="invalid-feedback">
+                    <div *ngIf="f['discordTag'].errors['required']">
+                      <p class="red">Umm Discord Tag required idiot.</p>
+                    </div>
+                </div>
+            
+            
+            </div>
+
 
             <div class="col-auto">
                 <label for="Name">Pack Cost</label>
