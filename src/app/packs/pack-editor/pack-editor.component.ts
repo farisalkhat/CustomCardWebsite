@@ -12,6 +12,7 @@ export class PackEditorComponent implements OnInit {
 
   username!:string;
   id!:number;
+  discordTag!:string;
 
   packs!:PackInfo[]; 
 

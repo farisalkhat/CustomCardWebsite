@@ -127,6 +127,7 @@ export interface PackInfo{
   pack:string;
   packsize:string;
   cost:number;
+  discordname:string
 }
 
 

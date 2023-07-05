@@ -21,7 +21,7 @@ export class PackMakerComponent implements OnInit {
 
 
   draftName!:string;
-  discordTag!:string;
+  discordname!:string;
   creator!:string;
 
 
@@ -48,7 +48,7 @@ export class PackMakerComponent implements OnInit {
       Validators.maxLength(100)
 
     ]),
-    discordTag:new FormControl(' ',[
+    discordname:new FormControl(' ',[
       Validators.required,
       Validators.minLength(1),
       Validators.maxLength(100)
@@ -139,7 +139,10 @@ export class PackMakerComponent implements OnInit {
                 this.packInfo = packInfo;
                 this.cards = packCards;
                 this.packSize = this.packInfo['packsize']
-  
+
+                this.draftData.controls['draftTitle'].setValue(this.packInfo['title'])
+                this.draftData.controls['discordname'].setValue(this.packInfo['discordname'])
+                this.draftData.controls['cost'].setValue(this.packInfo['cost'])
                 this.customcardsService.setProcessingPack(true);
   
                 
@@ -1046,7 +1049,7 @@ export class PackMakerComponent implements OnInit {
         const finaldata = {} as Pack2;
         finaldata['packID'] = this.packInfo['id']
         finaldata['title'] = this.draftData.controls['draftTitle'].value;
-        finaldata['discordname'] = this.draftData.controls['discordTag'].value;
+        finaldata['discordname'] = this.draftData.controls['discordname'].value;
         finaldata['creator'] = this.username;
         finaldata['creatorid'] = this.id;
         finaldata['cost'] = this.draftData.controls['cost'].value;
@@ -1109,7 +1112,7 @@ export class PackMakerComponent implements OnInit {
         finaldata['creator'] = this.username;
         finaldata['creatorid'] = this.id;
         finaldata['cost'] = this.draftData.controls['cost'].value;
-        finaldata['discordname'] = this.draftData.controls['discordTag'].value;
+        finaldata['discordname'] = this.draftData.controls['discordname'].value;
   
         const commonIDs:string[] = []
         const rareIDs:string[] = []

@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-auto">
                 <label for="Name">Pack Name</label>
-                <input id ="drafTitle" formControlName ="draftTitle" [ngClass]="{'is-invalid': submitted && f['draftTitle'].errors}" class="form-control" type="text" [(ngModel)] = "draftName">
+                <input id ="drafTitle" formControlName ="draftTitle" [ngClass]="{'is-invalid': submitted && f['draftTitle'].errors}" class="form-control" type="text" >
                 
 
                 <div *ngIf="submitted && f['draftTitle'].errors" class="invalid-feedback">
@@ -59,12 +59,12 @@
             </div>
 
             <div class="col-auto">
-                <label for="DiscordTag">Discord Name</label>
-                <input id ="discordTag" formControlName ="discordTag" [ngClass]="{'is-invalid': submitted && f['discordTag'].errors}" class="form-control" type="text" [(ngModel)] = "discordTag">
+                <label for="discordname">Discord Name</label>
+                <input id ="discordname" formControlName ="discordname" [ngClass]="{'is-invalid': submitted && f['discordname'].errors}" class="form-control" type="text" >
                 
 
-                <div *ngIf="submitted && f['discordTag'].errors" class="invalid-feedback">
-                    <div *ngIf="f['discordTag'].errors['required']">
+                <div *ngIf="submitted && f['discordname'].errors" class="invalid-feedback">
+                    <div *ngIf="f['discordname'].errors['required']">
                       <p class="red">Umm Discord Tag required idiot.</p>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
 
             <div class="col-auto">
                 <label for="Name">Pack Cost</label>
-                <input id ="cost" formControlName ="cost" [ngClass]="{'is-invalid': submitted && f['cost'].errors}" class="form-control" type="text" [(ngModel)] = "cost">
+                <input id ="cost" formControlName ="cost" [ngClass]="{'is-invalid': submitted && f['cost'].errors}" class="form-control" type="text" >
                 
 
                 <div *ngIf="submitted && f['cost'].errors" class="invalid-feedback">

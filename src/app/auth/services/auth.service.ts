@@ -13,6 +13,7 @@ export class AuthService {
   private _addUrl= "https://mm8bitdm-ygo.herokuapp.com/api/userdata/addcurrency"
   private _subtractUrl = "https://mm8bitdm-ygo.herokuapp.com/api/userdata/subtractcurrency"
 
+  private _changeinfoUrl = "https://mm8bitdm-ygo.herokuapp.com/api/changeaccountinfo"
   id:number | undefined;
   username:number| undefined;
   currency:number| undefined;
@@ -32,11 +33,8 @@ export class AuthService {
 
   loginUser(user:any){
     return this.http.post<any>(this._loginUrl,user, )
-
-
-
-
   }
+  changeInfo(user:any){return this.http.post<any>(this._changeinfoUrl,user)}
 
   getToken(){
     return localStorage.getItem('token')
