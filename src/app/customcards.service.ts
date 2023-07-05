@@ -556,7 +556,7 @@ export class CustomcardsService {
   }
 
   submitPack(pack:Pack){
-    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitpack',pack)
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitpack',pack)
   }
 
   resubmitPack(pack:Pack){
