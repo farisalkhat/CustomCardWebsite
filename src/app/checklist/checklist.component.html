@@ -46,13 +46,13 @@
 
                 <div  *ngIf="card.copies>0"class="rare-card">
                     <img class = "smallcard sparkle" *ngIf="card.rarity=='secret'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/giphy.gif'>
-                    <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                    <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
                     <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                 </div>
 
                 <div  *ngIf="card.copies==0" class="rare-card no-card">
                     <img class = "smallcard sparkle" *ngIf="card.rarity=='secret'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/giphy.gif'>
-                    <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                    <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
                     <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                 </div>
 
@@ -73,13 +73,13 @@
     
                     <div  *ngIf="card.copies>0" class="rare-card">
                         <img class = "smallcard sparkle" *ngIf="card.rarity=='ultra'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/fireworks.gif'>
-                        <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                        <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
                         <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                     </div>
 
                     <div  *ngIf="card.copies==0" class="rare-card no-card">
                         <img class = "smallcard sparkle" *ngIf="card.rarity=='ultra'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/fireworks.gif'>
-                        <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                        <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
                         <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                     </div>
     
@@ -100,12 +100,12 @@
 
                 <div  *ngIf="card.copies>0" class="rare-card" >
                     <img class = "smallcard sparkle" *ngIf="card.rarity=='super'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/super.gif'>
-                    <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                    <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
                     <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                 </div>
                 <div  *ngIf="card.copies==0" class="rare-card no-card" >
                     <img class = "smallcard sparkle" *ngIf="card.rarity=='super'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/super.gif'>
-                    <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                    <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
                     <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                 </div>
 
@@ -126,11 +126,11 @@
 
     
                     <div  *ngIf="card.copies>0" class="rare-card" >
-                        <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                        <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
                         <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                     </div>
                     <div  *ngIf="card.copies==0" class="rare-card no-card " >
-                        <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                        <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
                         <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                     </div>
     
@@ -150,12 +150,12 @@
             <button  *ngIf="card.rarity=='common'" routerLink="/cards/{{card.id}}" routerLink="/cards/{{card.id}}"(mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
 
                 <div *ngIf="card.copies>0" class="relative">
-                    <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                    <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
                     <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                 </div>
 
                 <div *ngIf="card.copies==0" class="relative no-card">
-                    <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{card?.id}}.png'>
+                    <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
                     <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                 </div>
 

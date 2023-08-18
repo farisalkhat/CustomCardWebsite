@@ -28,6 +28,7 @@ export interface Card extends Document{
   effect:string;
   creator:string;
   tag:string;
+  drive_id:string
 }
 
 
@@ -144,6 +145,7 @@ export interface PackCard extends Document{
   creator:string;
   tag:string;
   rarity:string;
+  drive_id:string;
 }
 
 
@@ -162,6 +164,7 @@ export interface BinderCard extends Document{
   packtitle:string;
   packid:number;
   copies:number;
+  drive_id:string;
 }
 
 export interface ChecklistCard extends Document{
@@ -177,6 +180,7 @@ export interface ChecklistCard extends Document{
   creator:string;
   rarity:string;
   copies:number;
+  drive_id:string;
 }
 
 
