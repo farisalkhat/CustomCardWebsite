@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Card, CustomcardsService, Draft, Pack, Pack2, PackInfo } from 'src/app/customcards.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -54,7 +55,8 @@ export class PackMakerComponent implements OnInit {
       Validators.maxLength(100)
 
     ]),
-    cost: new FormControl(50,[Validators.required,Validators.min(50)])
+    cost: new FormControl(50,[Validators.required,Validators.min(50)]),
+    packImage: new FormControl(File)
   })
 
 
@@ -65,7 +67,7 @@ export class PackMakerComponent implements OnInit {
   get f(){return this.draftData.controls;}
 
 
-  constructor(public _authService: AuthService,private customcardsService:CustomcardsService,private _router:Router) { }
+  constructor(private http:HttpClient,public _authService: AuthService,private customcardsService:CustomcardsService,private _router:Router) { }
 
   filters = {
     'name':'',
@@ -121,6 +123,7 @@ export class PackMakerComponent implements OnInit {
 
   done:boolean = false;
   ngOnInit(): void {
+
     if (this._authService.loggedIn()){
 
       this._authService.getUser().subscribe(
@@ -1087,24 +1090,50 @@ export class PackMakerComponent implements OnInit {
         finaldata['packSize'] = this.packSize;
         
   
-  
+        
+        
   
   
    
-  
-        this.customcardsService.resubmitPack(finaldata)
-        .subscribe(
-          res=>{
-            console.log(res);
-            this.customcardsService.setProcessingPack(false);
-            this.customcardsService.editPack(false);
-            this.customcardsService.setEditPackID(-1);
-            this.customcardsService.setEditPackName('')
-            this._router.navigate(['/packs']);
-          },
-            
-          err=>{console.log(err)}
-        )
+        if(this.fileChanged){
+          const formData = new FormData();
+          formData.append("thumbnail", this.file);
+          formData.append("name",finaldata['title'])
+          this.customcardsService.uploadImage(formData).subscribe(res=>{
+            finaldata['packurl']=res
+            this.customcardsService.resubmitPack(finaldata)
+            .subscribe(
+              res=>{
+                console.log(res);
+                this.customcardsService.setProcessingPack(false);
+                this.customcardsService.editPack(false);
+                this.customcardsService.setEditPackID(-1);
+                this.customcardsService.setEditPackName('')
+                this._router.navigate(['/packs']);
+              },
+                
+              err=>{console.log(err)}
+            )
+        
+        },err=>{console.log(err)})
+        }
+
+        else{
+          this.customcardsService.resubmitPack(finaldata)
+          .subscribe(
+            res=>{
+              console.log(res);
+              this.customcardsService.setProcessingPack(false);
+              this.customcardsService.editPack(false);
+              this.customcardsService.setEditPackID(-1);
+              this.customcardsService.setEditPackName('')
+              this._router.navigate(['/packs']);
+            },
+              
+            err=>{console.log(err)}
+          )
+        }
+
       }
       else{
         const finaldata = {} as Pack;
@@ -1113,7 +1142,8 @@ export class PackMakerComponent implements OnInit {
         finaldata['creatorid'] = this.id;
         finaldata['cost'] = this.draftData.controls['cost'].value;
         finaldata['discordname'] = this.draftData.controls['discordname'].value;
-  
+
+
         const commonIDs:string[] = []
         const rareIDs:string[] = []
         const superIDs:string[] = []
@@ -1144,22 +1174,40 @@ export class PackMakerComponent implements OnInit {
         finaldata['ultraIDs'] = ultraIDs;
         finaldata['secretIDs'] = secretIDs;
         finaldata['packSize'] = this.packSize;
+        finaldata['packurl'] = 'placeholder'
+
+
+        if(this.fileChanged){
+          const formData = new FormData();
+          formData.append("thumbnail", this.file);
+          formData.append("name",finaldata['title'])
+          this.customcardsService.uploadImage(formData).subscribe(res=>{finaldata['packurl']=res
         
-  
-  
-  
-  
-   
-  
-        this.customcardsService.submitPack(finaldata)
-        .subscribe(
-          res=>{
-            console.log(res);
-            this._router.navigate(['/packs']);
-          },
-            
-          err=>{console.log(err)}
-        )
+          this.customcardsService.submitPack(finaldata)
+          .subscribe(
+            res=>{
+              console.log(res);
+              this._router.navigate(['/packs']);
+            },
+              
+            err=>{console.log(err)}
+          )
+        },err=>{console.log(err)})
+        }
+        else{
+          this.customcardsService.submitPack(finaldata)
+          .subscribe(
+            res=>{
+              console.log(res);
+              this._router.navigate(['/packs']);
+            },
+              
+            err=>{console.log(err)}
+          )
+        }
+
+        
+
       }
 
  
@@ -1187,6 +1235,17 @@ export class PackMakerComponent implements OnInit {
     this.deleteDraftCard(cardtype);
 
   }
+
+  fileChanged:boolean = false;
+  file!:File;
+  onFileSelected(event:any) {
+
+    this.file = event.target.files[0];
+    this.fileChanged = true;
+
+
+
+}
 
   
 

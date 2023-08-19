@@ -86,8 +86,11 @@
             
             
             </div>
+
         </div>
  
+        <div class="row"><label class="form-label" for="customFile">Default file input example</label>
+            <input (change)="onFileSelected($event)" id="packImage" formControlName ="packImage" [ngClass]="{'is-invalid': submitted && f['packImage'].errors}" type="file" class="form-control"  /></div>
  
 
 
@@ -456,7 +459,7 @@
 
 
     <div class="row">
-        <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-success addcard" [disabled] = "done==true" (click)="saveDraft()">Save Pack</button>
+        <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-success addcard"  (click)="saveDraft()">Save Pack</button>
         <div *ngIf="submitfail && submitted" class="submit-text-fail" >
             Submission failed! Fix the following errors:
             <ul >

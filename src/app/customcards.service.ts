@@ -101,6 +101,7 @@ export interface Pack {
   packSize:string;
   cost: number;
   discordname:string;
+  packurl:string;
 }
 
 
@@ -566,6 +567,10 @@ export class CustomcardsService {
 
   resubmitPack(pack:Pack){
     return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editpack',pack   
+    )
+  }
+  uploadImage(formData:FormData){
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/uploadimage',formData   
     )
   }
 
