@@ -566,7 +566,7 @@ export class CustomcardsService {
   }
 
   resubmitDraft(draft:Draft){
-    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/editdraft',draft   
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editdraft',draft   
     )
   }
 
@@ -640,6 +640,6 @@ export class CustomcardsService {
     return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editdeck`,decklist);
   }
   deleteMatch(id:any){
-    return this.http.post<any>(`http://127.0.0.1:8080/api/yugioh/deletematch`,id);
+    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/deletematch`,id);
   }
 }
