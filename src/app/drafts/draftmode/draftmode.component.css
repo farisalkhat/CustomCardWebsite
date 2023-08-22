@@ -4,3 +4,58 @@ button{
   font-size:1.5rem;
   font-family: 'Oswald', sans-serif;
 }
+
+.card-img-top {
+  width: 100%;
+  height:100%;
+  object-fit: cover;
+  
+}
+.card-img-top img{
+  width:2000%;
+  margin: -72px 500px 0px -33px;
+} 
+
+.text-center{
+  margin-top:20px;
+}
+a{
+  color:white;
+}
+
+.card:hover{
+  cursor:pointer;
+}
+.card{
+  width:200px;
+  height:100px;
+}
+
+.crop {
+  width: 200px;
+  height: 100px;
+  overflow: hidden;
+  object-fit: cover;
+  
+}
+.crop img {
+  width:133%;
+  margin: -72px 500px 0px -33px;
+}
+
+.card-title{
+  color:white;
+  
+}
+
+.card-img-overlay{
+  color:white;
+}
+
+.overlay-div{
+  height:100px;
+  width: 200px;
+  position:absolute;
+  background-color:#000;
+  opacity:.7;
+}

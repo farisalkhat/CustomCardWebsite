@@ -15,12 +15,12 @@ export class AboutComponent implements OnInit {
   cardSelected:number=0;
   newSettings= {
     id:0,
-    profile_image:0,
-    favorite_card1:0,
-    favorite_card2:0,
-    favorite_card3:0,
-    favorite_card4:0,
-    favorite_card5:0,
+    profile_image:'',
+    favorite_card1:'',
+    favorite_card2:'',
+    favorite_card3:'',
+    favorite_card4:'',
+    favorite_card5:'',
     about:''
   }
 
@@ -190,12 +190,13 @@ export class AboutComponent implements OnInit {
   }
 
   setCard(card:string){
-    if(this.cardSelected==0){this.newSettings['profile_image']=Number(card)}
-    if(this.cardSelected==1){this.newSettings['favorite_card1']=Number(card)}
-    if(this.cardSelected==2){this.newSettings['favorite_card2']=Number(card)}
-    if(this.cardSelected==3){this.newSettings['favorite_card3']=Number(card)}
-    if(this.cardSelected==4){this.newSettings['favorite_card4']=Number(card)}
-    if(this.cardSelected==5){this.newSettings['favorite_card5']=Number(card)}
+    console.log(card)
+    if(this.cardSelected==0){this.newSettings['profile_image']=card}
+    if(this.cardSelected==1){this.newSettings['favorite_card1']=card}
+    if(this.cardSelected==2){this.newSettings['favorite_card2']=card}
+    if(this.cardSelected==3){this.newSettings['favorite_card3']=card}
+    if(this.cardSelected==4){this.newSettings['favorite_card4']=card}
+    if(this.cardSelected==5){this.newSettings['favorite_card5']=card}
   }
 
 

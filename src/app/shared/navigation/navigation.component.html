@@ -47,8 +47,8 @@
             Packs
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="nav-link" routerLink="/pack-maker" >Pack Maker</a></li>
-            <li><a class="nav-link" routerLink="/pack-editor" >Pack Editor</a></li>
+            <li><a class="nav-link" *ngIf="_authService.adminRole()" routerLink="/pack-maker" >Pack Maker</a></li>
+            <li><a class="nav-link" *ngIf="_authService.adminRole()" routerLink="/pack-editor" >Pack Editor</a></li>
             <li><a class="nav-link" (click)="goToSealedDraft()" routerLink="/packs">Sealed Draft</a></li>
           </ul>
         </li>
@@ -117,7 +117,9 @@
 
 
 
-
+          <!-- <form class="form-inline my-2 my-lg-0">
+            <button type="button" *ngIf="_authService.adminRole()" class="btn btn-success" routerLinkActive = "active">Admin</button>
+          </form> -->
           <form class="form-inline my-2 my-lg-0">
             <button type="button" *ngIf="!_authService.loggedIn()" class="btn btn-success"  routerLink="/login" routerLinkActive = "active">Login</button>
           </form>

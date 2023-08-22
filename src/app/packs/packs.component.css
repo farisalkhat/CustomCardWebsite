@@ -35,11 +35,14 @@ p{
   display: none;
     
 }
+.sidepush{
+    left:1150px;
+}
 
 .packtracker{
     width:200px;
     height:600px;
-    background-color: gray;
+    background-color: rgba(4, 113, 63, 0.9);
     padding:5px;
 }
 

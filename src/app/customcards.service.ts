@@ -64,6 +64,7 @@ export interface Draft {
   title: string;
   cardIDs:string[];
   ownerid:number;
+  draftimage:string;
 }
 
 export interface Decklist{
@@ -338,9 +339,16 @@ export class CustomcardsService {
     this.editDraftName = editDraftName;
   }
 
+  setEditDraftImage(editDraftImage:string){
+    this.editDraftImage = editDraftImage;
+  }
   getEditDraftName(){
     return this.editDraftName;
   }
+  getEditDraftImage(){
+    return this.editDraftImage;
+  }
+
 
 
   draft:string = "default"
@@ -349,6 +357,7 @@ export class CustomcardsService {
   editDrafts:boolean=false;
   editDraftID!:number;
   editDraftName!:string;
+  editDraftImage!:string;
 
 
   pack:string = "default"
@@ -557,7 +566,7 @@ export class CustomcardsService {
   }
 
   resubmitDraft(draft:Draft){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editdraft',draft   
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/editdraft',draft   
     )
   }
 
@@ -630,5 +639,7 @@ export class CustomcardsService {
   resubmitDecklist(decklist:Decklist){
     return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editdeck`,decklist);
   }
-  
+  deleteMatch(id:any){
+    return this.http.post<any>(`http://127.0.0.1:8080/api/yugioh/deletematch`,id);
+  }
 }

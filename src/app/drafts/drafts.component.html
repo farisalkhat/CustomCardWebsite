@@ -5,13 +5,32 @@
     <!-- <button type="button" class="btn btn-success"  *ngIf="_authService.loggedIn()" routerLink="/draft-maker" routerLinkActive = "active">Create a Draft List</button>
     <button type="button" class="btn btn-success"  *ngIf="_authService.loggedIn()" (click) ="editDraft(true)" routerLink="/draftmode" routerLinkActive = "active">Edit a Draft List</button> -->
  
-    <button type="button" class="btn btn-success"  (click) ="setDraft('default')"   routerLink="/draft-form" routerLinkActive = "active">Start a Draft</button>
+    <!-- <button type="button" class="btn btn-success"  (click) ="setDraft('default')"   routerLink="/draft-form" routerLinkActive = "active">Start a Draft</button>
 
-    <button type="button" class="btn btn-success"  (click) ="setDraft('generic')" routerLink="/draft-form" routerLinkActive = "active">Start a Generic Draft</button>
+    <button type="button" class="btn btn-success"  (click) ="setDraft('generic')" routerLink="/draft-form" routerLinkActive = "active">Start a Generic Draft</button> -->
 
     <span *ngFor = "let draft of drafts">
-      <button class="btn btn-success" (click)="setCustomDraft(draft.title)" routerLink="/draft-form" routerLinkActive = "active">{{draft.title}}</button>
+
+        
+        <div (click)="setCustomDraft(draft.title)" routerLink="/draft-form" class="card rounded">
+          <div class="crop rounded">
+            <div class="overlay-div"></div>
+            <img src='https://drive.google.com/uc?export=view&id={{draft?.draftimage}}' >
+            
+          </div>
+          
+          <div class="card-img-overlay">
+            <h5 class="text-center align-self-center mx-auto">{{draft.title}} </h5>
+          </div>
+        </div>
+
+
+
+
+      <!-- <button class="btn btn-success" (click)="setCustomDraft(draft.title)" routerLink="/draft-form" routerLinkActive = "active">{{draft.title}}</button> -->
   </span>
+
+
 
 </div>
 

@@ -36,7 +36,9 @@ export class DraftMakerComponent implements OnInit {
   done:boolean = false;
 
   draftCard!:Card | undefined;
+ 
 
+  draftMode:boolean = true;
 
   draftData= new FormGroup({
     draftTitle: new FormControl(' ',[
@@ -77,6 +79,7 @@ export class DraftMakerComponent implements OnInit {
   }
 
   card: Card | undefined;
+  draftImage: Card | undefined;
   monster!:string;
   attribute!:string;
   stType!:string;
@@ -85,6 +88,9 @@ export class DraftMakerComponent implements OnInit {
   username!:string;
   id!:number;
 
+  SetDraftMode(mode:boolean){
+    this.draftMode=mode;
+  }
   mouseHovering(card:Card,e:MouseEvent) {
 
     console.log(e.clientX);
@@ -302,6 +308,7 @@ export class DraftMakerComponent implements OnInit {
                     this.customcardsService.setProcessingDraft(true)
   
                     this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDraftName());
+                    
                   }
         
                 }
@@ -515,6 +522,12 @@ export class DraftMakerComponent implements OnInit {
   selectCard(id:string){
     this.card = this.cards.find(x => x.id == id);
   }
+
+  selectDraftImage(id:string){
+    this.draftImage = this.cards.find(x => x.id == id);
+    
+  }
+
 
 
   showDetails(card:Card){
@@ -755,11 +768,27 @@ export class DraftMakerComponent implements OnInit {
 
       const finaldata = {} as Draft;
       finaldata['ownerid']=this.id;
+      if(this.draftImage!=undefined){
+        finaldata['draftimage']= this.draftImage['drive_id'];
+      }
+      else{
+        if(this.customcardsService.getEditDraft()){
+          finaldata['draftimage']=this.customcardsService.getEditDraftImage();
+        }
+        else{
+          const randID = this.randomIntFromInterval(0,this.currentDraft.length-1)
+          let newCard = this.currentDraft[randID]
+          finaldata['draftimage'] = newCard['drive_id']
+        }
+        
+      }
+      
       
       if(!this.customcardsService.getEditDraft()){
         finaldata['title'] = this.draftData.controls['draftTitle'].value;
       }
       else{
+        finaldata['title'] = this.draftData.controls['draftTitle'].value;
         finaldata['id']=this.customcardsService.getEditDraftID();
       }
       
@@ -819,9 +848,16 @@ export class DraftMakerComponent implements OnInit {
 
   rightAddDraftCard($event: { preventDefault: () => void; },card:string){
     
-    this.selectCard(card);
-    $event.preventDefault();
-    this.addCard();
+    if(this.draftMode){
+      this.selectCard(card);
+      $event.preventDefault();
+      this.addCard();
+    }
+    else{
+      this.selectDraftImage(card);
+      $event.preventDefault();
+    }
+    
 
   }
 
@@ -833,7 +869,9 @@ export class DraftMakerComponent implements OnInit {
 
   }
 
-  
+  randomIntFromInterval(min:number, max:number) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
 
 
 

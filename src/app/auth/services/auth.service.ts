@@ -17,6 +17,7 @@ export class AuthService {
   id:number | undefined;
   username:number| undefined;
   currency:number| undefined;
+  role:string |undefined;
   constructor(private http:HttpClient, private router:Router) { 
   }
 
@@ -49,6 +50,7 @@ export class AuthService {
           this.username = res['username']
           this.id = res['id']
           this.currency = res['currency']
+          this.role = res['role']
         },
         err => {console.log(err)
           this.router.navigate(['/login'])})
@@ -99,9 +101,14 @@ export class AuthService {
     this.username =undefined;
     this.id = undefined;
     this.currency = undefined;
+    this.role = undefined;
   }
   getUserData(){
-    return(this.username,this.id,this.currency);
+    return(this.username,this.id,this.currency,this.role);
+  }
+  adminRole(){
+    if(this.role=='admin'){return true;}
+    return false;
   }
 }
  

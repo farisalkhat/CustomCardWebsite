@@ -69,10 +69,11 @@ export class DraftmodeComponent implements OnInit {
   }
 
     
-  editDraft(id:number,draft:string){
+  editDraft(id:number,draft:string,draftimage:string){
     this.customcardsService.editDraft(true);
     this.customcardsService.setEditDraftID(id);
     this.customcardsService.setEditDraftName(draft)
+    this.customcardsService.setEditDraftImage(draftimage)
     this._router.navigate(['/draft-maker']);
   }
 

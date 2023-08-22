@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
 import { CustomcardsService, PackButton, PackSelected, PackSelectedData } from '../customcards.service';
@@ -14,6 +14,11 @@ chosenPack:any;
  
 openingPacks:boolean = false;
 packLength:number = 0;
+maximized:boolean = true;
+@ViewChild('packtracker', { read: ElementRef }) public packtracker: ElementRef<any> | undefined;
+
+
+
 
   constructor(public router:Router,public _authService:AuthService,public customcardsService:CustomcardsService) { }
 
@@ -114,5 +119,10 @@ packLength:number = 0;
     this.openingPacks = true;
   }
   
+
+  minimizePackTracker(){
+    this.maximized = !this.maximized
+   
+  }
 
 }

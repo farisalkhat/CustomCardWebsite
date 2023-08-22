@@ -7,6 +7,7 @@
               <th scope="col">Duelists</th>
               <th scope="col">Result</th>
               <th scope="col">Replay</th>
+              <th scope="col" *ngIf="_authService.adminRole()">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -18,7 +19,10 @@
               <td *ngIf="match.result=='LOSS'"><a routerLink="/players/{{match.duelist2}}">{{match.d2Name}}</a> WINS!</td>
               <td *ngIf="match.result=='DRAW'">DRAW!</td>
               <td *ngIf="match.optional_link==null">N/A</td>
-              <td *ngIf="match.optional_link!=null"><a (click)="goToLink(match.optional_link)">LINK</a></td>
+              <td *ngIf="match.optional_link!=null"><a (click)="goToLink(match.optional_link)">LINK  </a>
+                
+              </td>
+              <td><button type="button" (click)="deleteMatch(match.id)" *ngIf="_authService.adminRole()" class="btn btn-danger">x</button></td>
             </tr>
           </tbody>
         </table>

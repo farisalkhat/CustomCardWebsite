@@ -4,7 +4,7 @@
         <div class="row">
             <h2>Profile Image</h2>
             <p class="text-center"><button class="btn btn-default" (click)="selectCardEdit(0)" >
-                <img class="smallcard" src="assets/cardimages/{{newSettings.profile_image}}.png">
+                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.profile_image}}'>
             </button></p>
             
         </div>
@@ -13,20 +13,21 @@
     
             <p class="text-center">
             <button class="button btn btn-default" (click)="selectCardEdit(1)" >
-                <img class="smallcard" src="assets/cardimages/{{newSettings.favorite_card1}}.png">
+                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.favorite_card1}}'>
             </button>
             <button class="button btn btn-default" (click)="selectCardEdit(2)" >
-                <img class="smallcard" src="assets/cardimages/{{newSettings.favorite_card2}}.png">
+                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.favorite_card2}}'>
             </button>
             <button class="button btn btn-default" (click)="selectCardEdit(3)" >
-                <img class="smallcard" src="assets/cardimages/{{newSettings.favorite_card3}}.png">
+                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.favorite_card3}}'>
             </button>
             <button class="button btn btn-default" (click)="selectCardEdit(4)" >
-                <img class="smallcard" src="assets/cardimages/{{newSettings.favorite_card4}}.png">
+                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.favorite_card4}}'>
             </button>
             <button class="button btn btn-default" (click)="selectCardEdit(5)" >
-                <img class="smallcard" src="assets/cardimages/{{newSettings.favorite_card5}}.png">
+                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.favorite_card5}}'>
             </button>
+            
         </p>
     
             
@@ -86,7 +87,7 @@
             
                         <span *ngFor = "let card of currentCards">
             
-                            <button  class="btn btn-default"   (click)="setCard(card.id)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
+                            <button  class="btn btn-default"   (click)="setCard(card.drive_id)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
                         </span>
             
                     

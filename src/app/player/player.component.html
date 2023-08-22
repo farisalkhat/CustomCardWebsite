@@ -11,12 +11,14 @@
           <thead >
             <tr>
               <th scope="col">Player</th>
+              <th scope="col">Role</th>
 
             </tr>
           </thead>
           <tbody *ngFor="let player of players ">
             <tr>
               <td> <a routerLink='/players/{{player.id}}'>{{player?.username}}</a></td>
+              <td> {{player?.role}}</td>
   
             </tr>
           </tbody>

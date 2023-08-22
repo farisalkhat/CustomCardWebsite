@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomcardsService } from '../customcards.service';
+import { AuthService } from '../auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-matches',
@@ -8,7 +10,7 @@ import { CustomcardsService } from '../customcards.service';
 })
 export class MatchesComponent implements OnInit {
 
-  constructor(public customcardsService:CustomcardsService) { }
+  constructor(private _router: Router, public _authService:AuthService,public customcardsService:CustomcardsService) { }
 
   matches:any[] = []
   ngOnInit(): void {
@@ -34,6 +36,18 @@ export class MatchesComponent implements OnInit {
       console.log(sublink)
       console.log("Someone's been a naughty boy!")
     }
+  }
+
+  deleteMatch(id:number){
+    let match = {id}
+    match['id']=id
+
+    this.customcardsService.deleteMatch(match).subscribe(
+      res => {
+        if(res){
+          location.reload();
+        }
+      })
   }
 
 }

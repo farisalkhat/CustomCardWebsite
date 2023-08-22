@@ -1,7 +1,16 @@
 <div class="container">
   <span *ngFor = "let draft of drafts">
     
-    <button class="btn btn-success"  (click)="editDraft(draft.id,draft.title)" >{{draft.title}}</button>
-    
+    <div (click)="editDraft(draft.id,draft.title,draft.draftimage)"  class="card rounded">
+      <div class="crop rounded">
+        <div class="overlay-div"></div>
+        <img src='https://drive.google.com/uc?export=view&id={{draft?.draftimage}}' >
+        
+      </div>
+      
+      <div class="card-img-overlay">
+        <h5 class="text-center align-self-center mx-auto">{{draft.title}} </h5>
+      </div>
+    </div>
 </span>
 </div>
