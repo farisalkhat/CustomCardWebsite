@@ -9,26 +9,30 @@
 
     <button type="button" class="btn btn-success"  (click) ="setDraft('generic')" routerLink="/draft-form" routerLinkActive = "active">Start a Generic Draft</button> -->
 
-    <span *ngFor = "let draft of drafts">
+    
 
-        
-        <div (click)="setCustomDraft(draft.title)" routerLink="/draft-form" class="card rounded">
-          <div class="crop rounded">
-            <div class="overlay-div"></div>
-            <img src='https://drive.google.com/uc?export=view&id={{draft?.draftimage}}' >
-            
-          </div>
-          
-          <div class="card-img-overlay">
-            <h5 class="text-center align-self-center mx-auto">{{draft.title}} </h5>
+        <div class="row">
+          <div *ngFor = "let draft of drafts" class="col-auto">
+            <div (click)="setCustomDraft(draft.title)" routerLink="/draft-form" class="card rounded">
+              <div class="crop rounded">
+                <div class="overlay-div rounded"></div>
+                <img src='https://drive.google.com/uc?export=view&id={{draft?.draftimage}}' >
+                
+              </div>
+              
+              <div class="card-img-overlay">
+                <h5 class="text-center align-self-center mx-auto">{{draft.title}} </h5>
+              </div>
+            </div>
           </div>
         </div>
+        
 
 
 
 
       <!-- <button class="btn btn-success" (click)="setCustomDraft(draft.title)" routerLink="/draft-form" routerLinkActive = "active">{{draft.title}}</button> -->
-  </span>
+  
 
 
 

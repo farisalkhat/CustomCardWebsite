@@ -642,4 +642,16 @@ export class CustomcardsService {
   deleteMatch(id:any){
     return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/deletematch`,id);
   }
+
+  submitCSVFile( file:any) {
+    const uploadedFile = new FormData();
+    uploadedFile.append( 'file', new Blob([file], { type: 'text/csv' }), file.name);
+    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitCSV`, uploadedFile);
+  }
+  deleteCard(card:Card){
+    const cardID = new FormData();
+    cardID.append('cardid',card.id)
+    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/deleteCard`, cardID);
+    
+  }
 }

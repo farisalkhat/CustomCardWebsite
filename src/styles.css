@@ -71,6 +71,11 @@ label{
     color:#1f1a1f;
 }
 
+.button-danger{
+    font-family: 'Oswald', sans-serif;
+    color:white;
+    font-size: x-large;
+}
 .btn-success{
     font-family: 'Oswald', sans-serif;
     color:white;

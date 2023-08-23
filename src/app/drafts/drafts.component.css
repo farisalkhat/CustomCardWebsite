@@ -25,10 +25,15 @@ a{
 
 .card:hover{
     cursor:pointer;
+    opacity: 1;
+    
 }
 .card{
     width:200px;
     height:100px;
+    opacity:.85;
+    transition: .5s;
+    
 }
 
 .crop {
@@ -41,6 +46,7 @@ a{
 .crop img {
     width:133%;
     margin: -72px 500px 0px -33px;
+    background-color: #000;
 }
 
 .card-title{
@@ -50,6 +56,7 @@ a{
 
 .card-img-overlay{
     color:white;
+    font-family: 'Oswald', sans-serif;
 }
 
 .overlay-div{
@@ -57,5 +64,13 @@ a{
     width: 200px;
     position:absolute;
     background-color:#000;
-    opacity:.7;
+    opacity:.4;
+    transition: 0.3s;
  }
+ .overlay-div:hover{
+    background-color:blue;
+    
+ }
+
+
+ 

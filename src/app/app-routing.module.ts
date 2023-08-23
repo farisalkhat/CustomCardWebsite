@@ -33,7 +33,8 @@ import { MatchesComponent } from './matches/matches.component';
 import { SettingsComponent } from './settings/settings.component';
 import { DuelistDecklistsComponent } from './decklists/duelist-decklists/duelist-decklists.component';
 import { UploadDecklistComponent } from './upload-decklist/upload-decklist.component';
-
+import {DatabaseComponent} from './database/database.component';
+import {AdminComponent} from './admin/admin.component';
 const routes: Routes = [
   {
     path:'',
@@ -102,7 +103,11 @@ component:SettingsComponent},
 {path:'duelist-decklists',
 component:DuelistDecklistsComponent},
 {path:'upload-decklist',
-component:UploadDecklistComponent}
+component:UploadDecklistComponent},
+{path:'database',
+component:DatabaseComponent},
+{path:'admin',
+component:AdminComponent}
 
 
 ];

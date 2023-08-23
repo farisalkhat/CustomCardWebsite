@@ -47,6 +47,8 @@ import { DuelistDecklistsComponent } from './decklists/duelist-decklists/duelist
 import { UploadDecklistComponent } from './upload-decklist/upload-decklist.component';
 import { AboutComponent } from './settings/about/about.component';
 import { AccountComponent } from './settings/account/account.component';
+import { DatabaseComponent } from './database/database.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -93,7 +95,9 @@ import { AccountComponent } from './settings/account/account.component';
     DuelistDecklistsComponent,
     UploadDecklistComponent,
     AboutComponent,
-    AccountComponent
+    AccountComponent,
+    DatabaseComponent,
+    AdminComponent
   ],
   imports: [
     HttpClientModule,

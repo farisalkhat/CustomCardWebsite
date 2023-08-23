@@ -112,6 +112,7 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="/collections" >Collection</a>
               </li>
+              <li *ngIf="_authService.adminRole()"><a class="nav-link" routerLink="/database">Database</a></li>
             </ul>
           </li>
 

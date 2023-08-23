@@ -56,6 +56,8 @@
 
 </div>
 
-
+<div>
+    <button *ngIf="_authService.adminRole()" (click)="confirmDelete()"class="btn btn-danger">Delete Card?</button>
+</div>
 
 </div>

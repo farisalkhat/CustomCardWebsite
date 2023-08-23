@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Card, CustomcardsService } from '../customcards.service';
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
   selector: 'app-card-details',
@@ -9,7 +10,7 @@ import { Card, CustomcardsService } from '../customcards.service';
 })
 export class CardDetailsComponent implements OnInit {
 
-  constructor(public route:ActivatedRoute,public customcardService:CustomcardsService) { }
+  constructor(public router:Router, public _authService:AuthService,public route:ActivatedRoute,public customcardService:CustomcardsService) { }
 
   cardid!:number;
   carddetails!:any;
@@ -33,7 +34,7 @@ export class CardDetailsComponent implements OnInit {
         (data:any)=>{
           this.carddetails = data;
           this.card = this.carddetails['carddetails']
-          console.log(this.card);
+          console.log(this.carddetails);
           this.showDetails()
         } 
       )
@@ -217,5 +218,24 @@ showDetails(){
 
   }
   
+}
+confirmDelete(){
+    if(this._authService.adminRole()){
+        if(this.carddetails['packdetails'].length!=0){
+            confirm("You cannot delete this card while it is in a pack!")
+        }
+        else{
+            let text = "Are you sure you want to delete this card?";
+            if (confirm(text) == true) {
+    
+                this.customcardService.deleteCard(this.card).subscribe(
+                    res=>{this.router.navigate(['/deck-editor']);},
+                    err=>{this.router.navigate(['/deck-editor']);}
+                )
+            } else {
+                text = "You canceled!";
+            }
+        }
+    }
 }
 }
