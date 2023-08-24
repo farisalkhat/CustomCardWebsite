@@ -14,6 +14,11 @@ export interface UserDetails extends Document{
 
 }
 
+export interface SiteData extends Document{
+  packs_opened:number,
+  dosh_spent:number,
+  cotd:number
+}
 
 
 export interface Card extends Document{
@@ -474,7 +479,7 @@ export class CustomcardsService {
   }
 
   getCustomCard(id:number){
-    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/${id}`);
+    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/card/${id}`);
   } 
 
   getCustomCardsByDraft(name:string){
@@ -653,5 +658,15 @@ export class CustomcardsService {
     cardID.append('cardid',card.id)
     return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/deleteCard`, cardID);
     
+  }
+
+  getSiteData(){
+    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/sitedata`);
+  }
+  getLatestPack(){
+    return this.http.get<PackButton>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/latestpack`);
+  }
+  updateCOTD(){
+    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/cotd`);
   }
 }

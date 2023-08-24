@@ -133,6 +133,9 @@
             <button type="button" (click)= "_authService.logoutUser()" *ngIf="_authService.loggedIn()" class="btn btn-success"   routerLinkActive = "active">Logout</button>
           </form>
       </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <button type="button" *ngIf="_authService.adminRole()" class="btn btn-success"  routerLink="/admin" routerLinkActive = "active">Admin</button>
+      </form>
       
       
     </div>

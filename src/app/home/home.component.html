@@ -1,8 +1,28 @@
 
 <div class="container">
-    <a href="https://farisalkhat.github.io/CustomCardWebsite/cards/2876404"><img class="center" src="https://drive.google.com/uc?export=view&id=13BEisqzWP1kXSbvwnCsmdQiuCb_PoId4"></a>
-    <!-- <img class="center" src="assets/images/Attic.png">
-    <h1 class="text-center">Coming Soon!</h1> -->
+    <!-- <a href="https://farisalkhat.github.io/CustomCardWebsite/cards/2876404"><img class="center" src="https://drive.google.com/uc?export=view&id=13BEisqzWP1kXSbvwnCsmdQiuCb_PoId4"></a> -->
+    <!-- <img class="center" src="assets/images/Attic.png"> -->
+
+    <div class="row alert alert-success center" role="alert">
+        <h4 class="text-center">{{sitedata?.packs_opened}} packs opened! {{sitedata?.dosh_spent}} dosh spent!</h4>
+      </div>
+    
+      <div class="row">
+        <div class="col">
+            <h1 class="text-center">Card of the Day!</h1>
+            <input class="center cotd" type="image" (click)="goToLink(cotd.id)" src="https://drive.google.com/uc?export=view&id={{cotd.drive_id}}" />
+    
+        </div>
+        <div class="col">
+            <h1 class="text-center">Latest Pack!</h1>
+            <img    *ngIf="latestpack.pack!='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack" src='https://drive.google.com/uc?export=view&id={{latestpack?.pack}}'>
+            
+    
+        </div>
+
+      </div>
+
+    
 </div>
 
 

@@ -41,4 +41,12 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  updateCOTD(){
+    console.log("lol")
+    this._ccService.updateCOTD().subscribe(
+      res=>{console.log("lol");
+      console.log(res)},
+      err=>{}
+    )
+  }
 }

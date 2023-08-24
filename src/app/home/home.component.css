@@ -4,3 +4,17 @@
     margin-right: auto;
     width: 50%;
   }
+
+  .alert{
+    width:50%
+  }
+
+
+  button{
+    padding:0;
+    margin:0;
+  }
+  .pack{
+    width:225px;
+    cursor: pointer;
+}
