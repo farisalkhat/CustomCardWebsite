@@ -442,7 +442,7 @@ export class CustomcardsService {
     return this.http.get<any[]>(this._carddataUrl);
   } 
   getRecentCards(){
-    return this.http.get<any[]>("http://127.0.0.1:8080/api/yugioh/recentcards");
+    return this.http.get<any[]>("https://mm8bitdm-ygo.herokuapp.com/api/yugioh/recentcards");
   } 
   getCustomCardsIDs(){
     return this.http.get<any[]>("https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards-ids");
