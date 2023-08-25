@@ -35,6 +35,7 @@ import { DuelistDecklistsComponent } from './decklists/duelist-decklists/duelist
 import { UploadDecklistComponent } from './upload-decklist/upload-decklist.component';
 import {DatabaseComponent} from './database/database.component';
 import {AdminComponent} from './admin/admin.component';
+import {EditorComponent} from './editor/editor.component';
 const routes: Routes = [
   {
     path:'',
@@ -107,7 +108,9 @@ component:UploadDecklistComponent},
 {path:'database',
 component:DatabaseComponent},
 {path:'admin',
-component:AdminComponent}
+component:AdminComponent},
+{path:'editor',
+component:EditorComponent}
 
 
 ];

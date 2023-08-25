@@ -1,16 +1,104 @@
 
-<div class="container">
+<div class="container center">
     <!-- <a href="https://farisalkhat.github.io/CustomCardWebsite/cards/2876404"><img class="center" src="https://drive.google.com/uc?export=view&id=13BEisqzWP1kXSbvwnCsmdQiuCb_PoId4"></a> -->
-    <!-- <img class="center" src="assets/images/Attic.png"> -->
+    <img class="center" src="assets/images/Attic2.png">
 
-    <div class="row alert alert-success center" role="alert">
-        <h4 class="text-center">{{sitedata?.packs_opened}} packs opened! {{sitedata?.dosh_spent}} dosh spent!</h4>
+    <div class="alert alert-success" role="alert">
+        <h4 class="">{{sitedata?.packs_opened}} packs opened! {{sitedata?.dosh_spent}} dosh spent!</h4>
       </div>
-    
+      
+      <div class="row">
+        <div class="col">
+            <div routerLink="/packs" class="card rounded">
+                <div class="crop rounded">
+                    <div class="overlay-div rounded"></div>
+                    <img src='https://drive.google.com/uc?export=view&id=19VB5LayxB2aVaDaIcMiayyJPdgaErxY_' >
+              
+                </div>
+            
+                <div class="card-img-overlay">
+                    <p class="text-center align-self-center mx-auto">Pack Opener </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div routerLink="/deck-editor" class="card rounded">
+                <div class="crop rounded">
+                    <div class="overlay-div rounded"></div>
+                    <img src='https://drive.google.com/uc?export=view&id=1Mm-cHxvBBwRu2ADvgVFzYhu-PfKvheEa' >
+              
+                </div>
+            
+                <div class="card-img-overlay">
+                    <p class="text-center align-self-center mx-auto">Deck Editor </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div routerLink="/decklists" class="card rounded">
+                <div class="crop rounded">
+                    <div class="overlay-div rounded"></div>
+                    <img src='https://drive.google.com/uc?export=view&id=11ik2eREdiLg6df2qHSU7uXgzdOAA7c7V' >
+              
+                </div>
+            
+                <div class="card-img-overlay">
+                    <p class="text-center align-self-center mx-auto">Decklists </p>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <div routerLink="/draft-maker" class="card rounded">
+                <div class="crop rounded">
+                    <div class="overlay-div rounded"></div>
+                    <img src='https://drive.google.com/uc?export=view&id=1BnruNoN42c-l6iuJMt-G0tNdQLsYqp6k' >
+              
+                </div>
+            
+                <div class="card-img-overlay">
+                    <p class="text-center align-self-center mx-auto">Draft Creator </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div (click)="goToSealedDraft()" routerLink="/packs" class="card rounded">
+                <div class="crop rounded">
+                    <div class="overlay-div rounded"></div>
+                    <img src='https://drive.google.com/uc?export=view&id=1FZ1bL7NpcZNq_hpnvz084O_R2je0FOrC' >
+              
+                </div>
+            
+                <div class="card-img-overlay">
+                    <p class="text-center align-self-center mx-auto">Sealed Draft </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card rounded">
+                <div class="crop rounded">
+                    <div class="overlay-div rounded"></div>
+                    <img src='https://drive.google.com/uc?export=view&id=1YDqy4PUS8ICjV-w9MVOAG_hKO3xAwsLJ' >
+              
+                </div>
+            
+                <div class="card-img-overlay">
+                    <p class="text-center align-self-center mx-auto">Popular Cards </p>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+            <h1 class="text-center">Latest Articles</h1>
+        </div>
+      </div>
       <div class="row">
         <div class="col">
             <h1 class="text-center">Card of the Day!</h1>
-            <input class="center cotd" type="image" (click)="goToLink(cotd.id)" src="https://drive.google.com/uc?export=view&id={{cotd.drive_id}}" />
+            <input class="center" type="image" (click)="goToLink(cotd.id)" src="https://drive.google.com/uc?export=view&id={{cotd.drive_id}}" />
     
         </div>
         <div class="col">
@@ -22,9 +110,29 @@
 
       </div>
 
+      
+        
+
+      <div class="row">
+        <div class="col">
+            <h1 class="text-center">Featured Decklists</h1>
+        </div>
+      </div>
+
     
 </div>
 
 
 
- 
+<div class="row align-items-center justify-content-center">
+
+        <h1 class="text-center">Newest Cards</h1>
+
+        <div  *ngFor = "let card of cards"class="col-sm-2">
+            
+                <input class="center cotd" type="image" routerLink="/cards/{{card.id}}" src="https://drive.google.com/uc?export=view&id={{card.drive_id}}" />
+            
+            
+        </div>
+
+  </div>

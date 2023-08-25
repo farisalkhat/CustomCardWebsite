@@ -49,8 +49,8 @@ import { AboutComponent } from './settings/about/about.component';
 import { AccountComponent } from './settings/account/account.component';
 import { DatabaseComponent } from './database/database.component';
 import { AdminComponent } from './admin/admin.component';
-
-
+import { EditorComponent } from './editor/editor.component';
+import { NgxEditorModule } from 'node_modules/ngx-editor';
 
 @NgModule({
   declarations: [
@@ -97,7 +97,8 @@ import { AdminComponent } from './admin/admin.component';
     AboutComponent,
     AccountComponent,
     DatabaseComponent,
-    AdminComponent
+    AdminComponent,
+    EditorComponent
   ],
   imports: [
     HttpClientModule,
@@ -105,7 +106,9 @@ import { AdminComponent } from './admin/admin.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ImageCropperModule
+    ImageCropperModule,
+    NgxEditorModule
+
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

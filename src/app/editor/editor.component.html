@@ -1,0 +1,43 @@
+<div class="container">
+
+  <div class="row">
+    <form [formGroup]="articleInfo" (ngSubmit)="submitArticle()">
+      <label class="sr-only">Title</label>
+      <input  formControlName = "title" name="title" type="text"  class="form-control" placeholder="Title" required autofocus
+      [ngClass]="{'is-invalid': submitted && f['title'].errors}">
+
+      <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+        peepee
+      </div>
+
+      <label class="sr-only">About</label>
+      <input  formControlName = "about" name="about" type="text"  class="form-control" placeholder="About" required
+      [ngClass]="{'is-invalid': submitted && f['about'].errors}">
+
+      <div *ngIf="submitted && f['about'].errors" class="invalid-feedback">
+        poopoo
+      </div>
+
+
+    </form>
+  </div>
+    
+
+
+
+    <div class="padup NgxEditor__Wrapper">
+      <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+      <ngx-editor
+        [editor]="editor"
+        [ngModel]="html"
+        [disabled]="false"
+        [placeholder]="'Type here...'"
+      ></ngx-editor>
+    </div>
+
+  
+
+    <button class="btn btn-success">Submit</button>
+
+</div>
+

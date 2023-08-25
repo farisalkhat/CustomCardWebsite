@@ -103,7 +103,13 @@
         <button (click)="openPack()" [disabled]="packLength==0 || totalCost>currency || totalCost==0"class="btn position-fixed bottom-0">Open Packs</button>
     </div>
 
-    <div *ngIf="sealedmode==true" class="packtracker position-fixed">
+    <div *ngIf="sealedmode==true" [ngClass]="maximized ? 'position-fixed bottom-0 end-0' : 'sidepush position-fixed bottom-0 end-0'" #packtracker class="packtracker ">
+        <button class="btn btn-success" (click)="minimizePackTracker()">
+            <span *ngIf="maximized">>></span>
+            <span *ngIf="!maximized"> << </span>
+            
+
+        </button>
         <p>Packs Selected</p>
         <div *ngFor="let pack of packTrackerArray"> 
 

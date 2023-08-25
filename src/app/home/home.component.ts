@@ -12,9 +12,14 @@ export class HomeComponent implements OnInit {
   sitedata!:SiteData
   cotd!:Card
   latestpack!:PackButton
+  cards!: Card[];
   constructor(public _router:Router,public _customCardsService:CustomcardsService) { }
 
   ngOnInit(): void {
+    this._customCardsService.getRecentCards().subscribe(
+      res=>{this.cards = res},
+      err=>{}
+    )
     this._customCardsService.getSiteData().subscribe(
       res=>{this.sitedata=res;
 
@@ -37,7 +42,10 @@ export class HomeComponent implements OnInit {
     )
   }
 
-
+  goToSealedDraft(){
+    this._customCardsService.setSealedDraftMode(true)
+    this._router.navigate(['/packs'])
+  }
   goToLink(url: string){
 
     let new_url =''
