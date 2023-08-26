@@ -7,7 +7,7 @@
         <h4 class="">{{sitedata?.packs_opened}} packs opened! {{sitedata?.dosh_spent}} dosh spent!</h4>
       </div>
       
-      <div class="row align-items-center justify-content-center">
+      <div class="row ">
         <div class="col">
             <div routerLink="/packs" class="card rounded center">
                 <div class="crop rounded ">
@@ -47,8 +47,6 @@
                 </div>
             </div>
         </div>
-      </div>
-      <div class="row">
         <div class="col">
             <div routerLink="/draft-maker" class="card rounded center">
                 <div class="crop rounded">
@@ -98,7 +96,7 @@
       <div class="row">
         <div class="col">
             <h1 class="text-center">Card of the Day!</h1>
-            <input class="center" type="image" (click)="goToLink(cotd.id)" src="https://drive.google.com/uc?export=view&id={{cotd.drive_id}}" />
+            <input class="center smaller" type="image" (click)="goToLink(cotd.id)" src="https://drive.google.com/uc?export=view&id={{cotd.drive_id}}" />
     
         </div>
         <div class="col">
@@ -123,12 +121,12 @@
 </div>
 
 
-
-<div class="row align-items-center justify-content-center">
+<div class="container2">
+    <div class="row justify-content-center">
 
         <h1 class="text-center">Newest Cards</h1>
 
-        <div  *ngFor = "let card of cards"class="col-sm-2">
+        <div  *ngFor = "let card of cards"class="col-md-2 ">
             
                 <input class="center cotd" type="image" routerLink="/cards/{{card.id}}" src="https://drive.google.com/uc?export=view&id={{card.drive_id}}" />
             
@@ -136,3 +134,4 @@
         </div>
 
   </div>
+</div>

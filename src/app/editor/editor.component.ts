@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Editor } from 'ngx-editor';
+import { Editor, Toolbar } from 'ngx-editor';
 import { AuthService } from '../auth/services/auth.service';
 import { CustomcardsService } from '../customcards.service';
-
+import { toHTML } from 'ngx-editor';
 
 @Component({
   selector: 'app-editor',
@@ -13,20 +13,32 @@ import { CustomcardsService } from '../customcards.service';
 })
 
 export class EditorComponent implements OnInit, OnDestroy {
+  htmlContent!:any;
   username:string | undefined;
   id:number | undefined
   currency!:number;
   editor!: Editor;
-  html!: '';
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
+  html!: 'asdasd';
   articleInfo = new FormGroup({
     title: new FormControl(undefined,[
       Validators.required,
       Validators.minLength(5)]),
     about: new FormControl(undefined,[
       Validators.required
-    ])
+    ]),
+    editorContent: new FormControl(null, [Validators.required]),
   }) 
-
+  theInnerHTML!:any;
   submitVerified = false;
   submitted = false;
   submitfail: boolean = false;
@@ -63,7 +75,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   submitArticle(){
-    return
+    this.theInnerHTML =  toHTML(this.articleInfo.controls['editorContent'].value);
   }
 
   constructor(public _ccService:CustomcardsService, public _authService:AuthService,public router:Router) { }

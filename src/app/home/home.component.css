@@ -51,18 +51,26 @@ a{
   
 }
 .card{
-  width:250px;
+  width:325px;
   height:75px;
   opacity:.85;
   transition: .5s;
   
 }
 
-.cotd{
-  width:200px;
+.row-small{
+  width:90%;
+  align-items: center;
+  text-align: center;
+  align-content: center;
 }
+.cotd{
+  width:300px;
+}
+
+
 .crop {
-  width: 250px;
+  width: 325px;
   height: 75px;
   overflow: hidden;
   object-fit: cover;
@@ -70,10 +78,12 @@ a{
 }
 .crop img {
   width:133%;
-  margin: -150px 600px 0px -40px;
+  margin: -170px 6000px 0px -52px;
   background-color: #000;
 }
-
+.smaller{
+  width:275px;
+}
 .card-title{
   color:white;
   font-size: 5.2em;
@@ -92,7 +102,7 @@ p{
 
 
 .overlay-div{
-  width:250px;
+  width:325px;
   height:75px;
   position:absolute;
   background-color:#000;

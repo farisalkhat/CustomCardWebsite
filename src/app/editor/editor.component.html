@@ -18,6 +18,16 @@
         poopoo
       </div>
 
+      <div class="padup NgxEditor__Wrapper">
+        <ngx-editor-menu  [toolbar]="toolbar" [editor]="editor"> </ngx-editor-menu>
+        <ngx-editor
+        formControlName="editorContent"
+          [editor]="editor"
+          [ngModel]="html"
+          [disabled]="false"
+          [placeholder]="'Type here...'"
+        ></ngx-editor>
+      </div>
 
     </form>
   </div>
@@ -25,19 +35,18 @@
 
 
 
-    <div class="padup NgxEditor__Wrapper">
-      <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-      <ngx-editor
-        [editor]="editor"
-        [ngModel]="html"
-        [disabled]="false"
-        [placeholder]="'Type here...'"
-      ></ngx-editor>
-    </div>
+
 
   
 
-    <button class="btn btn-success">Submit</button>
+    <button (click)="submitArticle()"class="btn btn-success">Submit</button>
+
+    <div>
+      <p [innerHTML] = "theInnerHTML">
+      </p>
+    </div>
+
+    
 
 </div>
 
