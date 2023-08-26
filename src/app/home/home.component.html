@@ -1,5 +1,5 @@
 
-<div class="container center">
+<div class="container2 center">
     <!-- <a href="https://farisalkhat.github.io/CustomCardWebsite/cards/2876404"><img class="center" src="https://drive.google.com/uc?export=view&id=13BEisqzWP1kXSbvwnCsmdQiuCb_PoId4"></a> -->
     <img class="center" src="assets/images/Attic2.png">
 
@@ -94,12 +94,12 @@
         </div>
       </div>
       <div class="row">
-        <div class="col">
+        <div class="col-md-6 col-6">
             <h1 class="text-center">Card of the Day!</h1>
             <input class="center smaller" type="image" (click)="goToLink(cotd.id)" src="https://drive.google.com/uc?export=view&id={{cotd.drive_id}}" />
     
         </div>
-        <div class="col">
+        <div class="col-md-6 col-6">
             <h1 class="text-center">Latest Pack!</h1>
             <img    *ngIf="latestpack.pack!='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack" src='https://drive.google.com/uc?export=view&id={{latestpack?.pack}}'>
             
@@ -126,9 +126,9 @@
 
         <h1 class="text-center">Newest Cards</h1>
 
-        <div  *ngFor = "let card of cards"class="col-md-2 ">
+        <div  *ngFor = "let card of cards"class="col-md-4 col-lg-2 col-4 ">
             
-                <input class="center cotd" type="image" routerLink="/cards/{{card.id}}" src="https://drive.google.com/uc?export=view&id={{card.drive_id}}" />
+                <input class="center cotd  " type="image" routerLink="/cards/{{card.id}}" src="https://drive.google.com/uc?export=view&id={{card.drive_id}}" />
             
             
         </div>

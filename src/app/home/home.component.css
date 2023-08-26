@@ -64,9 +64,7 @@ a{
   text-align: center;
   align-content: center;
 }
-.cotd{
-  width:300px;
-}
+
 
 
 .crop {
@@ -82,7 +80,10 @@ a{
   background-color: #000;
 }
 .smaller{
-  width:275px;
+  width:250px;
+}
+.cotd{
+  width:175px;
 }
 .card-title{
   color:white;
