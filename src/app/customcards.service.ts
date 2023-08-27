@@ -701,18 +701,18 @@ export class CustomcardsService {
   }
   submitArticle(article:ArticleSubmit){
     console.log(article)
-    return this.http.post<any>(`http://127.0.0.1:8080/api/yugioh/submitArticle`, article);
+    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitArticle`, article);
   }
   getArticles(){
-    return this.http.get<any>(`http://127.0.0.1:8080/api/yugioh/articles`);
+    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/articles`);
   }
   getArticle(id:number){
-    return this.http.get<any>(`http://127.0.0.1:8080/api/yugioh/articles/${id}`);
+    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/articles/${id}`);
   }
   updateArticle(article:ArticleUpdate){
-    return this.http.post<any>(`http://127.0.0.1:8080/api/yugioh/updateArticle`, article);
+    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/updateArticle`, article);
   }
   deleteArticle(article:Article){
-    return this.http.post<any>(`http://127.0.0.1:8080/api/yugioh/deleteArticle`, article);
+    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/deleteArticle`, article);
   }
 }
