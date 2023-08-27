@@ -10,6 +10,15 @@
         peepee
       </div>
 
+      <label class="sr-only">Header Image Link</label>
+      <input  formControlName = "header_img" name="header_img" type="text"  class="form-control" placeholder="header_img" required
+      [ngClass]="{'is-invalid': submitted && f['header_img'].errors}">
+
+      <div *ngIf="submitted && f['header_img'].errors" class="invalid-feedback">
+        poopoo
+      </div>
+
+
       <label class="sr-only">About</label>
       <input  formControlName = "about" name="about" type="text"  class="form-control" placeholder="About" required
       [ngClass]="{'is-invalid': submitted && f['about'].errors}">

@@ -36,6 +36,8 @@ import { UploadDecklistComponent } from './upload-decklist/upload-decklist.compo
 import {DatabaseComponent} from './database/database.component';
 import {AdminComponent} from './admin/admin.component';
 import {EditorComponent} from './editor/editor.component';
+import { ArticleDetailsComponent } from './articles/article-details/article-details.component';
+import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
 const routes: Routes = [
   {
     path:'',
@@ -110,7 +112,11 @@ component:DatabaseComponent},
 {path:'admin',
 component:AdminComponent},
 {path:'editor',
-component:EditorComponent}
+component:EditorComponent},
+{path:'articles/:articleid',
+component:ArticleDetailsComponent},
+{path:'articles/edit/:articleid',
+component:ArticleEditComponent}
 
 
 ];

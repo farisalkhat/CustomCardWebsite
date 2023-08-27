@@ -8,7 +8,14 @@ button{
     font-size:1.5rem;
     font-family: 'Oswald', sans-serif;
 }
-
+p{
+    font-family: 'Oswald', sans-serif;
+    color:#1f1a1f;
+}
+span{
+    font-family: 'Oswald', sans-serif;
+    color:#1f1a1f;
+}
 input{
     width:100px;
 }

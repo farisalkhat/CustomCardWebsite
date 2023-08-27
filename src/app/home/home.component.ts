@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomcardsService,SiteData,Card, PackInfo, PackButton } from '../customcards.service';
+import { CustomcardsService,SiteData,Card, PackInfo, PackButton, Article } from '../customcards.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,9 +13,19 @@ export class HomeComponent implements OnInit {
   cotd!:Card
   latestpack!:PackButton
   cards!: Card[];
+  articles!:Article[];
+  article!:Article;
   constructor(public _router:Router,public _customCardsService:CustomcardsService) { }
 
   ngOnInit(): void {
+    this._customCardsService.getArticles().subscribe(
+      res=>{this.articles=res
+
+        this.article = this.articles[this.articles.length-1]
+        this.articles.pop()
+      },
+      err=>{}
+    )
     this._customCardsService.getRecentCards().subscribe(
       res=>{this.cards = res},
       err=>{}

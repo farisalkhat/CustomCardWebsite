@@ -16,7 +16,14 @@ select{
  
 
 }
-
+p{
+    font-family: 'Oswald', sans-serif;
+    color:#1f1a1f;
+}
+span{
+    font-family: 'Oswald', sans-serif;
+    color:#1f1a1f;
+}
 p{
     font-size: 32px;
 }

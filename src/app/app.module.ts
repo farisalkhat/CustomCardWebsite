@@ -51,6 +51,8 @@ import { DatabaseComponent } from './database/database.component';
 import { AdminComponent } from './admin/admin.component';
 import { EditorComponent } from './editor/editor.component';
 import { NgxEditorModule } from 'node_modules/ngx-editor';
+import { ArticleDetailsComponent } from './articles/article-details/article-details.component';
+import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +100,9 @@ import { NgxEditorModule } from 'node_modules/ngx-editor';
     AccountComponent,
     DatabaseComponent,
     AdminComponent,
-    EditorComponent
+    EditorComponent,
+    ArticleDetailsComponent,
+    ArticleEditComponent
   ],
   imports: [
     HttpClientModule,

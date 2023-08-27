@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="col">
-            <div class="card rounded center">
+            <div routerLink="/articles" class="card rounded center">
                 <div class="crop rounded">
                     <div class="overlay-div rounded"></div>
                     <img src='https://drive.google.com/uc?export=view&id=1YDqy4PUS8ICjV-w9MVOAG_hKO3xAwsLJ' >
@@ -82,7 +82,7 @@
                 </div>
             
                 <div class="card-img-overlay">
-                    <p class="text-center align-self-center mx-auto">Popular Cards </p>
+                    <p class="text-center align-self-center mx-auto">Articles </p>
                 </div>
             </div>
         </div>
@@ -91,6 +91,43 @@
       <div class="row">
         <div class="col">
             <h1 class="text-center">Latest Articles</h1>
+
+            <div class="row">
+
+                <div id="carouselExample" class="carousel slide">
+                    <div class="carousel-inner">
+                        
+                        <div  routerLink="/articles/{{article.id}}" class="carousel-item active">
+                            <img src="{{article.header_img}}" class="d-block" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{article.title}} by {{article.username}}</h5>
+                                <p>{{article.header}}</p>
+                              </div>
+                          </div>
+
+
+                      <div routerLink="/articles/{{article.id}}" *ngFor="let article of articles" class="carousel-item">
+                        <img src="{{article.header_img}}" class="d-block" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{article.title}} by <a routerLink="users/{{article.author}}">{{article.username}}</a></h5>
+                            <p>{{article.header}}</p>
+                          </div>
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+    
+
+    </div>
+
+
         </div>
       </div>
       <div class="row">

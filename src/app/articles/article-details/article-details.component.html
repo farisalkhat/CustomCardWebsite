@@ -1,0 +1,22 @@
+<div class="container">
+
+
+    <div class="card center " style="width:903px;">
+        <img class="card-img-top" src="{{article.header_img}}" alt="Card image cap">
+        <div class="card-body" >
+            <h1 class="text-center">{{article?.title}}</h1>
+          <p class="card-text text-center" >{{article.header}}</p>
+          
+        </div>
+      </div>
+      <p>Article written by <a routerLink="/players/{{article?.author}}">{{article?.username}}</a> </p>
+
+
+    <h1>{{article?.title}}<button class="btn btn-danger" *ngIf="article?.author==id" (click)="confirmDelete()">Delete</button>  
+      <button class="btn btn-warning" *ngIf="article?.author==id" routerLink="/articles/edit/{{articleid}}">Edit</button></h1>
+    
+    <h2>{{article?.header}}</h2>
+    
+
+    <span [innerHTML]="article.body"></span>
+</div>

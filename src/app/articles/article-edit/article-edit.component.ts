@@ -1,25 +1,29 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup, FormControl,Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Editor, Toolbar } from 'ngx-editor';
-import { AuthService } from '../auth/services/auth.service';
-import { Article, ArticleSubmit, CustomcardsService } from '../customcards.service';
-import { toHTML } from 'ngx-editor';
-
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { Article, ArticleSubmit, ArticleUpdate, CustomcardsService } from 'src/app/customcards.service';
+import { toHTML,toDoc } from 'ngx-editor';
 @Component({
-  selector: 'app-editor',
-  templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css']
+  selector: 'app-article-edit',
+  templateUrl: './article-edit.component.html',
+  styleUrls: ['./article-edit.component.css']
 })
+export class ArticleEditComponent implements OnInit, OnDestroy {
 
-export class EditorComponent implements OnInit, OnDestroy {
+  constructor( public route:ActivatedRoute, public _ccService:CustomcardsService, public _authService:AuthService,public router:Router) { }
+
+  article!:Article;
+  articleid!:number;
+
+  initialBody!:any;
+
   htmlContent!:any;
   username:string | undefined;
   id!:number;
   currency!:number;
   editor!: Editor;
-
-  article!:Article;
 
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -49,6 +53,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   submitted = false;
   submitfail: boolean = false;
   get f(){return this.articleInfo.controls;}
+
+
   ngOnInit(): void {
     this.editor = new Editor();
     if (this._authService.loggedIn() && this._authService.adminRole()){
@@ -59,6 +65,30 @@ export class EditorComponent implements OnInit, OnDestroy {
           this.username = res['username']
           this.id = res['id']
           this.currency = res['currency']
+
+          this.route.paramMap.subscribe((paramMap)=>{
+            this.articleid = Number(paramMap.get('articleid'));
+            this._ccService.getArticle(this.articleid).subscribe(
+              (data:any)=>{
+                this.article = data;
+                if(this.article['author']!=this.id){
+                  this.router.navigate(['/home']);
+                }
+                this.initialBody=this.article['body']
+                this.editor.setContent(this.initialBody);
+
+                this.articleInfo.setValue({
+                  title:this.article['title'],
+                  about:this.article['header'],
+                  header_img:this.article['header_img'],
+                  editorContent:this.initialBody
+                });
+
+
+              } 
+            )
+          })
+
         },
         err => {console.log(err)
 
@@ -71,6 +101,10 @@ export class EditorComponent implements OnInit, OnDestroy {
 
       this.router.navigate(['/home'])
     }
+
+
+
+
   }
 
   // make sure to destory the editor
@@ -78,26 +112,25 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.editor.destroy();
   }
 
+
   submitArticle(){
-    const final = {} as ArticleSubmit
-    this.theInnerHTML =  toHTML(this.articleInfo.controls['editorContent'].value);
+    const final = {} as ArticleUpdate
+    this.theInnerHTML =  this.articleInfo.controls['editorContent'].value;
     console.log(this.theInnerHTML)
 
+    final.article_id=this.articleid;
     final.author= this.id;
     final.header_img = this.articleInfo.controls['header_img'].value;
     final.title = this.articleInfo.controls['title'].value;
     final.header = this.articleInfo.controls['about'].value;
     final.article = this.theInnerHTML;
-    this._ccService.submitArticle(final).subscribe(
+    this._ccService.updateArticle(final).subscribe(
       res=>{
         console.log(res);
-        let navigation = '/articles/'+ res['article_id'].toString()
+        let navigation = '/articles/'+ this.articleid.toString()
         this.router.navigate([navigation])},
       err=>{}
     )
   }
 
-
-
-  constructor(public _ccService:CustomcardsService, public _authService:AuthService,public router:Router) { }
 }

@@ -11,7 +11,14 @@
 .binder{
     font-size: xx-large;
 }
-
+p{
+  font-family: 'Oswald', sans-serif;
+  color:#1f1a1f;
+}
+span{
+  font-family: 'Oswald', sans-serif;
+  color:#1f1a1f;
+}
 
 .col-auto{
     max-width: 1200px;

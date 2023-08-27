@@ -54,5 +54,10 @@ a{
     padding:0;
     margin:0;
 }
+nav{
+    font-family: 'Oswald', sans-serif;
+    font-size: medium;
+    
+}
 
 }

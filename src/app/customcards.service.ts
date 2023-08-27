@@ -14,6 +14,33 @@ export interface UserDetails extends Document{
 
 }
 
+export interface ArticleSubmit extends Document{
+  author:number;
+  title:string;
+  header:string;
+  header_img:string;
+  article:string;
+}
+export interface ArticleUpdate extends Document{
+  article_id:number;
+  author:number;
+  title:string;
+  header:string;
+  header_img:string;
+  article:string;
+}
+export interface Article extends Document{
+  id:number;
+  author:number;
+  title:string;
+  header:string;
+  header_img:string;
+  article:string;
+  creation_time:string
+  modification_time:string
+  username:string;
+  
+}
 export interface SiteData extends Document{
   packs_opened:number,
   dosh_spent:number,
@@ -671,5 +698,21 @@ export class CustomcardsService {
   }
   updateCOTD(){
     return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/cotd`);
+  }
+  submitArticle(article:ArticleSubmit){
+    console.log(article)
+    return this.http.post<any>(`http://127.0.0.1:8080/api/yugioh/submitArticle`, article);
+  }
+  getArticles(){
+    return this.http.get<any>(`http://127.0.0.1:8080/api/yugioh/articles`);
+  }
+  getArticle(id:number){
+    return this.http.get<any>(`http://127.0.0.1:8080/api/yugioh/articles/${id}`);
+  }
+  updateArticle(article:ArticleUpdate){
+    return this.http.post<any>(`http://127.0.0.1:8080/api/yugioh/updateArticle`, article);
+  }
+  deleteArticle(article:Article){
+    return this.http.post<any>(`http://127.0.0.1:8080/api/yugioh/deleteArticle`, article);
   }
 }

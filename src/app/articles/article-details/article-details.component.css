@@ -1,0 +1,32 @@
+.header-img{
+    width:1000px;
+    height:800px;
+}
+
+.card-img-top {
+    width:900px;
+    height:500px;
+    object-fit: cover;
+    
+  }
+
+p{
+    font-family: 'Open Sans', sans-serif !important;;
+    font-weight: 500 !important;
+    font-size: large !important;
+}
+span{
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: large !important;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+button{
+    margin-right:2px;
+}
