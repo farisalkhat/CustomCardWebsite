@@ -54,6 +54,7 @@ export class DatabaseComponent implements OnInit {
 
   
   submitCSV(){
+    console.log("Test")
     this._ccService.submitCSVFile(this.file).subscribe(
       res=>{
         this.router.navigate(['/home'])

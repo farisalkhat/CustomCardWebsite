@@ -329,6 +329,7 @@ export class DeckEditorComponent implements OnInit {
       this.currentCards.push(this.cards[i]);
     }
 
+    console.log(this.currentCards)
 
 
   }

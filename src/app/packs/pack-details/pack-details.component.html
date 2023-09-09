@@ -27,7 +27,8 @@
 
 </div>
     
-<h1 class="text-center">Pack Details</h1> 
+<h1 class="text-center">{{packInfo.title}}</h1> 
+<h3 class="text-center">Created by <a routerLink="/players/{{packInfo.creatorid}}">{{packInfo.creator}}</a></h3> 
 <div *ngIf="packcards.length>0">
         
     <h2>Secret Rares</h2>

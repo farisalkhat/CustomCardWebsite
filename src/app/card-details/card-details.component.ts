@@ -16,6 +16,7 @@ export class CardDetailsComponent implements OnInit {
   carddetails!:any;
 
   card!:Card;
+  tags!:any;
 
   monster!:string;
   attribute!:string;
@@ -26,6 +27,10 @@ export class CardDetailsComponent implements OnInit {
   creator!:string;
   creatorid!:string;
 
+  banned:boolean = false;
+  limited:boolean = false;
+  semilimited:boolean = false;
+  unlimited:boolean = true;
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap)=>{
@@ -34,6 +39,27 @@ export class CardDetailsComponent implements OnInit {
         (data:any)=>{
           this.carddetails = data;
           this.card = this.carddetails['carddetails']
+          this.tags = this.carddetails['tags']
+          for(let tag in this.tags){
+            if(this.tags[tag]['tag']=="Limited"){
+                this.limited=true;
+                this.unlimited=false;
+                this.tags.splice(tag,1)
+            }
+            if(this.tags[tag]['tag']=="Semi-Limited"){
+                this.semilimited=true;
+                this.unlimited=false;
+                this.tags.splice(tag,1)
+            }
+            if(this.tags[tag]['tag']=="Banned"){
+                this.banned=true;
+                this.unlimited=false;
+                this.tags.splice(tag,1)
+            }
+
+            
+            console.log(tag)
+          }
           console.log(this.carddetails);
           this.showDetails()
         } 

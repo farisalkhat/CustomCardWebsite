@@ -1,15 +1,19 @@
 <div class="container">
-    <span *ngFor = "let pack of packs">
+  <div class="row">
+    <div class="col-md-3" *ngFor = "let pack of packs">
       
       <button *ngIf="pack.pack!='placeholder'" class="btn"   >
-        <img     class="pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/{{pack?.pack}}.png'>
-        <p>{{pack.title}}</p>
+        <img     class="pack"src='https://drive.google.com/uc?export=view&id={{pack?.pack}}'
+        >
+
       </button>
 
       <button *ngIf="pack.pack=='placeholder'" class="btn"   >
         <img     class="pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/placeholder.png'>
-        <p>{{pack.title}}</p>
       </button>
       
-  </span>
+    </div>
+
+  </div>
+
   </div>

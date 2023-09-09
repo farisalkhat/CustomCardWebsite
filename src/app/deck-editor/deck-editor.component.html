@@ -120,6 +120,8 @@
                     <option *ngIf = 'filters.initial=="Monster"' value ="">  </option>
                     <option *ngIf = 'filters.initial=="Monster"' value ="Effect Monster">Effect</option>
                     <option *ngIf = 'filters.initial=="Monster"' value ="Flip Monster">Flip</option>
+                    <option *ngIf = 'filters.initial=="Monster"' value ="Tuner Monster">Tuner</option>
+                    <option *ngIf = 'filters.initial=="Monster"' value ="Gemini Monster">Gemini</option>
                     <option *ngIf = 'filters.initial=="Monster"' value ="Fusion Monster">Fusion</option>
                     <option *ngIf = 'filters.initial=="Monster"' value ="Ritual Monster">Ritual</option>
                     <option *ngIf = 'filters.initial=="Monster"' value ="Union Monster">Union</option>
@@ -261,7 +263,7 @@
      
                 <span *ngFor = "let card of currentCards">
     
-                    <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card)"  (click)="goToLink(card.id)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
+                    <button *ngIf="card!=undefined" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card)"  (click)="goToLink(card.id)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
                 </span>
 
 

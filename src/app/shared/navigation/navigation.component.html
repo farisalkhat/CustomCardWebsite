@@ -19,23 +19,25 @@
           <a class="nav-link" routerLink="/banlist" >Banlist</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/players" >Players</a>
+
+        
+
+
+
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link " routerLink="/players" id="navbarDarkDropdownMenuLink" role="button"  aria-expanded="false">
+            Community
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="nav-link" routerLink="/players">Players </a></li>
+            <li><a class="nav-link" routerLink="/matches" >Matches</a></li>
+            <li><a class="nav-link" routerLink="/articles" >Articles</a></li>
+            
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/matches" >Matches</a>
-        </li>
-        
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/checklist" >Checklist</a>
-        </li>
-
-        
-        
 
 
-        
 
         <li class="nav-item dropdown">
           <a class="nav-link " routerLink="/drafts" id="navbarDarkDropdownMenuLink" role="button"  aria-expanded="false">
@@ -55,6 +57,7 @@
             <li><a class="nav-link" *ngIf="_authService.adminRole()" routerLink="/pack-maker" >Pack Maker</a></li>
             <li><a class="nav-link" *ngIf="_authService.adminRole()" routerLink="/pack-editor" >Pack Editor</a></li>
             <li><a class="nav-link" (click)="goToSealedDraft()" routerLink="/packs">Sealed Draft</a></li>
+            <li><a class="nav-link" routerLink="/checklist" >Checklist</a></li>
           </ul>
         </li>
   
@@ -117,7 +120,7 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="/collections" >Collection</a>
               </li>
-              <li *ngIf="_authService.adminRole()"><a class="nav-link" routerLink="/database">Database</a></li>
+              <!-- <li *ngIf="_authService.adminRole()"><a class="nav-link" routerLink="/database">Database</a></li> -->
             </ul>
           </li>
 

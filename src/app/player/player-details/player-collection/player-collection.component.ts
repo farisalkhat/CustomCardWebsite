@@ -9,13 +9,32 @@ import { CustomcardsService, PackButton, ChecklistCard, Binder, BinderCard } fro
   styleUrls: ['./player-collection.component.css']
 })
 export class PlayerCollectionComponent implements OnInit {
-
+    filters = {
+        'name':'',
+        'desc':'',
+        'creator':'',
+        'attribute':'',
+        'initial':'',
+        'cardtype':'',
+        'monstertype':'',
+        'levellow':'',
+        'levelhigh':'',
+        'atklow':'',
+        'atkhigh':'',
+        'deflow':'',
+        'defhigh':'',
+        'tag':'',
+        'sort':'c.name ASC',
+    }    
+    searching:boolean=false;
+    searchName:string=''
   creator!:string;
   creatorid!:number;
   binderID!:number;
 
   binders:Binder[] = [];
   cards:BinderCard[] = []
+  originalCards:BinderCard[]=[]
 
   isHovering: boolean = false;
   hoveredCard!:BinderCard;
@@ -94,8 +113,13 @@ export class PlayerCollectionComponent implements OnInit {
           )
           console.log(this.binders)
 
-          this.currentPage = 1
-          this.getCardNumbers(this.currentPage);
+        this.currentPage = 1
+        this.getCardNumbers(this.currentPage);
+        this.originalCards=this.cards;
+        console.log(this.binders)
+
+        this.currentPage = 1
+        this.getCardNumbers(this.currentPage);
 
 
         }
@@ -352,4 +376,18 @@ export class PlayerCollectionComponent implements OnInit {
         
       }
 
+
+      submitSearch(){
+        var div = document.getElementById('Loading')
+        if(div){
+          div.style.display = "block"
+          console.log(div)
+        }
+        this.searchName=this.filters['name']
+        this.cards=this.originalCards.filter((card)=>card.name.toLowerCase().includes(this.searchName.toLowerCase()))
+        this.currentPage = 1
+        this.getCardNumbers(this.currentPage);
+        console.log(this.searchName)
+    
+      }
 }

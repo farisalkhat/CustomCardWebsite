@@ -3,13 +3,14 @@
     <h1>Recent Articles</h1>
 
     <div class="row">
-        <div *ngFor="let article of articles" class="col-sm-6 col-md-3">
+        <div *ngFor="let article of articles" class="col-sm-6 col-md-4">
 
             <div routerLink="/articles/{{article?.id}}" class="card" style="width:302px;">
                 <img class="card-img-top" src="{{article.header_img}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{article.title}}</h5>
                   <p class="card-text">{{article.header}}</p>
+                  <p class="card-text">By {{article.username}}</p>
                 </div>
               </div>
     

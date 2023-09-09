@@ -34,6 +34,12 @@
                     <p> {{card?.effect}}</p>
                     <p>ID: {{card?.id}}</p>
                     <p>Creator: {{card?.creator}}</p>
+                    <p>Tags: <span *ngFor ="let tag of tags">{{tag.tag}}, </span></p>
+                    <p *ngIf="unlimited==true">Status: Unlimited</p>
+                    <p *ngIf="limited==true">Status: Limited</p>
+                    <p *ngIf="semilimited==true">Status: Semi-Limited</p>
+                    <p *ngIf="banned==true">Status: BANNED</p>
+                    
                 </b>
             </div>
             

@@ -17,6 +17,7 @@ export class PackDetailsComponent implements OnInit {
   hovermType!:string;
   leftPosition = 100
   rightPosition = 100
+  packInfo!:any;
   constructor(public customcardsService:CustomcardsService, public authService:AuthService, public router:Router,public route:ActivatedRoute) { }
 
   packcards:PackCard[]=[];
@@ -26,6 +27,12 @@ export class PackDetailsComponent implements OnInit {
 
     this.route.paramMap.subscribe((paramMap)=>{
       this.packid = Number(paramMap.get('packid'));
+    this.customcardsService.getPackInfoByID(this.packid).subscribe(
+        res=>{
+            this.packInfo=res;
+            console.log(this.packInfo)
+        }
+    )
       this.customcardsService.getCustomCardsByPack(this.packid).subscribe(
         (data:any)=>{
           this.packcards = data;

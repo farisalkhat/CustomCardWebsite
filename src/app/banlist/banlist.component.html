@@ -30,9 +30,7 @@
 <h1>Banlist</h1>
 
 <h2>Banned</h2>
-<span *ngFor = "let card of cards">
-    <button *ngIf="card.tag=='Banned' "(mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (click)="goToLink(card.id)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
-</span>
+
 <h2>Limited</h2>
 <span *ngFor = "let card of cards">
     <button *ngIf="card.tag=='Limited' "(mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (click)="goToLink(card.id)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
