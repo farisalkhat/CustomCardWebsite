@@ -1,20 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Card, CustomcardsService, Draft, Pack, Pack2, PackInfo } from 'src/app/customcards.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Editor, Toolbar } from 'ngx-editor';
+import { toHTML } from 'ngx-editor';
 
 @Component({
   selector: 'app-pack-maker',
   templateUrl: './pack-maker.component.html',
   styleUrls: ['./pack-maker.component.css']
 })
-export class PackMakerComponent implements OnInit {
+export class PackMakerComponent implements OnInit, OnDestroy {
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
+  editor!: Editor;
+  html!: 'asdasd';
+  theInnerHTML!:any;
 
-  
   cards!: Card[];
   currentPage = 1;
   currentCards!:Card[];
@@ -56,7 +69,8 @@ export class PackMakerComponent implements OnInit {
 
     ]),
     cost: new FormControl(50,[Validators.required,Validators.min(50)]),
-    packImage: new FormControl(File)
+    packImage: new FormControl(File),
+    packdescription: new FormControl(null, [Validators.required,Validators.min(1)]),
   })
 
 
@@ -65,7 +79,9 @@ export class PackMakerComponent implements OnInit {
   submitfail: boolean = false;
 
   get f(){return this.draftData.controls;}
-
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
 
   constructor(private http:HttpClient,public _authService: AuthService,private customcardsService:CustomcardsService,private _router:Router) { }
 
@@ -123,6 +139,7 @@ export class PackMakerComponent implements OnInit {
 
   done:boolean = false;
   ngOnInit(): void {
+    this.editor = new Editor();
 
     if (this._authService.loggedIn()){
 
@@ -142,10 +159,15 @@ export class PackMakerComponent implements OnInit {
                 this.packInfo = packInfo;
                 this.cards = packCards;
                 this.packSize = this.packInfo['packsize']
+                console.log(this.packInfo)
 
                 this.draftData.controls['draftTitle'].setValue(this.packInfo['title'])
                 this.draftData.controls['discordname'].setValue(this.packInfo['discordname'])
                 this.draftData.controls['cost'].setValue(this.packInfo['cost'])
+                if(this.packInfo['packdescription']!=undefined){
+                  this.draftData.controls['packdescription'].setValue(this.packInfo['packdescription'])
+                }
+                
                 this.customcardsService.setProcessingPack(true);
   
                 
@@ -282,7 +304,7 @@ export class PackMakerComponent implements OnInit {
                     // }
                     // console.log(this.currentDraft)
   
-                    this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDraftName());
+                    
                   }
         
                 }
@@ -1057,6 +1079,8 @@ export class PackMakerComponent implements OnInit {
         finaldata['creatorid'] = this.id;
         finaldata['cost'] = this.draftData.controls['cost'].value;
         finaldata['packurl'] = this.packInfo['pack']
+        finaldata['packdescription'] = this.draftData.controls['packdescription'].value;
+
   
         const commonIDs:string[] = []
         const rareIDs:string[] = []
@@ -1143,6 +1167,9 @@ export class PackMakerComponent implements OnInit {
         finaldata['cost'] = this.draftData.controls['cost'].value;
         finaldata['discordname'] = this.draftData.controls['discordname'].value;
 
+        finaldata['packdescription'] = toHTML(this.draftData.controls['packdescription'].value);
+
+
 
         const commonIDs:string[] = []
         const rareIDs:string[] = []
@@ -1175,6 +1202,7 @@ export class PackMakerComponent implements OnInit {
         finaldata['secretIDs'] = secretIDs;
         finaldata['packSize'] = this.packSize;
         finaldata['packurl'] = 'placeholder'
+        
 
 
         if(this.fileChanged){

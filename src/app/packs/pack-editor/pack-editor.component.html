@@ -2,7 +2,7 @@
     <span *ngFor = "let pack of packs">
       
       <button *ngIf="pack.pack!='placeholder'" class="btn"  (click)="editPack(pack.id,pack.title)" >
-        <img     class="pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/{{pack?.pack}}.png'>
+        <img     class="pack" src='https://drive.google.com/uc?export=view&id={{pack?.pack}}'>
         <p>{{pack.title}}</p>
       </button>
 

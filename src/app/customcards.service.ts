@@ -135,6 +135,7 @@ export interface Pack {
   cost: number;
   discordname:string;
   packurl:string;
+  packdescription:string;
 }
 
 
@@ -152,6 +153,7 @@ export interface Pack2 {
   packID:number;
   packurl:string;
   discordname:string;
+  packdescription:string;
 }
 
 export interface PackInfo{
@@ -163,6 +165,7 @@ export interface PackInfo{
   packsize:string;
   cost:number;
   discordname:string
+  packdescription:string;
 }
 
 

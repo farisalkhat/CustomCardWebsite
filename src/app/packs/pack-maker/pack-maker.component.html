@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-auto">
                 <label for="Name">Pack Name</label>
-                <input id ="drafTitle" formControlName ="draftTitle" [ngClass]="{'is-invalid': submitted && f['draftTitle'].errors}" class="form-control" type="text" >
+                <input id ="draftTitle" formControlName ="draftTitle" [ngClass]="{'is-invalid': submitted && f['draftTitle'].errors}" class="form-control" type="text" >
                 
 
                 <div *ngIf="submitted && f['draftTitle'].errors" class="invalid-feedback">
@@ -72,6 +72,7 @@
             
             </div>
 
+            
 
             <div class="col-auto">
                 <label for="Name">Pack Cost</label>
@@ -86,11 +87,29 @@
             
             
             </div>
+            
+            <div class="col-auto">
+                <label  for="customFile">Upload Image</label>
+                <input (change)="onFileSelected($event)" id="packImage" formControlName ="packImage" [ngClass]="{'is-invalid': submitted && f['packImage'].errors}" type="file" class="form-control"  />
+            </div>
 
+            
         </div>
+        <div class="row">
+            <div class=" padup NgxEditor__Wrapper">
+                <ngx-editor-menu  [toolbar]="toolbar" [editor]="editor"> </ngx-editor-menu>
+                <ngx-editor
+                formControlName="packdescription"
+                  [editor]="editor"
+                  [ngModel]="html"
+                  [disabled]="false"
+                  [placeholder]="'Type here...'"
+                ></ngx-editor>
+              </div>
+        </div>
+        
  
-        <div class="row"><label class="form-label" for="customFile">Default file input example</label>
-            <input (change)="onFileSelected($event)" id="packImage" formControlName ="packImage" [ngClass]="{'is-invalid': submitted && f['packImage'].errors}" type="file" class="form-control"  /></div>
+        
  
 
 
@@ -461,7 +480,7 @@
 
 
     <div class="row">
-        <button type="button"  *ngIf="currentDraft!=[]"class="btn btn-success addcard"  (click)="saveDraft()">Save Pack</button>
+        <button type="button"  [disabled] ="done==true" *ngIf="currentDraft!=[]"class="btn btn-success addcard"  (click)="saveDraft()">Save Pack</button>
         <div *ngIf="submitfail && submitted" class="submit-text-fail" >
             Submission failed! Fix the following errors:
             <ul >

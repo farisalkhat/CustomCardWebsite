@@ -84,3 +84,7 @@ h4{
 .extrapadding{
     padding-left:10px;
 }
+
+.row{
+    padding-left: 0;
+}

@@ -7,13 +7,22 @@
     height:47.99px;
     margin-bottom: 8px;
 }
-
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
 .binder{
     font-size: xx-large;
+}
+.packdescription{
+  
 }
 p{
   font-family: 'Oswald', sans-serif;
   color:#1f1a1f;
+  
 }
 span{
   font-family: 'Oswald', sans-serif;
@@ -28,6 +37,9 @@ span{
     width:1500px;
 }
 
+.btn{
+  padding:0
+}
 
 .littlenumber{
   width:20px;
@@ -46,7 +58,9 @@ span{
   .rare-card {
     position: relative;
   }
-   
+  .container{
+    width:1600px;
+  }
   .rare-card:after {
     content:'';
     top:0;
