@@ -637,6 +637,8 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         this.filters['cardtype']!="Ritual Monster"&&
         this.filters['cardtype']!="Union Monster" &&
         this.filters['cardtype']!="Synchro Monster" &&
+        this.filters['cardtype']!="Tuner Monster" &&
+        this.filters['cardtype']!="Gemini Monster" &&
         this.filters['cardtype']!="Xyz Monster"
         ){
           this.filters['cardtype']=''
