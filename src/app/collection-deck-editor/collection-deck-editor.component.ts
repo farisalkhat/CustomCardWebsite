@@ -1,25 +1,24 @@
 import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Card, CustomcardsService, Draft, Decklist, DeckListCard, importDecklist } from 'src/app/customcards.service';
+import { Card, CustomcardsService, Draft, Decklist, DeckListCard, importDecklist, BinderCard, Binder } from 'src/app/customcards.service';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import * as FileSaver from 'file-saver';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { forkJoin } from 'rxjs';
-
-
 @Component({
-  selector: 'app-deck-editor',
-  templateUrl: './deck-editor.component.html',
-  styleUrls: ['./deck-editor.component.css']
+  selector: 'app-collection-deck-editor',
+  templateUrl: './collection-deck-editor.component.html',
+  styleUrls: ['./collection-deck-editor.component.css']
 })
-export class DeckEditorComponent implements OnInit {
+export class CollectionDeckEditorComponent implements OnInit {
+
   xml_file: string = "";
-  all_cards!:Card[];
-  @Input() cards!: Card[];
+  all_cards!:BinderCard[];
+  @Input() cards!: BinderCard[];
   currentPage = 1;
-  currentCards!:Card[];
+  currentCards!:BinderCard[];
   currentID!:string;
 
   mainOrSide:string = 'Main';
@@ -28,11 +27,11 @@ export class DeckEditorComponent implements OnInit {
   draftName!:string;
 
 
-  currentDraft: Card[] = [];
+  currentDraft: BinderCard[] = [];
 
-  mainDeck:Card[]=[];
-  extraDeck:Card[]=[];
-  sideDeck:Card[]=[];
+  mainDeck:BinderCard[]=[];
+  extraDeck:BinderCard[]=[];
+  sideDeck:BinderCard[]=[];
 
   monsterCounter = 0;
   spellCounter = 0;
@@ -41,7 +40,7 @@ export class DeckEditorComponent implements OnInit {
   sideCounter = 0;
 
   isHovering: boolean = false;
-  hoveredCard!:Card;
+  hoveredCard!:BinderCard;
   hovermonster!:string;
   hoverattribute!:string;
   hoverstType!:string;
@@ -53,7 +52,7 @@ export class DeckEditorComponent implements OnInit {
   uploadCorrectly: boolean = true;
 
 
-  draftCard!:Card ;
+  draftCard!:BinderCard ;
 
 
   draftData= new FormGroup({
@@ -72,7 +71,7 @@ export class DeckEditorComponent implements OnInit {
 
   get f(){return this.draftData.controls;}
 
-
+  creatorid!:number;
   constructor(public _authService:AuthService,private customcardsService:CustomcardsService,private _router:Router) { }
 
   deckname:string = "placeholder";
@@ -97,7 +96,7 @@ export class DeckEditorComponent implements OnInit {
 
   }
 
-  card!: Card;
+  card!: BinderCard;
   monster!:string;
   attribute!:string;
   stType!:string;
@@ -105,7 +104,7 @@ export class DeckEditorComponent implements OnInit {
 
 
   creator!:string;
-  creatorid!:string;
+  
 
   decklist!:DeckListCard[];
   decklistinfo!:importDecklist;
@@ -129,105 +128,106 @@ export class DeckEditorComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-    this.uploadedMain= this.customcardsService.getUploadedMain()
-    this.uploadedSide= this.customcardsService.getUploadedSide()
-    this.uploadedExtra= this.customcardsService.getUploadedExtra()
-    this.customcardsService.getCustomCards().subscribe(
-      res => {
-        if(res){}
-        this.cards = res;
-        this.all_cards = this.cards;
-        this.getCardNumbers(this.currentPage);
-        this.hideloader();
-
-        if(this.customcardsService.getProcessingDeck()==false){
-          if(this.customcardsService.getEditDecklist() && this.customcardsService.getEditDeckID()!=-1){
-            forkJoin(
-              this.customcardsService.getDecklistInfo(this.customcardsService.getEditDeckID()),
-              this.customcardsService.getDecklist(this.customcardsService.getEditDeckID()),
-            ).subscribe(([deckInfo,decklist])=>{
-              this.decklistinfo = deckInfo;
-              this.decklist = decklist;
-    
-              for(let card in decklist){
-                if(decklist[card].deck=="maindeck" || decklist[card].deck=="extradeck"){
-                  this.addCard(decklist[card])
-                }
-                else{
-                  this.addSideCard(decklist[card])
-                }
-              }
-    
-              
-              this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDeckName());
-    
-    
-    
-    
-              
-        
-      
-      
-      
-            })
-            this.customcardsService.setProcessingDeck(true);
-          }
-    
-        }
-        else{
-          this.customcardsService.setProcessingDeck(false);
-          this.customcardsService.editDeck(false);
-          this.customcardsService.setEditDeckID(-1);
-          this.customcardsService.setEditDeckName('')
-        }
-
-        if(this.uploadedMain.length>0 || this.uploadedSide.length>0 || this.uploadedExtra.length>0){
-          console.log(this.uploadedMain);
-          for(let card in this.uploadedMain){
-              this.addCard(this.uploadedMain[card])
-          }
-          for(let card in this.uploadedSide){
-            this.addSideCard(this.uploadedSide[card])
-          }
-          for(let card in this.uploadedExtra){
-            this.addCard(this.uploadedExtra[card])
-          }
-    
-        }
-
-
-
-
-      }
-    )    
-
-
-
-    
-
-
-
-
-
-
-    
-
-
-
     this._authService.getUser().subscribe(
       res =>{
         console.log(res['username'])
         this.creator = res['username']
         this.creatorid = res['id']
+        this.uploadedMain= this.customcardsService.getUploadedMain()
+        this.uploadedSide= this.customcardsService.getUploadedSide()
+        this.uploadedExtra= this.customcardsService.getUploadedExtra()
+        this.customcardsService.getCollectionCardsByCreatorID(this.creatorid).subscribe(
+          res => {
+            if(res){}
+            this.cards = res;
+            this.all_cards = this.cards;
+            this.getCardNumbers(this.currentPage);
+            this.hideloader();
+    
+            if(this.customcardsService.getProcessingDeck()==false){
+              if(this.customcardsService.getEditDecklist() && this.customcardsService.getEditDeckID()!=-1){
+                forkJoin(
+                  this.customcardsService.getDecklistInfo(this.customcardsService.getEditDeckID()),
+                  this.customcardsService.getDecklist(this.customcardsService.getEditDeckID()),
+                ).subscribe(([deckInfo,decklist])=>{
+                  this.decklistinfo = deckInfo;
+                  this.decklist = decklist;
+        
+                  for(let card in decklist){
+                    if(decklist[card].deck=="maindeck" || decklist[card].deck=="extradeck"){
+                      this.addCard(decklist[card])
+                    }
+                    else{
+                      this.addSideCard(decklist[card])
+                    }
+                  }
+        
+                  
+                  this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDeckName());
+        
+        
+        
+        
+                  
+            
+          
+          
+          
+                })
+                this.customcardsService.setProcessingDeck(true);
+              }
+        
+            }
+            else{
+              this.customcardsService.setProcessingDeck(false);
+              this.customcardsService.editDeck(false);
+              this.customcardsService.setEditDeckID(-1);
+              this.customcardsService.setEditDeckName('')
+            }
+    
+            if(this.uploadedMain.length>0 || this.uploadedSide.length>0 || this.uploadedExtra.length>0){
+              console.log(this.uploadedMain);
+              for(let card in this.uploadedMain){
+                  this.addCard(this.uploadedMain[card])
+              }
+              for(let card in this.uploadedSide){
+                this.addSideCard(this.uploadedSide[card])
+              }
+              for(let card in this.uploadedExtra){
+                this.addCard(this.uploadedExtra[card])
+              }
+        
+            }
+    
+    
+    
+    
+          }
+        ) 
       },
       err => {
         console.log(err)
-        this.creator = ''
-        this.creatorid = ''
+        this._router.navigate(['/home'])
 
       }
     )
+
+   
+
+
+
+    
+
+
+
+
+
+
+    
+
+
+
+
   }
 
   submitSearch(){
@@ -532,7 +532,7 @@ addTo(type:string){
   this.mainOrSide = type;
 }
 
-goToLink(url: string){
+goToLink(url: number){
 
   let new_url =''
 
@@ -547,13 +547,13 @@ goToLink(url: string){
   
 
 
-  window.open(new_url +'/'+url, '_blank');
+  window.open(new_url +'/'+String(url), '_blank');
 
 
   // const newurl = 'https://www.duelingbook.com/card?id='+url
   // window.open(newurl, "_blank");
 }
-mouseHovering(card:Card,e:MouseEvent) {
+mouseHovering(card:BinderCard,e:MouseEvent) {
 
 console.log(e.clientX);
 console.log(e.clientY);
@@ -751,7 +751,7 @@ getHoveredCardDetails(){
 }
 
 
-  showDetails(card:Card){
+  showDetails(card:BinderCard){
     this.card = card;
     console.log(this.card)
     this.attribute=''
@@ -924,7 +924,7 @@ getHoveredCardDetails(){
     
 }
   
-  addCard(card:Card){
+  addCard(card:BinderCard){
     if(card!=undefined){
       console.log(card)
       if(card.cardtype=="Fusion Monster" || card.cardtype=="Xyz Monster" || card.cardtype=="Synchro Monster"){
@@ -954,7 +954,12 @@ getHoveredCardDetails(){
             } 
           }
         }
+        if(card.copies==0){
+          return;
+        }
+        card.copies--;
         this.mainDeck.push(card);
+        
         if(card.cardtype.includes("Spell")){
           this.spellCounter++;
         }
@@ -972,7 +977,7 @@ getHoveredCardDetails(){
   }
 
 
-  addSideCard(card:Card){
+  addSideCard(card:BinderCard){
     console.log(card)
     if(card!=undefined){
       if(card.cardtype=="Fusion Monster" || card.cardtype=="Xyz Monster"|| card.cardtype=="Synchro Monster"){
@@ -1005,6 +1010,10 @@ getHoveredCardDetails(){
             } 
           }
         }
+        if(card.copies==0){
+          return;
+        }
+        card.copies--;
         this.sideDeck.push(card);
         this.sideCounter++;
         
@@ -1013,7 +1022,7 @@ getHoveredCardDetails(){
     }
   }
 
-  selectDraftCard(card:Card){
+  selectDraftCard(card:BinderCard){
     // this.draftCard = this.currentDraft.find(x => x.id == id);
     this.draftCard = card;
     
@@ -1022,7 +1031,7 @@ getHoveredCardDetails(){
 
 
 
-  rightAddDraftCard($event: { preventDefault: () => void; },card:Card){
+  rightAddDraftCard($event: { preventDefault: () => void; },card:BinderCard){
     
     $event.preventDefault();
     this.card = card;
@@ -1047,14 +1056,15 @@ getHoveredCardDetails(){
   }
 
 
-  rightDeleteDraftCard($event: { preventDefault: () => void; },card:Card){
+  rightDeleteDraftCard($event: { preventDefault: () => void; },card:BinderCard){
     $event.preventDefault();
     this.deleteDraftCard(card);
 
   }
 
 
-  rightDeleteSideCard($event: { preventDefault: () => void; },card:Card){
+  rightDeleteSideCard($event: { preventDefault: () => void; },card:BinderCard){
+    card.copies++;
     $event.preventDefault();
     console.log(this.sideDeck)
     const index = this.sideDeck.findIndex(obj => obj.id === card?.id)
@@ -1066,8 +1076,9 @@ getHoveredCardDetails(){
 
   }
 
-  deleteDraftCard(card:Card){
+  deleteDraftCard(card:BinderCard){
     console.log("in deleteDraftCard!")
+    card.copies++;
     if(card!=undefined){
 
       if(card.cardtype=="Fusion Monster" || card.cardtype=="Xyz Monster" || card.cardtype=="Synchro Monster"){
@@ -1128,18 +1139,18 @@ getHoveredCardDetails(){
 
     for(const card of this.mainDeck){
         this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
-        idList1.push(card.id)
+        idList1.push(String(card.id))
     }
     this.xml_file+="</main><side>"   
     for(const card of this.sideDeck){
      this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
-     idList2.push(card.id)
+     idList2.push(String(card.id))
     }
     this.xml_file+="</side><extra>"   
     
     for(const card of this.extraDeck){
         this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
-        idList3.push(card.id)
+        idList3.push(String(card.id))
     }
     this.xml_file+="</extra></deck>\n"
 

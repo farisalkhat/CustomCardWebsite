@@ -53,6 +53,7 @@ import { EditorComponent } from './editor/editor.component';
 import { NgxEditorModule } from 'node_modules/ngx-editor';
 import { ArticleDetailsComponent } from './articles/article-details/article-details.component';
 import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
+import { CollectionDeckEditorComponent } from './collection-deck-editor/collection-deck-editor.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { ArticleEditComponent } from './articles/article-edit/article-edit.compo
     AdminComponent,
     EditorComponent,
     ArticleDetailsComponent,
-    ArticleEditComponent
+    ArticleEditComponent,
+    CollectionDeckEditorComponent
   ],
   imports: [
     HttpClientModule,

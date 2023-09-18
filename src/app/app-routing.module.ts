@@ -38,6 +38,7 @@ import {AdminComponent} from './admin/admin.component';
 import {EditorComponent} from './editor/editor.component';
 import { ArticleDetailsComponent } from './articles/article-details/article-details.component';
 import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
+import { CollectionDeckEditorComponent } from './collection-deck-editor/collection-deck-editor.component';
 const routes: Routes = [
   {
     path:'',
@@ -79,6 +80,8 @@ component:PacksComponent},
 component:PackMakerComponent},
 {path:'deck-editor',
 component:DeckEditorComponent},
+{path:'collection-deck-editor',
+component:CollectionDeckEditorComponent},
 {path:'decklist/:deckid',
 component:DecklistDetailsComponent},
 {path:'deck-master',

@@ -63,10 +63,16 @@
   
   
 
-        <li class="nav-item">
-          <a class="nav-link" (click)="customcardsService.resetDeck()"routerLink="/deck-editor">Editor</a>
-        </li>
 
+        <li class="nav-item dropdown">
+          <a class="nav-link" id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
+            Editor
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="nav-link" routerLink="/deck-editor" >Deck Editor</a></li>
+            <li><a class="nav-link" routerLink="/collection-deck-editor" >Collection Editor</a></li>
+          </ul>
+        </li>
         
 
 

@@ -266,7 +266,25 @@
      
                 <span *ngFor = "let card of currentCards">
     
-                    <button *ngIf="card!=undefined" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card)"  (click)="goToLink(card.id)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
+                    <button *ngIf="card!=undefined" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card)"  (click)="goToLink(card.id)" >
+                        
+                        <div class="relative"*ngIf="card.rarity=='common'">
+                            <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+                            <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
+                        </div>
+    
+                        <div  class="rare-card" *ngIf="card.rarity!='common'">
+                            <img class = " smallcard sparkle" *ngIf="card.rarity=='secret'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/giphy.gif'>
+                            <img class = "smallcard sparkle" *ngIf="card.rarity=='super'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/super.gif'>
+                            <img class = "smallcard sparkle" *ngIf="card.rarity=='ultra'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/fireworks.gif'>
+                            <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+                            <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
+                        </div>
+                    </button>
+                
+                
+                
+                
                 </span>
 
 
