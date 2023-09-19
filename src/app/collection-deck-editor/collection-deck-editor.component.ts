@@ -366,6 +366,8 @@ export class CollectionDeckEditorComponent implements OnInit {
       }
     }
     if(this.filters['monstertype']!=''){
+      search_res=search_res.filter((card)=>card.cardtype.toLowerCase().includes('monster'))
+      search_res=search_res.filter((card)=>card.type!=undefined)
       search_res=search_res.filter((card)=>card.type.toLowerCase().includes(this.filters['monstertype'].toLowerCase()))
     }
     

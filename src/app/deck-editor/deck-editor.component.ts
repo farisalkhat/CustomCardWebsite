@@ -292,6 +292,7 @@ export class DeckEditorComponent implements OnInit {
       }
 
       if(this.filters['initial']=='Spell'){
+        this.filters['monstertype']=''
         if(this.filters['cardtype']!="Normal Spell" &&
         this.filters['cardtype']!="Continuous Spell"&&
         this.filters['cardtype']!="Quick Spell"&&
@@ -303,12 +304,15 @@ export class DeckEditorComponent implements OnInit {
       }
 
       if(this.filters['initial']=='Trap'){
+        this.filters['monstertype']=''
         if(this.filters['cardtype']!="Normal Trap" &&
         this.filters['cardtype']!="Continuous Trap"&&
         this.filters['cardtype']!="Counter Trap"){
           this.filters['cardtype']=''
         }
       }
+
+      
       this.produceSearchRes()
     // this.customcardsService.getFilteredCards(this.filters).subscribe(
     //   res=>{
@@ -344,6 +348,7 @@ export class DeckEditorComponent implements OnInit {
     //   'sort':'c.name ASC',
   
     // }
+    console.log(this.filters)
     let search_res= this.all_cards;
     if(this.filters['name']!=''){
       search_res=search_res.filter((card)=>card.name.toLowerCase().includes(this.filters['name'].toLowerCase()))
@@ -366,6 +371,8 @@ export class DeckEditorComponent implements OnInit {
       }
     }
     if(this.filters['monstertype']!=''){
+      search_res=search_res.filter((card)=>card.cardtype.toLowerCase().includes('monster'))
+      search_res=search_res.filter((card)=>card.type!=undefined)
       search_res=search_res.filter((card)=>card.type.toLowerCase().includes(this.filters['monstertype'].toLowerCase()))
     }
     
