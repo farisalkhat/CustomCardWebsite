@@ -355,6 +355,7 @@ export class CollectionDeckEditorComponent implements OnInit {
       search_res=search_res.filter((card)=>card.creator.toLowerCase().includes(this.filters['creator'].toLowerCase()))
     }
     if(this.filters['attribute']!=''){
+      search_res=search_res.filter((card)=>card.attribute!=undefined)
       search_res=search_res.filter((card)=>card.attribute.toLowerCase().includes(this.filters['attribute'].toLowerCase()))
     }
     if(this.filters['initial']!=''){
