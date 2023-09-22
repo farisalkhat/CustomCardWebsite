@@ -529,7 +529,7 @@ export class CustomcardsService {
     return this.http.get<PackButton[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/packs`);
   }
   getStructureDecks(){
-    return this.http.get<PackButton[]>(`http://127.0.0.1:8080/api/yugioh/structure-decks`);
+    return this.http.get<PackButton[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/structure-decks`);
   }
 
   getPackInfoByID(id:number){
@@ -623,12 +623,12 @@ export class CustomcardsService {
   }
 
   resubmitPack(pack:Pack){
-    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/editpack',pack   
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editpack',pack   
     )
   }
 
   deletePack(id:number){
-    return this.http.post<any>(`http://127.0.0.1:8080/api/delete-pack`,id);
+    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/delete-pack`,id);
   }
   uploadImage(formData:FormData){
     return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/uploadimage',formData   
@@ -654,7 +654,7 @@ export class CustomcardsService {
   }
 
   addToCollection(addToBinder:AddToBinder){
-    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/addtocollection',addToBinder   
+    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/addtocollection',addToBinder   
     )
   }
   submitDuel(dueldata:DuelData){
