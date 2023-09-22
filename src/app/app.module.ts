@@ -54,6 +54,11 @@ import { NgxEditorModule } from 'node_modules/ngx-editor';
 import { ArticleDetailsComponent } from './articles/article-details/article-details.component';
 import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
 import { CollectionDeckEditorComponent } from './collection-deck-editor/collection-deck-editor.component';
+import { StructureDecksComponent } from './structure-decks/structure-decks.component';
+import { StructureDeckDetailsComponent } from './structure-decks/structure-deck-details/structure-deck-details.component';
+import { StructureDeckEditorComponent } from './structure-decks/structure-deck-editor/structure-deck-editor.component';
+import { StructureDeckMakerComponent } from './structure-decks/structure-deck-maker/structure-deck-maker.component';
+import { StructureDeckEditComponent } from './structure-decks/structure-deck-edit/structure-deck-edit.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +109,12 @@ import { CollectionDeckEditorComponent } from './collection-deck-editor/collecti
     EditorComponent,
     ArticleDetailsComponent,
     ArticleEditComponent,
-    CollectionDeckEditorComponent
+    CollectionDeckEditorComponent,
+    StructureDecksComponent,
+    StructureDeckDetailsComponent,
+    StructureDeckEditorComponent,
+    StructureDeckMakerComponent,
+    StructureDeckEditComponent
   ],
   imports: [
     HttpClientModule,

@@ -39,6 +39,10 @@ import {EditorComponent} from './editor/editor.component';
 import { ArticleDetailsComponent } from './articles/article-details/article-details.component';
 import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
 import { CollectionDeckEditorComponent } from './collection-deck-editor/collection-deck-editor.component';
+import { StructureDecksComponent } from './structure-decks/structure-decks.component';
+import { StructureDeckMakerComponent } from './structure-decks/structure-deck-maker/structure-deck-maker.component';
+import { StructureDeckDetailsComponent } from './structure-decks/structure-deck-details/structure-deck-details.component';
+import { StructureDeckEditorComponent } from './structure-decks/structure-deck-editor/structure-deck-editor.component';
 const routes: Routes = [
   {
     path:'',
@@ -119,7 +123,18 @@ component:EditorComponent},
 {path:'articles/:articleid',
 component:ArticleDetailsComponent},
 {path:'articles/edit/:articleid',
-component:ArticleEditComponent}
+component:ArticleEditComponent},
+{path:'structure-decks',
+component:StructureDecksComponent},
+{path:'structure-deck-maker',
+component:StructureDeckMakerComponent},
+{path:'structure-deck-details/:deckid',
+component:StructureDeckDetailsComponent
+},
+{path:'structure-deck-editor/:deckid',
+component:StructureDeckEditorComponent
+}
+
 
 
 ];

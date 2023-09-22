@@ -49,13 +49,17 @@
             
           </ul>
         </li>
+
+
         <li class="nav-item dropdown">
-          <a class="nav-link" (click)="goToPackOpener()" routerLink="/packs" id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
-            Packs
+          <a routerLink="/packs" class="nav-link"  id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
+            Shop
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="nav-link" *ngIf="_authService.adminRole()" routerLink="/pack-maker" >Pack Maker</a></li>
-            <li><a class="nav-link" *ngIf="_authService.adminRole()" routerLink="/pack-editor" >Pack Editor</a></li>
+            <li><a class="nav-link" (click)="goToPackOpener()" routerLink="/packs" >Packs</a></li>
+            <li><a class="nav-link"  routerLink="/structure-decks" >Structure Decks</a></li>
+
+            
             <li><a class="nav-link" (click)="goToSealedDraft()" routerLink="/packs">Sealed Draft</a></li>
             <li><a class="nav-link" routerLink="/checklist" >Checklist</a></li>
           </ul>
@@ -65,7 +69,7 @@
 
 
         <li class="nav-item dropdown">
-          <a class="nav-link" id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
+          <a routerLink="/deck-editor" class="nav-link" id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
             Editor
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">

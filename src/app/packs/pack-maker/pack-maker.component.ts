@@ -27,7 +27,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
   editor!: Editor;
   html!: 'asdasd';
   theInnerHTML!:any;
-
+  all_cards!:Card[];
   cards!: Card[];
   currentPage = 1;
   currentCards!:Card[];
@@ -342,6 +342,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
       res => {
         if(res){}
         this.cards = res;
+        this.all_cards = this.cards;
         this.getCardNumbers(this.currentPage);
         this.hideloader();
       }
@@ -574,109 +575,276 @@ export class PackMakerComponent implements OnInit, OnDestroy {
       }
       
     }
-  submitSearch(){
-    var div = document.getElementById('Loading')
-    if(div){
-      div.style.display = "block"
-      console.log(div)
-    }
-    console.log(this.filters)
-    this.cards = [] 
-    this.attribute ='';
-    this.stType=''
-    this.mType='';
-    this.monster='None';
-    
-    if(this.filters.levelhigh==null){this.filters.levelhigh=''}
-    if(this.filters.levellow==null){this.filters.levellow=''}
-    if(this.filters.atklow==null){this.filters.atklow=''}
-    if(this.filters.atkhigh==null){this.filters.atkhigh=''}
-    if(this.filters.deflow==null){this.filters.deflow=''}
-    if(this.filters.defhigh==null){this.filters.defhigh=''}
-
-    
-
-    // this.customcardsService.getFilteredCards2().subscribe(
-    //   res=>{
-        
-    //     console.log(res)
-    //     this.cards = res;
-    //     this.currentPage = 1
-    //     this.getCardNumbers(this.currentPage);
-    //   },
-    //   err=>{console.log(err)}
-    // )                                  
-    if(this.filters['initial']==''){
-        this.filters['cardtype']=='';
-        this.filters['defhigh']=='';
-        this.filters['deflow']=='';
-        this.filters['levelhigh']=='';
-        this.filters['levellow']=='';
-        this.filters['monstertype']=='';
-        this.filters['atkhigh']=='';
-        this.filters['atklow']=='';
+    submitSearch(){
+      var div = document.getElementById('Loading')
+      if(div){
+        div.style.display = "block"
+        console.log(div)
       }
-      if(this.filters['initial']!='Monster'){
-        if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' || 
-        this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' || 
-        this.filters['sort']=='c.DEF ASC' || this.filters['sort']=='c.DEF DESC'){
-          this.filters['sort'] = 'c.name ASC';
-        }
-        
-
-
-
-
+      console.log(this.filters)
+      this.cards = [] 
+      this.attribute ='';
+      this.stType=''
+      this.mType='';
+      this.monster='None';
       
-      }
-
-      if(this.filters['initial']=='Monster'){
-        if(this.filters['cardtype']!="Effect Monster" &&
-        this.filters['cardtype']!="Flip Monster"&&
-        this.filters['cardtype']!="Fusion Monster"&&
-        this.filters['cardtype']!="Ritual Monster"&&
-        this.filters['cardtype']!="Union Monster" &&
-        this.filters['cardtype']!="Synchro Monster" &&
-        this.filters['cardtype']!="Tuner Monster" &&
-        this.filters['cardtype']!="Gemini Monster" &&
-        this.filters['cardtype']!="Xyz Monster"
-        ){
-          this.filters['cardtype']=''
+      if(this.filters.levelhigh==null){this.filters.levelhigh=''}
+      if(this.filters.levellow==null){this.filters.levellow=''}
+      if(this.filters.atklow==null){this.filters.atklow=''}
+      if(this.filters.atkhigh==null){this.filters.atkhigh=''}
+      if(this.filters.deflow==null){this.filters.deflow=''}
+      if(this.filters.defhigh==null){this.filters.defhigh=''}
+  
+      
+  
+                                
+      if(this.filters['initial']==''){
+          this.filters['cardtype']=='';
+          this.filters['defhigh']=='';
+          this.filters['deflow']=='';
+          this.filters['levelhigh']=='';
+          this.filters['levellow']=='';
+          this.filters['monstertype']=='';
+          this.filters['atkhigh']=='';
+          this.filters['atklow']=='';
         }
-      }
-
-      if(this.filters['initial']=='Spell'){
-        if(this.filters['cardtype']!="Normal Spell" &&
-        this.filters['cardtype']!="Continuous Spell"&&
-        this.filters['cardtype']!="Quick Spell"&&
-        this.filters['cardtype']!="Ritual Spell"&&
-        this.filters['cardtype']!="Equip Spell" &&
-        this.filters['cardtype']!="Field Spell"){
-          this.filters['cardtype']=''
-        }
-      }
-
-      if(this.filters['initial']=='Trap'){
-        if(this.filters['cardtype']!="Normal Trap" &&
-        this.filters['cardtype']!="Continuous Trap"&&
-        this.filters['cardtype']!="Counter Trap"){
-          this.filters['cardtype']=''
-        }
-      }
-    this.customcardsService.getFilteredCards(this.filters).subscribe(
-      res=>{
+        if(this.filters['initial']!='Monster'){
+          if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' || 
+          this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' || 
+          this.filters['sort']=='c.DEF ASC' || this.filters['sort']=='c.DEF DESC'){
+            this.filters['sort'] = 'c.name ASC';
+          }
+          
+  
+  
+  
+  
         
-        console.log(res)
-        this.cards = res;
-        this.currentPage = 1
-
-        this.getCardNumbers(this.currentPage);
-        this.hideloader();
-      },
-      err=>{console.log(err)}
-    )
-
-  }
+        }
+  
+        if(this.filters['initial']=='Monster'){
+          if(this.filters['cardtype']!="Effect Monster" &&
+          this.filters['cardtype']!="Flip Monster"&&
+          this.filters['cardtype']!="Fusion Monster"&&
+          this.filters['cardtype']!="Ritual Monster"&&
+          this.filters['cardtype']!="Union Monster" &&
+          this.filters['cardtype']!="Synchro Monster" &&
+          this.filters['cardtype']!="Tuner Monster" &&
+          this.filters['cardtype']!="Gemini Monster" &&
+          this.filters['cardtype']!="Xyz Monster"){
+            this.filters['cardtype']=''
+          }
+        }
+  
+        if(this.filters['initial']=='Spell'){
+          this.filters['monstertype']=''
+          if(this.filters['cardtype']!="Normal Spell" &&
+          this.filters['cardtype']!="Continuous Spell"&&
+          this.filters['cardtype']!="Quick Spell"&&
+          this.filters['cardtype']!="Ritual Spell"&&
+          this.filters['cardtype']!="Equip Spell" &&
+          this.filters['cardtype']!="Field Spell"){
+            this.filters['cardtype']=''
+          }
+        }
+  
+        if(this.filters['initial']=='Trap'){
+          this.filters['monstertype']=''
+          if(this.filters['cardtype']!="Normal Trap" &&
+          this.filters['cardtype']!="Continuous Trap"&&
+          this.filters['cardtype']!="Counter Trap"){
+            this.filters['cardtype']=''
+          }
+        }
+  
+        
+        this.produceSearchRes()
+      // this.customcardsService.getFilteredCards(this.filters).subscribe(
+      //   res=>{
+          
+      //     console.log(res)
+      //     this.cards = res;
+      //     this.currentPage = 1
+  
+      //     this.getCardNumbers(this.currentPage);
+      //     this.hideloader();
+      //   },
+      //   err=>{console.log(err)}
+      // )
+  
+    }
+  
+    produceSearchRes(){
+      // filters = {
+      //   'name':'',
+      //   'desc':'',
+      //   'creator':'',
+      //   'attribute':'',
+      //   'initial':'',
+      //   'cardtype':'',
+      //   'monstertype':'',
+      //   'levellow':'',
+      //   'levelhigh':'',
+      //   'atklow':'',
+      //   'atkhigh':'',
+      //   'deflow':'',
+      //   'defhigh':'',
+      //   'tag':'',
+      //   'sort':'c.name ASC',
+    
+      // }
+      console.log(this.filters)
+      let search_res= this.all_cards;
+      if(this.filters['name']!=''){
+        search_res=search_res.filter((card)=>card.name.toLowerCase().includes(this.filters['name'].toLowerCase()))
+      }
+      if(this.filters['desc']!=''){
+        search_res=search_res.filter((card)=>card.effect.toLowerCase().includes(this.filters['desc'].toLowerCase()))
+      }
+      if(this.filters['creator']!=''){
+        search_res=search_res.filter((card)=>card.creator.toLowerCase().includes(this.filters['creator'].toLowerCase()))
+      }
+      if(this.filters['attribute']!=''){
+        search_res=search_res.filter((card)=>card.attribute!=undefined)
+        search_res=search_res.filter((card)=>card.attribute.toLowerCase().includes(this.filters['attribute'].toLowerCase()))
+      }
+      if(this.filters['initial']!=''){
+        if(this.filters['cardtype']!=''){
+          search_res=search_res.filter((card)=>card.cardtype.toLowerCase().includes(this.filters['cardtype'].toLowerCase()))
+        }
+        else{
+          search_res=search_res.filter((card)=>card.cardtype.toLowerCase().includes(this.filters['initial'].toLowerCase()))
+        }
+      }
+      if(this.filters['monstertype']!=''){
+        search_res=search_res.filter((card)=>card.cardtype.toLowerCase().includes('monster'))
+        search_res=search_res.filter((card)=>card.type!=undefined)
+        search_res=search_res.filter((card)=>card.type.toLowerCase().includes(this.filters['monstertype'].toLowerCase()))
+      }
+      
+      if(this.filters['levellow']!=''){
+        if(this.filters['levelhigh']!=''){
+          let levellow = Number(this.filters['levellow'])
+          let levelhigh = Number(this.filters['levelhigh'])
+          search_res=search_res.filter((card)=>card.level >=levellow && card.level <=levelhigh)
+        }
+        else{
+          let levellow = Number(this.filters['levellow'])
+          search_res=search_res.filter((card)=>card.level ==levellow)
+        }
+      }
+      else if(this.filters['levelhigh']!=''){
+          let levelhigh = Number(this.filters['levelhigh'])
+          search_res=search_res.filter((card)=>card.level <=levelhigh)
+      }
+    
+  
+      if(this.filters['atklow']!=''){
+        if(this.filters['atkhigh']!=''){
+          let atklow = Number(this.filters['atklow'])
+          let atkhigh = Number(this.filters['levelhigh'])
+          search_res=search_res.filter((card)=>card.atk >=atklow && card.atk <=atkhigh)
+        }
+        else{
+          let atklow = Number(this.filters['atklow'])
+          search_res=search_res.filter((card)=>card.atk ==atklow)
+        }
+      }
+      else if(this.filters['atkhigh']!=''){
+          let atkhigh = Number(this.filters['atkhigh'])
+          search_res=search_res.filter((card)=>card.atk <=atkhigh)
+      }
+  
+  
+  
+  
+  
+      if(this.filters['deflow']!=''){
+        if(this.filters['defhigh']!=''){
+          let deflow = Number(this.filters['deflow'])
+          let defhigh = Number(this.filters['defhigh'])
+          search_res=search_res.filter((card)=>card.def >=deflow && card.def <=defhigh)
+        }
+        else{
+          let deflow = Number(this.filters['deflow'])
+          search_res=search_res.filter((card)=>card.def ==deflow)
+        }
+      }
+      else if(this.filters['defhigh']!=''){
+          let defhigh = Number(this.filters['defhigh'])
+          search_res=search_res.filter((card)=>card.def <=defhigh)
+      }
+  
+      if(this.filters['sort']!=''){
+        switch(this.filters['sort']){
+          case 'c.id ASC':{
+            search_res.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
+            break;
+          }
+          case 'c.id DESC':{
+            search_res.sort((a,b) => (a.id > b.id) ? -1 : ((b.id > a.id) ? 1 : 0))
+            break;
+          }
+  
+          case 'c.name ASC':{
+            search_res.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+            break;
+          }
+          case 'c.name DESC':{
+            search_res.sort((a,b) => (a.name > b.name) ? -1 : ((b.name > a.name) ? 1 : 0))
+            break;
+          }
+  
+          case 'c.level ASC':{
+            search_res.sort((a,b) => (a.level > b.level) ? 1 : ((b.level > a.level) ? -1 : 0))
+            break;
+          }
+          case 'c.level DESC':{
+            search_res.sort((a,b) => (a.level > b.level) ? -1 : ((b.level > a.level) ? 1 : 0))
+            break;
+          }
+  
+  
+          case 'c.ATK ASC':{
+            search_res.sort((a,b) => (a.atk > b.atk) ? 1 : ((b.atk > a.atk) ? -1 : 0))
+            break;
+          }
+          case 'c.ATK DESC':{
+            search_res.sort((a,b) => (a.atk > b.atk) ? -1 : ((b.atk > a.atk) ? 1 : 0))
+            break;
+          }
+  
+          case 'c.DEF ASC':{
+            search_res.sort((a,b) => (a.def > b.def) ? 1 : ((b.def > a.def) ? -1 : 0))
+            break;
+          }
+          case 'c.DEF DESC':{
+            search_res.sort((a,b) => (a.def > b.def) ? -1 : ((b.def > a.def) ? 1 : 0))
+            break;
+          }
+  
+  
+  
+          default:{
+            break;
+          }
+            
+          
+          
+  
+        }
+  
+      }
+  
+      this.cards = search_res;
+      this.currentPage = 1
+      this.getCardNumbers(this.currentPage);
+      this.hideloader();
+  
+  
+      //this.searchName=this.filters['name']
+      //this.cards=this.originalCards.filter((card)=>card.name.toLowerCase().includes(this.searchName.toLowerCase()))
+    }
   getCardNumbers(page:number){
     this.currentCards = [];
     const cardmin = (page-1)*30;
