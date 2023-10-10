@@ -15,8 +15,17 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/home" routerLinkActive = "active">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/banlist" >Banlist</a>
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link " routerLink="/about" id="navbarDarkDropdownMenuLink" role="button"  aria-expanded="false">
+            About
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="nav-link" routerLink="/banlist" >Banlist</a></li>
+            <li><a class="nav-link" routerLink="/formats" >Formats</a></li>
+            
+          </ul>
         </li>
 
 
@@ -46,6 +55,7 @@
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
             <li><a class="nav-link" routerLink="/draft-maker">Draft Creator </a></li>
             <li><a class="nav-link" routerLink="/draftmode" >Draft Editor</a></li>
+            <li><a class="nav-link" (click)="goToSealedDraft()" routerLink="/packs">Sealed Draft</a></li>
             
           </ul>
         </li>
@@ -60,7 +70,7 @@
             <li><a class="nav-link"  routerLink="/structure-decks" >Structure Decks</a></li>
 
             
-            <li><a class="nav-link" (click)="goToSealedDraft()" routerLink="/packs">Sealed Draft</a></li>
+            
             <li><a class="nav-link" routerLink="/checklist" >Checklist</a></li>
           </ul>
         </li>

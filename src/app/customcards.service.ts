@@ -252,6 +252,7 @@ export interface DuelData{
   replay:string;
   gamemode:string;
   date:string;
+  format:string;
 }
 
 

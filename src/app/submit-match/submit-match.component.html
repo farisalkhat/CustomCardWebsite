@@ -38,12 +38,15 @@
             </div>
 
             <div class="col-auto">
-              <label for="Name">Game Mode</label>
+              <label for="Name">Format</label>
               <select class="form-control" id="gamemode" formControlName="gamemode" [ngClass]="{'is-invalid': submitted && f['gamemode'].errors}" >
                   <option value="Standard">Standard</option>
+                  <option value="Collection">Collection</option>
                   <option value ="Sealed Draft">Sealed Draft</option>
                   <option value ="Deck Master">Deck Master</option>
                   <option value ="Cube">Cube</option>
+                  <option value ="Balanced">Balanced</option>
+
                 </select>
               <div *ngIf="submitted && f['gamemode'].errors" class="invalid-feedback">
                   <div *ngIf="f['gamemode'].errors['gamemode']">
@@ -54,6 +57,22 @@
           
           
           </div>
+          <div class="col-auto">
+            <label for="Name">Type</label>
+            <select class="form-control" id="format" formControlName="format" [ngClass]="{'is-invalid': submitted && f['format'].errors}" >
+                <option value="Singles">Singles</option>
+                <option value ="Match">Match</option>
+
+              </select>
+            <div *ngIf="submitted && f['gamemode'].errors" class="invalid-feedback">
+                <div *ngIf="f['gamemode'].errors['gamemode']">
+                  <p class="red">Please input a game mode.</p>
+                </div>
+            </div>
+            
+        
+        
+        </div>
 
 
             <div class="col-auto">

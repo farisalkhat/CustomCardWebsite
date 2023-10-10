@@ -29,7 +29,7 @@
 
     <h1><b><u>{{decklistinfo?.name}}</u></b></h1>
     <h2>By {{decklistinfo?.creator}}</h2>
-    <button class="btn btn-success" (click)="download()">Download .xml</button>
+    <button class="btn btn-success" (click)="download()">Download .xml</button> 
     <button class="btn btn-danger" *ngIf="decklistinfo?.creatorid==id" (click)="delete()">Delete</button>
     <button class="btn btn-warning" *ngIf="decklistinfo?.creatorid==id" (click)="edit()">Edit</button>
 

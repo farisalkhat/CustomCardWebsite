@@ -344,9 +344,26 @@ export class DecklistDetailsComponent implements OnInit {
 
 
   goToLink(url: string){
-    const newurl = 'https://www.duelingbook.com/card?id='+url
-    window.open(newurl, "_blank");
-}
+
+    let new_url =''
+  
+    if(this._router['location']._platformLocation.location.origin=='http://localhost:4200'){
+       new_url = this._router.serializeUrl(
+        this._router.createUrlTree(['/cards/']));
+    }
+    else{
+       new_url = this._router.serializeUrl(
+      this._router.createUrlTree(['/CustomCardWebsite/cards/']));
+    }
+    
+  
+  
+    window.open(new_url +'/'+url, '_blank');
+  
+  
+    // const newurl = 'https://www.duelingbook.com/card?id='+url
+    // window.open(newurl, "_blank");
+  }
 
 download(){
 

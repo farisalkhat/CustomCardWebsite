@@ -59,6 +59,8 @@ import { StructureDeckDetailsComponent } from './structure-decks/structure-deck-
 import { StructureDeckEditorComponent } from './structure-decks/structure-deck-editor/structure-deck-editor.component';
 import { StructureDeckMakerComponent } from './structure-decks/structure-deck-maker/structure-deck-maker.component';
 import { StructureDeckEditComponent } from './structure-decks/structure-deck-edit/structure-deck-edit.component';
+import { FormatsComponent } from './formats/formats.component';
+import { AboutsiteComponent } from './aboutsite/aboutsite.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +116,9 @@ import { StructureDeckEditComponent } from './structure-decks/structure-deck-edi
     StructureDeckDetailsComponent,
     StructureDeckEditorComponent,
     StructureDeckMakerComponent,
-    StructureDeckEditComponent
+    StructureDeckEditComponent,
+    FormatsComponent,
+    AboutsiteComponent
   ],
   imports: [
     HttpClientModule,

@@ -43,6 +43,9 @@ import { StructureDecksComponent } from './structure-decks/structure-decks.compo
 import { StructureDeckMakerComponent } from './structure-decks/structure-deck-maker/structure-deck-maker.component';
 import { StructureDeckDetailsComponent } from './structure-decks/structure-deck-details/structure-deck-details.component';
 import { StructureDeckEditorComponent } from './structure-decks/structure-deck-editor/structure-deck-editor.component';
+import {FormatsComponent} from './formats/formats.component';
+import {AboutsiteComponent} from './aboutsite/aboutsite.component';
+
 const routes: Routes = [
   {
     path:'',
@@ -133,7 +136,12 @@ component:StructureDeckDetailsComponent
 },
 {path:'structure-deck-editor/:deckid',
 component:StructureDeckEditorComponent
-}
+},
+{path:'formats',
+component:FormatsComponent
+},
+{path:'about',
+component:AboutsiteComponent}
 
 
 

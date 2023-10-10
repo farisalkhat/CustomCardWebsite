@@ -32,6 +32,12 @@ export class SubmitMatchComponent implements OnInit {
       Validators.maxLength(100)
 
     ]),
+    format: new FormControl(' ',[
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(100)
+
+    ]),
     decklist: new FormControl(' ',[]),
 
     
@@ -127,6 +133,7 @@ export class SubmitMatchComponent implements OnInit {
       duel['replay'] = this.matchData.controls['replay'].value;
       duel['gamemode'] = this.matchData.controls['gamemode'].value;
       duel['date'] = this.jstoday
+      duel['format']=this.matchData.controls['format'].value;
       
 
 

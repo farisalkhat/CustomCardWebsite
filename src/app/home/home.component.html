@@ -139,7 +139,7 @@
         <div class="col-md-6 col-6">
             <h1 class="text-center">Latest Pack!</h1>
             <img    *ngIf="latestpack.pack!='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack" src='https://drive.google.com/uc?export=view&id={{latestpack?.pack}}'>
-            
+            <img   *ngIf="latestpack.pack=='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/placeholder.png'>
     
         </div>
 
@@ -172,3 +172,7 @@
 
   </div>
 </div>
+
+
+
+<img class="center" src="assets/images/Boneheimer.png">
