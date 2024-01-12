@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3" *ngFor = "let pack of packs">
-      
+
       <button *ngIf="pack.pack!='placeholder'" class="btn"   >
-        <img     class="pack"src='https://drive.google.com/uc?export=view&id={{pack?.pack}}'
+        <img     class="pack"src='https://lh3.google.com/u/0/d/{{pack?.pack}}'
         >
 
       </button>
@@ -11,7 +11,7 @@
       <button *ngIf="pack.pack=='placeholder'" class="btn"   >
         <img     class="pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/placeholder.png'>
       </button>
-      
+
     </div>
 
   </div>

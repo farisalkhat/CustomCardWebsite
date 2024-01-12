@@ -1,45 +1,45 @@
 
-    <div class="row">   
+    <div class="row">
         <div class="col-md-8">
         <div class="row">
             <h2>Profile Image</h2>
             <p class="text-center"><button class="btn btn-default" (click)="selectCardEdit(0)" >
-                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.profile_image}}'>
+                <img class="smallcard" src='https://lh3.google.com/u/0/d/{{newSettings.profile_image}}'>
             </button></p>
-            
+
         </div>
         <div class="row">
             <h2>Favorite Cards</h2>
-    
+
             <p class="text-center">
             <button class="button btn btn-default" (click)="selectCardEdit(1)" >
-                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.favorite_card1}}'>
+                <img class="smallcard" src='https://lh3.google.com/u/0/d/{{newSettings.favorite_card1}}'>
             </button>
             <button class="button btn btn-default" (click)="selectCardEdit(2)" >
-                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.favorite_card2}}'>
+                <img class="smallcard" src='https://lh3.google.com/u/0/d/{{newSettings.favorite_card2}}'>
             </button>
             <button class="button btn btn-default" (click)="selectCardEdit(3)" >
-                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.favorite_card3}}'>
+                <img class="smallcard" src='https://lh3.google.com/u/0/d/{{newSettings.favorite_card3}}'>
             </button>
             <button class="button btn btn-default" (click)="selectCardEdit(4)" >
-                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.favorite_card4}}'>
+                <img class="smallcard" src='https://lh3.google.com/u/0/d/{{newSettings.favorite_card4}}'>
             </button>
             <button class="button btn btn-default" (click)="selectCardEdit(5)" >
-                <img class="smallcard" src='https://drive.google.com/uc?export=view&id={{newSettings.favorite_card5}}'>
+                <img class="smallcard" src='https://lh3.google.com/u/0/d/{{newSettings.favorite_card5}}'>
             </button>
-            
+
         </p>
-    
-            
+
+
         </div>
-        
+
         <div class="row">
             <form [formGroup]="aboutMe">
                 <div class="form-group">
                     <h2><label for="aboutMe">About</label></h2>
                     <textarea formControlName="about" [ngClass]="{'is-invalid': submitted && f['about'].errors}" [(ngModel)]="about" class="form-control"  rows="3"></textarea>
                   </div>
-    
+
                   <div *ngIf="submitted && f['about'].errors" class="invalid-feedback">
                     asd
                     <div *ngIf="f['about'].errors['required']">
@@ -47,28 +47,28 @@
                     </div>
                 </div>
             </form>
-    
-    
-    
-            
-    
-            
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
             <button [disabled] = "done==true" class=" smallbtn btn button btn-success"(click)="saveImages()">Save</button>
         </div>
-        
-        
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     </div>
     <div class="col mr-auto text-center"  >
             <div class="row" (keydown.enter)="submitSearch()">
@@ -77,27 +77,27 @@
                     <input class="form-control" type="text" [(ngModel)] = "filters.name">
                     <button class="btn btn-success" (click)="submitSearch()">Search</button>
                 </div>
-        
+
                 <div class="cards row-lg-8 overflow-auto">
                     <div class="d-flex justify-content-center">
                             <div id="Loading" class="spinner-border" role="status">
                                 <span class="sr-only" ></span>
                             </div>
                     </div>
-            
+
                         <span *ngFor = "let card of currentCards">
-            
-                            <button  class="btn btn-default"   (click)="setCard(card.drive_id)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
+
+                            <button  class="btn btn-default"   (click)="setCard(card.drive_id)" ><img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'></button>
                         </span>
-            
-                    
+
+
                 </div>
-        
+
                 <div class="row">
                     <button class="btn btn-success" (click)="nextPage()">Next</button><button class="btn btn-success" (click)="prevPage()">Previous</button>
                 </div>
-        
+
             </div>
         </div></div>
- 
+
 

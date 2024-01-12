@@ -2,42 +2,42 @@
     <div class="col-sm-2">
             <h3>About</h3>
             <p>{{userDetails?.details?.about}}</p>
-        
-        
+
+
     </div>
     <div class="col-md-8">
-        
+
             <div class="row">
                 <h1>
                     Favorite Cards
                 </h1>
-    
+
                 <p>
                     <button *ngIf="userDetails?.details?.favorite_card1!=undefined"class="btn " routerLink="/cards/{{userDetails?.details?.favorite_card1}}">
-                        <img class="favoritecard" src='https://drive.google.com/uc?export=view&id={{userDetails?.details?.favorite_card1}}' />
+                        <img class="favoritecard" src='https://lh3.google.com/u/0/d/{{userDetails?.details?.favorite_card1}}' />
                     </button>
                     <button *ngIf="userDetails?.details?.favorite_card1!=undefined"class="btn " routerLink="/cards/{{userDetails?.details?.favorite_card2}}">
-                        <img class="favoritecard" src='https://drive.google.com/uc?export=view&id={{userDetails?.details?.favorite_card2}}' />
+                        <img class="favoritecard" src='https://lh3.google.com/u/0/d/{{userDetails?.details?.favorite_card2}}' />
                     </button>
                     <button *ngIf="userDetails?.details?.favorite_card1!=undefined"class="btn " routerLink="/cards/{{userDetails?.details?.favorite_card3}}">
-                        <img class="favoritecard" src='https://drive.google.com/uc?export=view&id={{userDetails?.details?.favorite_card3}}' />
+                        <img class="favoritecard" src='https://lh3.google.com/u/0/d/{{userDetails?.details?.favorite_card3}}' />
                     </button>
                     <button *ngIf="userDetails?.details?.favorite_card1!=undefined"class="btn " routerLink="/cards/{{userDetails?.details?.favorite_card4}}">
-                        <img class="favoritecard" src='https://drive.google.com/uc?export=view&id={{userDetails?.details?.favorite_card4}}' />
+                        <img class="favoritecard" src='https://lh3.google.com/u/0/d/{{userDetails?.details?.favorite_card4}}' />
                     </button>
                     <button *ngIf="userDetails?.details?.favorite_card1!=undefined"class="btn " routerLink="/cards/{{userDetails?.details?.favorite_card5}}">
-                        <img class="favoritecard" src='https://drive.google.com/uc?export=view&id={{userDetails?.details?.favorite_card5}}' />
+                        <img class="favoritecard" src='https://lh3.google.com/u/0/d/{{userDetails?.details?.favorite_card5}}' />
                     </button>
 
                 </p>
-                
 
 
 
-                
-                
-                
-                
+
+
+
+
+
             </div>
 
 
@@ -69,16 +69,16 @@
                     </table>
 
             </div>
-            
-            
-            
+
+
+
             <div class="row">
                     <h1>
                         Pack Checklist
                     </h1>
 
                 <div class="col">
-                    <span class="binder">Pack: </span> 
+                    <span class="binder">Pack: </span>
                     <select  class="form-control-lg" [(ngModel)] = "packID" aria-label="Default select example">
                         <option  *ngFor = "let pack of packs" value="{{pack.packid}}">{{pack.title}}</option>
                     </select>
@@ -87,17 +87,17 @@
                 </div>
 
 
-                
+
             </div>
 
 
-            
-        
 
 
 
 
-        
+
+
+
     </div>
 
 </div>

@@ -2,23 +2,23 @@
   <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
       <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
   <b><p *ngIf="hovermonster=='True'">
-      <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}  
+      <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}
   </p></b>
 
   <span *ngIf="hovermonster=='False'">
       <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
   </span>
 
-  
-  
-  
+
+
+
 
 
   <b>
-      
+
       <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
-  
-  
+
+
       <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}}  DEF/{{hoveredCard?.def}}</p>
       <p> {{hoveredCard?.effect}}</p>
       <p>ID: {{hoveredCard?.id}}</p>
@@ -29,13 +29,13 @@
 
 
 
- 
+
 
 
 
 <div class="container-fluid">
     <div class="row">
-      
+
       <h1 class="text-center">{{currentPack.title}}</h1>
 
     </div>
@@ -46,43 +46,43 @@
               <span  *ngFor = "let card of randomCards">
 
                   <button class="btn btn-default" (click)="showDetails(card)" >
-    
+
                     <div (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="card" [@cardFlip]="this.state">
                       <div class="face back">
                         <img src="assets/cardimages/Default.png" />
-                        
+
                       </div>
                         <div class="face front" *ngIf="card.rarity=='common'">
-                          <img src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+                          <img src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
                         </div>
 
                         <div class="face front rare-card" *ngIf="card.rarity!='common'">
                           <img class = "sparkle" *ngIf="card.rarity=='secret'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/giphy.gif'>
                           <img class = "sparkle" *ngIf="card.rarity=='super'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/super.gif'>
                           <img class = "sparkle" *ngIf="card.rarity=='ultra'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/fireworks.gif'>
-                          <img src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
-                        </div>
-                        
-
-
+                          <img src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
                         </div>
 
-                      
+
+
+                        </div>
+
+
                         <span  *ngIf="revealed==true && card.rarity=='common'"><b>{{card?.rarity}}</b></span>
                         <span style="color:blue;" *ngIf="revealed==true && card.rarity=='rare' "><b>{{card?.rarity}}</b></span>
                         <span style="color:orangered;" *ngIf="revealed==true && card.rarity=='super'"><b>{{card?.rarity}}</b></span>
                         <span style="color:red;" *ngIf="revealed==true && card.rarity=='ultra'"><b>{{card?.rarity}}</b></span>
                         <span style="color:purple;" *ngIf="revealed==true && card.rarity=='secret'"><b>{{card?.rarity}}</b></span>
                   </button>
-                  
-                  
+
+
               </span>
           </div>
           </div>
 
 
-    
-    
+
+
     </div>
 <div class="container">
       <button *ngIf="sealedmode==false"class="btn btn-success" [disabled]="finishedPacks==true || revealed==true" (click)="revealCards()">Open Pack {{packsOpened}}/{{packAmount}}</button>
@@ -96,34 +96,34 @@
 </div>
 
     <div class="container">
-        
-        
-      
+
+
+
 
       <form *ngIf="sealedmode==false" [formGroup] = "binderData" (ngSubmit)="submitBinder()">
 
 
 
 
-        
 
 
-        
+
+
 
 
           <div class="row">
             <div class="col-auto">
                 <label for="Name">Binder Name</label>
                 <input id ="binderName" formControlName ="binderName" [ngClass]="{'is-invalid': submitted && f['binderName'].errors}" class="form-control" type="text" [(ngModel)] = "binderName">
-                
+
 
                 <div *ngIf="submitted && f['binderName'].errors" class="invalid-feedback">
                     <div *ngIf="f['binderName'].errors['required']">
                       <p class="red">Give Binder name</p>
                     </div>
                 </div>
-            
-            
+
+
             </div>
         </div>
 
@@ -136,40 +136,40 @@
 
       </form>
 
-      
+
 
 
       <!-- <button class="btn btn-success" [disabled]="revealed==false || packsOpened==packAmount" (click)="openNextPack()">Save to Collection</button> -->
-      
+
 
     </div>
     <div class="row justify-content-center" *ngIf = "card!= undefined">
-      <div class="col-sm-2"><img class="bigcard" href='' routerLink="/cards/{{card.id}}" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'> </div>
+      <div class="col-sm-2"><img class="bigcard" href='' routerLink="/cards/{{card.id}}" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'> </div>
       <div class="col-md-4 cardeffect">
-        
+
         <b><p *ngIf="monster=='True'">
-            <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
+            <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}
         </p></b>
-  
+
         <p *ngIf="monster=='False'">
             <img class="attribute" src={{attribute}}> {{card?.attribute}}
         </p>
-  
+
         <h3>{{card?.name}}</h3>
         <h4 *ngIf="monster=='False'"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
         <h4 *ngIf="monster=='True'"> {{card?.cardtype}} </h4>
-        
-  
-  
+
+
+
         <b>
-            
+
             <p *ngIf="monster=='True'"><img class="type" src={{mType}}> {{card?.type}}</p>
-        
-        
+
+
             <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
             <p> {{card?.effect}}</p>
         </b>
-        
+
       </div>
 
     </div>
@@ -181,7 +181,7 @@
     <div class="col-lg-12">
       <h2>Current Cards</h2>
       <span *ngFor = "let card of currentOpened">
-          <img class ="smallcard" href='' (click)="goToLink(card.id)" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+          <img class ="smallcard" href='' (click)="goToLink(card.id)" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
       </span>
     </div>
 

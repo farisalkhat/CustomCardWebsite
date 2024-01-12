@@ -2,7 +2,7 @@
 
 <div class="container">
 
-<h2>Look at the card text and NOT the card image when reading effects, as custom cards are always changing.</h2>    
+<h2>Look at the card text and NOT the card image when reading effects, as custom cards are always changing.</h2>
 
 <div class="row">
         <div class="col-auto">
@@ -24,7 +24,7 @@
                 <option value =""></option>
                 <option value ="Attack Directly">Attack Directly</option>
                 <option value ="Attribute-Generic">Attribute-Generic</option>
-                
+
 
                 <option value ="Battle">Battle</option>
                 <option value ="Boost">Boost</option>
@@ -159,7 +159,7 @@
 
 
 
-        
+
 
 
 </div>
@@ -233,23 +233,23 @@
 
             <span *ngFor = "let card of currentCards">
 
-                <button class="btn btn-success" (click)="showDetails(card.id)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
-                
+                <button class="btn btn-success" (click)="showDetails(card.id)" ><img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'></button>
+
             </span>
 
         <div class="row">
             <button class="btn btn-success" (click)="nextPage()">Next</button><button class="btn btn-success" (click)="prevPage()">Previous</button>
         </div>
-        
+
     </div>
 
 
 
 
     <div class="col-lg-4 cardeffect">
-        <img class="bigcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'> 
+        <img class="bigcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
         <b><p *ngIf="monster=='True'">
-            <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
+            <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}
         </p></b>
 
         <p *ngIf="monster=='False'">
@@ -259,14 +259,14 @@
         <h3>{{card?.name}}</h3>
         <h4 *ngIf="monster=='False'"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
         <h4 *ngIf="monster=='True'"> {{card?.cardtype}} </h4>
-        
+
 
 
         <b>
-            
+
             <p *ngIf="monster=='True'"><img class="type" src={{mType}}> {{card?.type}}</p>
-        
-        
+
+
             <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
             <p> {{card?.effect}}</p>
             <p>{{card?.id}}</p>

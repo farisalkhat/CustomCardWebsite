@@ -3,39 +3,39 @@
     <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
         <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
     <b><p *ngIf="hovermonster=='True'">
-        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}  
+        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}
     </p></b>
 
     <span *ngIf="hovermonster=='False'">
         <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
     </span>
 
-    
-    
-    
+
+
+
 
 
     <b>
-        
+
         <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
-    
-    
+
+
         <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}}  DEF/{{hoveredCard?.def}}</p>
         <p> {{hoveredCard?.effect}}</p>
         <p>ID: {{hoveredCard?.id}}</p>
     </b>
 
 </div>
-    
-<h1 class="text-center">{{packInfo.title}}</h1> 
-<h4 class="text-center">Created by <a routerLink="/players/{{packInfo.creatorid}}">{{packInfo.creator}}</a> | 
+
+<h1 class="text-center">{{packInfo.title}}</h1>
+<h4 class="text-center">Created by <a routerLink="/players/{{packInfo.creatorid}}">{{packInfo.creator}}</a> |
     Pack Size: <span *ngIf="packInfo.packsize=='large'">200 cards, 13 per pack</span>
     <span *ngIf="packInfo.packsize=='medium'">100 cards, 9 per pack</span>
     <span *ngIf="packInfo.packsize=='small'">31 cards, 3 per pack</span>
 
 
 
-</h4> 
+</h4>
 
 <div class="container">
     <span class="packdescription" [innerHTML]="packInfo.packdescription"></span>
@@ -43,7 +43,7 @@
 
 <div *ngIf="packcards.length>0">
 
-        
+
     <h2>Secret Rares</h2>
     <span *ngFor = "let card of packcards">
         <button  *ngIf="card.rarity=='secret'" routerLink="/cards/{{card.id}}" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
@@ -52,8 +52,8 @@
 
             <div  class="rare-card">
                 <img class = "smallcard sparkle" *ngIf="card.rarity=='secret'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/giphy.gif'>
-                <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
-                
+                <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+
             </div>
 
 
@@ -63,7 +63,7 @@
                 <span style="color:orangered;" *ngIf=" card.rarity=='super'"><b>{{card?.rarity}}</b></span>
                 <span style="color:red;" *ngIf=" card.rarity=='ultra'"><b>{{card?.rarity}}</b></span>
                 <span style="color:purple;" *ngIf=" card.rarity=='secret'"><b>{{card?.rarity}}</b></span>    -->
-                
+
         </button>
 
     </span>
@@ -75,8 +75,8 @@
 
                 <div   class="rare-card">
                     <img class = "smallcard sparkle" *ngIf="card.rarity=='ultra'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/fireworks.gif'>
-                    <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
-                    
+                    <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+
                 </div>
 
 
@@ -86,7 +86,7 @@
                     <span style="color:orangered;" *ngIf=" card.rarity=='super'"><b>{{card?.rarity}}</b></span>
                     <span style="color:red;" *ngIf=" card.rarity=='ultra'"><b>{{card?.rarity}}</b></span>
                     <span style="color:purple;" *ngIf=" card.rarity=='secret'"><b>{{card?.rarity}}</b></span>    -->
-                    
+
         </button>
     </span>
 
@@ -98,8 +98,8 @@
 
             <div   class="rare-card" >
                 <img class = "smallcard sparkle" *ngIf="card.rarity=='super'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/super.gif'>
-                <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
-               
+                <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+
             </div>
 
 
@@ -108,20 +108,20 @@
                 <span style="color:orangered;" *ngIf=" card.rarity=='super'"><b>{{card?.rarity}}</b></span>
                 <span style="color:red;" *ngIf=" card.rarity=='ultra'"><b>{{card?.rarity}}</b></span>
                 <span style="color:purple;" *ngIf=" card.rarity=='secret'"><b>{{card?.rarity}}</b></span>    -->
-                
-        </button>            
+
+        </button>
 
     </span>
 
     <h2>Rares</h2>
-    <span *ngFor = "let card of packcards">   
+    <span *ngFor = "let card of packcards">
         <button   *ngIf="card.rarity=='rare'"routerLink="/cards/{{card.id}}" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
 
 
 
                 <div   class="rare-card" >
-                    <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
-                    
+                    <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+
                 </div>
 
 
@@ -130,7 +130,7 @@
                     <span style="color:orangered;" *ngIf=" card.rarity=='super'"><b>{{card?.rarity}}</b></span>
                     <span style="color:red;" *ngIf=" card.rarity=='ultra'"><b>{{card?.rarity}}</b></span>
                     <span style="color:purple;" *ngIf=" card.rarity=='secret'"><b>{{card?.rarity}}</b></span>    -->
-                    
+
         </button>
 
     </span>
@@ -141,8 +141,8 @@
         <button  *ngIf="card.rarity=='common'"  routerLink="/cards/{{card.id}}" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
 
             <div  class="relative">
-                <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
-                
+                <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+
             </div>
 
 
@@ -154,7 +154,7 @@
                 <span style="color:orangered;" *ngIf=" card.rarity=='super'"><b>{{card?.rarity}}</b></span>
                 <span style="color:red;" *ngIf=" card.rarity=='ultra'"><b>{{card?.rarity}}</b></span>
                 <span style="color:purple;" *ngIf=" card.rarity=='secret'"><b>{{card?.rarity}}</b></span>    -->
-                
+
         </button>
     </span>
 

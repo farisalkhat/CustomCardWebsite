@@ -3,30 +3,30 @@
     <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
         <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
     <b><p *ngIf="hovermonster=='True'">
-        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}  
+        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}
     </p></b>
 
     <span *ngIf="hovermonster=='False'">
         <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
     </span>
 
-    
-    
-    
+
+
+
 
 
     <b>
-        
+
         <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
-    
-    
+
+
         <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}}  DEF/{{hoveredCard?.def}}</p>
         <p> {{hoveredCard?.effect}}</p>
         <p>ID: {{hoveredCard?.id}}</p>
     </b>
 
 </div>
-    
+
 <h1 class="text-center">Card Binder Management</h1>
 
 <h2 class="text-center">Your Binders</h2>
@@ -38,16 +38,16 @@
     <button class="clickbutton btn-success btn" (click)="selectBinder()">Select Binder</button>
 </div>
 <div class="row">
-        
-    
+
+
     <div class="col justify-content-between">
- 
+
             <span *ngFor = "let card of cards">
 
                 <button  (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
 
                     <div class="relative"*ngIf="card.rarity=='common'">
-                        <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+                        <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
                         <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                     </div>
 
@@ -55,7 +55,7 @@
                         <img class = " smallcard sparkle" *ngIf="card.rarity=='secret'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/giphy.gif'>
                         <img class = "smallcard sparkle" *ngIf="card.rarity=='super'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/super.gif'>
                         <img class = "smallcard sparkle" *ngIf="card.rarity=='ultra'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/fireworks.gif'>
-                        <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+                        <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
                         <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                     </div>
 
@@ -64,9 +64,9 @@
                         <span style="color:orangered;" *ngIf=" card.rarity=='super'"><b>{{card?.rarity}}</b></span>
                         <span style="color:red;" *ngIf=" card.rarity=='ultra'"><b>{{card?.rarity}}</b></span>
                         <span style="color:purple;" *ngIf=" card.rarity=='secret'"><b>{{card?.rarity}}</b></span>    -->
-                        
+
                     </button>
-                
+
             </span>
 
 
@@ -75,7 +75,7 @@
         <!-- <div class="row">
             <button class="btn btn-success" (click)="nextPage()">Next</button><button class="btn btn-success" (click)="prevPage()">Previous</button>
         </div> -->
-        
+
     </div>
 
 </div>

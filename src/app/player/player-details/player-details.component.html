@@ -7,8 +7,8 @@
 <div class="row">
     <div class="col-auto">
         <div class="crop">
-            
-            <img src='https://drive.google.com/uc?export=view&id={{userDetails?.details?.profile_image}}' />
+
+            <img src='https://lh3.google.com/u/0/d/{{userDetails?.details?.profile_image}}' />
         </div>
     </div>
     <div class="mt-auto col-auto">
@@ -18,14 +18,14 @@
         <button routerLink ="/settings" *ngIf="loggedInID==userID" class="button btn btn-success">Edit Profile</button>
     </div>
 
-    
-    
-    
+
+
+
 
 </div>
 <nav class="rounded navbar navbar-default navbar-expand-md navbar-dark ">
 
-  
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
 
@@ -47,12 +47,12 @@
         <!-- <li class="nav-item">
             <a class="nav-link" >Creations</a>
         </li> -->
-        
+
       </ul>
 
     </div>
 
-    
+
   </nav>
 
     <app-player-profile [userId] = "userID" *ngIf="page=='Profile'"></app-player-profile>
@@ -60,7 +60,7 @@
     <app-player-decklists [userId] = "userID" *ngIf="page=='Decklists'"></app-player-decklists>
     <app-player-packs [userId] = "userID" *ngIf="page=='Packs'"></app-player-packs>
     <app-player-matches [userId] = "userID" *ngIf="page=='Matches'"></app-player-matches>
-    
+
 
 
 

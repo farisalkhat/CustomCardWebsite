@@ -2,23 +2,23 @@
     <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
         <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
     <b><p *ngIf="hovermonster=='True'">
-        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}  
+        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}
     </p></b>
 
     <span *ngIf="hovermonster=='False'">
         <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
     </span>
 
-    
-    
-    
+
+
+
 
 
     <b>
-        
+
         <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
-    
-    
+
+
         <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}}  DEF/{{hoveredCard?.def}}</p>
         <p> {{hoveredCard?.effect}}</p>
         <p>ID: {{hoveredCard?.id}}</p>
@@ -57,7 +57,7 @@
                 <label for="Creator">Creator</label>
                 <input class="form-control" type="text" [(ngModel)] = "filters.creator" >
             </div>
-    
+
             <!-- <div class="col-auto">
                 <label for="attribute">Tag</label>
                 <select class="form-control"  id="attribute" [(ngModel)] = "filters.tag">
@@ -80,7 +80,7 @@
                     <option value ="Generic">Generic</option>
                     <option value ="Hand Protection">Hand Protection</option>
                     <option value ="Ignore">Ignore</option>
-    
+
                     <option value ="Lingering">Lingering</option>
                     <option value ="Lockdown">Lockdown</option>
                     <option value ="Mill">Mill</option>
@@ -99,11 +99,11 @@
                     <option value ="Targeted Removal">Targeted Removal</option>
                     <option value ="Token">Token</option>
                     <option value ="Tribute">Tribute</option>
-    
+
                   </select>
             </div> -->
-    
-    
+
+
             <div class="col-auto">
                 <label for="cardtype">Card</label>
                 <select class="form-control"   id="initial" [(ngModel)] = "filters.initial" >
@@ -113,7 +113,7 @@
                     <option value ="Trap">Trap</option>
                 </select>
             </div>
-    
+
             <div class="col-auto">
                 <label for="cardtype">Card Type 2</label>
                 <select class="form-control"  [disabled]="filters.initial==''" id="cardtype" [(ngModel)] = "filters.cardtype" >
@@ -128,9 +128,9 @@
                     <option *ngIf = 'filters.initial=="Monster"' value ="Fusion Monster">Fusion</option>
                     <option *ngIf = 'filters.initial=="Monster"' value ="Synchro Monster">Synchro</option>
                     <option *ngIf = 'filters.initial=="Monster"' value ="Xyz Monster">Xyz</option>
-                    
-                    
-    
+
+
+
                     <option *ngIf = 'filters.initial=="Spell"' value ="">  </option>
                     <option *ngIf = 'filters.initial=="Spell"' value = "Normal Spell">Normal</option>
                     <option *ngIf = 'filters.initial=="Spell"' value ="Continuous Spell">Continuous</option>
@@ -138,15 +138,15 @@
                     <option *ngIf = 'filters.initial=="Spell"' value ="Ritual Spell">Ritual</option>
                     <option *ngIf = 'filters.initial=="Spell"' value ="Equip Spell">Equip</option>
                     <option *ngIf = 'filters.initial=="Spell"' value ="Field Spell">Field</option>
-    
+
                     <option *ngIf = 'filters.initial=="Trap"' value ="">  </option>
                     <option *ngIf = 'filters.initial=="Trap"' value = "Normal Trap">Normal</option>
                     <option *ngIf = 'filters.initial=="Trap"' value ="Continuous Trap">Continuous</option>
                     <option *ngIf = 'filters.initial=="Trap"' value ="Counter Trap">Counter</option>
                 </select>
             </div>
-    
-    
+
+
             <div class="col-auto">
                 <label for="gamemode">Monster Type</label>
                 <select class="form-control"   [disabled]="filters.initial!='Monster'" id="monstertype" [(ngModel)] = "filters.monstertype">
@@ -174,20 +174,20 @@
                     <option value ="Zombie">Zombie</option>
                   </select>
             </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-            
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
-    
+
     <div class="row" (keydown.enter)="submitSearch()">
         <div class="col-auto">
             <label for="attribute">Attribute</label>
@@ -210,7 +210,7 @@
             <label for="levelhigh"> Level   </label>
             <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.levelhigh" type="number" >
         </div>
-    
+
         <div class="col-auto">
             <label for="atklow">Atk &#60;=</label>
             <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.atklow" type="number" >
@@ -219,7 +219,7 @@
             <label for="atkhigh">Atk</label>
             <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.atkhigh" type="number" >
         </div>
-    
+
         <div class="col-auto">
             <label for="deflow">Def &#60;=</label>
             <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.deflow "type="number" >
@@ -235,91 +235,91 @@
                 <option value ="c.id DESC">Release Date DESC</option>
                 <option value ="c.name ASC">Alphabetical ASC</option>
                 <option value ="c.name DESC">Alphabetical DESC</option>
-    
+
                 <option *ngIf = 'filters.initial=="Monster"' value ="c.level ASC">Level ASC</option>
                 <option *ngIf = 'filters.initial=="Monster"' value ="c.level DESC">Level DESC</option>
                 <option *ngIf = 'filters.initial=="Monster"' value ="c.ATK ASC">ATK ASC</option>
                 <option *ngIf = 'filters.initial=="Monster"' value ="c.ATK DESC">ATK DESC</option>
                 <option *ngIf = 'filters.initial=="Monster"' value ="c.DEF ASC">DEF ASC</option>
                 <option *ngIf = 'filters.initial=="Monster"' value ="c.DEF DESC">DEF DESC</option>
-    
+
             </select>
         </div>
-    
+
         <button class="btn btn-success" (click)="submitSearch()">Search</button>
-    
-    
+
+
     </div>
-    
+
     <div class="row text-center"  >
 
         <div><button (click)="addTo('Main')"class="btn btn-success small text-center">Main Deck</button>
             <button (click)="addTo('Side')" class="btn btn-success small text-center">Side Deck</button></div>
-        
-        
-    
+
+
+
         <div class="col-auto"><div class="d-flex justify-content-center">
             <div id="Loading" class="spinner-border" role="status">
                 <span class="sr-only" ></span>
             </div>
           </div>
-     
+
                 <span *ngFor = "let card of currentCards">
-    
+
                     <button *ngIf="card!=undefined" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card)"  (click)="goToLink(card.id)" >
-                        
+
                         <div class="relative"*ngIf="card.rarity=='common'">
-                            <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+                            <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
                             <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                         </div>
-    
+
                         <div  class="rare-card" *ngIf="card.rarity!='common'">
                             <img class = " smallcard sparkle" *ngIf="card.rarity=='secret'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/giphy.gif'>
                             <img class = "smallcard sparkle" *ngIf="card.rarity=='super'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/super.gif'>
                             <img class = "smallcard sparkle" *ngIf="card.rarity=='ultra'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/fireworks.gif'>
-                            <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+                            <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
                             <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                         </div>
                     </button>
-                
-                
-                
-                
+
+
+
+
                 </span>
 
 
 
-    
+
             <div class="row">
                 <button class="btn btn-success" (click)="nextPage()">Next</button><button class="btn btn-success" (click)="prevPage()">Previous</button>
             </div>
-            
-        </div>
-    
-    
 
-    
+        </div>
+
+
+
+
         <!-- <div class="col-lg-4 cardeffect">
-            <img href='' (click)="goToLink(card.id)" class="bigcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+            <img href='' (click)="goToLink(card.id)" class="bigcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
             <b><p *ngIf="monster=='True'">
-                <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
+                <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}
             </p></b>
-    
+
             <p *ngIf="monster=='False'">
                 <img class="attribute" src={{attribute}}> {{card?.attribute}}
             </p>
-    
+
             <h3>{{card?.name}}</h3>
             <h4 *ngIf="monster=='False'"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
             <h4 *ngIf="monster=='True'"> {{card?.cardtype}} </h4>
-            
-    
-    
+
+
+
             <b>
-                
+
                 <p *ngIf="monster=='True'"><img class="type" src={{mType}}> {{card?.type}}</p>
-            
-            
+
+
                 <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
                 <p> {{card?.effect}}</p>
                 <p>ID: {{card?.id}}</p>
@@ -336,13 +336,13 @@
 
 
     </div>
-    
-    
+
+
     <div class="row">
 
         <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b>      <button class="btn btn-success"(click)="exportList()">Export XML</button>
         <button class="btn btn-success"(click)="uploadList()" *ngIf="_authService.loggedIn()">Upload Decklist</button><span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
-        
+
         </h1>
 
 
@@ -351,7 +351,7 @@
         <div class="col-lg-12">
             <h2>Monsters ({{monsterCounter}})</h2>
             <span *ngFor = "let card of mainDeck">
-                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Monster')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
+                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Monster')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'></button>
             </span>
         </div>
 
@@ -359,28 +359,28 @@
         <div class="col-lg-12">
             <h2>Spells ({{spellCounter}})</h2>
             <span *ngFor = "let card of mainDeck">
-                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Spell')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
+                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Spell')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Traps ({{trapCounter}})</h2>
             <span *ngFor = "let card of mainDeck">
-                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Trap')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
+                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Trap')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Side Deck ({{sideCounter}})</h2>
             <span *ngFor = "let card of sideDeck">
-                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (contextmenu)="rightDeleteSideCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
+                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (contextmenu)="rightDeleteSideCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Extra ({{edCounter}})</h2>
             <span *ngFor = "let card of extraDeck">
-                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
+                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'></button>
             </span>
         </div>
 
@@ -390,11 +390,10 @@
 
 
 
-    
 
-    
+
+
     </div>
-    
-    
 
-    
+
+

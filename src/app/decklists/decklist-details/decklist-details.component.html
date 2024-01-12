@@ -2,49 +2,49 @@
     <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
         <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
     <b><p *ngIf="hovermonster=='True'">
-        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}  
+        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}
     </p></b>
-  
+
     <span *ngIf="hovermonster=='False'">
         <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
     </span>
-  
-    
-    
-    
-  
-  
+
+
+
+
+
+
     <b>
-        
+
         <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
-    
-    
+
+
         <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}}  DEF/{{hoveredCard?.def}}</p>
         <p> {{hoveredCard?.effect}}</p>
         <p>ID: {{hoveredCard?.id}}</p>
     </b>
-  
+
   </div>
 <div class="container">
 
     <h1><b><u>{{decklistinfo?.name}}</u></b></h1>
     <h2>By {{decklistinfo?.creator}}</h2>
-    <button class="btn btn-success" (click)="download()">Download .xml</button> 
+    <button class="btn btn-success" (click)="download()">Download .xml</button>
     <button class="btn btn-danger" *ngIf="decklistinfo?.creatorid==id" (click)="delete()">Delete</button>
     <button class="btn btn-warning" *ngIf="decklistinfo?.creatorid==id" (click)="edit()">Edit</button>
 
 
     <h3><b><u>Main Deck</u></b></h3>
     <span *ngFor = "let card of decklist">
-        <span *ngIf="card?.deck == 'maindeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></span>
-    </span> 
+        <span *ngIf="card?.deck == 'maindeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'></span>
+    </span>
     <h3><b><u>Side Deck</u></b></h3>
     <span *ngFor = "let card of decklist">
-        <span *ngIf="card?.deck == 'sidedeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></span>
-    </span> 
+        <span *ngIf="card?.deck == 'sidedeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'></span>
+    </span>
     <h3><b><u>Extra Deck</u></b></h3>
     <span *ngFor = "let card of decklist">
-        <span *ngIf="card?.deck == 'extradeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></span>
-    </span> 
- 
+        <span *ngIf="card?.deck == 'extradeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'></span>
+    </span>
+
 </div>

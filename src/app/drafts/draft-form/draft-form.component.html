@@ -2,23 +2,23 @@
   <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
       <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
   <b><p *ngIf="hovermonster=='True'">
-      <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}  
+      <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}
   </p></b>
 
   <span *ngIf="hovermonster=='False'">
       <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
   </span>
 
-  
-  
-  
+
+
+
 
 
   <b>
-      
+
       <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
-  
-  
+
+
       <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}}  DEF/{{hoveredCard?.def}}</p>
       <p> {{hoveredCard?.effect}}</p>
       <p>ID: {{hoveredCard?.cardid}}</p>
@@ -28,7 +28,7 @@
 
 <div class="container">
     <h1 class="text-center">This is a Pseudo Draft. You open a pack of 15 from the entire database, select 1, then open a pack with one less card, and you repeat the process until you have 60 cards. </h1>
-    
+
 </div>
 
 
@@ -36,18 +36,18 @@
 
 
 
- 
+
 
 
 
 <div class="container-fluid">
     <div class="row">
       <div class="container">
-        
-        
+
+
         <button class="btn btn-success"(click)="revealCards()">Reveal Cards</button>
-        
-        
+
+
 
 
           <!-- <button *ngIf="customButton1=='afres'" class="btn btn-success"(click)="shuffleUnique('afres')">Afres Pack</button>
@@ -66,12 +66,12 @@
           <button *ngIf="customButton2=='traps'" class="btn btn-success"(click)="shuffleUnique('traps')">Trap Pack</button>
           <button *ngIf="customButton2=='richie'" class="btn btn-success"(click)="shuffleUnique('richie')">Charge301 Pack</button> -->
 
-        
+
 
 
         <!-- <button class="btn btn-success"(click)="shuffleCards()">Open Next Pack</button> -->
-        
- 
+
+
       </div>
 
     </div>
@@ -82,35 +82,35 @@
               <span  *ngFor = "let card of randomCards">
 
                   <button (click)="goToLink(card.cardid)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class=" btn btn-default btncard" (contextmenu)="rightAddDraftCard($event,card)" >
-    
+
                     <div class="card" [@cardFlip]="this.state">
                       <div class="face back">
                         <img src="assets/cardimages/Default.png" />
                       </div>
                         <div class="face front">
-                          <img src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+                          <img src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
                       </div>
                         </div>
-  
+
                   </button>
-                  
+
               </span>
 
-              
+
           </div>
           </div>
           <div class="colDraft col">
-            <h2>Current Cards ( {{cardsSelected}}/60)</h2> 
+            <h2>Current Cards ( {{cardsSelected}}/60)</h2>
               <span *ngFor = "let card of currentDraft">
-                <button (click)="goToLink(card.cardid)" (mouseenter)="mouseHoverDrafted(card,$event)" (mouseleave)="mouseLeft()" class=" btn btn-default btncard" ><img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'></button>
-                   
+                <button (click)="goToLink(card.cardid)" (mouseenter)="mouseHoverDrafted(card,$event)" (mouseleave)="mouseLeft()" class=" btn btn-default btncard" ><img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'></button>
+
               </span>
           </div>
-          
+
           <!-- <div class="col colCardInfo cardeffect">
             <button type="button" *ngIf="draftCardSelected==true"class="btn btn-success addcard" (click)="addCard()">Add</button>
             <div *ngIf = "card!= undefined">
-              <h3>{{card?.name}}   
+              <h3>{{card?.name}}
                 <span *ngIf="monster=='False'"> / {{card?.cardtype}} <img class="attribute" src={{attribute}}> <img class="type" src={{stType}}>{{card?.attribute}}</span>
                 <span *ngIf="monster=='True'"> / {{card?.cardtype}} </span>
 
@@ -121,34 +121,34 @@
 
                 <p>
               <b *ngIf="monster=='True'">
-                <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
+                <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}
             </b>
-      
+
 
           </p>
-              
-              
-        
-        
+
+
+
+
               <b>
-                  
+
                   <p *ngIf="monster=='True'"><img class="type" src={{mType}}> {{card?.type}}</p>
-              
-              
+
+
                   <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
                   <p> {{card?.effect}}</p>
               </b>
-              
-            
-            <img class="bigcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+
+
+            <img class="bigcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
 
             </div>
 
-            
-              
 
-        
-              
+
+
+
+
 
           </div> -->
 
@@ -166,7 +166,7 @@
     <!-- <div class="col-lg-12">
       <h2>Current Cards</h2>
       <span *ngFor = "let card of currentDraft">
-          <img class ="smallcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+          <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
       </span>
     </div> -->
 

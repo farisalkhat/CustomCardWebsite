@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-lg-4 cardeffect">
-        <img href='' (click)="goToLink(card.id)" class="bigcard" src='https://drive.google.com/uc?export=view&id={{card?.drive_id}}'>
+        <img href='' (click)="goToLink(card.id)" class="bigcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
     </div>
 
         <div class="col">
@@ -14,22 +14,22 @@
                 <h4 *ngIf="monster=='False'"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
                 <h4 *ngIf="monster=='True'"> {{card?.cardtype}} </h4>
                 <b><p *ngIf="monster=='True'">
-                    <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}  
+                    <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}
                 </p></b>
-        
+
                 <p *ngIf="monster=='False'">
                     <img class="attribute" src={{attribute}}> {{card?.attribute}}
                 </p>
-        
-                
-                
-        
-        
+
+
+
+
+
                 <b>
-                    
+
                     <p *ngIf="monster=='True'"><img class="type" src={{mType}}> {{card?.type}}</p>
-                
-                
+
+
                     <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
                     <p> {{card?.effect}}</p>
                     <p>ID: {{card?.id}}</p>
@@ -39,10 +39,10 @@
                     <p *ngIf="limited==true">Status: Limited</p>
                     <p *ngIf="semilimited==true">Status: Semi-Limited</p>
                     <p *ngIf="banned==true">Status: BANNED</p>
-                    
+
                 </b>
             </div>
-            
+
 
 
 

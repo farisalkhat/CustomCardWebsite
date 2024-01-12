@@ -4,35 +4,35 @@
 <div class="container justify-content-center">
     <!-- <button type="button" class="btn btn-success"  *ngIf="_authService.loggedIn()" routerLink="/draft-maker" routerLinkActive = "active">Create a Draft List</button>
     <button type="button" class="btn btn-success"  *ngIf="_authService.loggedIn()" (click) ="editDraft(true)" routerLink="/draftmode" routerLinkActive = "active">Edit a Draft List</button> -->
- 
+
     <!-- <button type="button" class="btn btn-success"  (click) ="setDraft('default')"   routerLink="/draft-form" routerLinkActive = "active">Start a Draft</button>
 
     <button type="button" class="btn btn-success"  (click) ="setDraft('generic')" routerLink="/draft-form" routerLinkActive = "active">Start a Generic Draft</button> -->
 
-    
+
 
         <div class="row">
           <div *ngFor = "let draft of drafts" class="col-auto">
             <div (click)="setCustomDraft(draft.title)" routerLink="/draft-form" class="card rounded">
               <div class="crop rounded">
                 <div class="overlay-div rounded"></div>
-                <img src='https://drive.google.com/uc?export=view&id={{draft?.draftimage}}' >
-                
+                <img src='https://lh3.google.com/u/0/d/{{draft?.draftimage}}' >
+
               </div>
-              
+
               <div class="card-img-overlay">
                 <h5 class="text-center align-self-center mx-auto">{{draft.title}} </h5>
               </div>
             </div>
           </div>
         </div>
-        
+
 
 
 
 
       <!-- <button class="btn btn-success" (click)="setCustomDraft(draft.title)" routerLink="/draft-form" routerLinkActive = "active">{{draft.title}}</button> -->
-  
+
 
 
 
@@ -43,7 +43,7 @@
 
 <!-- <div class="container">
     <form [formGroup] = "draftData" (ngSubmit) = "onSubmit()">
-  
+
         <div class="form-row">
             <div class="col">
               <div class="form-group">
@@ -56,8 +56,8 @@
                 </div>
               </div>
             </div>
-        
-            
+
+
 
             <div class="col">
               <div class="form-group">
@@ -74,38 +74,38 @@
                       </div>
               </div>
             </div>
-            
-            
-        
-        
-        
-        
-        
-        
-        </div> 
-        
-        
-        
-        
-        
-            
-            
-        
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
             <app-gameform #gameForm [submitted] = "submitted" [match] = "gameData"></app-gameform>
             <button class="btn btn-primary" type="submit">Submit</button>
-        
-        
-        
+
+
+
             <div *ngIf="submitfail && submitted" class="submit-text-fail" >
-              Submission failed! Fix errors above. 
+              Submission failed! Fix errors above.
             </div>
-          
+
             <div *ngIf="!submitfail && submitted" class="submit-text-success">
               Match submitted!
             </div>
-            
-        
-        
+
+
+
           </form>
 
 
