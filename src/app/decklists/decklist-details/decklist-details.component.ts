@@ -25,7 +25,7 @@ export class DecklistDetailsComponent implements OnInit {
   hoverstType!:string;
   hovermType!:string;
   leftPosition = 100
-  rightPosition = 100 
+  rightPosition = 100
 
   constructor(private _router:Router, private _authService:AuthService, private route: ActivatedRoute, private customcardService: CustomcardsService) { }
 
@@ -34,30 +34,30 @@ export class DecklistDetailsComponent implements OnInit {
 
 
 
-    this.isHovering = true; 
-    this.hoveredCard = card 
-  
+    this.isHovering = true;
+    this.hoveredCard = card
+
     if(e.clientX>=900){
       this.leftPosition = e.clientX-200;
     }
-  
+
     else{
       this.leftPosition = e.clientX+2;
     }
-    
+
     this.rightPosition =e.clientY-170;
-    
+
 
     this.getHoveredCardDetails()
-    
-    
-    
+
+
+
   }
 
 
   mouseHoverDrafted(card:Card,e:MouseEvent){
-  this.isHovering = true; 
-  this.hoveredCard = card 
+  this.isHovering = true;
+  this.hoveredCard = card
 
   if(e.clientX>=900){
     this.leftPosition = e.clientX-200;
@@ -66,24 +66,24 @@ export class DecklistDetailsComponent implements OnInit {
   else{
     this.leftPosition = e.clientX+2;
   }
-  
+
   this.rightPosition =e.clientY-170;
-  
+
 
   this.getHoveredCardDetails()}
   mouseLeft() {
       this.isHovering = false;
   }
   getHoveredCardDetails(){
-    
+
     this.hoverattribute=''
     this.hoverstType =''
     this.hovermType= ''
-  
+
     if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
       this.hovermonster='False';
       this.hoverattribute="assets/cardstats/TRAP.png";
-      
+
       switch (this.hoveredCard?.cardtype) {
         case "Normal Trap":
             this.hoverstType = "assets/cardstats/Normal.png";
@@ -99,12 +99,12 @@ export class DecklistDetailsComponent implements OnInit {
             break;
     }
     }
-  
+
     else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
     this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
       this.hovermonster='False';
       this.hoverattribute="assets/cardstats/SPELL.png";
-      
+
       switch (this.hoveredCard?.cardtype) {
         case "Normal Spell":
             this.hoverstType = "assets/cardstats/Normal.png";
@@ -129,9 +129,9 @@ export class DecklistDetailsComponent implements OnInit {
             break;
     }
     }
-  
-  
-    
+
+
+
     else{
       this.hovermonster='True';
       switch(this.hoveredCard?.attribute){
@@ -159,10 +159,10 @@ export class DecklistDetailsComponent implements OnInit {
         default:
             this.hoverattribute = "assets/cardstats/EARTH.png";
             break;
-        
-      
+
+
       }
-  
+
       switch (this.hoveredCard?.type) {
         case "Aqua":
             this.hovermType = "assets/monstertypes/Aqua.png";
@@ -182,7 +182,7 @@ export class DecklistDetailsComponent implements OnInit {
         case "Dragon":
             this.hovermType = "assets/monstertypes/Dragon.png";
             break;
-  
+
         case "Fairy":
             this.hovermType = "assets/monstertypes/Fairy.png";
             break;
@@ -201,7 +201,7 @@ export class DecklistDetailsComponent implements OnInit {
         case "Plant":
             this.hovermType = "assets/monstertypes/Plant.png";
             break;
-  
+
         case "Psychic":
             this.hovermType = "assets/monstertypes/Psychic.png";
             break;
@@ -220,7 +220,7 @@ export class DecklistDetailsComponent implements OnInit {
         case "Spellcaster":
             this.hovermType = "assets/monstertypes/Spellcaster.png";
             break;
-  
+
         case "Thunder":
             this.hovermType = "assets/monstertypes/Thunder.png";
             break;
@@ -233,17 +233,17 @@ export class DecklistDetailsComponent implements OnInit {
         case "Zombie":
             this.hovermType = "assets/monstertypes/Zombie.png";
             break;
-        
+
         default:
             this.hovermType = "assets/monstertypes/Zombie.png";
             break;
     }
-  
-  
-  
-  
+
+
+
+
     }
-    
+
   }
 
 
@@ -271,9 +271,9 @@ export class DecklistDetailsComponent implements OnInit {
       this.deckid = Number(paramMap.get('deckid'));
       this.customcardService.getDecklist(this.deckid).subscribe(
         (data:any)=>{this.decklist=data;
-        
-          this.decklist.sort((a, b) => 
-          
+
+          this.decklist.sort((a, b) =>
+
           {
             if(a.cardtype.includes('Monster')){
                 if(b.cardtype.includes('Spell') || b.cardtype.includes('Trap')){
@@ -286,7 +286,7 @@ export class DecklistDetailsComponent implements OnInit {
                     else{
                         return -1
                     }
-                    
+
                 }
             }
             if(a.cardtype.includes('Spell')){
@@ -319,17 +319,17 @@ export class DecklistDetailsComponent implements OnInit {
                     }
                 }
             }
-            
-            return 1}
-          
 
-          
-          
-          
+            return 1}
+
+
+
+
+
           )
           console.log(this.decklist);
         }
-          
+
       )
 
       this.customcardService.getDecklistInfo(this.deckid).subscribe(
@@ -346,21 +346,21 @@ export class DecklistDetailsComponent implements OnInit {
   goToLink(url: string){
 
     let new_url =''
-  
+
     if(this._router['location']._platformLocation.location.origin=='http://localhost:4200'){
        new_url = this._router.serializeUrl(
         this._router.createUrlTree(['/cards/']));
     }
     else{
        new_url = this._router.serializeUrl(
-      this._router.createUrlTree(['/CustomCardWebsite/cards/']));
+      this._router.createUrlTree(['/cards/']));
     }
-    
-  
-  
+
+
+
     window.open(new_url +'/'+url, '_blank');
-  
-  
+
+
     // const newurl = 'https://www.duelingbook.com/card?id='+url
     // window.open(newurl, "_blank");
   }
@@ -374,22 +374,22 @@ download(){
       this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
     }
 
-     
+
  }
- this.xml_file+="</main><side>"   
+ this.xml_file+="</main><side>"
  for(const card of this.decklist){
   if(card.deck=='sidedeck'){
     this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
   }
-  
+
  }
- this.xml_file+="</side><extra>"   
- 
+ this.xml_file+="</side><extra>"
+
  for(const card of this.decklist){
   if(card.deck=='extradeck'){
     this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
   }
-     
+
  }
  this.xml_file+="</extra></deck>"
  console.log(this.xml_file);
@@ -399,8 +399,8 @@ download(){
  FileSaver.saveAs(blob, "cardlist.xml");
 
 
- 
- 
+
+
 
 
 

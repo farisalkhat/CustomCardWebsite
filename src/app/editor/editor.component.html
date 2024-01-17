@@ -18,6 +18,18 @@
         poopoo
       </div>
 
+      <label for="tag">Tag</label>
+      <select class="form-control"   id="initial"  formControlName = "tag" required
+      [ngClass]="{'is-invalid': submitted && f['tag'].errors}">
+          <option value = "Guide">Guide</option>
+          <option value = "Meta">Meta</option>
+          <option value = "Meme">Meme</option>
+          <option value = "News">News</option>
+          <option value = "Tournament">Tournament</option>
+          <option value = "Update">Update</option>
+          <option value = "Other">Other</option>
+      </select>
+
 
       <label class="sr-only">About</label>
       <input  formControlName = "about" name="about" type="text"  class="form-control" placeholder="About" required
@@ -40,13 +52,13 @@
 
     </form>
   </div>
-    
 
 
 
 
 
-  
+
+
 
     <button (click)="submitArticle()"class="btn btn-success">Submit</button>
 
@@ -55,7 +67,7 @@
       </p>
     </div>
 
-    
+
 
 </div>
 

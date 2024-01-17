@@ -11,7 +11,7 @@ import { CustomcardsService, PackButton, PackSelected, PackSelectedData } from '
 export class PacksComponent implements OnInit {
 placeId: any;
 chosenPack:any;
- 
+
 openingPacks:boolean = false;
 packLength:number = 0;
 maximized:boolean = true;
@@ -26,11 +26,11 @@ maximized:boolean = true;
   id!:number;
   currency!:number;
 
-  
+
   packs:PackButton[] = [];
   packSelected:boolean=false;
   packAmount = 0;
- 
+
   packsSelected = new Map();
   packTrackerArray:PackSelectedData[]=[];
   totalCost:number = 0;
@@ -38,7 +38,7 @@ maximized:boolean = true;
   sealedmode:boolean=false
 
   queuePack(pack:PackButton,value:number){
-    
+
 
     let packSelected:PackSelectedData = {
       packid: pack.packid,
@@ -68,7 +68,7 @@ maximized:boolean = true;
 
       this.totalCost = 0
       for(let pack in this.packTrackerArray){
-        
+
         this.totalCost+=this.packTrackerArray[pack].cost *this.packTrackerArray[pack].amount
       }
 
@@ -102,9 +102,9 @@ maximized:boolean = true;
 
     )
 
-    
 
-    
+
+
   }
   SetPackNo(pack:number,packid:number){
     this.packSelected=true;
@@ -118,11 +118,11 @@ maximized:boolean = true;
     this.customcardsService.setPackQueue(this.packTrackerArray)
     this.openingPacks = true;
   }
-  
+
 
   minimizePackTracker(){
     this.maximized = !this.maximized
-   
+
   }
 
 }

@@ -15,6 +15,7 @@ export interface UserDetails extends Document{
 }
 
 export interface ArticleSubmit extends Document{
+  tag: string;
   author:number;
   title:string;
   header:string;
@@ -28,6 +29,7 @@ export interface ArticleUpdate extends Document{
   header:string;
   header_img:string;
   article:string;
+  tag:string;
 }
 export interface Article extends Document{
   id:number;
@@ -38,8 +40,9 @@ export interface Article extends Document{
   article:string;
   creation_time:string
   modification_time:string
+  tag:string;
   username:string;
-  
+
 }
 export interface SiteData extends Document{
   packs_opened:number,
@@ -231,7 +234,7 @@ export interface PackButton{
   pack:string;
   packsize:string;
   cost:number;
-  
+
 }
 
 export interface PackSelected{
@@ -344,7 +347,7 @@ export class CustomcardsService {
     this.mainDeck= [];
     this.sideDeck = [];
     this.extraDeck = [];
-  } 
+  }
 
   uploadDecklist(mainDeck:any[],sideDeck:any[],extraDeck:any[]){
     this.mainDeck=mainDeck;
@@ -435,7 +438,7 @@ export class CustomcardsService {
     return this.processingDraftEdit;
   }
   setProcessingDraft(process:boolean){
-    
+
     this.processingDraftEdit=process;
   }
   setProcessingPack(process:boolean){
@@ -450,11 +453,11 @@ export class CustomcardsService {
   packAmount = 6;
   packSize = 'medium'
 
-  private _carddataUrl = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards"
-  private _cardMonsters = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/monsters"
-  private _cardSpells = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/spells"
-  private _cardTraps = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/traps"
-  private _cardST = "https://mm8bitdm-ygo.herokuapp.com/api/yugioh/spellstraps"
+  private _carddataUrl = "https://farisalkhat.com/theattic/api/yugioh/customcards"
+  private _cardMonsters = "https://farisalkhat.com/theattic/api/yugioh/monsters"
+  private _cardSpells = "https://farisalkhat.com/theattic/api/yugioh/spells"
+  private _cardTraps = "https://farisalkhat.com/theattic/api/yugioh/traps"
+  private _cardST = "https://farisalkhat.com/theattic/api/yugioh/spellstraps"
 
   PackQueue:PackSelectedData[] =[];
 
@@ -471,109 +474,109 @@ export class CustomcardsService {
 
   getCustomCards(){
     return this.http.get<any[]>(this._carddataUrl);
-  } 
+  }
   getRecentCards(){
-    return this.http.get<any[]>("https://mm8bitdm-ygo.herokuapp.com/api/yugioh/recentcards");
-  } 
+    return this.http.get<any[]>("https://farisalkhat.com/theattic/api/yugioh/recentcards");
+  }
   getCustomCardsIDs(){
-    return this.http.get<any[]>("https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards-ids");
-  } 
+    return this.http.get<any[]>("https://farisalkhat.com/theattic/api/yugioh/customcards-ids");
+  }
   getDecklists(){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/decklists`);
   }
   getDecklistsFromUser(id:number){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists/creator/${id}`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/decklists/creator/${id}`);
   }
 
   getMatchesFromUser(id:number){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/matches/duelist/${id}`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/matches/duelist/${id}`);
   }
 
   getPlayers(){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/players`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/players`);
   }
 
   getMatches(){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/matches`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/matches`);
   }
   getBanlist(){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/banlist`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/banlist`);
   }
 
   getDeckMasters(){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/deckmaster`);
-  } 
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/deckmaster`);
+  }
 
   getDecklist(id:number){
-    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists/${id}`);
-  } 
+    return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/decklists/${id}`);
+  }
   getStructureDeck(id:number){
-    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/structure-decks/${id}`);
-  } 
+    return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/structure-decks/${id}`);
+  }
 
   getDecklistInfo(id:number){
-    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/decklists-info/${id}`);
+    return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/decklists-info/${id}`);
   }
 
   getCustomCard(id:number){
-    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/card/${id}`);
-  } 
+    return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/customcards/card/${id}`);
+  }
 
   getCustomCardsByDraft(name:string){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/${name}`);
-  } 
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/${name}`);
+  }
   getDrafts(){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/drafts`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/drafts`);
   }
 
   getPacks(){
-    return this.http.get<PackButton[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/packs`);
+    return this.http.get<PackButton[]>(`https://farisalkhat.com/theattic/api/yugioh/packs`);
   }
   getStructureDecks(){
-    return this.http.get<PackButton[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/structure-decks`);
+    return this.http.get<PackButton[]>(`https://farisalkhat.com/theattic/api/yugioh/structure-decks`);
   }
 
   getPackInfoByID(id:number){
     //Input: Pack ID, Output: Pack Info
-    return this.http.get<PackInfo>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/packs/${id}`);
+    return this.http.get<PackInfo>(`https://farisalkhat.com/theattic/api/yugioh/packs/${id}`);
   }
 
   getDraftsbyOwner(id:number){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/drafts/${id}`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/drafts/${id}`);
   }
   getPacksbyOwner(id:number){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/packs/owner/${id}`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/packs/owner/${id}`);
   }
 
-  
+
 
   getDraftCardsbyID(id:number){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/draft/${id}`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/draft/${id}`);
   }
 
   deleteDecklists(id:number){
-    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/delete-decklists`,id);
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/delete-decklists`,id);
 
   }
 
   getCustomMonsters(){
     return this.http.get<any[]>(this._cardMonsters);
-  } 
+  }
   getCustomSpells(){
     return this.http.get<any[]>(this._cardSpells);
-  } 
+  }
   getCustomTraps(){
     return this.http.get<any[]>(this._cardTraps);
-  } 
+  }
   getCustomSpellsTraps(){
     return this.http.get<any[]>(this._cardST);
-  } 
+  }
   getCustomCardsByCreator(name:string){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/creator/${name}`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/creator/${name}`);
   }
   getCustomCardsByTag(name:string){
-    return this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/tags/${name}`);
-  }  
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/tags/${name}`);
+  }
 
   SetPackNo(value:number,packid:number){
     if(value==undefined){
@@ -583,10 +586,10 @@ export class CustomcardsService {
       this.packAmount=value;
     }
 
-  }  
+  }
   getCustomCardsByPack(id:number){
-    return (this.http.get<any[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/pack/${id}`));
-  } 
+    return (this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/pack/${id}`));
+  }
 
   getPackAmount(){
     return this.packAmount;
@@ -595,142 +598,142 @@ export class CustomcardsService {
 
 
   getFilteredCards(data: any){
-    return this.http.post<Card[]>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/searchresult',data);
+    return this.http.post<Card[]>('https://farisalkhat.com/theattic/api/yugioh/searchresult',data);
   }
   getFilteredCards2(data: any){
-    return this.http.post<Card[]>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/searchresult',data);
+    return this.http.post<Card[]>('https://farisalkhat.com/theattic/api/yugioh/searchresult',data);
   }
 
   submitDecklist(decklist:Decklist){
     console.log("help!")
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitdeck',decklist);
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/submitdeck',decklist);
   }
   submitDraft(draft:Draft){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitdraft',draft
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/submitdraft',draft
       )
   }
 
   resubmitDraft(draft:Draft){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editdraft',draft   
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/editdraft',draft
     )
   }
 
   submitPack(pack:Pack){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitpack',pack)
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/submitpack',pack)
   }
-  
+
   submitStructure(pack:Pack){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitstructure',pack)
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/submitstructure',pack)
   }
 
   resubmitPack(pack:Pack){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editpack',pack   
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/editpack',pack
     )
   }
 
   deletePack(id:number){
-    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/delete-pack`,id);
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/delete-pack`,id);
   }
   uploadImage(formData:FormData){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/uploadimage',formData   
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/uploadimage',formData
     )
   }
 
-  
- 
-  
+
+
+
 
   getBindersByOwner(id:number){
-    return this.http.get<Binder[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/binders/${id}`);
+    return this.http.get<Binder[]>(`https://farisalkhat.com/theattic/api/yugioh/binders/${id}`);
   }
 
   submitBinder(binderInfo:BinderInfo){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitbinder',binderInfo   
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/submitbinder',binderInfo
     )
   }
 
   addToBinder(addToBinder:AddToBinder){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/addtobinder',addToBinder   
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/addtobinder',addToBinder
     )
   }
 
   addToCollection(addToBinder:AddToBinder){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/addtocollection',addToBinder   
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/addtocollection',addToBinder
     )
   }
   submitDuel(dueldata:DuelData){
-    return this.http.post<any>('https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submit-duel',dueldata)
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/submit-duel',dueldata)
   }
 
   getCardsByBinderID(id:number){
 
-    return this.http.get<BinderCard[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/binders/${id}`);
-    
+    return this.http.get<BinderCard[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/binders/${id}`);
+
   }
 
   getCollectionCardsByCreatorID(id:number){
-    return this.http.get<BinderCard[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/collections/${id}`);
+    return this.http.get<BinderCard[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/collections/${id}`);
   }
 
   getChecklist(userid:number,packid:number){
-    return this.http.get<ChecklistCard[]>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/checklist/${userid}/${packid}`);
+    return this.http.get<ChecklistCard[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/checklist/${userid}/${packid}`);
   }
 
 
   getCardDetails(id:number){
-    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/customcards/cards/details/${id}`);
+    return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/customcards/cards/details/${id}`);
   }
 
   getUserPageDetails(id:number){
-    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/users/${id}`);
+    return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/users/${id}`);
   }
 
   editProfileImages(images:any){
-    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editprofile/images`,images);
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/editprofile/images`,images);
   }
 
   resubmitDecklist(decklist:Decklist){
-    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/editdeck`,decklist);
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/editdeck`,decklist);
   }
   deleteMatch(id:any){
-    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/deletematch`,id);
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/deletematch`,id);
   }
 
   submitCSVFile( file:any) {
     const uploadedFile = new FormData();
     uploadedFile.append( 'file', new Blob([file], { type: 'text/csv' }), file.name);
-    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitCSV`, uploadedFile);
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/submitCSV`, uploadedFile);
   }
   deleteCard(card:Card){
     const cardID = new FormData();
     cardID.append('cardid',card.id)
-    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/deleteCard`, cardID);
-    
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/deleteCard`, cardID);
+
   }
 
   getSiteData(){
-    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/sitedata`);
+    return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/sitedata`);
   }
   getLatestPack(){
-    return this.http.get<PackButton>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/latestpack`);
+    return this.http.get<PackButton>(`https://farisalkhat.com/theattic/api/yugioh/latestpack`);
   }
   updateCOTD(){
-    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/cotd`);
+    return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/cotd`);
   }
   submitArticle(article:ArticleSubmit){
     console.log(article)
-    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/submitArticle`, article);
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/submitArticle`, article);
   }
   getArticles(){
-    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/articles`);
+    return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/articles`);
   }
   getArticle(id:number){
-    return this.http.get<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/articles/${id}`);
+    return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/articles/${id}`);
   }
   updateArticle(article:ArticleUpdate){
-    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/updateArticle`, article);
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/updateArticle`, article);
   }
   deleteArticle(article:Article){
-    return this.http.post<any>(`https://mm8bitdm-ygo.herokuapp.com/api/yugioh/deleteArticle`, article);
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/deleteArticle`, article);
   }
 }

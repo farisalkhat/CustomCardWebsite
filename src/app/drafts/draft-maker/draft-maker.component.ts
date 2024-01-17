@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Card, CustomcardsService, Draft } from 'src/app/customcards.service';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthService } from 'src/app/auth/services/auth.service';
 @Component({
@@ -36,7 +36,7 @@ export class DraftMakerComponent implements OnInit {
   done:boolean = false;
 
   draftCard!:Card | undefined;
- 
+
 
   draftMode:boolean = true;
 
@@ -95,37 +95,37 @@ export class DraftMakerComponent implements OnInit {
 
     console.log(e.clientX);
     console.log(e.clientY);
-    
-      this.isHovering = true; 
-      this.hoveredCard = card 
-    
+
+      this.isHovering = true;
+      this.hoveredCard = card
+
       if(e.clientX>=900){
         this.leftPosition = e.clientX-200;
       }
-    
+
       else{
         this.leftPosition = e.clientX+2;
       }
-      
+
       this.rightPosition =e.clientY-170;
-      
-      
+
+
       this.getHoveredCardDetails()
-      
+
     }
     mouseLeft() {
         this.isHovering = false;
     }
     getHoveredCardDetails(){
-      
+
       this.hoverattribute=''
       this.hoverstType =''
       this.hovermType= ''
-    
+
       if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
         this.hovermonster='False';
         this.hoverattribute="assets/cardstats/TRAP.png";
-        
+
         switch (this.hoveredCard?.cardtype) {
           case "Normal Trap":
               this.hoverstType = "assets/cardstats/Normal.png";
@@ -141,12 +141,12 @@ export class DraftMakerComponent implements OnInit {
               break;
       }
       }
-    
+
       else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
       this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
         this.hovermonster='False';
         this.hoverattribute="assets/cardstats/SPELL.png";
-        
+
         switch (this.hoveredCard?.cardtype) {
           case "Normal Spell":
               this.hoverstType = "assets/cardstats/Normal.png";
@@ -171,9 +171,9 @@ export class DraftMakerComponent implements OnInit {
               break;
       }
       }
-    
-    
-      
+
+
+
       else{
         this.hovermonster='True';
         switch(this.hoveredCard?.attribute){
@@ -201,10 +201,10 @@ export class DraftMakerComponent implements OnInit {
           default:
               this.hoverattribute = "assets/cardstats/EARTH.png";
               break;
-          
-        
+
+
         }
-    
+
         switch (this.hoveredCard?.type) {
           case "Aqua":
               this.hovermType = "assets/monstertypes/Aqua.png";
@@ -224,7 +224,7 @@ export class DraftMakerComponent implements OnInit {
           case "Dragon":
               this.hovermType = "assets/monstertypes/Dragon.png";
               break;
-    
+
           case "Fairy":
               this.hovermType = "assets/monstertypes/Fairy.png";
               break;
@@ -243,7 +243,7 @@ export class DraftMakerComponent implements OnInit {
           case "Plant":
               this.hovermType = "assets/monstertypes/Plant.png";
               break;
-    
+
           case "Psychic":
               this.hovermType = "assets/monstertypes/Psychic.png";
               break;
@@ -262,7 +262,7 @@ export class DraftMakerComponent implements OnInit {
           case "Spellcaster":
               this.hovermType = "assets/monstertypes/Spellcaster.png";
               break;
-    
+
           case "Thunder":
               this.hovermType = "assets/monstertypes/Thunder.png";
               break;
@@ -275,17 +275,17 @@ export class DraftMakerComponent implements OnInit {
           case "Zombie":
               this.hovermType = "assets/monstertypes/Zombie.png";
               break;
-          
+
           default:
               this.hovermType = "assets/monstertypes/Zombie.png";
               break;
       }
-    
-    
-    
-    
+
+
+
+
       }
-      
+
     }
 
   ngOnInit(): void {
@@ -304,13 +304,13 @@ export class DraftMakerComponent implements OnInit {
                 res => {
                   if(res){
                     this.currentDraft=res;
-  
+
                     this.customcardsService.setProcessingDraft(true)
-  
+
                     this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDraftName());
-                    
+
                   }
-        
+
                 }
               )
             }
@@ -323,7 +323,7 @@ export class DraftMakerComponent implements OnInit {
           }
 
 
-          
+
 
         },
         err => {console.log(err)
@@ -332,16 +332,16 @@ export class DraftMakerComponent implements OnInit {
         this._router.navigate(['/drafts']);
       }
       )
-      
+
 
     }
     else{
       this._router.navigate(['/login']);
 
     }
-    
 
- 
+
+
 
 
       this.customcardsService.getCustomCards().subscribe(
@@ -351,10 +351,10 @@ export class DraftMakerComponent implements OnInit {
             this.getCardNumbers(this.currentPage);
             this.hideloader();
           }
-          
+
         }
       )
-    
+
 
 
   }
@@ -365,7 +365,7 @@ export class DraftMakerComponent implements OnInit {
       console.log(div)
     }
 
-  } 
+  }
   goToLink(url: string){
 
     let new_url =''
@@ -376,11 +376,11 @@ export class DraftMakerComponent implements OnInit {
     }
     else{
        new_url = this._router.serializeUrl(
-      this._router.createUrlTree(['/CustomCardWebsite/cards/']));
+      this._router.createUrlTree(['/cards/']));
     }
-    
 
- 
+
+
     window.open(new_url +'/'+url, '_blank');
 
 
@@ -402,12 +402,12 @@ export class DraftMakerComponent implements OnInit {
       console.log(div)
     }
     console.log(this.filters)
-    this.cards = [] 
+    this.cards = []
     this.attribute ='';
     this.stType=''
     this.mType='';
     this.monster='None';
-    
+
     if(this.filters.levelhigh==null){this.filters.levelhigh=''}
     if(this.filters.levellow==null){this.filters.levellow=''}
     if(this.filters.atklow==null){this.filters.atklow=''}
@@ -415,18 +415,18 @@ export class DraftMakerComponent implements OnInit {
     if(this.filters.deflow==null){this.filters.deflow=''}
     if(this.filters.defhigh==null){this.filters.defhigh=''}
 
-    
+
 
     // this.customcardsService.getFilteredCards2().subscribe(
     //   res=>{
-        
+
     //     console.log(res)
     //     this.cards = res;
     //     this.currentPage = 1
     //     this.getCardNumbers(this.currentPage);
     //   },
     //   err=>{console.log(err)}
-    // )                                  
+    // )
     if(this.filters['initial']==''){
         this.filters['cardtype']=='';
         this.filters['defhigh']=='';
@@ -438,17 +438,17 @@ export class DraftMakerComponent implements OnInit {
         this.filters['atklow']=='';
       }
       if(this.filters['initial']!='Monster'){
-        if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' || 
-        this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' || 
+        if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' ||
+        this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' ||
         this.filters['sort']=='c.DEF ASC' || this.filters['sort']=='c.DEF DESC'){
           this.filters['sort'] = 'c.name ASC';
         }
-        
 
 
 
 
-      
+
+
       }
 
       if(this.filters['initial']=='Monster'){
@@ -485,7 +485,7 @@ export class DraftMakerComponent implements OnInit {
       }
     this.customcardsService.getFilteredCards(this.filters).subscribe(
       res=>{
-        
+
         console.log(res)
         this.cards = res;
         this.currentPage = 1
@@ -527,7 +527,7 @@ export class DraftMakerComponent implements OnInit {
 
   selectDraftImage(id:string){
     this.draftImage = this.cards.find(x => x.id == id);
-    
+
   }
 
 
@@ -542,7 +542,7 @@ export class DraftMakerComponent implements OnInit {
     if(this.card?.cardtype=="Normal Trap" || this.card?.cardtype=="Counter Trap" || this.card?.cardtype=="Continuous Trap"){
       this.monster='False';
       this.attribute="assets/cardstats/TRAP.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Trap":
             this.stType = "assets/cardstats/Normal.png";
@@ -563,7 +563,7 @@ export class DraftMakerComponent implements OnInit {
     this.card?.cardtype=="Ritual Spell" || this.card?.cardtype=="Field Spell" || this.card?.cardtype=="Equip Spell" ){
       this.monster='False';
       this.attribute="assets/cardstats/SPELL.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Spell":
             this.stType = "assets/cardstats/Normal.png";
@@ -590,7 +590,7 @@ export class DraftMakerComponent implements OnInit {
     }
 
 
-    
+
     else{
       this.monster='True';
       switch(this.card?.attribute){
@@ -618,8 +618,8 @@ export class DraftMakerComponent implements OnInit {
         default:
             this.attribute = "assets/cardstats/EARTH.png";
             break;
-        
-      
+
+
       }
 
       switch (this.card?.type) {
@@ -692,7 +692,7 @@ export class DraftMakerComponent implements OnInit {
         case "Zombie":
             this.mType = "assets/monstertypes/Zombie.png";
             break;
-        
+
         default:
             this.mType = "assets/monstertypes/Zombie.png";
             break;
@@ -702,9 +702,9 @@ export class DraftMakerComponent implements OnInit {
 
 
     }
-    
+
 }
-  
+
   addCard(){
     if(this.card!=undefined){
       const index = this.currentDraft.findIndex(obj => obj.id === this.card?.id)
@@ -714,7 +714,7 @@ export class DraftMakerComponent implements OnInit {
         }
       this.currentDraft.push(this.card);
     }
-    
+
   }
 
 
@@ -727,14 +727,14 @@ export class DraftMakerComponent implements OnInit {
         }
       this.currentDraft.push(card);
     }
-    
+
   }
 
 
   selectDraftCard(card:Card){
     // this.draftCard = this.currentDraft.find(x => x.id == id);
     this.draftCard = card;
-    
+
   }
 
   deleteDraftCard(){
@@ -782,10 +782,10 @@ export class DraftMakerComponent implements OnInit {
           let newCard = this.currentDraft[randID]
           finaldata['draftimage'] = newCard['drive_id']
         }
-        
+
       }
-      
-      
+
+
       if(!this.customcardsService.getEditDraft()){
         finaldata['title'] = this.draftData.controls['draftTitle'].value;
       }
@@ -793,7 +793,7 @@ export class DraftMakerComponent implements OnInit {
         finaldata['title'] = this.draftData.controls['draftTitle'].value;
         finaldata['id']=this.customcardsService.getEditDraftID();
       }
-      
+
 
       const idList:string[] = []
 
@@ -821,7 +821,7 @@ export class DraftMakerComponent implements OnInit {
             this.customcardsService.setEditDraftName('')
             this._router.navigate(['/drafts']);
           },
-            
+
           err=>{console.log(err)}
         )
         this.submitfail = false;
@@ -835,7 +835,7 @@ export class DraftMakerComponent implements OnInit {
             console.log(res);
             this._router.navigate(['/drafts']);
           },
-            
+
           err=>{console.log(err)}
         )
         this.submitfail = false;
@@ -843,13 +843,13 @@ export class DraftMakerComponent implements OnInit {
       }
 
 
- 
+
 
     }
   }
 
   rightAddDraftCard($event: { preventDefault: () => void; },card:string){
-    
+
     if(this.draftMode){
       this.selectCard(card);
       $event.preventDefault();
@@ -859,7 +859,7 @@ export class DraftMakerComponent implements OnInit {
       this.selectDraftImage(card);
       $event.preventDefault();
     }
-    
+
 
   }
 
@@ -871,7 +871,7 @@ export class DraftMakerComponent implements OnInit {
 
   }
 
-  randomIntFromInterval(min:number, max:number) { // min and max included 
+  randomIntFromInterval(min:number, max:number) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 

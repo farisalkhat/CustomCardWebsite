@@ -7,18 +7,18 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private _registerUrl = "https://mm8bitdm-ygo.herokuapp.com/api/register-yugioh"
-  private _loginUrl = "https://mm8bitdm-ygo.herokuapp.com/api/loginyugioh"
-  private _userUrl = "https://mm8bitdm-ygo.herokuapp.com/api/userdata"
-  private _addUrl= "https://mm8bitdm-ygo.herokuapp.com/api/userdata/addcurrency"
-  private _subtractUrl = "https://mm8bitdm-ygo.herokuapp.com/api/userdata/subtractcurrency"
+  private _registerUrl = "https://farisalkhat.com/theattic/api/register-yugioh"
+  private _loginUrl = "https://farisalkhat.com/theattic/api/loginyugioh"
+  private _userUrl = "https://farisalkhat.com/theattic/api/userdata"
+  private _addUrl= "https://farisalkhat.com/theattic/api/userdata/addcurrency"
+  private _subtractUrl = "https://farisalkhat.com/theattic/api/userdata/subtractcurrency"
 
-  private _changeinfoUrl = "https://mm8bitdm-ygo.herokuapp.com/api/changeaccountinfo"
+  private _changeinfoUrl = "https://farisalkhat.com/theattic/api/changeaccountinfo"
   id:number | undefined;
   username:number| undefined;
   currency:number| undefined;
   role:string |undefined;
-  constructor(private http:HttpClient, private router:Router) { 
+  constructor(private http:HttpClient, private router:Router) {
   }
 
   getID(){
@@ -41,7 +41,7 @@ export class AuthService {
     return localStorage.getItem('token')
   }
 
-  getUser(){  
+  getUser(){
       const token = {
         "token": localStorage.getItem('token')
       }
@@ -111,4 +111,3 @@ export class AuthService {
     return false;
   }
 }
- 

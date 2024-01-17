@@ -5,28 +5,46 @@
         <label class="sr-only">Title</label>
         <input  formControlName = "title" name="title" type="text"  class="form-control" value={{article?.title}} required autofocus
         [ngClass]="{'is-invalid': submitted && f['title'].errors}">
-  
+
         <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
           peepee
         </div>
-  
+
         <label class="sr-only">Header Image Link</label>
         <input  formControlName = "header_img" name="header_img" type="text"  class="form-control" value={{article?.header_img}} required
         [ngClass]="{'is-invalid': submitted && f['header_img'].errors}">
-  
+
         <div *ngIf="submitted && f['header_img'].errors" class="invalid-feedback">
           poopoo
         </div>
-  
-  
+
+          <label for="tag">Tag</label>
+          <select class="form-control"   id="initial"  formControlName = "tag" required
+          [ngClass]="{'is-invalid': submitted && f['tag'].errors}">
+            <option value = "Guide">Guide</option>
+            <option value = "Meta">Meta</option>
+            <option value = "Meme">Meme</option>
+            <option value = "News">News</option>
+            <option value = "Tournament">Tournament</option>
+            <option value = "Update">Update</option>
+            <option value = "Other">Other</option>
+          </select>
+
+          <div *ngIf="submitted && f['tag'].errors" class="invalid-feedback">
+            poopoo
+          </div>
+
+
+
+
         <label class="sr-only">About</label>
         <input  formControlName = "about" name="about" type="text"  class="form-control" value={{article?.header}} required
         [ngClass]="{'is-invalid': submitted && f['about'].errors}">
-  
+
         <div *ngIf="submitted && f['about'].errors" class="invalid-feedback">
           poopoo
         </div>
-  
+
         <div class="padup NgxEditor__Wrapper">
           <ngx-editor-menu  [toolbar]="toolbar" [editor]="editor"> </ngx-editor-menu>
           <ngx-editor
@@ -37,26 +55,25 @@
             [placeholder]="'Type here...'"
           ></ngx-editor>
         </div>
-   
+
       </form>
     </div>
-      
-  
-  
-  
-  
-  
-    
-  
+
+
+
+
+
+
+
+
     <button (click)="submitArticle()"class="btn btn-success">Submit</button>
-  
+
       <div>
         <p [innerHTML] = "theInnerHTML">
         </p>
       </div>
-  
-      
-  
+
+
+
   </div>
-  
-  
+

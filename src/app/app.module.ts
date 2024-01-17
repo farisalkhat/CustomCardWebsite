@@ -61,6 +61,7 @@ import { StructureDeckMakerComponent } from './structure-decks/structure-deck-ma
 import { StructureDeckEditComponent } from './structure-decks/structure-deck-edit/structure-deck-edit.component';
 import { FormatsComponent } from './formats/formats.component';
 import { AboutsiteComponent } from './aboutsite/aboutsite.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -164,7 +165,7 @@ import { AboutsiteComponent } from './aboutsite/aboutsite.component';
     }),
 
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

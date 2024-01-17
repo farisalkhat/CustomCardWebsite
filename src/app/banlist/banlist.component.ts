@@ -38,59 +38,59 @@ export class BanlistComponent implements OnInit {
   goToLink(url: string){
 
     let new_url =''
-  
+
     if(this._router['location']._platformLocation.location.origin=='http://localhost:4200'){
        new_url = this._router.serializeUrl(
         this._router.createUrlTree(['/cards/']));
     }
     else{
        new_url = this._router.serializeUrl(
-      this._router.createUrlTree(['/CustomCardWebsite/cards/']));
+      this._router.createUrlTree(['/cards/']));
     }
-    
-  
-  
+
+
+
     window.open(new_url +'/'+url, '_blank');
-  
-  
+
+
     // const newurl = 'https://www.duelingbook.com/card?id='+url
     // window.open(newurl, "_blank");
   }
   mouseHovering(card:Card,e:MouseEvent) {
-  
+
   console.log(e.clientX);
   console.log(e.clientY);
-  
-    this.isHovering = true; 
-    this.hoveredCard = card 
-  
+
+    this.isHovering = true;
+    this.hoveredCard = card
+
     if(e.clientX>=900){
       this.leftPosition = e.clientX-200;
     }
-  
+
     else{
       this.leftPosition = e.clientX+2;
     }
-    
+
     this.rightPosition =e.clientY-170;
-    
-    
+
+
     this.getHoveredCardDetails()
-    
+
   }
   mouseLeft() {
       this.isHovering = false;
   }
   getHoveredCardDetails(){
-    
+
     this.hoverattribute=''
     this.hoverstType =''
     this.hovermType= ''
-  
+
     if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
       this.hovermonster='False';
       this.hoverattribute="assets/cardstats/TRAP.png";
-      
+
       switch (this.hoveredCard?.cardtype) {
         case "Normal Trap":
             this.hoverstType = "assets/cardstats/Normal.png";
@@ -106,12 +106,12 @@ export class BanlistComponent implements OnInit {
             break;
     }
     }
-  
+
     else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
     this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
       this.hovermonster='False';
       this.hoverattribute="assets/cardstats/SPELL.png";
-      
+
       switch (this.hoveredCard?.cardtype) {
         case "Normal Spell":
             this.hoverstType = "assets/cardstats/Normal.png";
@@ -136,9 +136,9 @@ export class BanlistComponent implements OnInit {
             break;
     }
     }
-  
-  
-    
+
+
+
     else{
       this.hovermonster='True';
       switch(this.hoveredCard?.attribute){
@@ -166,10 +166,10 @@ export class BanlistComponent implements OnInit {
         default:
             this.hoverattribute = "assets/cardstats/EARTH.png";
             break;
-        
-      
+
+
       }
-  
+
       switch (this.hoveredCard?.type) {
         case "Aqua":
             this.hovermType = "assets/monstertypes/Aqua.png";
@@ -189,7 +189,7 @@ export class BanlistComponent implements OnInit {
         case "Dragon":
             this.hovermType = "assets/monstertypes/Dragon.png";
             break;
-  
+
         case "Fairy":
             this.hovermType = "assets/monstertypes/Fairy.png";
             break;
@@ -208,7 +208,7 @@ export class BanlistComponent implements OnInit {
         case "Plant":
             this.hovermType = "assets/monstertypes/Plant.png";
             break;
-  
+
         case "Psychic":
             this.hovermType = "assets/monstertypes/Psychic.png";
             break;
@@ -227,7 +227,7 @@ export class BanlistComponent implements OnInit {
         case "Spellcaster":
             this.hovermType = "assets/monstertypes/Spellcaster.png";
             break;
-  
+
         case "Thunder":
             this.hovermType = "assets/monstertypes/Thunder.png";
             break;
@@ -240,16 +240,16 @@ export class BanlistComponent implements OnInit {
         case "Zombie":
             this.hovermType = "assets/monstertypes/Zombie.png";
             break;
-        
+
         default:
             this.hovermType = "assets/monstertypes/Zombie.png";
             break;
     }
-  
-  
-  
-  
+
+
+
+
     }
-    
+
   }
 }

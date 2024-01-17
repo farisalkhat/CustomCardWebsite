@@ -52,7 +52,7 @@
 
             <div  class="rare-card">
                 <img class = "smallcard sparkle" *ngIf="card.rarity=='secret'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/giphy.gif'>
-                <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+                <img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'>
 
             </div>
 
@@ -75,7 +75,7 @@
 
                 <div   class="rare-card">
                     <img class = "smallcard sparkle" *ngIf="card.rarity=='ultra'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/fireworks.gif'>
-                    <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+                    <img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'>
 
                 </div>
 
@@ -98,7 +98,7 @@
 
             <div   class="rare-card" >
                 <img class = "smallcard sparkle" *ngIf="card.rarity=='super'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/super.gif'>
-                <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+                <img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'>
 
             </div>
 
@@ -120,7 +120,7 @@
 
 
                 <div   class="rare-card" >
-                    <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+                    <img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'>
 
                 </div>
 
@@ -141,7 +141,7 @@
         <button  *ngIf="card.rarity=='common'"  routerLink="/cards/{{card.id}}" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
 
             <div  class="relative">
-                <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+                <img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'>
 
             </div>
 

@@ -25,6 +25,8 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
   currency!:number;
   editor!: Editor;
 
+  tag:string | undefined;
+
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -47,7 +49,9 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
       Validators.required
     ]),
     editorContent: new FormControl(null, [Validators.required]),
-  }) 
+    tag: new FormControl(undefined,
+      [Validators.required])
+  })
   theInnerHTML!:any;
   submitVerified = false;
   submitted = false;
@@ -85,7 +89,7 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
                 });
 
 
-              } 
+              }
             )
           })
 
@@ -115,21 +119,43 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
 
   submitArticle(){
     const final = {} as ArticleUpdate
-    this.theInnerHTML =  this.articleInfo.controls['editorContent'].value;
-    console.log(this.theInnerHTML)
+
+    this.theInnerHTML =  toHTML(this.articleInfo.controls['editorContent'].value);
 
     final.article_id=this.articleid;
     final.author= this.id;
-    final.header_img = this.articleInfo.controls['header_img'].value;
-    final.title = this.articleInfo.controls['title'].value;
+    if(this.articleInfo.controls['header_img'].value==null){
+      final.header_img = this.article['header_img']
+    }
+    else{
+      final.header_img = this.articleInfo.controls['header_img'].value;
+    }
+    if(this.articleInfo.controls['about'].value==null){
+      final.header = this.article['header']
+    }
+    else{
+      final.header = this.articleInfo.controls['about'].value
+    }
+    if(this.articleInfo.controls['title'].value==null){
+      final.title = this.article['title']
+    }
+    else{
+      final.title = this.articleInfo.controls['title'].value;
+    }
+
+
     final.header = this.articleInfo.controls['about'].value;
     final.article = this.theInnerHTML;
+    final.tag= this.articleInfo.controls['tag'].value;
     this._ccService.updateArticle(final).subscribe(
       res=>{
         console.log(res);
         let navigation = '/articles/'+ this.articleid.toString()
         this.router.navigate([navigation])},
-      err=>{}
+      err=>{
+        console.log(err);
+        console.log(final);
+      }
     )
   }
 

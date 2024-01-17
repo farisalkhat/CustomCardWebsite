@@ -167,52 +167,52 @@ export class PackMakerComponent implements OnInit, OnDestroy {
                 if(this.packInfo['packdescription']!=undefined){
                   this.draftData.controls['packdescription'].setValue(this.packInfo['packdescription'])
                 }
-                
+
                 this.customcardsService.setProcessingPack(true);
-  
-                
-                
-        
+
+
+
+
                 if(this.packInfo['packsize']=='small'){
-  
+
                   this.maxCommon=15
                   this.maxRare=9
                   this.maxSuper=4
                   this.maxUltra=2
                   this.maxSecret=1
-  
+
                   this.common=15
                   this.rare=9
                   this.super=4
                   this.ultra=2
                   this.secret=1
-  
-        
+
+
                   let counter = 0;
                   for(counter; counter!=2;counter++){
                     this.currentUltra.push(this.cards[counter])
-        
+
                   }
-        
+
                   for(counter; counter!=6;counter++){
                     this.currentSuper.push(this.cards[counter])
                   }
-        
+
                   for(counter; counter!=7;counter++){
                     this.currentSecret.push(this.cards[counter])
                   }
-        
+
                   for(counter; counter!=16;counter++){
                     this.currentRare.push(this.cards[counter])
                   }
-        
+
                   for(counter; counter!=31;counter++){
                     this.currentCommons.push(this.cards[counter])
                   }
-        
-                  
-                
-                
+
+
+
+
                 }
                 if(this.packInfo['packsize']=='medium'){
                   this.maxCommon=48
@@ -220,37 +220,37 @@ export class PackMakerComponent implements OnInit, OnDestroy {
                   this.maxSuper=15
                   this.maxUltra=10
                   this.maxSecret=2
-  
+
                   this.common=48
                   this.rare=25
                   this.super=15
                   this.ultra=10
                   this.secret=2
-  
+
                   let counter = 0;
                   for(counter; counter!=10;counter++){
                     this.currentUltra.push(this.cards[counter])
                   }
-        
+
                   for(counter; counter!=25;counter++){
                     this.currentSuper.push(this.cards[counter])
                   }
-        
+
                   for(counter; counter!=27;counter++){
                     this.currentSecret.push(this.cards[counter])
                   }
-        
+
                   for(counter; counter!=52;counter++){
                     this.currentRare.push(this.cards[counter])
                   }
-        
+
                   for(counter; counter!=100;counter++){
                     this.currentCommons.push(this.cards[counter])
                   }
-        
-        
-        
-                  
+
+
+
+
                 }
                 if(this.packInfo['packsize']=='large'){
                   this.maxCommon=100
@@ -258,55 +258,55 @@ export class PackMakerComponent implements OnInit, OnDestroy {
                   this.maxSuper=20
                   this.maxUltra=14
                   this.maxSecret=6
-  
+
                   this.common=100
                   this.rare=60
                   this.super=20
                   this.ultra=14
                   this.secret=6
-  
+
                   let counter = 0;
                   for(counter; counter!=14;counter++){
                     this.currentUltra.push(this.cards[counter])
                   }
-        
+
                   for(counter; counter!=34;counter++){
                     this.currentSuper.push(this.cards[counter])
                   }
-        
+
                   for(counter; counter!=40;counter++){
                     this.currentSecret.push(this.cards[counter])
                   }
-        
+
                   for(counter; counter!=100;counter++){
                     this.currentRare.push(this.cards[counter])
                   }
-        
+
                   for(counter; counter!=200;counter++){
                     this.currentCommons.push(this.cards[counter])
                   }
                 }
-        
-        
-        
+
+
+
               })
-  
-  
-  
-  
+
+
+
+
               this.customcardsService.getCustomCardsByPack(this.customcardsService.getEditPackID()).subscribe(
                 res => {
                   if(res){
                     this.currentDraft=res;
-  
+
                     // for (let i = 0; i <= res.length-1; i++) {
                     //   this.addCardfromDraft(res[i]);
                     // }
                     // console.log(this.currentDraft)
-  
-                    
+
+
                   }
-        
+
                 }
               )
 
@@ -357,7 +357,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
       console.log(div)
     }
 
-  } 
+  }
   goToLink(url: string){
 
     let new_url =''
@@ -368,11 +368,11 @@ export class PackMakerComponent implements OnInit, OnDestroy {
     }
     else{
        new_url = this._router.serializeUrl(
-      this._router.createUrlTree(['/CustomCardWebsite/cards/']));
+      this._router.createUrlTree(['/cards/']));
     }
-    
 
- 
+
+
     window.open(new_url +'/'+url, '_blank');
 
 
@@ -383,37 +383,37 @@ export class PackMakerComponent implements OnInit, OnDestroy {
 
     console.log(e.clientX);
     console.log(e.clientY);
-    
-      this.isHovering = true; 
-      this.hoveredCard = card 
-    
+
+      this.isHovering = true;
+      this.hoveredCard = card
+
       if(e.clientX>=900){
         this.leftPosition = e.clientX-200;
       }
-    
+
       else{
         this.leftPosition = e.clientX+2;
       }
-      
+
       this.rightPosition =e.clientY-170;
-      
-      
+
+
       this.getHoveredCardDetails()
-      
+
     }
     mouseLeft() {
         this.isHovering = false;
     }
     getHoveredCardDetails(){
-      
+
       this.hoverattribute=''
       this.hoverstType =''
       this.hovermType= ''
-    
+
       if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
         this.hovermonster='False';
         this.hoverattribute="assets/cardstats/TRAP.png";
-        
+
         switch (this.hoveredCard?.cardtype) {
           case "Normal Trap":
               this.hoverstType = "assets/cardstats/Normal.png";
@@ -429,12 +429,12 @@ export class PackMakerComponent implements OnInit, OnDestroy {
               break;
       }
       }
-    
+
       else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
       this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
         this.hovermonster='False';
         this.hoverattribute="assets/cardstats/SPELL.png";
-        
+
         switch (this.hoveredCard?.cardtype) {
           case "Normal Spell":
               this.hoverstType = "assets/cardstats/Normal.png";
@@ -459,9 +459,9 @@ export class PackMakerComponent implements OnInit, OnDestroy {
               break;
       }
       }
-    
-    
-      
+
+
+
       else{
         this.hovermonster='True';
         switch(this.hoveredCard?.attribute){
@@ -489,10 +489,10 @@ export class PackMakerComponent implements OnInit, OnDestroy {
           default:
               this.hoverattribute = "assets/cardstats/EARTH.png";
               break;
-          
-        
+
+
         }
-    
+
         switch (this.hoveredCard?.type) {
           case "Aqua":
               this.hovermType = "assets/monstertypes/Aqua.png";
@@ -512,7 +512,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
           case "Dragon":
               this.hovermType = "assets/monstertypes/Dragon.png";
               break;
-    
+
           case "Fairy":
               this.hovermType = "assets/monstertypes/Fairy.png";
               break;
@@ -531,7 +531,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
           case "Plant":
               this.hovermType = "assets/monstertypes/Plant.png";
               break;
-    
+
           case "Psychic":
               this.hovermType = "assets/monstertypes/Psychic.png";
               break;
@@ -550,7 +550,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
           case "Spellcaster":
               this.hovermType = "assets/monstertypes/Spellcaster.png";
               break;
-    
+
           case "Thunder":
               this.hovermType = "assets/monstertypes/Thunder.png";
               break;
@@ -563,17 +563,17 @@ export class PackMakerComponent implements OnInit, OnDestroy {
           case "Zombie":
               this.hovermType = "assets/monstertypes/Zombie.png";
               break;
-          
+
           default:
               this.hovermType = "assets/monstertypes/Zombie.png";
               break;
       }
-    
-    
-    
-    
+
+
+
+
       }
-      
+
     }
     submitSearch(){
       var div = document.getElementById('Loading')
@@ -582,22 +582,22 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         console.log(div)
       }
       console.log(this.filters)
-      this.cards = [] 
+      this.cards = []
       this.attribute ='';
       this.stType=''
       this.mType='';
       this.monster='None';
-      
+
       if(this.filters.levelhigh==null){this.filters.levelhigh=''}
       if(this.filters.levellow==null){this.filters.levellow=''}
       if(this.filters.atklow==null){this.filters.atklow=''}
       if(this.filters.atkhigh==null){this.filters.atkhigh=''}
       if(this.filters.deflow==null){this.filters.deflow=''}
       if(this.filters.defhigh==null){this.filters.defhigh=''}
-  
-      
-  
-                                
+
+
+
+
       if(this.filters['initial']==''){
           this.filters['cardtype']=='';
           this.filters['defhigh']=='';
@@ -609,19 +609,19 @@ export class PackMakerComponent implements OnInit, OnDestroy {
           this.filters['atklow']=='';
         }
         if(this.filters['initial']!='Monster'){
-          if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' || 
-          this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' || 
+          if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' ||
+          this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' ||
           this.filters['sort']=='c.DEF ASC' || this.filters['sort']=='c.DEF DESC'){
             this.filters['sort'] = 'c.name ASC';
           }
-          
-  
-  
-  
-  
-        
+
+
+
+
+
+
         }
-  
+
         if(this.filters['initial']=='Monster'){
           if(this.filters['cardtype']!="Effect Monster" &&
           this.filters['cardtype']!="Flip Monster"&&
@@ -635,7 +635,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
             this.filters['cardtype']=''
           }
         }
-  
+
         if(this.filters['initial']=='Spell'){
           this.filters['monstertype']=''
           if(this.filters['cardtype']!="Normal Spell" &&
@@ -647,7 +647,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
             this.filters['cardtype']=''
           }
         }
-  
+
         if(this.filters['initial']=='Trap'){
           this.filters['monstertype']=''
           if(this.filters['cardtype']!="Normal Trap" &&
@@ -656,24 +656,24 @@ export class PackMakerComponent implements OnInit, OnDestroy {
             this.filters['cardtype']=''
           }
         }
-  
-        
+
+
         this.produceSearchRes()
       // this.customcardsService.getFilteredCards(this.filters).subscribe(
       //   res=>{
-          
+
       //     console.log(res)
       //     this.cards = res;
       //     this.currentPage = 1
-  
+
       //     this.getCardNumbers(this.currentPage);
       //     this.hideloader();
       //   },
       //   err=>{console.log(err)}
       // )
-  
+
     }
-  
+
     produceSearchRes(){
       // filters = {
       //   'name':'',
@@ -691,7 +691,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
       //   'defhigh':'',
       //   'tag':'',
       //   'sort':'c.name ASC',
-    
+
       // }
       console.log(this.filters)
       let search_res= this.all_cards;
@@ -721,7 +721,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         search_res=search_res.filter((card)=>card.type!=undefined)
         search_res=search_res.filter((card)=>card.type.toLowerCase().includes(this.filters['monstertype'].toLowerCase()))
       }
-      
+
       if(this.filters['levellow']!=''){
         if(this.filters['levelhigh']!=''){
           let levellow = Number(this.filters['levellow'])
@@ -737,8 +737,8 @@ export class PackMakerComponent implements OnInit, OnDestroy {
           let levelhigh = Number(this.filters['levelhigh'])
           search_res=search_res.filter((card)=>card.level <=levelhigh)
       }
-    
-  
+
+
       if(this.filters['atklow']!=''){
         if(this.filters['atkhigh']!=''){
           let atklow = Number(this.filters['atklow'])
@@ -754,11 +754,11 @@ export class PackMakerComponent implements OnInit, OnDestroy {
           let atkhigh = Number(this.filters['atkhigh'])
           search_res=search_res.filter((card)=>card.atk <=atkhigh)
       }
-  
-  
-  
-  
-  
+
+
+
+
+
       if(this.filters['deflow']!=''){
         if(this.filters['defhigh']!=''){
           let deflow = Number(this.filters['deflow'])
@@ -774,7 +774,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
           let defhigh = Number(this.filters['defhigh'])
           search_res=search_res.filter((card)=>card.def <=defhigh)
       }
-  
+
       if(this.filters['sort']!=''){
         switch(this.filters['sort']){
           case 'c.id ASC':{
@@ -785,7 +785,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
             search_res.sort((a,b) => (a.id > b.id) ? -1 : ((b.id > a.id) ? 1 : 0))
             break;
           }
-  
+
           case 'c.name ASC':{
             search_res.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
             break;
@@ -794,7 +794,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
             search_res.sort((a,b) => (a.name > b.name) ? -1 : ((b.name > a.name) ? 1 : 0))
             break;
           }
-  
+
           case 'c.level ASC':{
             search_res.sort((a,b) => (a.level > b.level) ? 1 : ((b.level > a.level) ? -1 : 0))
             break;
@@ -803,8 +803,8 @@ export class PackMakerComponent implements OnInit, OnDestroy {
             search_res.sort((a,b) => (a.level > b.level) ? -1 : ((b.level > a.level) ? 1 : 0))
             break;
           }
-  
-  
+
+
           case 'c.ATK ASC':{
             search_res.sort((a,b) => (a.atk > b.atk) ? 1 : ((b.atk > a.atk) ? -1 : 0))
             break;
@@ -813,7 +813,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
             search_res.sort((a,b) => (a.atk > b.atk) ? -1 : ((b.atk > a.atk) ? 1 : 0))
             break;
           }
-  
+
           case 'c.DEF ASC':{
             search_res.sort((a,b) => (a.def > b.def) ? 1 : ((b.def > a.def) ? -1 : 0))
             break;
@@ -822,26 +822,26 @@ export class PackMakerComponent implements OnInit, OnDestroy {
             search_res.sort((a,b) => (a.def > b.def) ? -1 : ((b.def > a.def) ? 1 : 0))
             break;
           }
-  
-  
-  
+
+
+
           default:{
             break;
           }
-            
-          
-          
-  
+
+
+
+
         }
-  
+
       }
-  
+
       this.cards = search_res;
       this.currentPage = 1
       this.getCardNumbers(this.currentPage);
       this.hideloader();
-  
-  
+
+
       //this.searchName=this.filters['name']
       //this.cards=this.originalCards.filter((card)=>card.name.toLowerCase().includes(this.searchName.toLowerCase()))
     }
@@ -883,7 +883,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
     if(this.card?.cardtype=="Normal Trap" || this.card?.cardtype=="Counter Trap" || this.card?.cardtype=="Continuous Trap"){
       this.monster='False';
       this.attribute="assets/cardstats/TRAP.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Trap":
             this.stType = "assets/cardstats/Normal.png";
@@ -904,7 +904,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
     this.card?.cardtype=="Ritual Spell" || this.card?.cardtype=="Field Spell" || this.card?.cardtype=="Equip Spell" ){
       this.monster='False';
       this.attribute="assets/cardstats/SPELL.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Spell":
             this.stType = "assets/cardstats/Normal.png";
@@ -931,7 +931,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
     }
 
 
-    
+
     else{
       this.monster='True';
       switch(this.card?.attribute){
@@ -959,8 +959,8 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         default:
             this.attribute = "assets/cardstats/EARTH.png";
             break;
-        
-      
+
+
       }
 
       switch (this.card?.type) {
@@ -1033,7 +1033,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         case "Zombie":
             this.mType = "assets/monstertypes/Zombie.png";
             break;
-        
+
         default:
             this.mType = "assets/monstertypes/Zombie.png";
             break;
@@ -1043,9 +1043,9 @@ export class PackMakerComponent implements OnInit, OnDestroy {
 
 
     }
-    
+
 }
-  
+
   resetPack(size:string){
 
     console.log("Ah!")
@@ -1139,15 +1139,15 @@ export class PackMakerComponent implements OnInit, OnDestroy {
       }
 
 
-      
+
     }
-    
+
   }
 
   selectDraftCard(card:Card){
     // this.draftCard = this.currentDraft.find(x => x.id == id);
     this.draftCard = card;
-    
+
   }
 
   deleteDraftCard(cardtype:string){
@@ -1163,7 +1163,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         }
       }
       else if(cardtype=="rare"){
-        
+
         const index = this.currentRare.findIndex(obj => obj.id === this.draftCard?.id)
         if (index > -1) {
           this.currentRare.splice(index, 1);
@@ -1205,7 +1205,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
     }
   }
   rightAddPackCard($event: { preventDefault: () => void; },card:Card){
-    
+
     $event.preventDefault();
     this.card=card;
     console.log(card.name);
@@ -1228,7 +1228,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
       console.log("Basic data not filled.")
       return;
     }
-    else if(this.currentCommons.length!= this.maxCommon || 
+    else if(this.currentCommons.length!= this.maxCommon ||
         this.currentRare.length!= this.maxRare ||
         this.currentSuper.length!= this.maxSuper ||
         this.currentUltra.length!= this.maxUltra ||
@@ -1238,7 +1238,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         return;
     }
 
-    else{ 
+    else{
       this.done=true;
       if(this.packInfo){
         const finaldata = {} as Pack2;
@@ -1251,15 +1251,15 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         finaldata['packurl'] = this.packInfo['pack']
         finaldata['packdescription'] = this.draftData.controls['packdescription'].value;
 
-  
+
         const commonIDs:string[] = []
         const rareIDs:string[] = []
         const superIDs:string[] = []
         const ultraIDs:string[] = []
         const secretIDs:string[] = []
-  
-  
-  
+
+
+
         for (let i = 0; i <= this.currentCommons.length-1; i++) {
           commonIDs.push(this.currentCommons[i].id);
         }
@@ -1275,20 +1275,20 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         for (let i = 0; i <= this.currentSecret.length-1; i++) {
           secretIDs.push(this.currentSecret[i].id);
         }
-  
+
         finaldata['commonIDs'] = commonIDs;
         finaldata['rareIDs'] = rareIDs;
         finaldata['superIDs'] = superIDs;
         finaldata['ultraIDs'] = ultraIDs;
         finaldata['secretIDs'] = secretIDs;
         finaldata['packSize'] = this.packSize;
-        
-  
-        
-        
-  
-  
-   
+
+
+
+
+
+
+
         if(this.fileChanged){
           const formData = new FormData();
           formData.append("thumbnail", this.file);
@@ -1305,10 +1305,10 @@ export class PackMakerComponent implements OnInit, OnDestroy {
                 this.customcardsService.setEditPackName('')
                 this._router.navigate(['/packs']);
               },
-                
+
               err=>{console.log(err)}
             )
-        
+
         },err=>{console.log(err)})
         }
 
@@ -1323,7 +1323,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
               this.customcardsService.setEditPackName('')
               this._router.navigate(['/packs']);
             },
-              
+
             err=>{console.log(err)}
           )
         }
@@ -1346,9 +1346,9 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         const superIDs:string[] = []
         const ultraIDs:string[] = []
         const secretIDs:string[] = []
-  
-  
-  
+
+
+
         for (let i = 0; i <= this.currentCommons.length-1; i++) {
           commonIDs.push(this.currentCommons[i].id);
         }
@@ -1364,7 +1364,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         for (let i = 0; i <= this.currentSecret.length-1; i++) {
           secretIDs.push(this.currentSecret[i].id);
         }
-  
+
         finaldata['commonIDs'] = commonIDs;
         finaldata['rareIDs'] = rareIDs;
         finaldata['superIDs'] = superIDs;
@@ -1372,7 +1372,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         finaldata['secretIDs'] = secretIDs;
         finaldata['packSize'] = this.packSize;
         finaldata['packurl'] = 'placeholder'
-        
+
 
 
         if(this.fileChanged){
@@ -1380,14 +1380,14 @@ export class PackMakerComponent implements OnInit, OnDestroy {
           formData.append("thumbnail", this.file);
           formData.append("name",finaldata['title'])
           this.customcardsService.uploadImage(formData).subscribe(res=>{finaldata['packurl']=res
-        
+
           this.customcardsService.submitPack(finaldata)
           .subscribe(
             res=>{
               console.log(res);
               this._router.navigate(['/packs']);
             },
-              
+
             err=>{console.log(err)}
           )
         },err=>{console.log(err)})
@@ -1399,19 +1399,19 @@ export class PackMakerComponent implements OnInit, OnDestroy {
               console.log(res);
               this._router.navigate(['/packs']);
             },
-              
+
             err=>{console.log(err)}
           )
         }
 
-        
+
 
       }
 
- 
+
 
       this.submitfail = false;
-      
+
 
 
 
@@ -1419,7 +1419,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
   }
 
   // rightAddDraftCard($event: { preventDefault: () => void; },card:string){
-    
+
   //   this.selectCard(card);
   //   $event.preventDefault();
   //   this.addCard();
@@ -1445,7 +1445,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
 
 }
 
-  
+
 
 
 

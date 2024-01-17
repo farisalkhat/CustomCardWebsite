@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomcardsService,SiteData,Card, PackInfo, PackButton, Article } from '../customcards.service';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -13,16 +14,40 @@ export class HomeComponent implements OnInit {
   cotd!:Card
   latestpack!:PackButton
   cards!: Card[];
-  articles!:Article[];
-  article!:Article;
-  constructor(public _router:Router,public _customCardsService:CustomcardsService) { }
+  articles:any[] = [];
+  unused_articles:any[] = [];
+  constructor(public datepipe:DatePipe, public _router:Router,public _customCardsService:CustomcardsService) { }
 
   ngOnInit(): void {
     this._customCardsService.getArticles().subscribe(
-      res=>{this.articles=res
+      res=>{this.unused_articles=res
 
-        this.article = this.articles[this.articles.length-1]
-        this.articles.pop()
+        for(const article in this.unused_articles){
+          if(this.unused_articles[article].creation_time!=null){
+            this.datepipe.transform(this.unused_articles[article].creation_time,'MMM d, y')
+            console.log(this.unused_articles[article].creation_time)
+            // this.articles[article].creation_time = this.datepipe.transform(this.articles[article].creation_time,'MMM d, y')
+          }
+
+          if(this.unused_articles[article].modification_time!=null){
+            this.datepipe.transform(this.unused_articles[article].modification_time,'MMM d, y')
+          }
+
+
+        }
+
+        let i = 0;
+        while(i!=4){
+          let article = this.unused_articles.shift();
+          this.articles.push(article);
+          console.log(this.articles);
+          i++;
+        }
+        console.log(this.unused_articles);
+
+
+
+
       },
       err=>{}
     )
@@ -59,23 +84,37 @@ export class HomeComponent implements OnInit {
   goToLink(url: string){
 
     let new_url =''
-  
+
     if(this._router['location']._platformLocation.location.origin=='http://localhost:4200'){
        new_url = this._router.serializeUrl(
         this._router.createUrlTree(['/cards/']));
     }
     else{
        new_url = this._router.serializeUrl(
-      this._router.createUrlTree(['/CustomCardWebsite/cards/']));
+      this._router.createUrlTree(['/cards/']));
     }
-    
-  
-  
+
+
+
     window.open(new_url +'/'+url, '_blank');
-  
-  
+
+
     // const newurl = 'https://www.duelingbook.com/card?id='+url
     // window.open(newurl, "_blank");
+  }
+
+
+  loadMore(){
+    let i = 0;
+        while(i!=3){
+          if(this.unused_articles.length==0){
+            return;
+          }
+          let article = this.unused_articles.pop();
+          this.articles.push(article);
+          console.log(this.articles);
+          i++;
+        }
   }
 
 }

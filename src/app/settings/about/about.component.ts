@@ -114,7 +114,7 @@ export class AboutComponent implements OnInit {
     //     (data:any)=>{
     //       this.userDetails = data;
     //       console.log(this.userDetails);
-    //     } 
+    //     }
     //   )
     // })
 
@@ -149,7 +149,7 @@ export class AboutComponent implements OnInit {
             this.newSettings['about'] = this.userdata['details']['about'];
             this.about = this.userdata['details']['about'];
         })
-        
+
       },
       err => {
         console.log(err)
@@ -208,12 +208,12 @@ export class AboutComponent implements OnInit {
       console.log(div)
     }
     console.log(this.filters)
-    this.cards = [] 
+    this.cards = []
     this.attribute ='';
     this.stType=''
     this.mType='';
     this.monster='None';
-    
+
     if(this.filters.levelhigh==null){this.filters.levelhigh=''}
     if(this.filters.levellow==null){this.filters.levellow=''}
     if(this.filters.atklow==null){this.filters.atklow=''}
@@ -221,9 +221,9 @@ export class AboutComponent implements OnInit {
     if(this.filters.deflow==null){this.filters.deflow=''}
     if(this.filters.defhigh==null){this.filters.defhigh=''}
 
-    
 
-                              
+
+
     if(this.filters['initial']==''){
         this.filters['cardtype']=='';
         this.filters['defhigh']=='';
@@ -235,17 +235,17 @@ export class AboutComponent implements OnInit {
         this.filters['atklow']=='';
       }
       if(this.filters['initial']!='Monster'){
-        if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' || 
-        this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' || 
+        if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' ||
+        this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' ||
         this.filters['sort']=='c.DEF ASC' || this.filters['sort']=='c.DEF DESC'){
           this.filters['sort'] = 'c.name ASC';
         }
-        
 
 
 
 
-      
+
+
       }
 
       if(this.filters['initial']=='Monster'){
@@ -280,7 +280,7 @@ export class AboutComponent implements OnInit {
       }
     this.customcardsService.getFilteredCards(this.filters).subscribe(
       res=>{
-        
+
         console.log(res)
         this.cards = res;
         this.currentPage = 1
@@ -322,7 +322,7 @@ export class AboutComponent implements OnInit {
       console.log(div)
     }
 
-  } 
+  }
 
 
 goToLink(url: string){
@@ -335,9 +335,9 @@ goToLink(url: string){
   }
   else{
      new_url = this._router.serializeUrl(
-    this._router.createUrlTree(['/CustomCardWebsite/cards/']));
+    this._router.createUrlTree(['/cards/']));
   }
-  
+
 
 
   window.open(new_url +'/'+url, '_blank');
@@ -359,7 +359,7 @@ goToLink(url: string){
     if(this.card?.cardtype=="Normal Trap" || this.card?.cardtype=="Counter Trap" || this.card?.cardtype=="Continuous Trap"){
       this.monster='False';
       this.attribute="assets/cardstats/TRAP.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Trap":
             this.stType = "assets/cardstats/Normal.png";
@@ -380,7 +380,7 @@ goToLink(url: string){
     this.card?.cardtype=="Ritual Spell" || this.card?.cardtype=="Field Spell" || this.card?.cardtype=="Equip Spell" ){
       this.monster='False';
       this.attribute="assets/cardstats/SPELL.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Spell":
             this.stType = "assets/cardstats/Normal.png";
@@ -407,7 +407,7 @@ goToLink(url: string){
     }
 
 
-    
+
     else{
       this.monster='True';
       switch(this.card?.attribute){
@@ -435,8 +435,8 @@ goToLink(url: string){
         default:
             this.attribute = "assets/cardstats/EARTH.png";
             break;
-        
-      
+
+
       }
 
       switch (this.card?.type) {
@@ -509,7 +509,7 @@ goToLink(url: string){
         case "Zombie":
             this.mType = "assets/monstertypes/Zombie.png";
             break;
-        
+
         default:
             this.mType = "assets/monstertypes/Zombie.png";
             break;
@@ -519,7 +519,7 @@ goToLink(url: string){
 
 
     }
-    
+
 }
 
 }

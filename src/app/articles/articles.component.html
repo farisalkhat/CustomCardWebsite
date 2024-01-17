@@ -5,17 +5,39 @@
     <div class="row">
         <div *ngFor="let article of articles" class="col-sm-6 col-md-4">
 
-            <div routerLink="/articles/{{article?.id}}" class="card" style="width:302px;">
+            <div routerLink="/articles/{{article?.id}}" class="card article-card" style="width:302px;">
+              <div *ngIf="article?.tag=='Guide'" class="article-label article-label-shadow" style="background-color:purple"><p class="article-label-text">GUIDE</p></div>
+              <div *ngIf="article?.tag=='News'" class="article-label article-label-shadow" style="background-color:rgb(0, 128, 255)"><p class="article-label-text">NEWS</p></div>
+              <div *ngIf="article?.tag=='Tournament'" class="article-label article-label-shadow" style="background-color:rgba(255, 0, 0, 0.786)"><p class="article-label-text">TOURNAMENT</p></div>
+              <div *ngIf="article?.tag=='Meta'" class="article-label article-label-shadow" style="background-color:rgb(16, 154, 57)"><p class="article-label-text">META</p></div>
+              <div *ngIf="article?.tag=='Update'" class="article-label article-label-shadow" style="background-color:rgb(250, 120, 7)"><p class="article-label-text">UPDATE</p></div>
+              <div *ngIf="article?.tag=='Meme'" class="article-label article-label-shadow" style="background-color:rgb(248, 49, 162)"><p class="article-label-text">MEME</p></div>
+              <div *ngIf="article?.tag=='Other'" class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">OTHER</p></div>
+              <div *ngIf="article?.tag!='Other'
+              && article?.tag!='Guide'
+              && article?.tag!='News'
+              && article?.tag!='Tournament'
+              && article?.tag!='Meta'
+              && article?.tag!='Update'
+              && article?.tag!='Meme' " class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">OTHER</p></div>
+
                 <img class="card-img-top" src="{{article.header_img}}" alt="Card image cap">
-                <div class="card-body">
+
+                <div class="article-info-overlay">
+                  <h5 class="card-title">{{article.title}}</h5>
+                  <p *ngIf="article.modification_time==null" class="article-card-text card-text">Submitted on <b>{{ this.datepipe.transform(article.creation_time,'MMM d, y') }}</b> By <b>{{article.username}}</b></p>
+                  <p *ngIf="article.modification_time!=null" class="article-card-text card-text">Updated <b>{{ this.datepipe.transform(article.modification_time,'MMM d, y') }}</b> By <b>{{article.username}}</b></p>
+                </div>
+
+                <!-- <div class="card-body">
                   <h5 class="card-title">{{article.title}}</h5>
                   <p class="card-text">{{article.header}}</p>
                   <p class="card-text">By {{article.username}}</p>
-                </div>
+                </div> -->
               </div>
-    
+
         </div>
     </div>
-    
-    
+
+
 </div>

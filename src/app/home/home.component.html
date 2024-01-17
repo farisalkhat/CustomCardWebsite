@@ -1,7 +1,18 @@
 
-<div class="container2 center">
+<div class="container-fluid center">
     <!-- <a href="https://farisalkhat.github.io/CustomCardWebsite/cards/2876404"><img class="center" src="https://lh3.google.com/u/0/d/13BEisqzWP1kXSbvwnCsmdQiuCb_PoId4"></a> -->
-    <img class="center" src="assets/images/Attic2.png">
+    <!-- <img class="center" src="assets/images/Attic2.png"> -->
+
+    <div class="card newbie rounded-7">
+        <div class="card-body">
+          <h1 class="card-title">New to the Attic?</h1>
+          <p class="card-text">Check out our guide to get started, or head to the Decklists and get right into it! </p>
+          <button type="button" class="btn btn-success"  routerLink="/articles" routerLinkActive = "active">Get Started</button>
+          <button type="button" class="btn btn-outline-dark"  routerLink="/decklists" routerLinkActive = "active">Decklists</button>
+        </div>
+      </div>
+
+
 
     <div class="alert alert-success" role="alert">
         <h4 class="">{{sitedata?.packs_opened}} packs opened! {{sitedata?.dosh_spent}} dosh spent!</h4>
@@ -9,7 +20,7 @@
 
       <div class="row ">
         <div class="col">
-            <div routerLink="/packs" class="card rounded center">
+            <div routerLink="/packs" class="card rounded center small-card">
                 <div class="crop rounded ">
                     <div class="overlay-div rounded "></div>
                     <img src='https://lh3.google.com/u/0/d/19VB5LayxB2aVaDaIcMiayyJPdgaErxY_' >
@@ -22,7 +33,7 @@
             </div>
         </div>
         <div class="col">
-            <div routerLink="/deck-editor" class="card rounded center">
+            <div routerLink="/deck-editor" class="card rounded center small-card">
                 <div class="crop rounded">
                     <div class="overlay-div rounded"></div>
                     <img src='https://lh3.google.com/u/0/d/1Mm-cHxvBBwRu2ADvgVFzYhu-PfKvheEa' >
@@ -35,7 +46,7 @@
             </div>
         </div>
         <div class="col">
-            <div routerLink="/decklists" class="card rounded center">
+            <div routerLink="/decklists" class="card rounded center small-card">
                 <div class="crop rounded">
                     <div class="overlay-div rounded"></div>
                     <img src='https://lh3.google.com/u/0/d/11ik2eREdiLg6df2qHSU7uXgzdOAA7c7V' >
@@ -48,7 +59,7 @@
             </div>
         </div>
         <div class="col">
-            <div routerLink="/draft-maker" class="card rounded center">
+            <div routerLink="/draft-maker" class="card rounded center small-card">
                 <div class="crop rounded">
                     <div class="overlay-div rounded"></div>
                     <img src='https://lh3.google.com/u/0/d/1BnruNoN42c-l6iuJMt-G0tNdQLsYqp6k' >
@@ -61,7 +72,7 @@
             </div>
         </div>
         <div class="col">
-            <div (click)="goToSealedDraft()" routerLink="/packs" class="center card rounded">
+            <div (click)="goToSealedDraft()" routerLink="/packs" class="center card rounded small-card">
                 <div class="crop rounded">
                     <div class="overlay-div rounded"></div>
                     <img src='https://lh3.google.com/u/0/d/1FZ1bL7NpcZNq_hpnvz084O_R2je0FOrC' >
@@ -74,7 +85,7 @@
             </div>
         </div>
         <div class="col">
-            <div routerLink="/articles" class="card rounded center">
+            <div routerLink="/articles" class="card rounded center small-card">
                 <div class="crop rounded">
                     <div class="overlay-div rounded"></div>
                     <img src='https://lh3.google.com/u/0/d/1YDqy4PUS8ICjV-w9MVOAG_hKO3xAwsLJ' >
@@ -91,8 +102,54 @@
       <div class="row">
         <div class="col">
             <h1 class="text-center">Latest Articles</h1>
-
             <div class="row">
+              <div *ngFor="let article of articles" class="col-sm-6 col-md-4">
+
+                  <div routerLink="/articles/{{article?.id}}" class="card article-card" style="width:302px;">
+                    <div *ngIf="article?.tag=='Guide'" class="article-label article-label-shadow" style="background-color:purple"><p class="article-label-text">GUIDE</p></div>
+                    <div *ngIf="article?.tag=='News'" class="article-label article-label-shadow" style="background-color:rgb(0, 128, 255)"><p class="article-label-text">NEWS</p></div>
+                    <div *ngIf="article?.tag=='Tournament'" class="article-label article-label-shadow" style="background-color:rgba(255, 0, 0, 0.786)"><p class="article-label-text">TOURNAMENT</p></div>
+                    <div *ngIf="article?.tag=='Meta'" class="article-label article-label-shadow" style="background-color:rgb(16, 154, 57)"><p class="article-label-text">META</p></div>
+                    <div *ngIf="article?.tag=='Update'" class="article-label article-label-shadow" style="background-color:rgb(250, 120, 7)"><p class="article-label-text">UPDATE</p></div>
+                    <div *ngIf="article?.tag=='Meme'" class="article-label article-label-shadow" style="background-color:rgb(248, 49, 162)"><p class="article-label-text">MEME</p></div>
+                    <div *ngIf="article?.tag=='Other'" class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">OTHER</p></div>
+                    <div *ngIf="article?.tag!='Other'
+                    && article?.tag!='Guide'
+                    && article?.tag!='News'
+                    && article?.tag!='Tournament'
+                    && article?.tag!='Meta'
+                    && article?.tag!='Update'
+                    && article?.tag!='Meme' " class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">OTHER</p></div>
+
+                      <img class="card-img-top" src="{{article.header_img}}" alt="Card image cap">
+
+                      <div class="article-info-overlay">
+                        <h5 class="card-title">{{article.title}}</h5>
+                        <p *ngIf="article.modification_time==null" class="article-card-text card-text">Submitted on <b>{{ this.datepipe.transform(article.creation_time,'MMM d, y') }}</b> By <b>{{article.username}}</b></p>
+                        <p *ngIf="article.modification_time!=null" class="article-card-text card-text">Updated <b>{{ this.datepipe.transform(article.modification_time,'MMM d, y') }}</b> By <b>{{article.username}}</b></p>
+                      </div>
+
+                      <!-- <div class="card-body">
+                        <h5 class="card-title">{{article.title}}</h5>
+                        <p class="card-text">{{article.header}}</p>
+                        <p class="card-text">By {{article.username}}</p>
+                      </div> -->
+                    </div>
+
+              </div>
+            </div>
+
+
+            <div class="row center">
+              <button  (click)="loadMore()"  class="button btn-success btn">Load More</button>
+            </div>
+
+
+
+
+
+
+            <!-- <div class="row">
 
                 <div id="carouselExample" class="carousel slide">
                     <div class="carousel-inner">
@@ -122,24 +179,21 @@
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Next</span>
                     </button>
-                  </div>
 
-
-    </div>
-
-
-        </div>
+                </div>
+        </div> -->
       </div>
+    </div>
       <div class="row">
         <div class="col-md-6 col-6">
             <h1 class="text-center">Card of the Day!</h1>
-            <input class="center smaller" type="image" (click)="goToLink(cotd.id)" src="https://lh3.google.com/u/0/d/{{cotd.drive_id}}" />
+            <input class="center smaller" type="image" (click)="goToLink(cotd.id)" src="https://theatticygo.com/assets/cardimages/{{cotd.id}}.png" />
 
         </div>
         <div class="col-md-6 col-6">
             <h1 class="text-center">Latest Pack!</h1>
-            <img    *ngIf="latestpack.pack!='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack" src='https://lh3.google.com/u/0/d/{{latestpack?.pack}}'>
-            <img   *ngIf="latestpack.pack=='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/placeholder.png'>
+            <img    *ngIf="latestpack.pack!='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack" src="https://theatticygo.com/assets/packimages/{{latestpack?.packid}}.png">
+            <img   *ngIf="latestpack.pack=='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack"src = 'https://theatticygo.com/assets/packimages/placeholder.png'>
 
         </div>
 
@@ -158,14 +212,16 @@
 </div>
 
 
-<div class="container2">
+<div class="container">
     <div class="row justify-content-center">
 
         <h1 class="text-center">Newest Cards</h1>
 
         <div  *ngFor = "let card of cards"class="col-md-4 col-lg-2 col-4 ">
 
-                <input class="center cotd  " type="image" routerLink="/cards/{{card.id}}" src="https://lh3.google.com/u/0/d/{{card.drive_id}}" />
+                <input class="center cotd  " type="image" routerLink="/cards/{{card.id}}"
+
+                src="https://theatticygo.com/assets/cardimages/{{card.id}}.png" />
 
 
         </div>
@@ -175,4 +231,4 @@
 
 
 
-<img class="center" src="assets/images/Boneheimer.png">
+<!-- <img class="center" src="assets/images/Boneheimer.png"> -->

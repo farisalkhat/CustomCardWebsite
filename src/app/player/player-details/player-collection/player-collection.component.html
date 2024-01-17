@@ -53,7 +53,7 @@
                 <button  (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" >
 
                     <div class="relative"*ngIf="card.rarity=='common'">
-                        <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+                        <img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'>
                         <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                     </div>
 
@@ -61,7 +61,7 @@
                         <img class = " smallcard sparkle" *ngIf="card.rarity=='secret'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/giphy.gif'>
                         <img class = "smallcard sparkle" *ngIf="card.rarity=='super'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/super.gif'>
                         <img class = "smallcard sparkle" *ngIf="card.rarity=='ultra'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/fireworks.gif'>
-                        <img class ="smallcard" src='https://lh3.google.com/u/0/d/{{card?.drive_id}}'>
+                        <img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'>
                         <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                     </div>
 

@@ -25,7 +25,7 @@ export class PlayerCollectionComponent implements OnInit {
         'defhigh':'',
         'tag':'',
         'sort':'c.name ASC',
-    }    
+    }
     searching:boolean=false;
     searchName:string=''
   creator!:string;
@@ -50,14 +50,14 @@ export class PlayerCollectionComponent implements OnInit {
 
   constructor(public customcardsService:CustomcardsService, public authService:AuthService, public router:Router) { }
   @Input() userId!:number;
-  
+
   ngOnInit(): void {
     this.customcardsService.getCollectionCardsByCreatorID(this.userId).subscribe(
       res => {
         if(res){
           this.cards=res;
-          this.cards.sort((a, b) => 
-          
+          this.cards.sort((a, b) =>
+
           {
             if(a.cardtype.includes('Monster')){
                 if(b.cardtype.includes('Spell') || b.cardtype.includes('Trap')){
@@ -70,7 +70,7 @@ export class PlayerCollectionComponent implements OnInit {
                     else{
                         return -1
                     }
-                    
+
                 }
             }
             if(a.cardtype.includes('Spell')){
@@ -103,13 +103,13 @@ export class PlayerCollectionComponent implements OnInit {
                     }
                 }
             }
-            
-            return 1}
-          
 
-          
-          
-          
+            return 1}
+
+
+
+
+
           )
           console.log(this.binders)
 
@@ -133,21 +133,21 @@ export class PlayerCollectionComponent implements OnInit {
     goToLink(url: number){
 
       let new_url =''
-  
+
       if(this.router['location']._platformLocation.location.origin=='http://localhost:4200'){
          new_url = this.router.serializeUrl(
           this.router.createUrlTree(['/cards/']));
       }
       else{
          new_url = this.router.serializeUrl(
-        this.router.createUrlTree(['/CustomCardWebsite/cards/']));
+        this.router.createUrlTree(['/cards/']));
       }
-      
-  
-   
+
+
+
       window.open(new_url +'/'+url, '_blank');
-  
-  
+
+
       // const newurl = 'https://www.duelingbook.com/card?id='+url
       // window.open(newurl, "_blank");
   }
@@ -155,65 +155,65 @@ export class PlayerCollectionComponent implements OnInit {
         this.currentCards = [];
         const cardmin = (page-1)*54;
         const cardmax = (page * 54) - 1;
-    
+
         for (let i = cardmin; i <= cardmax; i++) {
           console.log(cardmin,' ',cardmax);
           this.currentCards.push(this.cards[i]);
         }
-    
-    
-    
+
+
+
       }
-    
+
       nextPage(){
         this.currentPage +=1;
         this.getCardNumbers(this.currentPage);
       }
-    
+
       prevPage(){
         this.currentPage -=1;
         this.getCardNumbers(this.currentPage);
       }
 
 
-    
+
 
 
     mouseHovering(card:BinderCard,e:MouseEvent) {
 
       console.log(e.clientX);
       console.log(e.clientY);
-      
-        this.isHovering = true; 
-        this.hoveredCard = card 
-      
+
+        this.isHovering = true;
+        this.hoveredCard = card
+
         if(e.clientX>=900){
           this.leftPosition = e.clientX-200;
         }
-      
+
         else{
           this.leftPosition = e.clientX+2;
         }
-        
+
         this.rightPosition =e.clientY-170;
-        
-        
+
+
         this.getHoveredCardDetails()
-        
+
       }
       mouseLeft() {
           this.isHovering = false;
       }
       getHoveredCardDetails(){
-        
+
         this.hoverattribute=''
         this.hoverstType =''
         this.hovermType= ''
-      
+
         if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
           this.hovermonster='False';
           this.hoverattribute="assets/cardstats/TRAP.png";
-          
+
           switch (this.hoveredCard?.cardtype) {
             case "Normal Trap":
                 this.hoverstType = "assets/cardstats/Normal.png";
@@ -229,12 +229,12 @@ export class PlayerCollectionComponent implements OnInit {
                 break;
         }
         }
-      
+
         else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
         this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
           this.hovermonster='False';
           this.hoverattribute="assets/cardstats/SPELL.png";
-          
+
           switch (this.hoveredCard?.cardtype) {
             case "Normal Spell":
                 this.hoverstType = "assets/cardstats/Normal.png";
@@ -259,9 +259,9 @@ export class PlayerCollectionComponent implements OnInit {
                 break;
         }
         }
-      
-      
-        
+
+
+
         else{
           this.hovermonster='True';
           switch(this.hoveredCard?.attribute){
@@ -289,10 +289,10 @@ export class PlayerCollectionComponent implements OnInit {
             default:
                 this.hoverattribute = "assets/cardstats/EARTH.png";
                 break;
-            
-          
+
+
           }
-      
+
           switch (this.hoveredCard?.type) {
             case "Aqua":
                 this.hovermType = "assets/monstertypes/Aqua.png";
@@ -312,7 +312,7 @@ export class PlayerCollectionComponent implements OnInit {
             case "Dragon":
                 this.hovermType = "assets/monstertypes/Dragon.png";
                 break;
-      
+
             case "Fairy":
                 this.hovermType = "assets/monstertypes/Fairy.png";
                 break;
@@ -331,7 +331,7 @@ export class PlayerCollectionComponent implements OnInit {
             case "Plant":
                 this.hovermType = "assets/monstertypes/Plant.png";
                 break;
-      
+
             case "Psychic":
                 this.hovermType = "assets/monstertypes/Psychic.png";
                 break;
@@ -350,7 +350,7 @@ export class PlayerCollectionComponent implements OnInit {
             case "Spellcaster":
                 this.hovermType = "assets/monstertypes/Spellcaster.png";
                 break;
-      
+
             case "Thunder":
                 this.hovermType = "assets/monstertypes/Thunder.png";
                 break;
@@ -363,17 +363,17 @@ export class PlayerCollectionComponent implements OnInit {
             case "Zombie":
                 this.hovermType = "assets/monstertypes/Zombie.png";
                 break;
-            
+
             default:
                 this.hovermType = "assets/monstertypes/Zombie.png";
                 break;
         }
-      
-      
-      
-      
+
+
+
+
         }
-        
+
       }
 
 
@@ -388,6 +388,6 @@ export class PlayerCollectionComponent implements OnInit {
         this.currentPage = 1
         this.getCardNumbers(this.currentPage);
         console.log(this.searchName)
-    
+
       }
 }

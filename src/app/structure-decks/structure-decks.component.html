@@ -33,7 +33,7 @@
 
     <div class="row align-items-center">
         <div class="col"*ngFor = "let pack of packs">
-            <img    *ngIf="pack.pack!='placeholder'" routerLink="/structure-deck-details/{{pack.packid}}" routerLinkActive = "active" class="pack" src='https://lh3.google.com/u/0/d/{{pack?.pack}}'>
+            <img    *ngIf="pack.pack!='placeholder'" routerLink="/structure-deck-details/{{pack.packid}}" routerLinkActive = "active" class="pack" src='https://theatticygo.com/assets/packimages/{{pack?.packid}}.png'>
             <img   *ngIf="pack.pack=='placeholder'" routerLink="/structure-deck-details/{{pack.packid}}" routerLinkActive = "active" class="pack"src = 'https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/packs/placeholder.png'>
 
 

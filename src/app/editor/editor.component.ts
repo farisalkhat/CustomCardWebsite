@@ -18,6 +18,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   id!:number;
   currency!:number;
   editor!: Editor;
+  tag:string | undefined;
 
   article!:Article;
 
@@ -43,6 +44,8 @@ export class EditorComponent implements OnInit, OnDestroy {
       Validators.required
     ]),
     editorContent: new FormControl(null, [Validators.required]),
+    tag: new FormControl(undefined,
+      [Validators.required])
   }) 
   theInnerHTML!:any;
   submitVerified = false;
@@ -88,6 +91,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     final.title = this.articleInfo.controls['title'].value;
     final.header = this.articleInfo.controls['about'].value;
     final.article = this.theInnerHTML;
+    final.tag = this.articleInfo.controls['tag'].value;
     this._ccService.submitArticle(final).subscribe(
       res=>{
         console.log(res);

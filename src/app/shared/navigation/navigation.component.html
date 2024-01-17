@@ -1,173 +1,146 @@
 
 
-<nav class="navbar navbar-default navbar-expand-md navbar-dark ">
-  <div class="container-fluid">
 
-    <a class="navbar-brand" href="#">
-      <img class="wretched" src="https://i.imgur.com/VaqZnwF.png"  >
-    </a>
-    <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon navbar-dark"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive = "active">Home</a>
-        </li>
+  <nav class="navbar navbar-default navbar-expand-md navbar-dark ">
+    <div class="container-fluid">
 
+      <a class="navbar-brand" href="#">
+        <img src="assets/images/Attic2.png" height="80">
+        <!-- <img class="wretched" src="https://i.imgur.com/VaqZnwF.png"  > -->
+      </a>
+      <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon navbar-dark"></span>
+      </button>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link " routerLink="/about" id="navbarDarkDropdownMenuLink" role="button"  aria-expanded="false">
-            About
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="nav-link" routerLink="/banlist" >Banlist</a></li>
-            <li><a class="nav-link" routerLink="/formats" >Formats</a></li>
-            
-          </ul>
-        </li>
-
-
-        
-
-
-
-        
-        <li class="nav-item dropdown">
-          <a class="nav-link " routerLink="/players" id="navbarDarkDropdownMenuLink" role="button"  aria-expanded="false">
-            Community
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="nav-link" routerLink="/players">Players </a></li>
-            <li><a class="nav-link" routerLink="/matches" >Matches</a></li>
-            <li><a class="nav-link" routerLink="/articles" >Articles</a></li>
-            
-          </ul>
-        </li>
-
-
-
-        <li class="nav-item dropdown">
-          <a class="nav-link " routerLink="/drafts" id="navbarDarkDropdownMenuLink" role="button"  aria-expanded="false">
-            Drafts
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="nav-link" routerLink="/draft-maker">Draft Creator </a></li>
-            <li><a class="nav-link" routerLink="/draftmode" >Draft Editor</a></li>
-            <li><a class="nav-link" (click)="goToSealedDraft()" routerLink="/packs">Sealed Draft</a></li>
-            
-          </ul>
-        </li>
-
-
-        <li class="nav-item dropdown">
-          <a routerLink="/packs" class="nav-link"  id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
-            Shop
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="nav-link" (click)="goToPackOpener()" routerLink="/packs" >Packs</a></li>
-            <li><a class="nav-link"  routerLink="/structure-decks" >Structure Decks</a></li>
-
-            
-            
-            <li><a class="nav-link" routerLink="/checklist" >Checklist</a></li>
-          </ul>
-        </li>
-  
-  
-
-
-        <li class="nav-item dropdown">
-          <a routerLink="/deck-editor" class="nav-link" id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
-            Editor
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="nav-link" routerLink="/deck-editor" >Deck Editor</a></li>
-            <li><a class="nav-link" routerLink="/collection-deck-editor" >Collection Editor</a></li>
-          </ul>
-        </li>
-        
-
-
-
-        <li class="nav-item dropdown">
-          <a class="nav-link" routerLink="/decklists" id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
-            Decklists
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="nav-link" routerLink="/decklists" >Public Decklists</a></li>
-            <li><a class="nav-link" routerLink="/duelist-decklists" >Your Decklists</a></li>
-            <li><a class="nav-link" routerLink="/upload-decklist" >Upload Decklist</a></li>
-          </ul>
-        </li>
-
-        
- 
-<!--         
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/players" >Players</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/players" >Players</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/decklists" >Decklists</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/deck-master">Deck Master</a>
-        </li> -->
-      </ul>
-  
-
-
-
-
-
-      <ul   class="navbar-nav ms-auto mb-2 mb-lg-0">
-
-          <li *ngIf="username!=undefined" class="nav-item dropdown">
-            <a class="nav-link " routerLink="/players/{{id}}" id="navbarDarkDropdownMenuLink" role="button"  aria-expanded="false">
-              {{_authService.username}}
+      <div class="collapse navbar-collapse justify-content-md-center !important" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link " routerLink="/about" id="navbarDarkDropdownMenuLink" role="button"  aria-expanded="false">
+              About
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li class="nav-link">{{_authService.currency}} Dosh™</li>
-              <li><a class="nav-link" routerLink="/settings">Settings</a></li>
-              <li><a class="nav-link" routerLink="/submit-match">Submit Match</a></li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/binders"  >Binders</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/collections" >Collection</a>
-              </li>
-              <!-- <li *ngIf="_authService.adminRole()"><a class="nav-link" routerLink="/database">Database</a></li> -->
+              <li><a class="nav-link" routerLink="/banlist" >Banlist</a></li>
+              <li><a class="nav-link" routerLink="/formats" >Formats</a></li>
+
             </ul>
           </li>
 
+          <li class="nav-item dropdown">
+            <a class="nav-link " routerLink="/players" id="navbarDarkDropdownMenuLink" role="button"  aria-expanded="false">
+              Community
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="nav-link" routerLink="/players">Players </a></li>
+              <li><a class="nav-link" routerLink="/matches" >Matches</a></li>
+              <li><a class="nav-link" routerLink="/articles" >Articles</a></li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link " routerLink="/drafts" id="navbarDarkDropdownMenuLink" role="button"  aria-expanded="false">
+              Drafts
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="nav-link" routerLink="/draft-maker">Draft Creator </a></li>
+              <li><a class="nav-link" routerLink="/draftmode" >Draft Editor</a></li>
+              <li><a class="nav-link" (click)="goToSealedDraft()" routerLink="/packs">Sealed Draft</a></li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a routerLink="/packs" class="nav-link"  id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
+              Shop
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="nav-link" (click)="goToPackOpener()" routerLink="/packs" >Packs</a></li>
+              <li><a class="nav-link"  routerLink="/structure-decks" >Structure Decks</a></li>
 
 
-          <!-- <form class="form-inline my-2 my-lg-0">
-            <button type="button" *ngIf="_authService.adminRole()" class="btn btn-success" routerLinkActive = "active">Admin</button>
-          </form> -->
-          <form class="form-inline my-2 my-lg-0">
-            <button type="button" *ngIf="!_authService.loggedIn()" class="btn btn-success"  routerLink="/login" routerLinkActive = "active">Login</button>
-          </form>
-      
-          <form class="form-inline my-2 my-lg-0">
-            <button type="button" *ngIf="!_authService.loggedIn()" class="btn btn-success"  routerLink="/register" routerLinkActive = "active">Sign Up</button>
-          </form>
-    
-          <form class="form-inline my-2 my-lg-0">
-            <button type="button" (click)= "_authService.logoutUser()" *ngIf="_authService.loggedIn()" class="btn btn-success"   routerLinkActive = "active">Logout</button>
-          </form>
+
+              <li><a class="nav-link" routerLink="/checklist" >Checklist</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a routerLink="/deck-editor" class="nav-link" id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
+              Editor
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="nav-link" routerLink="/deck-editor" >Deck Editor</a></li>
+              <li><a class="nav-link" routerLink="/collection-deck-editor" >Collection Editor</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link" routerLink="/decklists" id="navbarDarkDropdownMenuLink" role="button" aria-expanded="false">
+              Decklists
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="nav-link" routerLink="/decklists" >Public Decklists</a></li>
+              <li><a class="nav-link" routerLink="/duelist-decklists" >Your Decklists</a></li>
+              <li><a class="nav-link" routerLink="/upload-decklist" >Upload Decklist</a></li>
+            </ul>
+          </li>
+
+        <div>
+
+      </div>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <button type="button" *ngIf="_authService.adminRole()" class="btn btn-success"  routerLink="/admin" routerLinkActive = "active">Admin</button>
-      </form>
-      
-      
-    </div>
 
-  </div>
+
+
+
+
+
+        <ul   class="navbar-nav">
+
+            <li *ngIf="username!=undefined" class="nav-item dropdown">
+              <a class="nav-link " routerLink="/players/{{id}}" id="navbarDarkDropdownMenuLink" role="button"  aria-expanded="false">
+                {{_authService.username}}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li class="nav-link">{{_authService.currency}} Dosh™</li>
+                <li><a class="nav-link" routerLink="/settings">Settings</a></li>
+                <li><a class="nav-link" routerLink="/submit-match">Submit Match</a></li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/binders"  >Binders</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/collections" >Collection</a>
+                </li>
+
+              </ul>
+            </li>
+
+
+
+            <form class="d-flex">
+              <button type="button" *ngIf="!_authService.loggedIn()" class="btn btn-success"  routerLink="/login" routerLinkActive = "active">Login</button>
+            </form>
+
+            <form class="d-flex">
+              <button type="button" *ngIf="!_authService.loggedIn()" class="btn btn-success"  routerLink="/register" routerLinkActive = "active">Sign Up</button>
+            </form>
+
+            <form class="d-flex">
+              <button type="button" (click)= "_authService.logoutUser()" *ngIf="_authService.loggedIn()" class="btn btn-success"   routerLinkActive = "active">Logout</button>
+            </form>
+            <form class="d-flex">
+
+            <button type="button" *ngIf="_authService.adminRole()" class="btn btn-success"  routerLink="/admin" routerLinkActive = "active">Admin</button>
+          </form>
+        </ul>
+
+
+
+      </div>
+
+    </div>
   </nav>
+
+  <div class="blank"></div>
+
+
 

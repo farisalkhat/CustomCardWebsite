@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Card, CustomcardsService, Draft, Decklist, DeckListCard, importDecklist, BinderCard, Binder } from 'src/app/customcards.service';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import * as FileSaver from 'file-saver';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -104,11 +104,11 @@ export class CollectionDeckEditorComponent implements OnInit {
 
 
   creator!:string;
-  
+
 
   decklist!:DeckListCard[];
   decklistinfo!:importDecklist;
-  
+
   uploadedMain:any[] =[]
   uploadedSide:any[]=[]
   uploadedExtra:any[]=[]
@@ -143,7 +143,7 @@ export class CollectionDeckEditorComponent implements OnInit {
             this.all_cards = this.cards;
             this.getCardNumbers(this.currentPage);
             this.hideloader();
-    
+
             if(this.customcardsService.getProcessingDeck()==false){
               if(this.customcardsService.getEditDecklist() && this.customcardsService.getEditDeckID()!=-1){
                 forkJoin(
@@ -152,7 +152,7 @@ export class CollectionDeckEditorComponent implements OnInit {
                 ).subscribe(([deckInfo,decklist])=>{
                   this.decklistinfo = deckInfo;
                   this.decklist = decklist;
-        
+
                   for(let card in decklist){
                     if(decklist[card].deck=="maindeck" || decklist[card].deck=="extradeck"){
                       this.addCard(decklist[card])
@@ -161,22 +161,22 @@ export class CollectionDeckEditorComponent implements OnInit {
                       this.addSideCard(decklist[card])
                     }
                   }
-        
-                  
+
+
                   this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDeckName());
-        
-        
-        
-        
-                  
-            
-          
-          
-          
+
+
+
+
+
+
+
+
+
                 })
                 this.customcardsService.setProcessingDeck(true);
               }
-        
+
             }
             else{
               this.customcardsService.setProcessingDeck(false);
@@ -184,7 +184,7 @@ export class CollectionDeckEditorComponent implements OnInit {
               this.customcardsService.setEditDeckID(-1);
               this.customcardsService.setEditDeckName('')
             }
-    
+
             if(this.uploadedMain.length>0 || this.uploadedSide.length>0 || this.uploadedExtra.length>0){
               console.log(this.uploadedMain);
               for(let card in this.uploadedMain){
@@ -196,14 +196,14 @@ export class CollectionDeckEditorComponent implements OnInit {
               for(let card in this.uploadedExtra){
                 this.addCard(this.uploadedExtra[card])
               }
-        
+
             }
-    
-    
-    
-    
+
+
+
+
           }
-        ) 
+        )
       },
       err => {
         console.log(err)
@@ -212,18 +212,18 @@ export class CollectionDeckEditorComponent implements OnInit {
       }
     )
 
-   
-
-
-
-    
 
 
 
 
 
 
-    
+
+
+
+
+
+
 
 
 
@@ -237,12 +237,12 @@ export class CollectionDeckEditorComponent implements OnInit {
       console.log(div)
     }
     console.log(this.filters)
-    this.cards = [] 
+    this.cards = []
     this.attribute ='';
     this.stType=''
     this.mType='';
     this.monster='None';
-    
+
     if(this.filters.levelhigh==null){this.filters.levelhigh=''}
     if(this.filters.levellow==null){this.filters.levellow=''}
     if(this.filters.atklow==null){this.filters.atklow=''}
@@ -250,9 +250,9 @@ export class CollectionDeckEditorComponent implements OnInit {
     if(this.filters.deflow==null){this.filters.deflow=''}
     if(this.filters.defhigh==null){this.filters.defhigh=''}
 
-    
 
-                              
+
+
     if(this.filters['initial']==''){
         this.filters['cardtype']=='';
         this.filters['defhigh']=='';
@@ -264,17 +264,17 @@ export class CollectionDeckEditorComponent implements OnInit {
         this.filters['atklow']=='';
       }
       if(this.filters['initial']!='Monster'){
-        if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' || 
-        this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' || 
+        if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' ||
+        this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' ||
         this.filters['sort']=='c.DEF ASC' || this.filters['sort']=='c.DEF DESC'){
           this.filters['sort'] = 'c.name ASC';
         }
-        
 
 
 
 
-      
+
+
       }
 
       if(this.filters['initial']=='Monster'){
@@ -312,7 +312,7 @@ export class CollectionDeckEditorComponent implements OnInit {
       this.produceSearchRes()
     // this.customcardsService.getFilteredCards(this.filters).subscribe(
     //   res=>{
-        
+
     //     console.log(res)
     //     this.cards = res;
     //     this.currentPage = 1
@@ -342,7 +342,7 @@ export class CollectionDeckEditorComponent implements OnInit {
     //   'defhigh':'',
     //   'tag':'',
     //   'sort':'c.name ASC',
-  
+
     // }
     let search_res= this.all_cards;
     if(this.filters['name']!=''){
@@ -371,7 +371,7 @@ export class CollectionDeckEditorComponent implements OnInit {
       search_res=search_res.filter((card)=>card.type!=undefined)
       search_res=search_res.filter((card)=>card.type.toLowerCase().includes(this.filters['monstertype'].toLowerCase()))
     }
-    
+
     if(this.filters['levellow']!=''){
       if(this.filters['levelhigh']!=''){
         let levellow = Number(this.filters['levellow'])
@@ -387,7 +387,7 @@ export class CollectionDeckEditorComponent implements OnInit {
         let levelhigh = Number(this.filters['levelhigh'])
         search_res=search_res.filter((card)=>card.level <=levelhigh)
     }
-  
+
 
     if(this.filters['atklow']!=''){
       if(this.filters['atkhigh']!=''){
@@ -478,9 +478,9 @@ export class CollectionDeckEditorComponent implements OnInit {
         default:{
           break;
         }
-          
-        
-        
+
+
+
 
       }
 
@@ -527,7 +527,7 @@ export class CollectionDeckEditorComponent implements OnInit {
       console.log(div)
     }
 
-  } 
+  }
 
 
 
@@ -545,9 +545,9 @@ goToLink(url: number){
   }
   else{
      new_url = this._router.serializeUrl(
-    this._router.createUrlTree(['/CustomCardWebsite/cards/']));
+    this._router.createUrlTree(['/cards/']));
   }
-  
+
 
 
   window.open(new_url +'/'+String(url), '_blank');
@@ -561,8 +561,8 @@ mouseHovering(card:BinderCard,e:MouseEvent) {
 console.log(e.clientX);
 console.log(e.clientY);
 
-  this.isHovering = true; 
-  this.hoveredCard = card 
+  this.isHovering = true;
+  this.hoveredCard = card
 
   if(e.clientX>=900){
     this.leftPosition = e.clientX-200;
@@ -571,18 +571,18 @@ console.log(e.clientY);
   else{
     this.leftPosition = e.clientX+2;
   }
-  
+
   this.rightPosition =e.clientY-170;
-  
-  
+
+
   this.getHoveredCardDetails()
-  
+
 }
 mouseLeft() {
     this.isHovering = false;
 }
 getHoveredCardDetails(){
-  
+
   this.hoverattribute=''
   this.hoverstType =''
   this.hovermType= ''
@@ -590,7 +590,7 @@ getHoveredCardDetails(){
   if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
     this.hovermonster='False';
     this.hoverattribute="assets/cardstats/TRAP.png";
-    
+
     switch (this.hoveredCard?.cardtype) {
       case "Normal Trap":
           this.hoverstType = "assets/cardstats/Normal.png";
@@ -611,7 +611,7 @@ getHoveredCardDetails(){
   this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
     this.hovermonster='False';
     this.hoverattribute="assets/cardstats/SPELL.png";
-    
+
     switch (this.hoveredCard?.cardtype) {
       case "Normal Spell":
           this.hoverstType = "assets/cardstats/Normal.png";
@@ -638,7 +638,7 @@ getHoveredCardDetails(){
   }
 
 
-  
+
   else{
     this.hovermonster='True';
     switch(this.hoveredCard?.attribute){
@@ -666,8 +666,8 @@ getHoveredCardDetails(){
       default:
           this.hoverattribute = "assets/cardstats/EARTH.png";
           break;
-      
-    
+
+
     }
 
     switch (this.hoveredCard?.type) {
@@ -740,7 +740,7 @@ getHoveredCardDetails(){
       case "Zombie":
           this.hovermType = "assets/monstertypes/Zombie.png";
           break;
-      
+
       default:
           this.hovermType = "assets/monstertypes/Zombie.png";
           break;
@@ -750,7 +750,7 @@ getHoveredCardDetails(){
 
 
   }
-  
+
 }
 
 
@@ -764,7 +764,7 @@ getHoveredCardDetails(){
     if(this.card?.cardtype=="Normal Trap" || this.card?.cardtype=="Counter Trap" || this.card?.cardtype=="Continuous Trap"){
       this.monster='False';
       this.attribute="assets/cardstats/TRAP.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Trap":
             this.stType = "assets/cardstats/Normal.png";
@@ -785,7 +785,7 @@ getHoveredCardDetails(){
     this.card?.cardtype=="Ritual Spell" || this.card?.cardtype=="Field Spell" || this.card?.cardtype=="Equip Spell" ){
       this.monster='False';
       this.attribute="assets/cardstats/SPELL.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Spell":
             this.stType = "assets/cardstats/Normal.png";
@@ -812,7 +812,7 @@ getHoveredCardDetails(){
     }
 
 
-    
+
     else{
       this.monster='True';
       switch(this.card?.attribute){
@@ -840,8 +840,8 @@ getHoveredCardDetails(){
         default:
             this.attribute = "assets/cardstats/EARTH.png";
             break;
-        
-      
+
+
       }
 
       switch (this.card?.type) {
@@ -914,7 +914,7 @@ getHoveredCardDetails(){
         case "Zombie":
             this.mType = "assets/monstertypes/Zombie.png";
             break;
-        
+
         default:
             this.mType = "assets/monstertypes/Zombie.png";
             break;
@@ -924,9 +924,9 @@ getHoveredCardDetails(){
 
 
     }
-    
+
 }
-  
+
   addCard(card:BinderCard){
     if(card!=undefined){
       console.log(card)
@@ -940,7 +940,7 @@ getHoveredCardDetails(){
             duplicates+=1;
             if(duplicates==3){
               return;
-            } 
+            }
           }
         }
         this.extraDeck.push(card)
@@ -954,7 +954,7 @@ getHoveredCardDetails(){
             duplicates+=1;
             if(duplicates==3){
               return;
-            } 
+            }
           }
         }
         if(card.copies==0){
@@ -962,7 +962,7 @@ getHoveredCardDetails(){
         }
         card.copies--;
         this.mainDeck.push(card);
-        
+
         if(card.cardtype.includes("Spell")){
           this.spellCounter++;
         }
@@ -972,11 +972,11 @@ getHoveredCardDetails(){
         if(card.cardtype.includes("Trap")){
           this.trapCounter++;
         }
-        
+
       }
 
     }
-    
+
   }
 
 
@@ -990,7 +990,7 @@ getHoveredCardDetails(){
             duplicates+=1;
             if(duplicates==3){
               return;
-            } 
+            }
           }
         }
       }
@@ -1002,7 +1002,7 @@ getHoveredCardDetails(){
             duplicates+=1;
             if(duplicates==3){
               return;
-            } 
+            }
           }
         }
         for(const cardFrom of this.sideDeck){
@@ -1010,7 +1010,7 @@ getHoveredCardDetails(){
             duplicates+=1;
             if(duplicates==3){
               return;
-            } 
+            }
           }
         }
         if(card.copies==0){
@@ -1019,7 +1019,7 @@ getHoveredCardDetails(){
         card.copies--;
         this.sideDeck.push(card);
         this.sideCounter++;
-        
+
       }
 
     }
@@ -1028,14 +1028,14 @@ getHoveredCardDetails(){
   selectDraftCard(card:BinderCard){
     // this.draftCard = this.currentDraft.find(x => x.id == id);
     this.draftCard = card;
-    
+
   }
 
 
 
 
   rightAddDraftCard($event: { preventDefault: () => void; },card:BinderCard){
-    
+
     $event.preventDefault();
     this.card = card;
 
@@ -1045,7 +1045,7 @@ getHoveredCardDetails(){
     else{
       this.addCard(this.card);
     }
-    
+
 
   }
   leftAddDraftCard(){
@@ -1109,12 +1109,12 @@ getHoveredCardDetails(){
 
       }
 
-      
+
 
 
       // var draftCardID: number = +this.draftCard.id;
       // this.currentDraft.splice(draftCardID,1);
-      
+
     }
   }
 
@@ -1133,7 +1133,7 @@ getHoveredCardDetails(){
     decklist.desc = this.deckdescription;
 
     this.xml_file = '<?xml version="1.0" encoding="utf-8" ?> <deck name=".TriType"><main>';
- 
+
     const idList1:string[] = []
     const idList2:string[] = []
     const idList3:string[] = []
@@ -1144,13 +1144,13 @@ getHoveredCardDetails(){
         this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
         idList1.push(String(card.id))
     }
-    this.xml_file+="</main><side>"   
+    this.xml_file+="</main><side>"
     for(const card of this.sideDeck){
      this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
      idList2.push(String(card.id))
     }
-    this.xml_file+="</side><extra>"   
-    
+    this.xml_file+="</side><extra>"
+
     for(const card of this.extraDeck){
         this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
         idList3.push(String(card.id))
@@ -1164,7 +1164,7 @@ getHoveredCardDetails(){
     decklist['decklist'] = this.xml_file;
     decklist['creator']=this.creator;
     decklist['creatorid']=Number(this.creatorid);
-    
+
 
     if(this.decklistinfo){
       decklist['decklistid'] = this.decklistinfo.id
@@ -1181,7 +1181,7 @@ getHoveredCardDetails(){
           this.submitfail = false;
         this._router.navigate(['/decklists']);
         },
-          
+
         err=>{console.log(err)}
       )
     }
@@ -1193,46 +1193,46 @@ getHoveredCardDetails(){
           this.submitfail = false;
           this._router.navigate(['/decklists']);
         },
-          
+
         err=>{console.log(err)}
       )
-      
+
 
     }
 
-  
+
 
   }
 
   exportList(){
 
     this.xml_file = '<?xml version="1.0" encoding="utf-8" ?>\n<deck name=".TriType">\n <main>\n';
- 
+
    for(const card of this.mainDeck){
        this.xml_file+='  <card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
    }
-   this.xml_file+=" </main>\n <side>\n"   
+   this.xml_file+=" </main>\n <side>\n"
    for(const card of this.sideDeck){
     this.xml_file+='  <card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
    }
-   this.xml_file+=" </side>\n <extra>\n"   
-   
+   this.xml_file+=" </side>\n <extra>\n"
+
    for(const card of this.extraDeck){
        this.xml_file+='  <card id="' + String(card.id) +'" passcode="">'+card.name+'</card>\n'
    }
    this.xml_file+=" </extra>\n</deck>\n"
    console.log(this.xml_file);
- 
+
    let blob = new Blob([this.xml_file], {type: "text/xml"});
- 
+
    FileSaver.saveAs(blob, "cardlist.xml");
- 
- 
-   
-   
- 
- 
- 
+
+
+
+
+
+
+
    }
 
 }

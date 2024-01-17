@@ -1,12 +1,54 @@
 .card-img-top {
-    width:300px;
-    height:150px;
-    object-fit: cover;
-    
-  }
+  width: 300px;
+  height: 150px;
+  object-fit: cover;
+}
 
-  .card{
-    margin:5px;
-    padding: auto;
-    cursor:pointer;
-  }
+.article-card {
+  margin: 5px;
+  padding: auto;
+  cursor: pointer;
+  position: relative;
+  border-color: black;
+  border-radius: 0%;
+}
+
+.article-label {
+  width: 100px;
+  height: 25px;
+  background-color: purple;
+  position: absolute;
+  top: -10px;
+  left: -20px;
+}
+
+.article-label-shadow {
+  color: black;
+  border: 1px solid;
+  box-shadow: 3px 4px;
+}
+
+.article-label-text {
+  color: white;
+  text-align: center;
+}
+
+.article-info-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2px;
+  margin: 0;
+}
+.article-card-text {
+  font-color: white;
+  color: #ededed;
+  font-family: Roboto;
+  font-size: 14px;
+}
+
+h5 {
+  color: #ededed;
+}

@@ -1,132 +1,120 @@
 .navbar-default {
-    background-color:#212529;
-    background-image: none;
-    background-repeat: no-repeat;
-   }
-nav{
-height:75px;
+  background-color: #212529;
+  background-image: none;
+  background-repeat: no-repeat;
 }
-.navbar-brand{
-    padding-left:10px;
-    margin-right: -3rem !important;
+nav {
+  height: 75px;
 }
 
 body {
-    background: #f2f2f2  !important;
-  }
-
-
-.container{
-    margin-top:10px;
-}
-.extra-space{
-    height:200px;
+  background: white !important;
 }
 
-body{
-    padding:0px;
-    margin:0px;
-    
+.container {
+  margin-top: 10px;
+}
+.extra-space {
+  height: 200px;
 }
 
-label{
-    color:#1f1a1f;;
+body {
+  padding: 0px;
+  margin: 0px;
 }
 
-p{
-    color:#1f1a1f;;
-}
-ul{
-    
-        color:#1f1a1f;;
-        
-    
+label {
+  color: #1f1a1f;
 }
 
-.wretched{
-    width:50%;
+p {
+  color: #1f1a1f;
 }
-h2{
-    font-family: 'Oswald', sans-serif;
-    color:#1f1a1f;
-}
-h3{
-    font-family: 'Oswald', sans-serif;
-    color:#1f1a1f;
-}
-h4{
-    font-family: 'Oswald', sans-serif;
-    color:#1f1a1f;
+ul {
+  color: #1f1a1f;
 }
 
-label{
-    font-family: 'Oswald', sans-serif;
-    color:#1f1a1f;
+.wretched {
+  width: 50%;
+}
+h2 {
+  font-family: "Oswald", sans-serif;
+  color: #1f1a1f;
+}
+h3 {
+  font-family: "Oswald", sans-serif;
+  color: #1f1a1f;
+}
+h4 {
+  font-family: "Oswald", sans-serif;
+  color: #1f1a1f;
 }
 
-.button-danger{
-    font-family: 'Oswald', sans-serif;
-    color:white;
-    font-size: x-large;
-}
-.btn-success{
-    font-family: 'Oswald', sans-serif;
-    color:white;
-    font-size: x-large;
+label {
+  font-family: "Oswald", sans-serif;
+  color: #1f1a1f;
 }
 
-button{
-    padding:5px;
-    margin:3px;
-    font-size:1.5rem;
-    font-family: 'Oswald', sans-serif;
+.button-danger {
+  font-family: "Oswald", sans-serif;
+  color: white;
+  font-size: x-large;
+}
+.btn-success {
+  font-family: "Oswald", sans-serif;
+  color: white;
 }
 
-nav{
-    font-family: 'Oswald', sans-serif;
-    font-size: x-large;
+button {
+  padding: 5px;
+  margin: 3px;
+  font-size: 1.5rem;
+  font-family: "Oswald", sans-serif;
 }
 
-h1{
-    font-family: 'Oswald', sans-serif;
-    font-size: x-large;
-}
-.hovering{
-    background-color:rgba(5, 163, 90, 0.858);
-    color:white;
-    width:350px;
-    position: fixed;
-    padding:2px;
-    pointer-events: none;
-    z-index: 100000;
-    
+nav {
+  font-family: "Oswald", sans-serif;
+  font-size: x-large;
 }
 
-.star{
-    width:34px;
-    height:34px;
+h1 {
+  font-family: "Oswald", sans-serif;
+  font-size: x-large;
 }
-.attribute{
-    width:34px;
-    height:34px;
-}
-.type{
-    width:34px;
-    height:34px;
+.hovering {
+  background-color: rgba(5, 163, 90, 0.858);
+  color: white;
+  width: 350px;
+  position: fixed;
+  padding: 2px;
+  pointer-events: none;
+  z-index: 100000;
 }
 
-.addcard{
-    width:100px;
-    height:40px;
-    margin-left:5px;
+.star {
+  width: 34px;
+  height: 34px;
 }
-a{
-    
-    text-decoration: none !important;
+.attribute {
+  width: 34px;
+  height: 34px;
 }
-a:hover{
-    color:green !important;
+.type {
+  width: 34px;
+  height: 34px;
 }
-.table-dark{
-    background-color: blue !important;
+
+.addcard {
+  width: 100px;
+  height: 40px;
+  margin-left: 5px;
+}
+a {
+  text-decoration: none !important;
+}
+a:hover {
+  color: green !important;
+}
+.table-dark {
+  background-color: blue !important;
 }
