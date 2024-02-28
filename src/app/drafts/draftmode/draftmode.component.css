@@ -20,7 +20,7 @@ button{
   margin-top:20px;
 }
 a{
-  color:white;
+  color:#e3e3e3;
 }
 
 .card:hover{
@@ -44,12 +44,12 @@ a{
 }
 
 .card-title{
-  color:white;
+  color:#e3e3e3;
   
 }
 
 .card-img-overlay{
-  color:white;
+  color:#e3e3e3;
 }
 
 .overlay-div{

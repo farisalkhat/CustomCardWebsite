@@ -62,6 +62,7 @@ import { StructureDeckEditComponent } from './structure-decks/structure-deck-edi
 import { FormatsComponent } from './formats/formats.component';
 import { AboutsiteComponent } from './aboutsite/aboutsite.component';
 import { DatePipe } from '@angular/common';
+import { HoverCardComponent } from './hover-card/hover-card.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +120,8 @@ import { DatePipe } from '@angular/common';
     StructureDeckMakerComponent,
     StructureDeckEditComponent,
     FormatsComponent,
-    AboutsiteComponent
+    AboutsiteComponent,
+    HoverCardComponent
   ],
   imports: [
     HttpClientModule,

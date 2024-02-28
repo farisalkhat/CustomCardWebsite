@@ -40,8 +40,9 @@
       </div>
 
       <div class="padup NgxEditor__Wrapper">
-        <ngx-editor-menu  [toolbar]="toolbar" [editor]="editor"> </ngx-editor-menu>
+        <ngx-editor-menu  [toolbar]="toolbar" [editor]="editor" > </ngx-editor-menu>
         <ngx-editor
+        style="color:black !important"
         formControlName="editorContent"
           [editor]="editor"
           [ngModel]="html"

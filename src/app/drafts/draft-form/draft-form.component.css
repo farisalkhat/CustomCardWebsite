@@ -40,7 +40,7 @@
   
   .flip-card-back {
     background-color: dodgerblue;
-    color: white;
+    color: #e3e3e3;
     transform: rotateY(180deg);
   }
   img{

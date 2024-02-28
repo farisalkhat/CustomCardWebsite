@@ -7,17 +7,17 @@
 footer{
     margin-top:100px;
     font-family: 'Oswald', sans-serif;
-    color:white;
+    color:#e3e3e3;
     font-size: 20px;
 }
 
 p{
     font-family: 'Oswald', sans-serif;
-    color:white;
+    color:#e3e3e3;
 }
 
 .bottom{
-    background-color: #1f1a1f;
+    background-color: #e3e3e3;
   overflow: hidden;
   bottom: 0;
   width: 100%;

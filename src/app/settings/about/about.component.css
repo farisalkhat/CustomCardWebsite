@@ -66,7 +66,7 @@ p{
 }
 .hovering{
     background-color:rgba(5, 163, 90, 0.758);
-    color:white;
+    color:#e3e3e3;
     width:300px;
     position: fixed;
     padding:2px;

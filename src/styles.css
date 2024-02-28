@@ -1,5 +1,7 @@
 .navbar-default {
-  background-color: #212529;
+  background-color: 
+  #222222
+  ;
   background-image: none;
   background-repeat: no-repeat;
 }
@@ -8,7 +10,7 @@ nav {
 }
 
 body {
-  background: white !important;
+  background: #16181C !important;
 }
 
 .container {
@@ -22,48 +24,91 @@ body {
   padding: 0px;
   margin: 0px;
 }
-
-label {
-  color: #1f1a1f;
-}
-
-p {
-  color: #1f1a1f;
-}
-ul {
-  color: #1f1a1f;
-}
-
 .wretched {
   width: 50%;
 }
+
+
+label {
+  color: #e3e3e3;
+}
+
+ngx-editor p{
+  color:black;
+}
+
+ngx-editor ul {
+  color:black;
+}
+
+ngx-editor h1 {
+  font-family: "Oswald", sans-serif;
+  color:black;
+}
+ngx-editor h2 {
+  font-family: "Oswald", sans-serif;
+  color:black;
+}
+ngx-editor h3 {
+  font-family: "Oswald", sans-serif;
+  color:black;
+}
+ngx-editor h4 {
+  font-family: "Oswald", sans-serif;
+  color:black;
+}
+
+ngx-editor label {
+  font-family: "Oswald", sans-serif;
+  color:black;
+}
+
+
+
+
+
+p {
+  color: #e3e3e3;
+}
+ul {
+  color: #e3e3e3;
+}
+
+
 h2 {
   font-family: "Oswald", sans-serif;
-  color: #1f1a1f;
+  color: #e3e3e3;
 }
 h3 {
   font-family: "Oswald", sans-serif;
-  color: #1f1a1f;
+  color: #e3e3e3;
 }
 h4 {
   font-family: "Oswald", sans-serif;
-  color: #1f1a1f;
+  color: #e3e3e3;
 }
 
 label {
   font-family: "Oswald", sans-serif;
-  color: #1f1a1f;
+  color: #e3e3e3;
 }
 
 .button-danger {
   font-family: "Oswald", sans-serif;
-  color: white;
+  color: #e3e3e3;
   font-size: x-large;
 }
 .btn-success {
   font-family: "Oswald", sans-serif;
-  color: white;
+  color: #e3e3e3;
+  background-color: #16181C !important;
+  border-color: #198754;
+  /* background-color: #1f1a1f !important; */
 }
+
+
+
+
 
 button {
   padding: 5px;
@@ -80,10 +125,11 @@ nav {
 h1 {
   font-family: "Oswald", sans-serif;
   font-size: x-large;
+  color: #e3e3e3 ;
 }
 .hovering {
   background-color: rgba(5, 163, 90, 0.858);
-  color: white;
+  color: #e3e3e3;
   width: 350px;
   position: fixed;
   padding: 2px;
@@ -111,10 +157,19 @@ h1 {
 }
 a {
   text-decoration: none !important;
+  color:#198754 !important;
 }
 a:hover {
-  color: green !important;
+  color: #055734 !important;
 }
 .table-dark {
   background-color: blue !important;
 }
+
+button:hover{
+  color: #055734 !important;
+  transition: 0.3s;
+}
+
+
+

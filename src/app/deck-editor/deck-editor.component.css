@@ -1,76 +1,96 @@
-.smallcard{
-    width:100px;
+.smallcard {
+    width: 100px;
 }
-button{
-    padding:0;
-    margin:0;
+
+button {
+    padding: 0;
+    margin: 0;
 }
-.btn-success{
-    margin:3px;
+
+.btn-success {
+    margin: 3px;
 }
-p{
-    padding:0;
-    margin:0;
+
+p {
+    padding: 0;
+    margin: 0;
     color: black;
 }
 
-.small{
-    width:100px;
-} 
+.littlenumber {
+    width: 20px;
+    background-color: rgba(0, 0, 0, 0.858);
+    color: #e3e3e3;
+    z-index: 1000;
+}
+
+.relative {
+    position: relative;
+}
+
+.small {
+    width: 100px;
+}
 
 
-.bigcard{
-    width:316px;
-    padding-top:5px;
+.bigcard {
+    width: 316px;
+    padding-top: 5px;
     cursor: pointer;
 }
-.cardeffect{
-    padding-top:10px;
-    padding-left:20px;
+
+.cardeffect {
+    padding-top: 10px;
+    padding-left: 20px;
 }
-.col{
-    width:320px;
+
+.col {
+    width: 320px;
     flex: .6 1 0%;
 }
-.fixed{
+
+.fixed {
     position: fixed;
-    left:1200px;
-}
-.container-fluid{
-    padding-top:50px;
+    left: 1200px;
 }
 
-.number{
-    width:65px;
+.container-fluid {
+    padding-top: 50px;
 }
 
-.star{
-    width:34px;
-    height:34px;
-}
-.attribute{
-    width:34px;
-    height:34px;
-}
-.type{
-    width:34px;
-    height:34px;
+.number {
+    width: 65px;
 }
 
-.addcard{
-    width:100px;
-    height:40px;
-    margin-left:5px;
+.star {
+    width: 34px;
+    height: 34px;
 }
 
-.hovering{
-    background-color:rgba(5, 163, 90, 0.758);
-    color:white;
-    width:300px;
+.attribute {
+    width: 34px;
+    height: 34px;
+}
+
+.type {
+    width: 34px;
+    height: 34px;
+}
+
+.addcard {
+    width: 100px;
+    height: 40px;
+    margin-left: 5px;
+}
+
+.hovering {
+    background-color: rgba(5, 163, 90, 0.758);
+    color: #e3e3e3;
+    width: 300px;
     position: fixed;
-    padding:2px;
+    padding: 2px;
     pointer-events: none;
-    
+
 }
 
 /* .hovering:hover{

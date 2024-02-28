@@ -771,7 +771,7 @@ export class DraftMakerComponent implements OnInit {
       const finaldata = {} as Draft;
       finaldata['ownerid']=this.id;
       if(this.draftImage!=undefined){
-        finaldata['draftimage']= this.draftImage['drive_id'];
+        finaldata['draftimage']= this.draftImage['id'];
       }
       else{
         if(this.customcardsService.getEditDraft()){
@@ -780,7 +780,7 @@ export class DraftMakerComponent implements OnInit {
         else{
           const randID = this.randomIntFromInterval(0,this.currentDraft.length-1)
           let newCard = this.currentDraft[randID]
-          finaldata['draftimage'] = newCard['drive_id']
+          finaldata['draftimage'] = newCard['id']
         }
 
       }

@@ -32,7 +32,7 @@ button {
   margin-top: 20px;
 }
 a {
-  color: white;
+  color: #e3e3e3;
 }
 
 .small-card:hover {
@@ -46,6 +46,18 @@ a {
 .newbie .card .card-text {
   text-shadow: 3px 3px 0px black !important;
   font-size: 2em;
+  color: white !important;
+}
+.newbie p {
+  color: white !important;
+}
+.newbie h1 {
+  color: white !important;
+}
+.newbie-outline{
+
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+
 }
 h1 {
   font-size: 3.5em;
@@ -53,15 +65,16 @@ h1 {
   font-weight: 600;
 }
 .newbie {
-  background-color: #212529;
+  background-color:   #075433;
   background-image: url("/assets/images/Prisman-Render.png");
   background-repeat: no-repeat;
   background-position: right;
-  height: 350px;
+  height: 250px;
   margin-top: 5px;
   margin-bottom: 5px;
   background-size: 250px;
   border-radius: 0.85rem !important;
+  font-color: black;
 }
 
 .newbie-crop {
@@ -70,7 +83,7 @@ h1 {
   object-fit: cover;
 }
 .newbie-crop img {
-  width: 133%;
+  width: 1%;
   margin: -170px 6000px 0px -52px;
   background-color: #000;
 }
@@ -85,7 +98,7 @@ h1 {
   height: 300px;
   position: absolute;
   background-color: #000;
-  opacity: 0.4;
+  opacity: 0.4; 
   transition: 0.3s;
 }
 .newbie-overlay-div:hover {
@@ -127,7 +140,7 @@ h1 {
   margin: 5px 0 5px 0;
 }
 .card-title {
-  color: white;
+  color: #e3e3e3;
 }
 .carousel-item {
   cursor: pointer;
@@ -147,7 +160,7 @@ h1 {
   padding: 0;
 }
 p {
-  color: white;
+  color: #e3e3e3;
 }
 
 .overlay-div {
@@ -212,7 +225,7 @@ p {
 }
 
 .article-label-text {
-  color: white;
+  color: #e3e3e3;
   text-align: center;
 }
 
@@ -226,7 +239,6 @@ p {
   margin: 0;
 }
 .article-card-text {
-  font-color: white;
   color: #ededed;
   font-family: Roboto;
   font-size: 14px;
@@ -234,4 +246,7 @@ p {
 
 h5 {
   color: #ededed;
+}
+h4{
+  color:#1f1f1f;
 }

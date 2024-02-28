@@ -1,0 +1,36 @@
+p{
+    font-size:12px;
+}
+
+.smallcard {
+    width: 225px;
+}
+
+.hovering{
+    width:600px;
+    background-color: #151D1E;
+    padding:10px;
+}
+.monster-name{
+    font-size:16px;
+}
+
+span{
+    align-items: right;
+    align-content: right;
+    float:right;
+}
+.star {
+    width: 25px;
+    height: 25px;
+}
+
+.attribute {
+    width: 25px;
+    height: 25px;
+}
+
+.type {
+    width: 25px;
+    height: 25px;
+}

@@ -1,4 +1,4 @@
-<div [style.left.px]="leftPosition" [style.top.px]="rightPosition" class="hovering" *ngIf="isHovering===true">
+<!-- <div [style.left.px]="leftPosition" [style.top.px]="rightPosition" class="hovering" *ngIf="isHovering===true">
     <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
         <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
     <b><p *ngIf="hovermonster=='True'">
@@ -24,9 +24,10 @@
         <p>ID: {{hoveredCard?.id}}</p>
     </b>
 
-</div>
+</div> -->
 
 
+<app-hover-card></app-hover-card>
 
 
 
@@ -36,33 +37,33 @@
 
     <div class="row">
         <div class="col-auto">
-        <label for="Name">Deck Name</label>
-                <input id ="drafTitle"  class="form-control" type="text" [(ngModel)] = "deckname">
+            <label for="Name">Deck Name</label>
+            <input id="drafTitle" class="form-control" type="text" [(ngModel)]="deckname">
         </div>
 
         <div class="col-auto">
             <label for="Desc">Deck Description</label>
-            <input class="form-control" type="text" [(ngModel)] = "deckdescription" >
+            <input class="form-control" type="text" [(ngModel)]="deckdescription">
         </div>
 
     </div>
 
 
     <div class="row" (keydown.enter)="submitSearch()">
-            <div class="col-auto">
-                <label for="Name">Name</label>
-                <input class="form-control" type="text" [(ngModel)] = "filters.name">
-            </div>
-            <div class="col-auto">
-                <label for="Desc">Desc</label>
-                <input class="form-control" type="text" [(ngModel)] = "filters.desc" >
-            </div>
-            <div class="col-auto">
-                <label for="Creator">Creator</label>
-                <input class="form-control" type="text" [(ngModel)] = "filters.creator" >
-            </div>
+        <div class="col-auto">
+            <label for="Name">Name</label>
+            <input class="form-control" type="text" [(ngModel)]="filters.name">
+        </div>
+        <div class="col-auto">
+            <label for="Desc">Desc</label>
+            <input class="form-control" type="text" [(ngModel)]="filters.desc">
+        </div>
+        <div class="col-auto">
+            <label for="Creator">Creator</label>
+            <input class="form-control" type="text" [(ngModel)]="filters.creator">
+        </div>
 
-            <!-- <div class="col-auto">
+        <!-- <div class="col-auto">
                 <label for="attribute">Tag</label>
                 <select class="form-control"  id="attribute" [(ngModel)] = "filters.tag">
                     <option value =""></option>
@@ -108,76 +109,77 @@
             </div> -->
 
 
-            <div class="col-auto">
-                <label for="cardtype">Card</label>
-                <select class="form-control"   id="initial" [(ngModel)] = "filters.initial" >
-                    <option value = "">   </option>
-                    <option value = "Monster">Monster</option>
-                    <option value ="Spell">Spell</option>
-                    <option value ="Trap">Trap</option>
-                </select>
-            </div>
+        <div class="col-auto">
+            <label for="cardtype">Card</label>
+            <select class="form-control" id="initial" [(ngModel)]="filters.initial">
+                <option value=""> </option>
+                <option value="Monster">Monster</option>
+                <option value="Spell">Spell</option>
+                <option value="Trap">Trap</option>
+            </select>
+        </div>
 
-            <div class="col-auto">
-                <label for="cardtype">Card Type 2</label>
-                <select class="form-control"  [disabled]="filters.initial==''" id="cardtype" [(ngModel)] = "filters.cardtype" >
-                    <option *ngIf = 'filters.initial=="Monster"' value ="">  </option>
-                    <option *ngIf = 'filters.initial=="Monster"' value ="Effect Monster">Effect</option>
-                    <option *ngIf = 'filters.initial=="Monster"' value ="Flip Monster">Flip</option>
-                    <option *ngIf = 'filters.initial=="Monster"' value ="Tuner Monster">Tuner</option>
-                    <option *ngIf = 'filters.initial=="Monster"' value ="Gemini Monster">Gemini</option>
-                    <option *ngIf = 'filters.initial=="Monster"' value ="Spirit Monster">Spirit</option>
-                    <option *ngIf = 'filters.initial=="Monster"' value ="Union Monster">Union</option>
-                    <option *ngIf = 'filters.initial=="Monster"' value ="Ritual Monster">Ritual</option>
-                    <option *ngIf = 'filters.initial=="Monster"' value ="Fusion Monster">Fusion</option>
-                    <option *ngIf = 'filters.initial=="Monster"' value ="Synchro Monster">Synchro</option>
-                    <option *ngIf = 'filters.initial=="Monster"' value ="Xyz Monster">Xyz</option>
-
-
-
-                    <option *ngIf = 'filters.initial=="Spell"' value ="">  </option>
-                    <option *ngIf = 'filters.initial=="Spell"' value = "Normal Spell">Normal</option>
-                    <option *ngIf = 'filters.initial=="Spell"' value ="Continuous Spell">Continuous</option>
-                    <option *ngIf = 'filters.initial=="Spell"' value ="Quick Spell">Quick</option>
-                    <option *ngIf = 'filters.initial=="Spell"' value ="Ritual Spell">Ritual</option>
-                    <option *ngIf = 'filters.initial=="Spell"' value ="Equip Spell">Equip</option>
-                    <option *ngIf = 'filters.initial=="Spell"' value ="Field Spell">Field</option>
-
-                    <option *ngIf = 'filters.initial=="Trap"' value ="">  </option>
-                    <option *ngIf = 'filters.initial=="Trap"' value = "Normal Trap">Normal</option>
-                    <option *ngIf = 'filters.initial=="Trap"' value ="Continuous Trap">Continuous</option>
-                    <option *ngIf = 'filters.initial=="Trap"' value ="Counter Trap">Counter</option>
-                </select>
-            </div>
+        <div class="col-auto">
+            <label for="cardtype">Card Type 2</label>
+            <select class="form-control" [disabled]="filters.initial==''" id="cardtype" [(ngModel)]="filters.cardtype">
+                <option *ngIf='filters.initial=="Monster"' value=""> </option>
+                <option *ngIf='filters.initial=="Monster"' value="Effect Monster">Effect</option>
+                <option *ngIf='filters.initial=="Monster"' value="Flip Monster">Flip</option>
+                <option *ngIf='filters.initial=="Monster"' value="Tuner Monster">Tuner</option>
+                <option *ngIf='filters.initial=="Monster"' value="Gemini Monster">Gemini</option>
+                <option *ngIf='filters.initial=="Monster"' value="Spirit Monster">Spirit</option>
+                <option *ngIf='filters.initial=="Monster"' value="Union Monster">Union</option>
+                <option *ngIf='filters.initial=="Monster"' value="Ritual Monster">Ritual</option>
+                <option *ngIf='filters.initial=="Monster"' value="Fusion Monster">Fusion</option>
+                <option *ngIf='filters.initial=="Monster"' value="Synchro Monster">Synchro</option>
+                <option *ngIf='filters.initial=="Monster"' value="Xyz Monster">Xyz</option>
 
 
-            <div class="col-auto">
-                <label for="gamemode">Monster Type</label>
-                <select class="form-control"   [disabled]="filters.initial!='Monster'" id="monstertype" [(ngModel)] = "filters.monstertype">
-                    <option value = "">  </option>
-                    <option value ="Aqua">Aqua</option>
-                    <option value ="Beast">Beast</option>
-                    <option value ="Beast-Warrior">Beast-Warrior</option>
-                    <option value ="Dinosaur">Dinosaur</option>
-                    <option value ="Dragon">Dragon</option>
-                    <option value ="Fairy">Fairy</option>
-                    <option value ="Fiend">Fiend</option>
-                    <option value ="Fish">Fish</option>
-                    <option value ="Insect">Insect</option>
-                    <option value ="Machine">Machine</option>
-                    <option value ="Plant">Plant</option>
-                    <option value ="Psychic">Psychic</option>
-                    <option value ="Pyro">Pyro</option>
-                    <option value ="Reptile">Reptile</option>
-                    <option value ="Rock">Rock</option>
-                    <option value ="Sea Serpent">Sea Serpent</option>
-                    <option value ="Spellcaster">Spellcaster</option>
-                    <option value ="Thunder">Thunder</option>
-                    <option value ="Warrior">Warrior</option>
-                    <option value ="Winged-Beast">Winged-Beast</option>
-                    <option value ="Zombie">Zombie</option>
-                  </select>
-            </div>
+
+                <option *ngIf='filters.initial=="Spell"' value=""> </option>
+                <option *ngIf='filters.initial=="Spell"' value="Normal Spell">Normal</option>
+                <option *ngIf='filters.initial=="Spell"' value="Continuous Spell">Continuous</option>
+                <option *ngIf='filters.initial=="Spell"' value="Quick Spell">Quick</option>
+                <option *ngIf='filters.initial=="Spell"' value="Ritual Spell">Ritual</option>
+                <option *ngIf='filters.initial=="Spell"' value="Equip Spell">Equip</option>
+                <option *ngIf='filters.initial=="Spell"' value="Field Spell">Field</option>
+
+                <option *ngIf='filters.initial=="Trap"' value=""> </option>
+                <option *ngIf='filters.initial=="Trap"' value="Normal Trap">Normal</option>
+                <option *ngIf='filters.initial=="Trap"' value="Continuous Trap">Continuous</option>
+                <option *ngIf='filters.initial=="Trap"' value="Counter Trap">Counter</option>
+            </select>
+        </div>
+
+
+        <div class="col-auto">
+            <label for="gamemode">Monster Type</label>
+            <select class="form-control" [disabled]="filters.initial!='Monster'" id="monstertype"
+                [(ngModel)]="filters.monstertype">
+                <option value=""> </option>
+                <option value="Aqua">Aqua</option>
+                <option value="Beast">Beast</option>
+                <option value="Beast-Warrior">Beast-Warrior</option>
+                <option value="Dinosaur">Dinosaur</option>
+                <option value="Dragon">Dragon</option>
+                <option value="Fairy">Fairy</option>
+                <option value="Fiend">Fiend</option>
+                <option value="Fish">Fish</option>
+                <option value="Insect">Insect</option>
+                <option value="Machine">Machine</option>
+                <option value="Plant">Plant</option>
+                <option value="Psychic">Psychic</option>
+                <option value="Pyro">Pyro</option>
+                <option value="Reptile">Reptile</option>
+                <option value="Rock">Rock</option>
+                <option value="Sea Serpent">Sea Serpent</option>
+                <option value="Spellcaster">Spellcaster</option>
+                <option value="Thunder">Thunder</option>
+                <option value="Warrior">Warrior</option>
+                <option value="Winged-Beast">Winged-Beast</option>
+                <option value="Zombie">Zombie</option>
+            </select>
+        </div>
 
 
 
@@ -195,57 +197,64 @@
     <div class="row" (keydown.enter)="submitSearch()">
         <div class="col-auto">
             <label for="attribute">Attribute</label>
-            <select class="form-control"   [disabled]="filters.initial!='Monster'" id="attribute" [(ngModel)] = "filters.attribute">
-                <option value = "">  </option>
-                <option value ="DARK">DARK</option>
-                <option value ="DIVINE">DIVINE</option>
-                <option value ="EARTH">EARTH</option>
-                <option value ="FIRE">FIRE</option>
-                <option value ="LIGHT">LIGHT</option>
-                <option value ="WATER">WATER</option>
-                <option value ="WIND">WIND</option>
-              </select>
+            <select class="form-control" [disabled]="filters.initial!='Monster'" id="attribute"
+                [(ngModel)]="filters.attribute">
+                <option value=""> </option>
+                <option value="DARK">DARK</option>
+                <option value="DIVINE">DIVINE</option>
+                <option value="EARTH">EARTH</option>
+                <option value="FIRE">FIRE</option>
+                <option value="LIGHT">LIGHT</option>
+                <option value="WATER">WATER</option>
+                <option value="WIND">WIND</option>
+            </select>
         </div>
         <div class="col-auto">
             <label for="levellow">Level &#60;= </label>
-            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.levellow" type="number" >
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)]="filters.levellow"
+                type="number">
         </div>
         <div class="col-auto">
-            <label for="levelhigh"> Level   </label>
-            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.levelhigh" type="number" >
+            <label for="levelhigh"> Level </label>
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)]="filters.levelhigh"
+                type="number">
         </div>
 
         <div class="col-auto">
             <label for="atklow">Atk &#60;=</label>
-            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.atklow" type="number" >
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)]="filters.atklow"
+                type="number">
         </div>
         <div class="col-auto">
             <label for="atkhigh">Atk</label>
-            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.atkhigh" type="number" >
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)]="filters.atkhigh"
+                type="number">
         </div>
 
         <div class="col-auto">
             <label for="deflow">Def &#60;=</label>
-            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.deflow "type="number" >
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)]="filters.deflow "
+                type="number">
         </div>
         <div class="col-auto">
             <label for="defhigh">Def</label>
-            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)] = "filters.defhigh "type="number" >
+            <input class="form-control number" [disabled]="filters.initial!='Monster'" [(ngModel)]="filters.defhigh "
+                type="number">
         </div>
         <div class="col-auto">
             <label for="sort">Sort By</label>
-            <select class="form-control"   id="initial" [(ngModel)] = "filters.sort" >
-                <option value ="c.id ASC">Release Date ASC</option>
-                <option value ="c.id DESC">Release Date DESC</option>
-                <option value ="c.name ASC">Alphabetical ASC</option>
-                <option value ="c.name DESC">Alphabetical DESC</option>
+            <select class="form-control" id="initial" [(ngModel)]="filters.sort">
+                <option value="c.id ASC">Release Date ASC</option>
+                <option value="c.id DESC">Release Date DESC</option>
+                <option value="c.name ASC">Alphabetical ASC</option>
+                <option value="c.name DESC">Alphabetical DESC</option>
 
-                <option *ngIf = 'filters.initial=="Monster"' value ="c.level ASC">Level ASC</option>
-                <option *ngIf = 'filters.initial=="Monster"' value ="c.level DESC">Level DESC</option>
-                <option *ngIf = 'filters.initial=="Monster"' value ="c.ATK ASC">ATK ASC</option>
-                <option *ngIf = 'filters.initial=="Monster"' value ="c.ATK DESC">ATK DESC</option>
-                <option *ngIf = 'filters.initial=="Monster"' value ="c.DEF ASC">DEF ASC</option>
-                <option *ngIf = 'filters.initial=="Monster"' value ="c.DEF DESC">DEF DESC</option>
+                <option *ngIf='filters.initial=="Monster"' value="c.level ASC">Level ASC</option>
+                <option *ngIf='filters.initial=="Monster"' value="c.level DESC">Level DESC</option>
+                <option *ngIf='filters.initial=="Monster"' value="c.ATK ASC">ATK ASC</option>
+                <option *ngIf='filters.initial=="Monster"' value="c.ATK DESC">ATK DESC</option>
+                <option *ngIf='filters.initial=="Monster"' value="c.DEF ASC">DEF ASC</option>
+                <option *ngIf='filters.initial=="Monster"' value="c.DEF DESC">DEF DESC</option>
 
             </select>
         </div>
@@ -255,29 +264,53 @@
 
     </div>
 
-    <div class="row text-center"  >
+    <div class="row text-center">
 
-        <div><button (click)="addTo('Main')"class="btn btn-success small text-center">Main Deck</button>
-            <button (click)="addTo('Side')" class="btn btn-success small text-center">Side Deck</button></div>
+        <div><button (click)="addTo('Main')" class="btn btn-success small text-center">Main Deck</button>
+            <button (click)="addTo('Side')" class="btn btn-success small text-center">Side Deck</button>
+        </div>
 
 
 
-        <div class="col-auto"><div class="d-flex justify-content-center">
-            <div id="Loading" class="spinner-border" role="status">
-                <span class="sr-only" ></span>
+        <div class="col-auto">
+            <div class="d-flex justify-content-center">
+                <div id="Loading" class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                </div>
             </div>
-          </div>
 
-                <span *ngFor = "let card of currentCards">
-
-                    <button *ngIf="card!=undefined" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card)"  routerLink="/cards/{{card?.id}}" ><img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
+            <span *ngIf="this.defaultRules == 'default'">
+                <span *ngFor="let card of currentCards">
+                    <button *ngIf="card!=undefined" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()"
+                        class="btn btn-default" (contextmenu)="rightAddCard($event,card)"
+                        (click)="goToLink(card?.id)"><img class="smallcard"
+                            src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
                 </span>
+            </span>
+
+            <span *ngIf="this.defaultRules == 'draft'">
+                <span *ngFor="let card of currentCards">
+                    <button *ngIf="card!=undefined" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()"
+                        class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card)"
+                        (click)="goToLink(card?.id)">
+                        <div class="relative">
+                            <img class="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'>
+                            <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
+                        </div>
+                    </button>
+                </span>
+            </span>
+
+
+
+
 
 
 
 
             <div class="row">
-                <button class="btn btn-success" (click)="nextPage()">Next</button><button class="btn btn-success" (click)="prevPage()">Previous</button>
+                <button class="btn btn-success" (click)="nextPage()">Next</button><button class="btn btn-success"
+                    (click)="prevPage()">Previous</button>
             </div>
 
         </div>
@@ -324,10 +357,12 @@
     </div>
 
 
-    <div class="row">
+    <div *ngIf="this.defaultRules=='default'" class="row">
 
-        <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b>      <button class="btn btn-success"(click)="exportList()">Export XML</button>
-        <button class="btn btn-success"(click)="uploadList()" *ngIf="_authService.loggedIn()">Upload Decklist</button><span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
+        <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b> <button class="btn btn-success"
+                (click)="exportList()">Export XML</button>
+            <button class="btn btn-success" (click)="uploadList()" *ngIf="_authService.loggedIn()">Upload
+                Decklist</button><span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
 
         </h1>
 
@@ -336,37 +371,114 @@
 
         <div class="col-lg-12">
             <h2>Monsters ({{monsterCounter}})</h2>
-            <span *ngFor = "let card of mainDeck">
-                <button  (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Monster')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
+            <span *ngFor="let card of mainDeck">
+                <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
+                    *ngIf="card.cardtype.includes('Monster')" (contextmenu)="rightDeleteCard($event,card)"
+                    (click)="showDetails(card)"><img class="smallcard"
+                        src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
             </span>
         </div>
 
 
         <div class="col-lg-12">
             <h2>Spells ({{spellCounter}})</h2>
-            <span *ngFor = "let card of mainDeck">
-                <button  (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Spell')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
+            <span *ngFor="let card of mainDeck">
+                <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
+                    *ngIf="card.cardtype.includes('Spell')" (contextmenu)="rightDeleteCard($event,card)"
+                    (click)="showDetails(card)"><img class="smallcard"
+                        src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Traps ({{trapCounter}})</h2>
-            <span *ngFor = "let card of mainDeck">
-                <button  (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Trap')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
+            <span *ngFor="let card of mainDeck">
+                <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
+                    *ngIf="card.cardtype.includes('Trap')" (contextmenu)="rightDeleteCard($event,card)"
+                    (click)="showDetails(card)"><img class="smallcard"
+                        src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Side Deck ({{sideCounter}})</h2>
-            <span *ngFor = "let card of sideDeck">
-                <button  (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (contextmenu)="rightDeleteSideCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
+            <span *ngFor="let card of sideDeck">
+                <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
+                    (contextmenu)="rightDeleteSideCard($event,card)" (click)="showDetails(card)"><img class="smallcard"
+                        src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Extra ({{edCounter}})</h2>
-            <span *ngFor = "let card of extraDeck">
-                <button  (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
+            <span *ngFor="let card of extraDeck">
+                <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
+                    (contextmenu)="rightDeleteCard($event,card)" (click)="selectDraftCard(card)"><img class="smallcard"
+                        src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
+            </span>
+        </div>
+
+    </div>
+
+
+    <div *ngIf="this.defaultRules=='draft'" class="row">
+
+        <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b> <button class="btn btn-success"
+                (click)="exportList()">Export XML</button>
+            <button class="btn btn-success" (click)="uploadList()" *ngIf="_authService.loggedIn()">Upload
+                Decklist</button><span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
+
+        </h1>
+
+
+
+
+        <div class="col-lg-12">
+            <h2>Monsters ({{monsterCounter}})</h2>
+            <span *ngFor="let card of mainDeck">
+                <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
+                    *ngIf="card.cardtype.includes('Monster')" (contextmenu)="rightDeleteDraftCard($event,card)"
+                    (click)="showDetails(card)"><img class="smallcard"
+                        src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
+            </span>
+        </div>
+
+
+        <div class="col-lg-12">
+            <h2>Spells ({{spellCounter}})</h2>
+            <span *ngFor="let card of mainDeck">
+                <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
+                    *ngIf="card.cardtype.includes('Spell')" (contextmenu)="rightDeleteDraftCard($event,card)"
+                    (click)="showDetails(card)"><img class="smallcard"
+                        src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
+            </span>
+        </div>
+
+        <div class="col-lg-12">
+            <h2>Traps ({{trapCounter}})</h2>
+            <span *ngFor="let card of mainDeck">
+                <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
+                    *ngIf="card.cardtype.includes('Trap')" (contextmenu)="rightDeleteDraftCard($event,card)"
+                    (click)="showDetails(card)"><img class="smallcard"
+                        src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
+            </span>
+        </div>
+
+        <div class="col-lg-12">
+            <h2>Side Deck ({{sideCounter}})</h2>
+            <span *ngFor="let card of sideDeck">
+                <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
+                    (contextmenu)="rightDeleteSideCard($event,card)" (click)="showDetails(card)"><img class="smallcard"
+                        src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
+            </span>
+        </div>
+
+        <div class="col-lg-12">
+            <h2>Extra ({{edCounter}})</h2>
+            <span *ngFor="let card of extraDeck">
+                <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
+                    (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)"><img
+                        class="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
             </span>
         </div>
 
@@ -379,7 +491,4 @@
 
 
 
-    </div>
-
-
-
+</div>

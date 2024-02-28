@@ -25,11 +25,11 @@ a:hover{
     cursor: pointer;
 }
 a{
-    color:white !important;
+    color:#e3e3e3 !important;
     text-decoration: none !important;
-}a:hover{
-    color:green !important;
-}
+}a:hover {
+    color: #055734 !important;
+  }
 button{
     margin:0;
     padding:0;
@@ -118,9 +118,9 @@ nav{
 
 
 a{
-    color:white !important;
+    color:#e3e3e3 !important;
 }a:hover{
-    color:green !important;
+    color:#055734  !important;
 }
 
 li{

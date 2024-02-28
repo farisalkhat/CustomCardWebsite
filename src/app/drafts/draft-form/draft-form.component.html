@@ -1,12 +1,16 @@
 <div [style.left.px]="leftPosition" [style.top.px]="rightPosition" class="hovering" *ngIf="isHovering===true">
-  <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
+  <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}>
+        {{hoveredCard?.cardtype}} </span>
       <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
-  <b><p *ngIf="hovermonster=='True'">
-      <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}
-  </p></b>
+  <b>
+    <p *ngIf="hovermonster=='True'">
+      <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star"
+        src="assets/cardstats/Star.png"> {{hoveredCard?.level}}
+    </p>
+  </b>
 
   <span *ngIf="hovermonster=='False'">
-      <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
+    <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
   </span>
 
 
@@ -16,18 +20,19 @@
 
   <b>
 
-      <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
+    <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
 
 
-      <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}}  DEF/{{hoveredCard?.def}}</p>
-      <p> {{hoveredCard?.effect}}</p>
-      <p>ID: {{hoveredCard?.cardid}}</p>
+    <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}} DEF/{{hoveredCard?.def}}</p>
+    <p> {{hoveredCard?.effect}}</p>
+    <p>ID: {{hoveredCard?.cardid}}</p>
   </b>
 
 </div>
 
 <div class="container">
-    <h1 class="text-center">This is a Pseudo Draft. You open a pack of 15 from the entire database, select 1, then open a pack with one less card, and you repeat the process until you have 60 cards. </h1>
+  <h1 class="text-center">This is a Pseudo Draft. You open a pack of 15 from the entire database, select 1, then open a
+    pack with one less card, and you repeat the process until you have 60 cards. </h1>
 
 </div>
 
@@ -41,16 +46,17 @@
 
 
 <div class="container-fluid">
-    <div class="row">
-      <div class="container">
+  <div class="row">
+    <div class="container">
 
 
-        <button class="btn btn-success"(click)="revealCards()">Reveal Cards</button>
+      <button class="btn btn-success" (click)="revealCards()">Reveal Cards</button>
+      <button class="btn btn-success" (click)="GoToDeckEditor()">Deck Editor</button>
 
 
 
 
-          <!-- <button *ngIf="customButton1=='afres'" class="btn btn-success"(click)="shuffleUnique('afres')">Afres Pack</button>
+      <!-- <button *ngIf="customButton1=='afres'" class="btn btn-success"(click)="shuffleUnique('afres')">Afres Pack</button>
           <button *ngIf="customButton1=='gergoos'" class="btn btn-success"(click)="shuffleUnique('gergoos')">Gergoos Pack</button>
           <button *ngIf="customButton1=='swampus'" class="btn btn-success"(click)="shuffleUnique('swampus')">jirai_gumo_2200 Pack</button>
           <button *ngIf="customButton1=='monsters'" class="btn btn-success"(click)="shuffleUnique('monsters')">Monster Pack</button>
@@ -69,45 +75,48 @@
 
 
 
-        <!-- <button class="btn btn-success"(click)="shuffleCards()">Open Next Pack</button> -->
+      <!-- <button class="btn btn-success"(click)="shuffleCards()">Open Next Pack</button> -->
+
+
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-8 text-center colRand">
+      <div>
+
+        <span *ngFor="let card of randomCards">
+
+          <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()"
+            class=" btn btn-default btncard" (contextmenu)="rightAddDraftCard($event,card)">
+
+            <div class="card" [@cardFlip]="this.state">
+              <div class="face back">
+                <img src="assets/cardimages/Default.png" />
+              </div>
+              <div class="face front">
+                <img src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'>
+              </div>
+            </div>
+
+          </button>
+
+        </span>
 
 
       </div>
-
     </div>
-    <div class="row">
-          <div class="col-md-8 text-center colRand">
-            <div>
+    <div class="colDraft col">
+      <h2>Current Cards ( {{cardsSelected}}/60)</h2>
+      <span *ngFor="let card of currentDraft">
+        <button (click)="goToLink(card.id)" (mouseenter)="mouseHoverDrafted(card,$event)" (mouseleave)="mouseLeft()"
+          class=" btn btn-default btncard"><img class="smallcard"
+            src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
 
-              <span  *ngFor = "let card of randomCards">
+      </span>
+    </div>
 
-                  <button (click)="goToLink(card.cardid)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class=" btn btn-default btncard" (contextmenu)="rightAddDraftCard($event,card)" >
-
-                    <div class="card" [@cardFlip]="this.state">
-                      <div class="face back">
-                        <img src="assets/cardimages/Default.png" />
-                      </div>
-                        <div class="face front">
-                          <img src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'>
-                      </div>
-                        </div>
-
-                  </button>
-
-              </span>
-
-
-          </div>
-          </div>
-          <div class="colDraft col">
-            <h2>Current Cards ( {{cardsSelected}}/60)</h2>
-              <span *ngFor = "let card of currentDraft">
-                <button (click)="goToLink(card.cardid)" (mouseenter)="mouseHoverDrafted(card,$event)" (mouseleave)="mouseLeft()" class=" btn btn-default btncard" ><img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></button>
-
-              </span>
-          </div>
-
-          <!-- <div class="col colCardInfo cardeffect">
+    <!-- <div class="col colCardInfo cardeffect">
             <button type="button" *ngIf="draftCardSelected==true"class="btn btn-success addcard" (click)="addCard()">Add</button>
             <div *ngIf = "card!= undefined">
               <h3>{{card?.name}}
@@ -155,7 +164,7 @@
 
 
 
-    </div>
+  </div>
 
 
 
@@ -163,21 +172,21 @@
 
 
 
-    <!-- <div class="col-lg-12">
+  <!-- <div class="col-lg-12">
       <h2>Current Cards</h2>
       <span *ngFor = "let card of currentDraft">
           <img class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'>
       </span>
     </div> -->
 
-    <div class="col-lg-12">
-      <button class="btn btn-success"(click)="exportList()">Export XML</button>
-      <h2>Card List</h2>
-      <ul *ngFor = "let card of sortedList">
-        <li> <b>{{card?.name}}</b>, {{card?.cardtype}}, <b>{{card?.creator}}</b></li>
-      </ul>
+  <div class="col-lg-12">
+    <button class="btn btn-success" (click)="exportList()">Export XML</button>
+    <h2>Card List</h2>
+    <ul *ngFor="let card of sortedList">
+      <li> <b>{{card?.name}}</b>, {{card?.cardtype}}, <b>{{card?.creator}}</b>, copies: {{card?.copies}}</li>
+    </ul>
 
 
-    </div>
+  </div>
 
-    </div>
+</div>

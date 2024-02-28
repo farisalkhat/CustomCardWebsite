@@ -80,12 +80,12 @@ export class DraftsComponent implements OnInit {
     this.customcardsService.editDraft(edit);
   }
 
-  setDraft(draftType:string){
-    this.customcardsService.setDraft(draftType,false);
-  }
+  // setDraft(draftType:number){
+  //   this.customcardsService.setDraft(draftType,false);
+  // }
 
-  setCustomDraft(draftType:string){
-    this.customcardsService.setDraft(draftType,true);
-  }
+  // setCustomDraft(draftType:number){
+  //   this.customcardsService.setDraft(draftType,true);
+  // }
 
 }

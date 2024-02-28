@@ -13,17 +13,21 @@
 
         <div class="row">
           <div *ngFor = "let draft of drafts" class="col-auto">
-            <div (click)="setCustomDraft(draft.title)" routerLink="/draft-form" class="card rounded">
-              <div class="crop rounded">
-                <div class="overlay-div rounded"></div>
-                <img src='https://lh3.google.com/u/0/d/{{draft?.draftimage}}' >
+            <!-- (click)="setCustomDraft(draft.id)" -->
+            
+            <a routerLink="/draft-form/{{draft.id}}">
+              <div class="card rounded">
+                <div class="crop rounded">
+                  <div class="overlay-div rounded"></div>
+                  <img src='https://theatticygo.com/assets/cardimages/{{draft?.draftimage}}.png' >
 
-              </div>
+                </div>
 
-              <div class="card-img-overlay">
-                <h5 class="text-center align-self-center mx-auto">{{draft.title}} </h5>
+                <div class="card-img-overlay">
+                  <h5 class="text-center align-self-center mx-auto">{{draft.title}} {{draft.id}} </h5>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
 

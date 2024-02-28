@@ -8,12 +8,14 @@
 }
 button {
   font-size: x-large;
+  margin:3px;
 }
 a {
-  color: white !important;
+  color: #e3e3e3 !important;
 }
 a:hover {
-  color: green !important;
+  color: #055734 !important;
+  transition:.3s;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -24,7 +26,7 @@ a:hover {
 /* change navbar-toggler inside lines color (stroke) */
 .navbar-light span.navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='yellow' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-  color: white;
+  color: #e3e3e3;
 }
 
 /* change hamburger button border color */

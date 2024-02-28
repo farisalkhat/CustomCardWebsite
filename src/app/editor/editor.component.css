@@ -5,3 +5,10 @@
 .row{
     margin-bottom:5px;
 }
+
+p {
+    color: #000000 !important;
+  }
+  ul {
+    color: #000000 !important;
+  }

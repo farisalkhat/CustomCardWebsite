@@ -6,15 +6,15 @@
     <div class="card newbie rounded-7">
         <div class="card-body">
           <h1 class="card-title">New to the Attic?</h1>
-          <p class="card-text">Check out our guide to get started, or head to the Decklists and get right into it! </p>
+          <p class="card-text newbie-outline">Check out our guide to get started, or head to the Decklists and get right into it! </p>
           <button type="button" class="btn btn-success"  routerLink="/articles" routerLinkActive = "active">Get Started</button>
-          <button type="button" class="btn btn-outline-dark"  routerLink="/decklists" routerLinkActive = "active">Decklists</button>
+          <button type="button" class="btn btn-outline-light"  routerLink="/decklists" routerLinkActive = "active">Decklists</button>
         </div>
       </div>
 
 
 
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-dark" role="alert">
         <h4 class="">{{sitedata?.packs_opened}} packs opened! {{sitedata?.dosh_spent}} dosh spent!</h4>
       </div>
 
@@ -103,7 +103,7 @@
         <div class="col">
             <h1 class="text-center">Latest Articles</h1>
             <div class="row">
-              <div *ngFor="let article of articles" class="col-sm-6 col-md-4">
+              <div *ngFor="let article of articles" class="col-sm-6 col-md-6">
 
                   <div routerLink="/articles/{{article?.id}}" class="card article-card" style="width:302px;">
                     <div *ngIf="article?.tag=='Guide'" class="article-label article-label-shadow" style="background-color:purple"><p class="article-label-text">GUIDE</p></div>

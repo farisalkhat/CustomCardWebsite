@@ -1,26 +1,45 @@
-
 <div class="container">
 
-    <div class="d-flex justify-content-center">
-      <div id="Loading" class="spinner-border" role="status">
-          <span class="sr-only" ></span>
-      </div>
+  <div class="d-flex justify-content-center">
+    <div id="Loading" class="spinner-border" role="status">
+      <span class="sr-only"></span>
     </div>
-  
-      <table class="table table-dark table-striped">
-          <thead >
-            <tr>
-              <th scope="col">Player</th>
-              <th scope="col">Role</th>
+  </div>
+  <h1>TheAtticYGO Users</h1>
 
-            </tr>
-          </thead>
-          <tbody *ngFor="let player of players ">
-            <tr>
-              <td> <a routerLink='/players/{{player.id}}'>{{player?.username}}</a></td>
-              <td> {{player?.role}}</td>
-  
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <h3>Newest Users</h3>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Player</th>
+        <th scope="col">Role</th>
+
+      </tr>
+    </thead>
+    <tbody *ngFor="let player of players ">
+      <tr>
+        <td> <a routerLink='/players/{{player.id}}'>{{player?.username}}</a></td>
+        <td> {{player?.role}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Staff</h3>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Player</th>
+        <th scope="col">Role</th>
+
+      </tr>
+    </thead>
+    <tbody *ngFor="let player of players ">
+      <tr>
+        <td> <a routerLink='/players/{{player.id}}'>{{player?.username}}</a></td>
+        <td> {{player?.role}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

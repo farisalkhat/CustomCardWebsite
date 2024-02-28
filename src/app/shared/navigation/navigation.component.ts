@@ -10,30 +10,31 @@ import { CustomcardsService } from 'src/app/customcards.service';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(public _router:Router, public _authService:AuthService, public customcardsService:CustomcardsService) { }
+  constructor(public _router: Router, public _authService: AuthService, public customcardsService: CustomcardsService) { }
 
-  username:string | undefined;
-  id:number | undefined
-  currency!:number;
+  username: string | undefined;
+  id: number | undefined
+  currency!: number;
 
   ngOnInit(): void {
-    if (this._authService.loggedIn()){
+    if (this._authService.loggedIn()) {
 
       this._authService.getUser().subscribe(
-        res =>{
+        res => {
           console.log(res['username'])
           this.username = res['username']
           this.id = res['id']
           this.currency = res['currency']
         },
-        err => {console.log(err)
-        this.username = undefined
-        this.id = undefined
-      }
+        err => {
+          console.log(err)
+          this.username = undefined
+          this.id = undefined
+        }
       )
 
     }
-    else{
+    else {
       this.username = undefined
       this.id = undefined
     }
@@ -41,14 +42,17 @@ export class NavigationComponent implements OnInit {
   }
 
 
-  goToSealedDraft(){
+  goToSealedDraft() {
     this.customcardsService.setSealedDraftMode(true)
     this._router.navigate(['/packs'])
   }
 
-  goToPackOpener(){
+  goToPackOpener() {
     this.customcardsService.setSealedDraftMode(false)
     this._router.navigate(['/packs'])
+  }
+  GoToDeckEditor() {
+    this.customcardsService.SetDeckEditorDefault();
   }
 
 

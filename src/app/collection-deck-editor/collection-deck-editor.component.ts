@@ -929,6 +929,9 @@ getHoveredCardDetails(){
 
   addCard(card:BinderCard){
     if(card!=undefined){
+      if(card.copies==0){
+        return;
+      }
       console.log(card)
       if(card.cardtype=="Fusion Monster" || card.cardtype=="Xyz Monster" || card.cardtype=="Synchro Monster"){
         if(this.extraDeck.length==15){

@@ -32,6 +32,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
+  colorPresets = ['black', '#000000', 'rgb(0, 0, 0)'];
   html!: 'asdasd';
   articleInfo = new FormGroup({
     title: new FormControl(undefined,[
@@ -54,6 +55,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   get f(){return this.articleInfo.controls;}
   ngOnInit(): void {
     this.editor = new Editor();
+    this.editor.commands.textColor('black').exec();
     if (this._authService.loggedIn() && this._authService.adminRole()){
 
       this._authService.getUser().subscribe(

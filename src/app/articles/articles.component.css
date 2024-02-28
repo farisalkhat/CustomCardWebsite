@@ -29,7 +29,7 @@
 }
 
 .article-label-text {
-  color: white;
+  color: #e3e3e3;
   text-align: center;
 }
 
@@ -43,7 +43,7 @@
   margin: 0;
 }
 .article-card-text {
-  font-color: white;
+  font-color: #e3e3e3;
   color: #ededed;
   font-family: Roboto;
   font-size: 14px;

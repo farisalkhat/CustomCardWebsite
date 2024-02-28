@@ -38,7 +38,7 @@ opacity: 1;
 .littlenumber{
   width:20px;
   background-color:rgba(0,0,0, 0.858);
-    color:white;
+    color:#e3e3e3;
     z-index: 1000;
 }
 
