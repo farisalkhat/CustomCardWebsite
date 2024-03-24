@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Card, CustomcardsService, Draft } from 'src/app/customcards.service';
+import { Card, CustomcardsService, Draft, HoveredCardDetails } from 'src/app/customcards.service';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -91,31 +91,18 @@ export class DraftMakerComponent implements OnInit {
   SetDraftMode(mode:boolean){
     this.draftMode=mode;
   }
-  mouseHovering(card:Card,e:MouseEvent) {
-
-    console.log(e.clientX);
-    console.log(e.clientY);
-
-      this.isHovering = true;
-      this.hoveredCard = card
-
-      if(e.clientX>=900){
-        this.leftPosition = e.clientX-200;
-      }
-
-      else{
-        this.leftPosition = e.clientX+2;
-      }
-
-      this.rightPosition =e.clientY-170;
-
-
-      this.getHoveredCardDetails()
-
-    }
-    mouseLeft() {
-        this.isHovering = false;
-    }
+  mouseHovering(card: Card, e: MouseEvent) {
+    const final = {} as HoveredCardDetails;
+    if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
+    else { final.leftPosition = e.clientX + 2; }
+    final.rightPosition = e.clientY - 170;
+    final.card = card;
+    final.isHovering = true;
+    this.customcardsService.HoveredCard(final);
+  }
+  mouseLeft() {
+    this.customcardsService.DisableHoveredCard();
+  }
     getHoveredCardDetails(){
 
       this.hoverattribute=''

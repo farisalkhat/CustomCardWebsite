@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Card, CustomcardsService } from '../customcards.service';
+import { Card, CustomcardsService, HoveredCardDetails } from '../customcards.service';
 
 @Component({
   selector: 'app-banlist',
@@ -56,30 +56,17 @@ export class BanlistComponent implements OnInit {
     // const newurl = 'https://www.duelingbook.com/card?id='+url
     // window.open(newurl, "_blank");
   }
-  mouseHovering(card:Card,e:MouseEvent) {
-
-  console.log(e.clientX);
-  console.log(e.clientY);
-
-    this.isHovering = true;
-    this.hoveredCard = card
-
-    if(e.clientX>=900){
-      this.leftPosition = e.clientX-200;
-    }
-
-    else{
-      this.leftPosition = e.clientX+2;
-    }
-
-    this.rightPosition =e.clientY-170;
-
-
-    this.getHoveredCardDetails()
-
+  mouseHovering(card: Card, e: MouseEvent) {
+    const final = {} as HoveredCardDetails;
+    if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
+    else { final.leftPosition = e.clientX + 2; }
+    final.rightPosition = e.clientY - 170;
+    final.card = card;
+    final.isHovering = true;
+    this.customcardsService.HoveredCard(final);
   }
   mouseLeft() {
-      this.isHovering = false;
+    this.customcardsService.DisableHoveredCard();
   }
   getHoveredCardDetails(){
 

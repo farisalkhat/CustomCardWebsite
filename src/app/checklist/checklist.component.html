@@ -1,31 +1,4 @@
-<div [style.left.px]="leftPosition" [style.top.px]="rightPosition" class="hovering" *ngIf="isHovering===true">
-    <!-- <img class ="smallcard" src='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/cardimages/{{hoveredCard?.id}}.png'> -->
-    <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
-        <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
-    <b><p *ngIf="hovermonster=='True'">
-        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}
-    </p></b>
-
-    <span *ngIf="hovermonster=='False'">
-        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
-    </span>
-
-
-
-
-
-
-    <b>
-
-        <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
-
-
-        <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}}  DEF/{{hoveredCard?.def}}</p>
-        <p> {{hoveredCard?.effect}}</p>
-        <p>ID: {{hoveredCard?.id}}</p>
-    </b>
-
-</div>
+<app-hover-card></app-hover-card>
 <h2 class="text-center">The Attic Packs</h2>
 <div class="container ">
     <span class="binder">Pack: </span>

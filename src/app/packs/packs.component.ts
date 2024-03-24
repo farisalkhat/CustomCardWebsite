@@ -114,6 +114,15 @@ maximized:boolean = true;
 
   }
 
+  goToLink(id: number | undefined) {
+
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([`/packs/${id?.toString()}`])
+    );
+
+    window.open(url, '_blank');
+  }
+
   openPack(){
     this.customcardsService.setPackQueue(this.packTrackerArray)
     this.openingPacks = true;

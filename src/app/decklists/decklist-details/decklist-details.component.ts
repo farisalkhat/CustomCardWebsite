@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Card, CustomcardsService, DeckListCard, importDecklist } from 'src/app/customcards.service';
+import { Card, CustomcardsService, DeckListCard, HoveredCardDetails, importDecklist } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-decklist-details',
@@ -29,30 +29,7 @@ export class DecklistDetailsComponent implements OnInit {
 
   constructor(private _router:Router, private _authService:AuthService, private route: ActivatedRoute, private customcardService: CustomcardsService) { }
 
-  mouseHovering(card:Card,e:MouseEvent) {
 
-
-
-
-    this.isHovering = true;
-    this.hoveredCard = card
-
-    if(e.clientX>=900){
-      this.leftPosition = e.clientX-200;
-    }
-
-    else{
-      this.leftPosition = e.clientX+2;
-    }
-
-    this.rightPosition =e.clientY-170;
-
-
-    this.getHoveredCardDetails()
-
-
-
-  }
 
 
   mouseHoverDrafted(card:Card,e:MouseEvent){
@@ -71,9 +48,25 @@ export class DecklistDetailsComponent implements OnInit {
 
 
   this.getHoveredCardDetails()}
-  mouseLeft() {
-      this.isHovering = false;
+  
+  
+  mouseHovering(card: Card, e: MouseEvent) {
+    const final = {} as HoveredCardDetails;
+    if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
+    else { final.leftPosition = e.clientX + 2; }
+    final.rightPosition = e.clientY - 170;
+    final.card = card;
+    final.isHovering = true;
+    this.customcardService.HoveredCard(final);
   }
+  mouseLeft() {
+    this.customcardService.DisableHoveredCard();
+  }
+  
+  
+  
+  
+
   getHoveredCardDetails(){
 
     this.hoverattribute=''

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
-import { Binder, BinderCard, CustomcardsService } from '../customcards.service';
+import { Binder, BinderCard, CustomcardsService, HoveredCardDetails } from '../customcards.service';
 
 @Component({
   selector: 'app-collections',
@@ -137,30 +137,22 @@ export class CollectionsComponent implements OnInit {
 
 
 
-    mouseHovering(card:BinderCard,e:MouseEvent) {
-
-      console.log(e.clientX);
-      console.log(e.clientY);
-
-        this.isHovering = true;
-        this.hoveredCard = card
-
-        if(e.clientX>=900){
-          this.leftPosition = e.clientX-200;
-        }
-
-        else{
-          this.leftPosition = e.clientX+2;
-        }
-
-        this.rightPosition =e.clientY-170;
-
-
-        this.getHoveredCardDetails()
-
+      mouseHovering(card: BinderCard, e: MouseEvent) {
+        const final = {} as HoveredCardDetails;
+        if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
+        else { final.leftPosition = e.clientX + 2; }
+        final.rightPosition = e.clientY - 170;
+        console.log(card.id)
+        this.customcardsService.getCustomCard(card.id).subscribe(
+            res=>{
+                console.log(res)
+                final.card = res
+                final.isHovering = true;
+                this.customcardsService.HoveredCard(final);
+            })
       }
       mouseLeft() {
-          this.isHovering = false;
+        this.customcardsService.DisableHoveredCard();
       }
       getHoveredCardDetails(){
 

@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { AddToBinder, Binder, BinderInfo, Card, CustomcardsService, Pack, PackCard, PackInfo, PackSelectedData } from 'src/app/customcards.service';
+import { AddToBinder, Binder, BinderInfo, Card, CustomcardsService, HoveredCardDetails, Pack, PackCard, PackInfo, PackSelectedData } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-pack-opener',
@@ -138,88 +138,90 @@ export class PackOpenerComponent implements OnInit {
         this.superCards = []
         this.rareCards = []
         this.commonCards = []
+        this.cardsRemaining=9;
         
-        
-
-        if(this.packInfo['packsize']=='small'){
-          this.cardsRemaining=3
-
-          let counter = 0;
-          for(counter; counter!=2;counter++){
-            this.ultraCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=6;counter++){
-            this.superCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=7;counter++){
-            this.secretCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=16;counter++){
-            this.rareCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=31;counter++){
-            this.commonCards.push(this.cards[counter])
-          }
-
+        if(this.packID!=1){
+          if(this.packInfo['packsize']=='small'){
+            this.cardsRemaining=3
+  
+            let counter = 0;
+            for(counter; counter!=2;counter++){
+              this.ultraCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=6;counter++){
+              this.superCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=7;counter++){
+              this.secretCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=16;counter++){
+              this.rareCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=31;counter++){
+              this.commonCards.push(this.cards[counter])
+            }
+  
+            
           
-        
-        
-        }
-        if(this.packInfo['packsize']=='medium'){
-          this.cardsRemaining=9
-        
-          let counter = 0;
-          for(counter; counter!=10;counter++){
-            this.ultraCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=25;counter++){
-            this.superCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=27;counter++){
-            this.secretCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=52;counter++){
-            this.rareCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=100;counter++){
-            this.commonCards.push(this.cards[counter])
-          }
-
-
-
           
+          }
+          if(this.packInfo['packsize']=='medium'){
+            this.cardsRemaining=9
+          
+            let counter = 0;
+            for(counter; counter!=10;counter++){
+              this.ultraCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=25;counter++){
+              this.superCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=27;counter++){
+              this.secretCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=52;counter++){
+              this.rareCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=100;counter++){
+              this.commonCards.push(this.cards[counter])
+            }
+  
+  
+  
+            
+          }
+          if(this.packInfo['packsize']=='large'){
+            this.cardsRemaining=13
+            let counter = 0;
+            for(counter; counter!=14;counter++){
+              this.ultraCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=34;counter++){
+              this.superCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=40;counter++){
+              this.secretCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=100;counter++){
+              this.rareCards.push(this.cards[counter])
+            }
+  
+            for(counter; counter!=200;counter++){
+              this.commonCards.push(this.cards[counter])
+            }
+          }          
         }
-        if(this.packInfo['packsize']=='large'){
-          this.cardsRemaining=13
-          let counter = 0;
-          for(counter; counter!=14;counter++){
-            this.ultraCards.push(this.cards[counter])
-          }
 
-          for(counter; counter!=34;counter++){
-            this.superCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=40;counter++){
-            this.secretCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=100;counter++){
-            this.rareCards.push(this.cards[counter])
-          }
-
-          for(counter; counter!=200;counter++){
-            this.commonCards.push(this.cards[counter])
-          }
-        }
 
 
         this.shuffleCards();
@@ -233,34 +235,18 @@ export class PackOpenerComponent implements OnInit {
 
 
 
-mouseHovering(card:Card,e:MouseEvent) {
-
-    console.log(e.clientX);
-    console.log(e.clientY);
-    if(this.state!='flipped'){
-      return;
-    }
-    
-      this.isHovering = true; 
-      this.hoveredCard = card 
-    
-      if(e.clientX>=900){
-        this.leftPosition = e.clientX-200;
-      }
-    
-      else{
-        this.leftPosition = e.clientX+2;
-      }
-      
-      this.rightPosition =e.clientY-170;
-      
-      
-      this.getHoveredCardDetails()
-      
-    }
-    mouseLeft() {
-        this.isHovering = false;
-    }
+mouseHovering(card: Card, e: MouseEvent) {
+  const final = {} as HoveredCardDetails;
+  if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
+  else { final.leftPosition = e.clientX + 2; }
+  final.rightPosition = e.clientY - 170;
+  final.card = card;
+  final.isHovering = true;
+  this.customcardsService.HoveredCard(final);
+}
+mouseLeft() {
+  this.customcardsService.DisableHoveredCard();
+}
     getHoveredCardDetails(){
       
       this.hoverattribute=''
@@ -476,59 +462,75 @@ mouseHovering(card:Card,e:MouseEvent) {
 
     this.randomCards=[]
     let cardCounter = 0
-    while(cardCounter<this.cardsRemaining){
 
-      if(cardCounter<this.cardsRemaining-2){
-        const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
-        let newCard = this.commonCards[randID]
-
-        while(this.randomCards.findIndex(obj => obj.id === newCard?.id)>-1){
-          const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
-          newCard = this.commonCards[randID]
-        }
-
+    if(this.packID==1){
+      while(cardCounter<this.cardsRemaining){
+        const randID = this.randomIntFromInterval(0,this.cards.length-1)
+        let newCard = this.cards[randID]
+        newCard.rarity="common";
         this.randomCards.push(newCard)
+        cardCounter++;
       }
-      if(cardCounter==this.cardsRemaining-2){
-        const randID = this.randomIntFromInterval(0,this.rareCards.length-1)
-        const newCard = this.rareCards[randID]
-
-        
-        this.randomCards.push(newCard)
-      }
-      if(cardCounter==this.cardsRemaining-1){
-        const randID1 = this.randomIntFromInterval(0,5)
-        const randID2 = this.randomIntFromInterval(0,11)
-        const randID3 = this.randomIntFromInterval(0,30)
-        const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
-        let newCard = this.commonCards[randID]
-        while(this.randomCards.findIndex(obj => obj.id === newCard?.id)>-1){
-          const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
-          newCard = this.commonCards[randID]
-        }
-        console.log(randID1,randID2,randID3)
-        if(randID1==0){
-          const randID = this.randomIntFromInterval(0,this.superCards.length-1)
-          newCard = this.superCards[randID]
-          
-        }
-        if(randID2==0){
-          const randID = this.randomIntFromInterval(0,this.ultraCards.length-1)
-           newCard = this.ultraCards[randID]
-          
-        }
-        if(randID3==0){
-          const randID = this.randomIntFromInterval(0,this.secretCards.length-1)
-          newCard = this.secretCards[randID]
-        }
-
-        this.randomCards.push(newCard)
-      
-        
-      }
-      cardCounter++;
 
     }
+    if(this.packID!=1){
+      while(cardCounter<this.cardsRemaining){
+
+        if(cardCounter<this.cardsRemaining-2){
+          const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
+          let newCard = this.commonCards[randID]
+  
+          while(this.randomCards.findIndex(obj => obj.id === newCard?.id)>-1){
+            const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
+            newCard = this.commonCards[randID]
+          }
+  
+          this.randomCards.push(newCard)
+        }
+        if(cardCounter==this.cardsRemaining-2){
+          const randID = this.randomIntFromInterval(0,this.rareCards.length-1)
+          const newCard = this.rareCards[randID]
+  
+          
+          this.randomCards.push(newCard)
+        }
+      
+        if(cardCounter==this.cardsRemaining-1){
+          const randID1 = this.randomIntFromInterval(0,5)
+          const randID2 = this.randomIntFromInterval(0,11)
+          const randID3 = this.randomIntFromInterval(0,30)
+          const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
+          let newCard = this.commonCards[randID]
+          while(this.randomCards.findIndex(obj => obj.id === newCard?.id)>-1){
+            const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
+            newCard = this.commonCards[randID]
+          }
+          console.log(randID1,randID2,randID3)
+          if(randID1==0){
+            const randID = this.randomIntFromInterval(0,this.superCards.length-1)
+            newCard = this.superCards[randID]
+            
+          }
+          if(randID2==0){
+            const randID = this.randomIntFromInterval(0,this.ultraCards.length-1)
+             newCard = this.ultraCards[randID]
+            
+          }
+          if(randID3==0){
+            const randID = this.randomIntFromInterval(0,this.secretCards.length-1)
+            newCard = this.secretCards[randID]
+          }
+  
+          this.randomCards.push(newCard)
+        
+          
+        }
+        cardCounter++;
+  
+      }
+    }
+
+
 
     this.packsOpened++;
     console.log(this.randomCards);

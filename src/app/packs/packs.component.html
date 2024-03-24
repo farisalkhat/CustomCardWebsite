@@ -32,10 +32,11 @@
     </div> -->
 
     <div class="row align-items-center">
-        <div class="col"*ngFor = "let pack of packs">
-            <img    *ngIf="pack.pack!='placeholder'" routerLink="/packs/{{pack.packid}}" routerLinkActive = "active" class="pack" src='https://theatticygo.com/assets/packimages/{{pack?.packid}}.png'>
 
-            <img   *ngIf="pack.pack=='placeholder'" routerLink="/packs/{{pack.packid}}" routerLinkActive = "active" class="pack"src = 'https://theatticygo.com/assets/packimages/placeholder.png'>
+        <div class="col"*ngFor = "let pack of packs">
+            <img    *ngIf="pack.pack!='placeholder'" (click) = "goToLink(pack.packid)"  class="pack" src='https://theatticygo.com/assets/packimages/{{pack?.packid}}.png'>
+
+            <img   *ngIf="pack.pack=='placeholder'" (click) = "goToLink(pack.packid)"  class="pack"src = 'https://theatticygo.com/assets/packimages/placeholder.png'>
 
 
 

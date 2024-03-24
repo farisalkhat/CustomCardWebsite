@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Card, CustomcardsService, Draft, Decklist, DeckListCard, importDecklist, Pack } from 'src/app/customcards.service';
+import { Card, CustomcardsService, Draft, Decklist, DeckListCard, importDecklist, Pack, HoveredCardDetails } from 'src/app/customcards.service';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import * as FileSaver from 'file-saver';
@@ -530,30 +530,17 @@ goToLink(url: string){
   // const newurl = 'https://www.duelingbook.com/card?id='+url
   // window.open(newurl, "_blank");
 }
-mouseHovering(card:Card,e:MouseEvent) {
-
-console.log(e.clientX);
-console.log(e.clientY);
-
-  this.isHovering = true;
-  this.hoveredCard = card
-
-  if(e.clientX>=900){
-    this.leftPosition = e.clientX-200;
-  }
-
-  else{
-    this.leftPosition = e.clientX+2;
-  }
-
-  this.rightPosition =e.clientY-170;
-
-
-  this.getHoveredCardDetails()
-
+mouseHovering(card: Card, e: MouseEvent) {
+  const final = {} as HoveredCardDetails;
+  if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
+  else { final.leftPosition = e.clientX + 2; }
+  final.rightPosition = e.clientY - 170;
+  final.card = card;
+  final.isHovering = true;
+  this.customcardsService.HoveredCard(final);
 }
 mouseLeft() {
-    this.isHovering = false;
+  this.customcardsService.DisableHoveredCard();
 }
 getHoveredCardDetails(){
 

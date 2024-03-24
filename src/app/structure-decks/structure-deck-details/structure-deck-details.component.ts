@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { AddToBinder, Card, CustomcardsService, DeckListCard, PackCard, importDecklist } from 'src/app/customcards.service';
+import { AddToBinder, Card, CustomcardsService, DeckListCard, HoveredCardDetails, PackCard, importDecklist } from 'src/app/customcards.service';
 
 @Component({
   selector: 'app-structure-deck-details',
@@ -32,51 +32,21 @@ export class StructureDeckDetailsComponent implements OnInit {
   deckInfo!:any;
   constructor(private _router:Router, private _authService:AuthService, private route: ActivatedRoute, private customcardService: CustomcardsService) { }
 
-  mouseHovering(card:Card,e:MouseEvent) {
-
-
-
-
-    this.isHovering = true; 
-    this.hoveredCard = card 
-  
-    if(e.clientX>=900){
-      this.leftPosition = e.clientX-200;
-    }
-  
-    else{
-      this.leftPosition = e.clientX+2;
-    }
-    
-    this.rightPosition =e.clientY-170;
-    
-
-    this.getHoveredCardDetails()
-    
-    
-    
+  mouseHovering(card: Card, e: MouseEvent) {
+    const final = {} as HoveredCardDetails;
+    if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
+    else { final.leftPosition = e.clientX + 2; }
+    final.rightPosition = e.clientY - 170;
+    final.card = card;
+    final.isHovering = true;
+    this.customcardService.HoveredCard(final);
   }
-
-
-  mouseHoverDrafted(card:Card,e:MouseEvent){
-  this.isHovering = true; 
-  this.hoveredCard = card 
-
-  if(e.clientX>=900){
-    this.leftPosition = e.clientX-200;
-  }
-
-  else{
-    this.leftPosition = e.clientX+2;
-  }
-  
-  this.rightPosition =e.clientY-170;
-  
-
-  this.getHoveredCardDetails()}
   mouseLeft() {
-      this.isHovering = false;
+    this.customcardService.DisableHoveredCard();
   }
+
+
+
   getHoveredCardDetails(){
     
     this.hoverattribute=''
@@ -360,10 +330,13 @@ export class StructureDeckDetailsComponent implements OnInit {
   }
 
 
-  goToLink(url: string){
-    const newurl = 'https://www.duelingbook.com/card?id='+url
-    window.open(newurl, "_blank");
-}
+  goToLink(id: string | undefined) {
+    const url = this._router.serializeUrl(
+      this._router.createUrlTree([`/cards/${id}`])
+    );
+
+    window.open(url, '_blank');
+  }
 
 // download(){
 

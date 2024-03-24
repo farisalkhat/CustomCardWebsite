@@ -600,7 +600,15 @@ export class CustomcardsService {
 
   }
   getCustomCardsByPack(id: number) {
-    return (this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/pack/${id}`));
+    if(id==1){
+
+      return this.getCustomCards();
+
+    }
+    else{
+      return (this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/pack/${id}`));
+    }
+    
   }
 
   getPackAmount() {

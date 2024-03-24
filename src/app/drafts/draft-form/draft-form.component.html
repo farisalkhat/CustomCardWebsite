@@ -1,34 +1,4 @@
-<div [style.left.px]="leftPosition" [style.top.px]="rightPosition" class="hovering" *ngIf="isHovering===true">
-  <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}>
-        {{hoveredCard?.cardtype}} </span>
-      <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
-  <b>
-    <p *ngIf="hovermonster=='True'">
-      <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star"
-        src="assets/cardstats/Star.png"> {{hoveredCard?.level}}
-    </p>
-  </b>
-
-  <span *ngIf="hovermonster=='False'">
-    <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
-  </span>
-
-
-
-
-
-
-  <b>
-
-    <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
-
-
-    <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}} DEF/{{hoveredCard?.def}}</p>
-    <p> {{hoveredCard?.effect}}</p>
-    <p>ID: {{hoveredCard?.cardid}}</p>
-  </b>
-
-</div>
+<app-hover-card></app-hover-card>
 
 <div class="container">
   <h1 class="text-center">This is a Pseudo Draft. You open a pack of 15 from the entire database, select 1, then open a
@@ -51,7 +21,7 @@
 
 
       <button class="btn btn-success" (click)="revealCards()">Reveal Cards</button>
-      <button class="btn btn-success" (click)="GoToDeckEditor()">Deck Editor</button>
+      
 
 
 
@@ -87,7 +57,7 @@
 
         <span *ngFor="let card of randomCards">
 
-          <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()"
+          <button (click)="goToLinkDrafting(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()"
             class=" btn btn-default btncard" (contextmenu)="rightAddDraftCard($event,card)">
 
             <div class="card" [@cardFlip]="this.state">
@@ -181,6 +151,7 @@
 
   <div class="col-lg-12">
     <button class="btn btn-success" (click)="exportList()">Export XML</button>
+    <button class="btn btn-success" (click)="GoToDeckEditor()">Deck Editor</button>
     <h2>Card List</h2>
     <ul *ngFor="let card of sortedList">
       <li> <b>{{card?.name}}</b>, {{card?.cardtype}}, <b>{{card?.creator}}</b>, copies: {{card?.copies}}</li>

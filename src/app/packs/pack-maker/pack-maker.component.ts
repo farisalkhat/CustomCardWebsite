@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Card, CustomcardsService, Draft, Pack, Pack2, PackInfo } from 'src/app/customcards.service';
+import { Card, CustomcardsService, Draft, HoveredCardDetails, Pack, Pack2, PackInfo } from 'src/app/customcards.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Editor, Toolbar } from 'ngx-editor';
 import { toHTML } from 'ngx-editor';
@@ -358,52 +358,25 @@ export class PackMakerComponent implements OnInit, OnDestroy {
     }
 
   }
-  goToLink(url: string){
+  goToLink(id: string | undefined) {
+    const url = this._router.serializeUrl(
+      this._router.createUrlTree([`/cards/${id}`])
+    );
 
-    let new_url =''
-
-    if(this._router['location']._platformLocation.location.origin=='http://localhost:4200'){
-       new_url = this._router.serializeUrl(
-        this._router.createUrlTree(['/cards/']));
-    }
-    else{
-       new_url = this._router.serializeUrl(
-      this._router.createUrlTree(['/cards/']));
-    }
-
-
-
-    window.open(new_url +'/'+url, '_blank');
-
-
-    // const newurl = 'https://www.duelingbook.com/card?id='+url
-    // window.open(newurl, "_blank");
-}
-  mouseHovering(card:Card,e:MouseEvent) {
-
-    console.log(e.clientX);
-    console.log(e.clientY);
-
-      this.isHovering = true;
-      this.hoveredCard = card
-
-      if(e.clientX>=900){
-        this.leftPosition = e.clientX-200;
-      }
-
-      else{
-        this.leftPosition = e.clientX+2;
-      }
-
-      this.rightPosition =e.clientY-170;
-
-
-      this.getHoveredCardDetails()
-
-    }
-    mouseLeft() {
-        this.isHovering = false;
-    }
+    window.open(url, '_blank');
+  }
+  mouseHovering(card: Card, e: MouseEvent) {
+    const final = {} as HoveredCardDetails;
+    if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
+    else { final.leftPosition = e.clientX + 2; }
+    final.rightPosition = e.clientY - 170;
+    final.card = card;
+    final.isHovering = true;
+    this.customcardsService.HoveredCard(final);
+  }
+  mouseLeft() {
+    this.customcardsService.DisableHoveredCard();
+  }
     getHoveredCardDetails(){
 
       this.hoverattribute=''

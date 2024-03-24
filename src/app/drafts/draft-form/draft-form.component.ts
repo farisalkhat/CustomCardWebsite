@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { Card, CustomcardsService, DraftCard } from 'src/app/customcards.service';
+import { Card, CustomcardsService, DraftCard, HoveredCardDetails } from 'src/app/customcards.service';
 import * as FileSaver from 'file-saver';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -299,53 +299,59 @@ export class DraftFormComponent implements OnInit {
     // const newurl = 'https://www.duelingbook.com/card?id='+url
     // window.open(newurl, "_blank");
   }
-  mouseHovering(card: Card, e: MouseEvent) {
 
-
+  goToLinkDrafting(url: string) {
     if (this.state != 'flipped') {
       return
     }
+    let new_url = ''
 
-    this.isHovering = true;
-    this.hoveredCard = card
-
-    if (e.clientX >= 900) {
-      this.leftPosition = e.clientX - 200;
+    if (this.router['location']._platformLocation.location.origin == 'http://localhost:4200') {
+      new_url = this.router.serializeUrl(
+        this.router.createUrlTree(['/cards/']));
     }
-
     else {
-      this.leftPosition = e.clientX + 2;
+      new_url = this.router.serializeUrl(
+        this.router.createUrlTree(['/CustomCardWebsite/cards/']));
     }
 
-    this.rightPosition = e.clientY - 170;
 
 
-    this.getHoveredCardDetails()
+    window.open(new_url + '/' + url, '_blank');
 
 
-
+    // const newurl = 'https://www.duelingbook.com/card?id='+url
+    // window.open(newurl, "_blank");
   }
+
 
 
   mouseHoverDrafted(card: Card, e: MouseEvent) {
-    this.isHovering = true;
-    this.hoveredCard = card
+    const final = {} as HoveredCardDetails;
+    if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
+    else { final.leftPosition = e.clientX + 2; }
+    final.rightPosition = e.clientY - 170;
+    final.card = card;
+    final.isHovering = true;
+    this.customcardsService.HoveredCard(final);
+  }
 
-    if (e.clientX >= 900) {
-      this.leftPosition = e.clientX - 200;
+
+
+  mouseHovering(card: Card, e: MouseEvent) {
+    if (this.state != 'flipped') {
+      return
     }
-
-    else {
-      this.leftPosition = e.clientX + 2;
-    }
-
-    this.rightPosition = e.clientY - 170;
-
-
-    this.getHoveredCardDetails()
+    const final = {} as HoveredCardDetails;
+    if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
+    else { final.leftPosition = e.clientX + 2; }
+    final.rightPosition = e.clientY - 170;
+    final.card = card;
+    final.isHovering = true;
+    this.customcardsService.HoveredCard(final);
   }
   mouseLeft() {
-    this.isHovering = false;
+    this.customcardsService.DisableHoveredCard();
   }
   getHoveredCardDetails() {
 
