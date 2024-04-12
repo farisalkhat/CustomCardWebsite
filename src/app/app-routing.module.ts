@@ -45,6 +45,7 @@ import { StructureDeckDetailsComponent } from './structure-decks/structure-deck-
 import { StructureDeckEditorComponent } from './structure-decks/structure-deck-editor/structure-deck-editor.component';
 import {FormatsComponent} from './formats/formats.component';
 import {AboutsiteComponent} from './aboutsite/aboutsite.component';
+import { DustingCollectionComponent } from './collections/dusting-collection/dusting-collection.component';
 
 const routes: Routes = [
   {
@@ -141,7 +142,9 @@ component:StructureDeckEditorComponent
 component:FormatsComponent
 },
 {path:'about',
-component:AboutsiteComponent}
+component:AboutsiteComponent},
+{path:'collections/dusting',
+component:DustingCollectionComponent}
 
 
 

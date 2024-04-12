@@ -1330,9 +1330,13 @@ getHoveredCardDetails(){
             const formData = new FormData();
             formData.append("thumbnail", this.file);
             formData.append("name",finaldata['title'])
-            this.customcardsService.uploadImage(formData).subscribe(res=>{finaldata['packurl']=res
-
-            this.customcardsService.submitPack(finaldata)
+            this.customcardsService.submitPack(finaldata).subscribe(res=>{
+              
+            
+            
+            formData.append("thumbnail", this.file);
+            formData.append("name",res)
+            this.customcardsService.uploadPackImage(formData)
             .subscribe(
               res=>{
                 console.log(res);

@@ -608,7 +608,7 @@ export class CustomcardsService {
     else{
       return (this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/pack/${id}`));
     }
-    
+
   }
 
   getPackAmount() {
@@ -654,8 +654,13 @@ export class CustomcardsService {
   deletePack(id: number) {
     return this.http.post<any>(`https://farisalkhat.com/theattic/api/delete-pack`, id);
   }
-  uploadImage(formData: FormData) {
-    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/uploadimage', formData
+  uploadPackImage(formData: FormData) {
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/uploadpackimage', formData
+    )
+  }
+
+  uploadProfileImage(formData: FormData) {
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/uploadprofileimage', formData
     )
   }
 
@@ -693,6 +698,9 @@ export class CustomcardsService {
 
   getCollectionCardsByCreatorID(id: number) {
     return this.http.get<BinderCard[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/collections/${id}`);
+  }
+  getCollectionCardsByCreatorIDMerged(id: number) {
+    return this.http.get<BinderCard[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/collectionsmerged/${id}`);
   }
 
   getChecklist(userid: number, packid: number) {

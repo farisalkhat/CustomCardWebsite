@@ -63,6 +63,7 @@ import { FormatsComponent } from './formats/formats.component';
 import { AboutsiteComponent } from './aboutsite/aboutsite.component';
 import { DatePipe } from '@angular/common';
 import { HoverCardComponent } from './hover-card/hover-card.component';
+import { DustingCollectionComponent } from './collections/dusting-collection/dusting-collection.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { HoverCardComponent } from './hover-card/hover-card.component';
     StructureDeckEditComponent,
     FormatsComponent,
     AboutsiteComponent,
-    HoverCardComponent
+    HoverCardComponent,
+    DustingCollectionComponent
   ],
   imports: [
     HttpClientModule,

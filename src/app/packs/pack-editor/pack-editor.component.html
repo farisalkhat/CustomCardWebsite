@@ -2,7 +2,7 @@
     <span *ngFor = "let pack of packs">
 
       <button *ngIf="pack.pack!='placeholder'" class="btn"  (click)="editPack(pack.id,pack.title)" >
-        <img     class="pack" src='https://theatticygo.com/assets/packimages/{{pack?.id}}.png'>
+        <img     class="pack" src='https://images.theatticygo.com/pack-images/{{pack?.pack}}.png'>
         <p>{{pack.title}}</p>
       </button>
 

@@ -1261,13 +1261,19 @@ export class PackMakerComponent implements OnInit, OnDestroy {
 
 
 
-
+        //Pack resubmit
         if(this.fileChanged){
+
+
           const formData = new FormData();
           formData.append("thumbnail", this.file);
-          formData.append("name",finaldata['title'])
-          this.customcardsService.uploadImage(formData).subscribe(res=>{
-            finaldata['packurl']=res
+          let randnum = Math.floor(Math.random() * 100000);
+
+          formData.append("name",finaldata['packID']+randnum.toString())
+          formData.append("deleteImage",this.packInfo.pack)
+          finaldata['packurl'] = finaldata['packID']+randnum.toString()
+
+          this.customcardsService.uploadPackImage(formData).subscribe(res=>{
             this.customcardsService.resubmitPack(finaldata)
             .subscribe(
               res=>{
@@ -1302,6 +1308,7 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         }
 
       }
+      //pack first submit
       else{
         const finaldata = {} as Pack;
         finaldata['title'] = this.draftData.controls['draftTitle'].value;
@@ -1347,14 +1354,31 @@ export class PackMakerComponent implements OnInit, OnDestroy {
         finaldata['packurl'] = 'placeholder'
 
 
+        // const formData = new FormData();
+        // formData.append("thumbnail", this.file);
+
+        // let randnum = Math.floor(Math.random() * 100000);
+        // formData.append("name",this.creatorid+randnum.toString());
+        // formData.append("deleteImage",this.newSettings.profile_image)
+        // this.newSettings['profile_image'] = this.creatorid+randnum.toString()
+
+        // this.customcardsService.uploadProfileImage(formData).subscribe(res=>{
+        //   this.customcardsService.editProfileImages(this.newSettings).subscribe(res=>{
+
+
 
         if(this.fileChanged){
-          const formData = new FormData();
-          formData.append("thumbnail", this.file);
-          formData.append("name",finaldata['title'])
-          this.customcardsService.uploadImage(formData).subscribe(res=>{finaldata['packurl']=res
 
-          this.customcardsService.submitPack(finaldata)
+          this.customcardsService.submitPack(finaldata).subscribe(res=>{
+            const formData = new FormData();
+            formData.append("thumbnail", this.file);
+            let randnum = Math.floor(Math.random() * 100000);
+
+            formData.append("name",res+randnum.toString())
+            formData.append("deleteImage",this.packInfo.pack)
+            finaldata['packurl'] = res+randnum.toString()
+
+          this.customcardsService.uploadPackImage(formData)
           .subscribe(
             res=>{
               console.log(res);
@@ -1409,14 +1433,28 @@ export class PackMakerComponent implements OnInit, OnDestroy {
 
   fileChanged:boolean = false;
   file!:File;
-  onFileSelected(event:any) {
+  filename:string =''
+  onFileSelected(event:any){
 
-    this.file = event.target.files[0];
-    this.fileChanged = true;
-
-
-
-}
+    if(event.target.files.length > 0){
+      let selectedFile = event.target.files[0];
+      if(selectedFile.type !== "image/png" &&
+      selectedFile.type !== "image/jpg" &&
+      selectedFile.type !== "image/jpeg"){
+        alert("File type must be png, jpg or jpeg.")
+        return;
+      }
+      if (selectedFile.size >5000 * 1024) {
+        alert("File size cannot be more than 5mb.")
+        return;
+      }
+      else{
+        this.file = event.target.files[0];
+        this.filename = this.file.name;
+        this.fileChanged = true;
+      }
+    }
+  }
 
 
 

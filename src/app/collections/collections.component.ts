@@ -12,6 +12,7 @@ export class CollectionsComponent implements OnInit {
   searching:boolean=false;
   searchName:string=''
 
+  dusting: boolean = false;
   filters = {
     'name':'',
     'desc':'',
@@ -108,6 +109,8 @@ export class CollectionsComponent implements OnInit {
       // const newurl = 'https://www.duelingbook.com/card?id='+url
       // window.open(newurl, "_blank");
   }
+
+
     getCardNumbers(page:number){
         this.currentCards = [];
         const cardmin = (page-1)*54;
@@ -340,5 +343,12 @@ export class CollectionsComponent implements OnInit {
 
       }
 
+
+      InitializeDusting(){
+        this.dusting=true;
+      }
+      cancelDusting(){
+        this.dusting=false;
+      }
 
 }

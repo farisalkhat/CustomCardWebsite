@@ -3,6 +3,7 @@ button{
     margin:3px;
     font-size:1.5rem;
     font-family: 'Oswald', sans-serif;
+    color:white;
 }
 
 input{
@@ -48,7 +49,8 @@ p{
 .packtracker{
     width:200px;
     height:600px;
-    background-color: rgba(4, 113, 63, 0.9);
+    background-color: #151D1E;
+
     padding:5px;
 }
 

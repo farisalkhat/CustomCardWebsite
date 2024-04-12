@@ -1,0 +1,7 @@
+
+
+<div *ngIf="calculating===true">
+    <p>Total Dust Value: {{dustValue}}</p>
+
+    <button *ngIf="calculating===true" class="btn btn-success" (click)="dustCards()">Dust?</button>
+</div>

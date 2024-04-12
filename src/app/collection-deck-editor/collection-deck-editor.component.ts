@@ -136,7 +136,7 @@ export class CollectionDeckEditorComponent implements OnInit {
         this.uploadedMain= this.customcardsService.getUploadedMain()
         this.uploadedSide= this.customcardsService.getUploadedSide()
         this.uploadedExtra= this.customcardsService.getUploadedExtra()
-        this.customcardsService.getCollectionCardsByCreatorID(this.creatorid).subscribe(
+        this.customcardsService.getCollectionCardsByCreatorIDMerged(this.creatorid).subscribe(
           res => {
             if(res){}
             this.cards = res;

@@ -11,17 +11,24 @@ export class PlayerComponent implements OnInit {
   constructor(public customcardsService:CustomcardsService) { }
 
   players:any[]=[];
-  ngOnInit(): void {    
-    
+
+  staff:any[]=[];
+  newestUsers:any[]=[];
+  ngOnInit(): void {
+
     this.customcardsService.getPlayers().subscribe(
         res => {
-          if(res){}
             this.players = res;
-            console.log(this.players)
+            this.staff=this.players.filter((user)=>user.role.toLowerCase().includes('admin'))
             this.hideloader();
+
+            this.newestUsers = this.players.sort((a, b) => (a.id > b.id) ? -1 : ((b.id > a.id) ? 1 : 0))
+            if(this.newestUsers.length>7){
+              this.newestUsers = this.newestUsers.slice(0,7)
+            }
+
+            console.log(this.newestUsers);
         }
-
-
   )
   }
   hideloader() {

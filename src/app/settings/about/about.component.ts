@@ -176,12 +176,31 @@ export class AboutComponent implements OnInit {
     this.done=true;
 
     this.newSettings['about'] = this.aboutMe.controls['about'].value;;
-    this.customcardsService.editProfileImages(this.newSettings).subscribe(res=>{
-      window.location.reload()
-    },
-    err=>{
-      this._router.navigate(['/home'])
-    })
+
+    if(this.fileChanged){
+      const formData = new FormData();
+      formData.append("thumbnail", this.file);
+
+      let randnum = Math.floor(Math.random() * 100000);
+      formData.append("name",this.creatorid+randnum.toString());
+      formData.append("deleteImage",this.newSettings.profile_image)
+      this.newSettings['profile_image'] = this.creatorid+randnum.toString()
+
+      this.customcardsService.uploadProfileImage(formData).subscribe(res=>{
+        this.customcardsService.editProfileImages(this.newSettings).subscribe(res=>{
+          console.log(this.newSettings['profile_image'])
+          window.location.reload()
+        },
+        err=>{
+          this._router.navigate(['/home'])
+        })
+      });
+
+    }
+
+
+
+
   }
 
 
@@ -521,5 +540,36 @@ goToLink(url: string){
     }
 
 }
+
+
+fileChanged:boolean = false;
+file!:File;
+filename:string= '';
+
+
+
+
+onFileSelected(event:any){
+
+  if(event.target.files.length > 0){
+    let selectedFile = event.target.files[0];
+    if(selectedFile.type !== "image/png" &&
+    selectedFile.type !== "image/jpg" &&
+    selectedFile.type !== "image/jpeg"){
+      alert("File type must be png, jpg or jpeg.")
+      return;
+    }
+    if (selectedFile.size >5000 * 1024) {
+      alert("File size cannot be more than 5mb.")
+      return;
+    }
+    else{
+      this.file = event.target.files[0];
+      this.filename = this.file.name;
+      this.fileChanged = true;
+    }
+  }
+}
+
 
 }

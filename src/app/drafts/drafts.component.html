@@ -14,12 +14,12 @@
         <div class="row">
           <div *ngFor = "let draft of drafts" class="col-auto">
             <!-- (click)="setCustomDraft(draft.id)" -->
-            
+
             <a routerLink="/draft-form/{{draft.id}}">
               <div class="card rounded">
                 <div class="crop rounded">
                   <div class="overlay-div rounded"></div>
-                  <img src='https://theatticygo.com/assets/cardimages/{{draft?.draftimage}}.png' >
+                  <img src='https://images.theatticygo.com/card-images/{{draft?.draftimage}}.png' >
 
                 </div>
 

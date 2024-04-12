@@ -10,15 +10,15 @@
 
     <h3><b><u>Main Deck</u></b></h3>
     <span *ngFor = "let card of decklist">
-        <span *ngIf="card?.deck == 'maindeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></span>
+        <span *ngIf="card?.deck == 'maindeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></span>
     </span>
     <h3><b><u>Side Deck</u></b></h3>
     <span *ngFor = "let card of decklist">
-        <span *ngIf="card?.deck == 'sidedeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></span>
+        <span *ngIf="card?.deck == 'sidedeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></span>
     </span>
     <h3><b><u>Extra Deck</u></b></h3>
     <span *ngFor = "let card of decklist">
-        <span *ngIf="card?.deck == 'extradeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://theatticygo.com/assets/cardimages/{{card?.id}}.png'></span>
+        <span *ngIf="card?.deck == 'extradeck'"><img (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" (click)="goToLink(card.id)" class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></span>
     </span>
 
 </div>

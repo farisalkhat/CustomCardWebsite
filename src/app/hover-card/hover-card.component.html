@@ -1,43 +1,43 @@
 <div [style.left.px]="leftPosition" [style.top.px]="rightPosition" class="hovering container-fluid border border-success" *ngIf="isHovering===true">
     <div class="row">
         <div class="col-sm-5">
-            <img class="smallcard" src='https://theatticygo.com/assets/cardimages/{{hoveredCard?.id}}.png'>
+            <img class="smallcard" src='https://images.theatticygo.com/card-images/{{hoveredCard?.id}}.png'>
         </div>
         <div class="col-sm">
             <p>
                 <b class="monster-name">{{hoveredCard.name}}</b>
-                
-                
-                
+
+
+
                 <b><span  *ngIf="hovermonster=='False'">
                     <img class="attribute" src={{hoverattribute}}> {{hoveredCard.attribute}}
-                    <img class="type" src={{hoverstType}}> {{hoveredCard.cardtype}} 
+                    <img class="type" src={{hoverstType}}> {{hoveredCard.cardtype}}
                 </span>
-                <span *ngIf="hovermonster=='True'"> 
-                    <img class="attribute" src={{hoverattribute}}> {{hoveredCard.attribute}} 
+                <span *ngIf="hovermonster=='True'">
+                    <img class="attribute" src={{hoverattribute}}> {{hoveredCard.attribute}}
                     <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard.level}}
                 </span></b>
-                
+
             </p>
 
-                
 
-                
-            
 
-        
 
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
             <b>
                 <!-- <img class="type" src={{hovermType}}> -->
                 <p *ngIf="hovermonster=='True'"> [{{hoveredCard.type}}/{{hoveredCard.cardtype}}]</p>
-        
-        
+
+
                 <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard.atk}}  DEF/{{hoveredCard.def}}</p>
                 <p> {{hoveredCard.effect}}</p>
                 <p>ID: {{hoveredCard.id}}</p>
@@ -45,6 +45,6 @@
         </div>
     </div>
 
-    
+
 
 </div>

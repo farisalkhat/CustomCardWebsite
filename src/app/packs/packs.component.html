@@ -34,9 +34,9 @@
     <div class="row align-items-center">
 
         <div class="col"*ngFor = "let pack of packs">
-            <img    *ngIf="pack.pack!='placeholder'" (click) = "goToLink(pack.packid)"  class="pack" src='https://theatticygo.com/assets/packimages/{{pack?.packid}}.png'>
+            <img    *ngIf="pack.pack!='placeholder'" (click) = "goToLink(pack.packid)"  class="pack" src='https://images.theatticygo.com/pack-images/{{pack?.pack}}.png'>
 
-            <img   *ngIf="pack.pack=='placeholder'" (click) = "goToLink(pack.packid)"  class="pack"src = 'https://theatticygo.com/assets/packimages/placeholder.png'>
+            <img   *ngIf="pack.pack=='placeholder'" (click) = "goToLink(pack.packid)"  class="pack"src = 'https://images.theatticygo.com/pack-images/placeholder.png'>
 
 
 
@@ -85,7 +85,7 @@
 
 
 
-    <div *ngIf="sealedmode==false" [ngClass]="maximized ? 'position-fixed bottom-0 end-0' : 'sidepush position-fixed bottom-0 end-0'" #packtracker class="packtracker ">
+    <div *ngIf="sealedmode==false" [ngClass]="maximized ? 'position-fixed bottom-0 end-0' : 'sidepush position-fixed bottom-0 end-0'" #packtracker class="packtracker border border-success">
         <button class="btn btn-success" (click)="minimizePackTracker()">
             <span *ngIf="maximized">>></span>
             <span *ngIf="!maximized"> << </span>

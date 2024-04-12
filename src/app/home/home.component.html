@@ -1,6 +1,8 @@
 
+<app-hover-card></app-hover-card>
+
 <div class="container-fluid center">
-    <!-- <a href="https://farisalkhat.github.io/CustomCardWebsite/cards/2876404"><img class="center" src="https://lh3.google.com/u/0/d/13BEisqzWP1kXSbvwnCsmdQiuCb_PoId4"></a> -->
+    <!-- <a href="https://farisalkhat.github.io/CustomCardWebsite/cards/2876404"><img class="center" src="https://images.theatticygo.com/profile-images/13BEisqzWP1kXSbvwnCsmdQiuCb_PoId4"></a> -->
     <!-- <img class="center" src="assets/images/Attic2.png"> -->
 
     <div class="card newbie rounded-7">
@@ -23,7 +25,7 @@
             <div routerLink="/packs" class="card rounded center small-card">
                 <div class="crop rounded ">
                     <div class="overlay-div rounded "></div>
-                    <img src='https://lh3.google.com/u/0/d/19VB5LayxB2aVaDaIcMiayyJPdgaErxY_' >
+                    <img src='https://images.theatticygo.com/card-images/2876561.png' >
 
                 </div>
 
@@ -36,7 +38,7 @@
             <div routerLink="/deck-editor" class="card rounded center small-card">
                 <div class="crop rounded">
                     <div class="overlay-div rounded"></div>
-                    <img src='https://lh3.google.com/u/0/d/1Mm-cHxvBBwRu2ADvgVFzYhu-PfKvheEa' >
+                    <img src='https://images.theatticygo.com/card-images/3466774.png' >
 
                 </div>
 
@@ -49,7 +51,7 @@
             <div routerLink="/decklists" class="card rounded center small-card">
                 <div class="crop rounded">
                     <div class="overlay-div rounded"></div>
-                    <img src='https://lh3.google.com/u/0/d/11ik2eREdiLg6df2qHSU7uXgzdOAA7c7V' >
+                    <img src='https://images.theatticygo.com/card-images/2945734.png' >
 
                 </div>
 
@@ -62,7 +64,7 @@
             <div routerLink="/draft-maker" class="card rounded center small-card">
                 <div class="crop rounded">
                     <div class="overlay-div rounded"></div>
-                    <img src='https://lh3.google.com/u/0/d/1BnruNoN42c-l6iuJMt-G0tNdQLsYqp6k' >
+                    <img src='https://images.theatticygo.com/card-images/2876383.png' >
 
                 </div>
 
@@ -72,10 +74,10 @@
             </div>
         </div>
         <div class="col">
-            <div (click)="goToSealedDraft()" routerLink="/packs" class="center card rounded small-card">
+            <div (click)="goToSealedDraft()" class="center card rounded small-card">
                 <div class="crop rounded">
                     <div class="overlay-div rounded"></div>
-                    <img src='https://lh3.google.com/u/0/d/1FZ1bL7NpcZNq_hpnvz084O_R2je0FOrC' >
+                    <img src='https://images.theatticygo.com/card-images/2883166.png' >
 
                 </div>
 
@@ -88,7 +90,7 @@
             <div routerLink="/articles" class="card rounded center small-card">
                 <div class="crop rounded">
                     <div class="overlay-div rounded"></div>
-                    <img src='https://lh3.google.com/u/0/d/1YDqy4PUS8ICjV-w9MVOAG_hKO3xAwsLJ' >
+                    <img src='https://images.theatticygo.com/card-images/2956848.png' >
 
                 </div>
 
@@ -187,13 +189,13 @@
       <div class="row">
         <div class="col-md-6 col-6">
             <h1 class="text-center">Card of the Day!</h1>
-            <input class="center smaller" type="image" (click)="goToLink(cotd.id)" src="https://theatticygo.com/assets/cardimages/{{cotd.id}}.png" />
+            <input class="center smaller" type="image" (click)="goToLink(cotd.id)" src="https://images.theatticygo.com/card-images/{{cotd.id}}.png" />
 
         </div>
         <div class="col-md-6 col-6">
             <h1 class="text-center">Latest Pack!</h1>
-            <img    *ngIf="latestpack.pack!='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack" src="https://theatticygo.com/assets/packimages/{{latestpack?.packid}}.png">
-            <img   *ngIf="latestpack.pack=='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack"src = 'https://theatticygo.com/assets/packimages/placeholder.png'>
+            <img    *ngIf="latestpack.pack!='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack" src="https://images.theatticygo.com/pack-images/{{latestpack?.packid}}.png">
+            <img   *ngIf="latestpack.pack=='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack"src = 'https://images.theatticygo.com/pack-images/placeholder.png'>
 
         </div>
 
@@ -219,9 +221,9 @@
 
         <div  *ngFor = "let card of cards"class="col-md-4 col-lg-2 col-4 ">
 
-                <input class="center cotd  " type="image" routerLink="/cards/{{card.id}}"
+                <input (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="center cotd  " type="image" routerLink="/cards/{{card.id}}"
 
-                src="https://theatticygo.com/assets/cardimages/{{card.id}}.png" />
+                src="https://images.theatticygo.com/card-images/{{card.id}}.png" />
 
 
         </div>

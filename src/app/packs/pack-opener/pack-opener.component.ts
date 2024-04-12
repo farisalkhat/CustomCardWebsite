@@ -236,6 +236,9 @@ export class PackOpenerComponent implements OnInit {
 
 
 mouseHovering(card: Card, e: MouseEvent) {
+  if(this.state=="default"){
+    return;
+  }
   const final = {} as HoveredCardDetails;
   if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
   else { final.leftPosition = e.clientX + 2; }

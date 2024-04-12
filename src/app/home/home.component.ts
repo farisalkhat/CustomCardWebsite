@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomcardsService,SiteData,Card, PackInfo, PackButton, Article } from '../customcards.service';
+import { CustomcardsService,SiteData,Card, PackInfo, PackButton, Article, HoveredCardDetails } from '../customcards.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
@@ -117,4 +117,16 @@ export class HomeComponent implements OnInit {
         }
   }
 
+  mouseHovering(card: Card, e: MouseEvent) {
+    const final = {} as HoveredCardDetails;
+    if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
+    else { final.leftPosition = e.clientX + 2; }
+    final.rightPosition = e.clientY - 170;
+    final.card = card;
+    final.isHovering = true;
+    this._customCardsService.HoveredCard(final);
+  }
+  mouseLeft() {
+    this._customCardsService.DisableHoveredCard();
+  }
 }
