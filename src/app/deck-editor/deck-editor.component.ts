@@ -45,32 +45,44 @@ export class DeckEditorComponent implements OnInit {
 
 
   uploadCorrectly: boolean = true;
+  finishedUploading:boolean = false;
 
 
   draftCard!: Card;
 
 
-  draftData = new FormGroup({
-    draftTitle: new FormControl(' ', [
+  deckDetails = new FormGroup({
+    deckname: new FormControl(' ', [
       Validators.required,
       Validators.minLength(1),
       Validators.maxLength(100)
+    ]),
+    deckdescription: new FormControl('placeholder', [
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(100)
+    ]),
+    decklabel: new FormControl(' ', [
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(100)
+    ]),
 
-    ])
   })
-
+  get f() { return this.deckDetails.controls; }
 
   submitVerified = false;
   submitted = false;
   submitfail: boolean = false;
 
-  get f() { return this.draftData.controls; }
+
 
 
   constructor(public _authService: AuthService, private customcardsService: CustomcardsService, private _router: Router) { }
 
   deckname: string = "placeholder";
   deckdescription: string = "placeholder";
+  decklabel:string = "placeholder";
 
   filters = {
     'name': '',
@@ -111,9 +123,15 @@ export class DeckEditorComponent implements OnInit {
 
   defaultRules: string = "default";
 
+  detaileddecklistdescription!:any;
+  detailederror:boolean = false;
+  showdetaileddeckdescription: boolean = false;
+  setthumbnailmode: boolean = false;
+  thumbnail:number = 0;
 
   @Input() drafting: boolean = true;
 
+  editing:boolean = false;
   ngOnChanges(changes: SimpleChanges) {
     for (const propName in changes) {
       const chng = changes[propName];
@@ -126,6 +144,11 @@ export class DeckEditorComponent implements OnInit {
 
   GetDeckEditorDetails() {
     this.defaultRules = this.customcardsService.defaultDeckEditor
+    this.customcardsService.receiveDecklistDetailsEvent.subscribe((data)=>{
+      this.detaileddecklistdescription = data;
+      console.log("blahlablal");
+      console.log(this.detaileddecklistdescription.id)
+    })
 
 
 
@@ -174,46 +197,48 @@ export class DeckEditorComponent implements OnInit {
     this.hideloader();
 
 
-
+    //First checks if it is in the middle of editing a decklist.
     if (this.customcardsService.getProcessingDeck() == false) {
+      //Checks if there is a decklist saved.
       if (this.customcardsService.getEditDecklist() && this.customcardsService.getEditDeckID() != -1) {
         forkJoin(
           this.customcardsService.getDecklistInfo(this.customcardsService.getEditDeckID()),
           this.customcardsService.getDecklist(this.customcardsService.getEditDeckID()),
         ).subscribe(([deckInfo, decklist]) => {
+          //Retrieves and sets decklist info.
           this.decklistinfo = deckInfo;
           this.decklist = decklist;
+          console.log("decklistinfo: " + this.decklistinfo.id)
+          this.uploadedMain = this.customcardsService.getUploadedMain()
+          this.uploadedSide = this.customcardsService.getUploadedSide()
+          this.uploadedExtra = this.customcardsService.getUploadedExtra()
 
-          for (let card in decklist) {
-            if (decklist[card].deck == "maindeck" || decklist[card].deck == "extradeck") {
-              this.addCard(decklist[card])
-            }
-            else {
-              this.addSideCard(decklist[card])
-            }
-          }
-
-
-          this.draftData.controls['draftTitle'].setValue(this.customcardsService.getEditDeckName());
-
-
-
-
-
-
-
-
-
+          // for (let card in decklist) {
+          //   if (decklist[card].deck == "maindeck" || decklist[card].deck == "extradeck") {
+          //     this.addCard(decklist[card])
+          //   }
+          //   else {
+          //     this.addSideCard(decklist[card])
+          //   }
+          // }
+          this.deckDetails.controls['deckname'].setValue(this.customcardsService.getEditDeckName());
+          this.deckDetails.controls['decklabel'].setValue(this.decklistinfo.label);
         })
         this.customcardsService.setProcessingDeck(true);
+        this.editing=true;
+        console.log("Processing deck set to true.")
+
       }
 
     }
     else {
+      console.log("Processing deck set to false")
       this.customcardsService.setProcessingDeck(false);
       this.customcardsService.editDeck(false);
       this.customcardsService.setEditDeckID(-1);
       this.customcardsService.setEditDeckName('')
+      this.customcardsService.uploadDecklist([],[],[]);
+      this.editing=false;
     }
 
     if (this.uploadedMain.length > 0 || this.uploadedSide.length > 0 || this.uploadedExtra.length > 0) {
@@ -248,8 +273,25 @@ export class DeckEditorComponent implements OnInit {
 
 
   ngOnInit() {
+    if(this.customcardsService.getProcessingDeck() == true){
+      this.customcardsService.setProcessingDeck(false);
+      this.customcardsService.editDeck(false);
+      this.customcardsService.setEditDeckID(-1);
+      this.customcardsService.setEditDeckName('')
+      this.customcardsService.uploadDecklist([],[],[]);
+      this.editing=false;
+    }
+
     this.GetDeckEditorDetails();
+    const current = new Date();
+    this.timestamp = current.getTime();
     console.log(this.cards)
+
+  }
+
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
   }
 
   submitSearch() {
@@ -606,177 +648,7 @@ export class DeckEditorComponent implements OnInit {
 
 
 
-  // getHoveredCardDetails(){
 
-  //   this.hoverattribute=''
-  //   this.hoverstType =''
-  //   this.hovermType= ''
-
-  //   if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
-  //     this.hovermonster='False';
-  //     this.hoverattribute="assets/cardstats/TRAP.png";
-
-  //     switch (this.hoveredCard?.cardtype) {
-  //       case "Normal Trap":
-  //           this.hoverstType = "assets/cardstats/Normal.png";
-  //           break;
-  //       case "Continuous Trap":
-  //           this.hoverstType = "assets/cardstats/Continuous.png";
-  //           break;
-  //       case "Counter Trap":
-  //           this.hoverstType = "assets/cardstats/Counter.png";
-  //           break;
-  //       default:
-  //           this.hoverstType
-  //           break;
-  //   }
-  //   }
-
-  //   else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
-  //   this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
-  //     this.hovermonster='False';
-  //     this.hoverattribute="assets/cardstats/SPELL.png";
-
-  //     switch (this.hoveredCard?.cardtype) {
-  //       case "Normal Spell":
-  //           this.hoverstType = "assets/cardstats/Normal.png";
-  //           break;
-  //       case "Quick Spell":
-  //           this.hoverstType = "assets/cardstats/Quick.png";
-  //           break;
-  //       case "Field Spell":
-  //           this.hoverstType = "assets/cardstats/Field.png";
-  //           break;
-  //       case "Continuous Spell":
-  //           this.hoverstType = "assets/cardstats/Continuous.png";
-  //           break;
-  //       case "Equip Spell":
-  //           this.hoverstType = "assets/cardstats/Equip.png";
-  //           break;
-  //       case "Ritual Spell":
-  //           this.hoverstType = "assets/cardstats/Ritual.png";
-  //           break;
-  //       default:
-  //           this.hoverstType
-  //           break;
-  //   }
-  //   }
-
-
-
-  //   else{
-  //     this.hovermonster='True';
-  //     switch(this.hoveredCard?.attribute){
-  //       case "FIRE":
-  //           this.hoverattribute = "assets/cardstats/FIRE.png";
-  //           break;
-  //       case "DARK":
-  //           this.hoverattribute = "assets/cardstats/DARK.png";
-  //           break;
-  //       case "WIND":
-  //           this.hoverattribute = "assets/cardstats/WIND.png";
-  //           break;
-  //       case "WATER":
-  //           this.hoverattribute = "assets/cardstats/WATER.png";
-  //           break;
-  //       case "LIGHT":
-  //           this.hoverattribute = "assets/cardstats/LIGHT.png";
-  //           break;
-  //       case "DIVINE":
-  //           this.hoverattribute = "assets/cardstats/DIVINE.png";
-  //           break;
-  //       case "EARTH":
-  //           this.hoverattribute = "assets/cardstats/EARTH.png";
-  //           break;
-  //       default:
-  //           this.hoverattribute = "assets/cardstats/EARTH.png";
-  //           break;
-
-
-  //     }
-
-  //     switch (this.hoveredCard?.type) {
-  //       case "Aqua":
-  //           this.hovermType = "assets/monstertypes/Aqua.png";
-  //           break;
-  //       case "Beast-Warrior":
-  //           this.hovermType = "assets/monstertypes/Beast-Warrior.png";
-  //           break;
-  //       case "Beast":
-  //           this.hovermType = "assets/monstertypes/Beast.png";
-  //           break;
-  //       case "Dinosaur":
-  //           this.hovermType = "assets/monstertypes/Dinosaur.png";
-  //           break;
-  //       case "Divine-Beast":
-  //           this.hovermType = "assets/monstertypes/Divine-Beast.png";
-  //           break;
-  //       case "Dragon":
-  //           this.hovermType = "assets/monstertypes/Dragon.png";
-  //           break;
-
-  //       case "Fairy":
-  //           this.hovermType = "assets/monstertypes/Fairy.png";
-  //           break;
-  //       case "Fiend":
-  //           this.hovermType = "assets/monstertypes/Fiend.png";
-  //           break;
-  //       case "Fish":
-  //           this.hovermType = "assets/monstertypes/Fish.png";
-  //           break;
-  //       case "Insect":
-  //           this.hovermType = "assets/monstertypes/Insect.png";
-  //           break;
-  //       case "Machine":
-  //           this.hovermType = "assets/monstertypes/Machine.png";
-  //           break;
-  //       case "Plant":
-  //           this.hovermType = "assets/monstertypes/Plant.png";
-  //           break;
-
-  //       case "Psychic":
-  //           this.hovermType = "assets/monstertypes/Psychic.png";
-  //           break;
-  //       case "Pyro":
-  //           this.hovermType = "assets/monstertypes/Pyro.png";
-  //           break;
-  //       case "Reptile":
-  //           this.hovermType = "assets/monstertypes/Reptile.png";
-  //           break;
-  //       case "Rock":
-  //           this.hovermType = "assets/monstertypes/Rock.png";
-  //           break;
-  //       case "Sea Serpent":
-  //           this.hovermType = "assets/monstertypes/Serpent.png";
-  //           break;
-  //       case "Spellcaster":
-  //           this.hovermType = "assets/monstertypes/Spellcaster.png";
-  //           break;
-
-  //       case "Thunder":
-  //           this.hovermType = "assets/monstertypes/Thunder.png";
-  //           break;
-  //       case "Warrior":
-  //           this.hovermType = "assets/monstertypes/Warrior.png";
-  //           break;
-  //       case "Winged-Beast":
-  //           this.hovermType = "assets/monstertypes/Winged-Beast.png";
-  //           break;
-  //       case "Zombie":
-  //           this.hovermType = "assets/monstertypes/Zombie.png";
-  //           break;
-
-  //       default:
-  //           this.hovermType = "assets/monstertypes/Zombie.png";
-  //           break;
-  //   }
-
-
-
-
-  //   }
-
-  // }
 
 
   showDetails(card: Card) {
@@ -1154,6 +1026,11 @@ export class DeckEditorComponent implements OnInit {
   rightAddDraftCard($event: { preventDefault: () => void; }, card: DraftCard) {
 
     $event.preventDefault();
+    if(this.setthumbnailmode===true){
+      this.thumbnail= Number(card.id);
+      this.setthumbnailmode=false;
+      return;
+    }
     this.card = card;
 
     if (this.mainOrSide == 'Side') {
@@ -1170,6 +1047,11 @@ export class DeckEditorComponent implements OnInit {
   rightAddCard($event: { preventDefault: () => void; }, card: Card) {
 
     $event.preventDefault();
+    if(this.setthumbnailmode===true){
+      this.thumbnail= Number(card.id);
+      this.setthumbnailmode=false;
+      return;
+    }
     this.card = card;
 
     if (this.mainOrSide == 'Side') {
@@ -1193,6 +1075,11 @@ export class DeckEditorComponent implements OnInit {
 
 
   rightDeleteCard($event: { preventDefault: () => void; }, card: Card) {
+    if(this.setthumbnailmode===true){
+      this.thumbnail= Number(card.id);
+      this.setthumbnailmode=false;
+      return;
+    }
     $event.preventDefault();
     this.deleteCard(card);
 
@@ -1200,6 +1087,11 @@ export class DeckEditorComponent implements OnInit {
 
 
   rightDeleteSideCard($event: { preventDefault: () => void; }, card: Card) {
+    if(this.setthumbnailmode===true){
+      this.thumbnail= Number(card.id);
+      this.setthumbnailmode=false;
+      return;
+    }
     $event.preventDefault();
     console.log(this.sideDeck)
     const index = this.sideDeck.findIndex(obj => obj.id === card?.id)
@@ -1253,6 +1145,11 @@ export class DeckEditorComponent implements OnInit {
 
 
   rightDeleteDraftCard($event: { preventDefault: () => void; }, card: DraftCard) {
+    if(this.setthumbnailmode===true){
+      this.thumbnail= Number(card.id);
+      this.setthumbnailmode=false;
+      return;
+    }
     $event.preventDefault();
     this.deleteDraftCard(card);
 
@@ -1260,6 +1157,11 @@ export class DeckEditorComponent implements OnInit {
 
 
   rightDeleteDraftSideCard($event: { preventDefault: () => void; }, card: DraftCard) {
+    if(this.setthumbnailmode===true){
+      this.thumbnail= Number(card.id);
+      this.setthumbnailmode=false;
+      return;
+    }
     card.copies++;
     $event.preventDefault();
     console.log(this.sideDeck)
@@ -1312,18 +1214,31 @@ export class DeckEditorComponent implements OnInit {
   }
 
 
+  getFormDetails(){
+    console.log(this.deckDetails.controls['deckname'].value);
+    console.log(this.deckDetails.controls['deckdescription'].value);
+    console.log(this.deckDetails.controls['decklabel'].value);
+  }
 
   uploadList() {
+    this.customcardsService.SendDeckListDetails();
+    if(this.detaileddecklistdescription==null){
+      this.detailederror=true;
+
+      return;
+    }
+    this.detailederror=false;
     if (this.mainDeck.length < 40 || this.mainDeck.length > 60) {
       this.uploadCorrectly = false;
       return;
     }
-    this.uploadCorrectly = true;
+
 
 
     const decklist = {} as Decklist;
-    decklist.title = this.deckname;
-    decklist.desc = this.deckdescription;
+    decklist['title'] = this.deckDetails.controls['deckname'].value;
+    decklist['desc'] = " ";
+    decklist['label']= this.deckDetails.controls['decklabel'].value;
 
     this.xml_file = '<?xml version="1.0" encoding="utf-8" ?> <deck name=".TriType"><main>';
 
@@ -1357,10 +1272,20 @@ export class DeckEditorComponent implements OnInit {
     decklist['decklist'] = this.xml_file;
     decklist['creator'] = this.creator;
     decklist['creatorid'] = Number(this.creatorid);
+    decklist['body'] = this.detaileddecklistdescription;
 
+    if(this.thumbnail==0){
 
-    if (this.decklistinfo) {
-      decklist['decklistid'] = this.decklistinfo.id
+      decklist['thumbnail'] = 3117440;
+    }
+    else{
+      decklist['thumbnail'] = this.thumbnail;
+    }
+
+    this.finishedUploading=true;
+    console.log(this.customcardsService.getEditDeckID())
+    if (this.customcardsService.getEditDeckID()!=undefined && this.customcardsService.getEditDeckID()!=-1) {
+      decklist['decklistid'] = this.customcardsService.getEditDeckID()
       console.log("resubmitting decklist..")
       this.customcardsService.resubmitDecklist(decklist)
         .subscribe(
@@ -1371,6 +1296,8 @@ export class DeckEditorComponent implements OnInit {
             this.customcardsService.editDeck(false);
             this.customcardsService.setEditDeckID(-1);
             this.customcardsService.setEditDeckName('')
+            this.customcardsService.uploadDecklist([],[],[]);
+            this.editing=false;
             this.submitfail = false;
             this._router.navigate(['/decklists']);
           },
@@ -1428,4 +1355,14 @@ export class DeckEditorComponent implements OnInit {
 
   }
 
+
+
+  ShowDetailedDeckDescription(){
+    console.log("poopie");
+    this.showdetaileddeckdescription = !this.showdetaileddeckdescription;
+  }
+  SetThumbnailMode(){
+    this.setthumbnailmode = !this.setthumbnailmode;
+
+  }
 }

@@ -128,6 +128,8 @@ export class CollectionDeckEditorComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this._authService.getUser().subscribe(
       res =>{
         console.log(res['username'])
@@ -229,7 +231,10 @@ export class CollectionDeckEditorComponent implements OnInit {
 
 
   }
-
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
   submitSearch(){
     var div = document.getElementById('Loading')
     if(div){

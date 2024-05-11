@@ -1,7 +1,7 @@
 <div [style.left.px]="leftPosition" [style.top.px]="rightPosition" class="hovering container-fluid border border-success" *ngIf="isHovering===true">
     <div class="row">
         <div class="col-sm-5">
-            <img class="smallcard" src='https://images.theatticygo.com/card-images/{{hoveredCard?.id}}.png'>
+            <img class="smallcard" src='https://images.theatticygo.com/card-images/{{hoveredCard?.id}}.png?{{getTimeStamp()}}'>
         </div>
         <div class="col-sm">
             <p>

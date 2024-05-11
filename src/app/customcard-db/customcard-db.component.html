@@ -233,7 +233,7 @@
 
             <span *ngFor = "let card of currentCards">
 
-                <button class="btn btn-success" (click)="showDetails(card.id)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                <button class="btn btn-success" (click)="showDetails(card.id)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
 
             </span>
 
@@ -247,7 +247,7 @@
 
 
     <div class="col-lg-4 cardeffect">
-        <img class="bigcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'>
+        <img class="bigcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'>
         <b><p *ngIf="monster=='True'">
             <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}
         </p></b>

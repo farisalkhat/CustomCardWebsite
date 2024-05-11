@@ -1,7 +1,106 @@
 
 <div class="container">
   <h1>Public Decklists</h1>
-    <table class="table">
+  <div class="row" (keydown.enter)="submitSearch()">
+    <div class="col-auto" [formGroup]="searchFilters">
+        <label for="Name">Deck Name</label>
+        <input  class="form-control" type="text" id="deckname" formControlName="deckname"  >
+    </div>
+
+    <div class="col-auto" [formGroup]="searchFilters">
+        <label for="Desc">Included Card</label>
+        <input class="form-control" type="text" id="cardname" formControlName="cardname"  >
+
+    </div>
+    <div class="col-auto" [formGroup]="searchFilters">
+        <label for="Name">Deck Label</label>
+        <select class="form-control" id="decklabel" formControlName="decklabel" >
+          <option value=""></option>
+            <option value="Meta">Meta Decks</option>
+            <option value="Collection">Collection Format</option>
+            <option value ="Sealed Draft">Sealed Draft Format</option>
+            <option value ="Deck Master">Deck Master Format</option>
+            <option value ="Cube">Cube Format</option>
+            <option value ="Balanced">Balanced Format</option>
+            <option value ="Non-Meta">Non-Meta Decks</option>
+            <option value ="Anime">Anime Decks</option>
+            <option value ="Fun/Casual">Fun/Casual Decks</option>
+
+
+          </select>
+
+
+
+
+
+    </div>
+    <div class="col-md-4 movedown">
+      <button class="btn btn-success movedown" (click) = submitSearch()>Search</button>
+    </div>
+
+    </div>
+
+    <div class="col-auto"><div class="d-flex justify-content-center">
+      <div id="Loading" class="spinner-border" role="status">
+          <span class="sr-only" ></span>
+      </div>
+    </div>
+
+
+  <div class="row">
+    <div class="col">
+
+        <div class="row">
+          <div *ngFor="let decklist of current_decklists" class="col-sm-6 col-md-4">
+
+              <div routerLink="/decklist/{{decklist?.id}}" class="card article-card" style="width:302px;">
+                <div *ngIf="decklist?.label=='Meta'" class="article-label article-label-shadow" style="background-color:purple"><p class="article-label-text">META</p></div>
+                <div *ngIf="decklist?.label=='Collection'" class="article-label article-label-shadow" style="background-color:rgb(255, 145, 0)"><p class="article-label-text">COLLECTION</p></div>
+                <div *ngIf="decklist?.label=='Sealed Draft'" class="article-label article-label-shadow" style="background-color:rgba(255, 0, 0, 0.786)"><p class="article-label-text">SEALED DRAFT</p></div>
+                <div *ngIf="decklist?.label=='Deck Master'" class="article-label article-label-shadow" style="background-color:rgb(16, 154, 57)"><p class="article-label-text">DM</p></div>
+                <div *ngIf="decklist?.label=='Cube'" class="article-label article-label-shadow" style="background-color:rgb(209, 7, 250)"><p class="article-label-text">CUBE</p></div>
+                <div *ngIf="decklist?.label=='Balanced'" class="article-label article-label-shadow" style="background-color:rgb(0, 131, 94)"><p class="article-label-text">BALANCED</p></div>
+                <div *ngIf="decklist?.label=='Non-Meta'" class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">NON-META</p></div>
+                <div *ngIf="decklist?.label=='Anime'" class="article-label article-label-shadow" style="background-color:rgb(5, 78, 180)"><p class="article-label-text">ANIME</p></div>
+                <div *ngIf="decklist?.label=='Fun/Casual'" class="article-label article-label-shadow" style="background-color:rgba(200, 8, 142, 0.977)"><p class="article-label-text">CASUAL</p></div>
+                <div *ngIf="decklist?.label!='Meta'
+                && decklist?.label != 'Collection'
+                && decklist?.label != 'Sealed Draft'
+                && decklist?.label != 'Deck Master'
+                && decklist?.label != 'Cube'
+                && decklist?.label != 'Balanced'
+                && decklist?.label != 'Non-Meta'
+                && decklist?.label != 'Anime'
+                && decklist?.label != 'Fun/Casual' " class="article-label article-label-shadow" style="background-color:gray">
+                <p class="article-label article-label-shadow" style="background-color:gray"class="article-label-text">OTHER</p></div>
+                <div class="crop ">
+
+                  <img src='https://images.theatticygo.com/card-images/{{decklist?.thumbnail}}.png?{{getTimeStamp()}}' alt="Card image cap">
+
+                  <div class="article-info-overlay">
+                    <h5 class="card-title">{{decklist.name}}</h5>
+                    <p  class="article-card-text card-text">Submitted By <b>{{decklist.creator}}</b></p>
+
+                  </div>
+                  </div>
+
+                  <!-- <div class="card-body">
+                    <h5 class="card-title">{{article.title}}</h5>
+                    <p class="card-text">{{article.header}}</p>
+                    <p class="card-text">By {{article.username}}</p>
+                  </div> -->
+                </div>
+
+          </div>
+        </div>
+
+
+        <div class="row center">
+          <button  (click)="loadMore()"  class="button btn-success btn">Load More</button>
+        </div>
+
+  </div>
+    <!-- <table class="table">
         <thead class="table-dark">
           <tr>
             <th scope="col">Creator</th>
@@ -13,11 +112,11 @@
             <tr>
               <a routerLink="/players/{{decklist?.creatorid}}"><td>{{decklist?.creator}}</td></a>
               <td><a routerLink='/decklist/{{decklist.id}}'>{{decklist?.name}}</a></td>
-              <td><p>{{decklist?.description}}</p></td>    
-    
+              <td><p>{{decklist?.description}}</p></td>
+
             </tr>
           </tbody>
-      </table>
+      </table> -->
 
 </div>
 

@@ -29,6 +29,8 @@ export class BindersComponent implements OnInit {
   constructor(public customcardsService:CustomcardsService, public authService:AuthService, public router:Router) { }
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
 
 
     this.authService.getUser().subscribe(
@@ -42,10 +44,10 @@ export class BindersComponent implements OnInit {
             if(res){
               this.binders=res;
               console.log(this.binders)
-    
-    
+
+
             }
-    
+
           }
         )
       },
@@ -59,7 +61,10 @@ export class BindersComponent implements OnInit {
     console.log(this.creatorid)
 
     }
-
+    timestamp: number = 0;
+    getTimeStamp(){
+      return this.timestamp;
+    }
 
 
     selectBinder(){
@@ -69,19 +74,19 @@ export class BindersComponent implements OnInit {
           if(res){
             this.cards=res;
             console.log(this.cards)
-  
-  
+
+
           }
-  
+
         }
       )
 
     }
-    
+
     goToLink(url: number){
 
       let new_url =''
-  
+
       if(this.router['location']._platformLocation.location.origin=='http://localhost:4200'){
          new_url = this.router.serializeUrl(
           this.router.createUrlTree(['/cards/']));
@@ -90,12 +95,12 @@ export class BindersComponent implements OnInit {
          new_url = this.router.serializeUrl(
         this.router.createUrlTree(['/CustomCardWebsite/cards/']));
       }
-      
-  
-   
+
+
+
       window.open(new_url +'/'+url, '_blank');
-  
-  
+
+
       // const newurl = 'https://www.duelingbook.com/card?id='+url
       // window.open(newurl, "_blank");
   }
@@ -120,17 +125,17 @@ export class BindersComponent implements OnInit {
 
 
 
-      
+
       getHoveredCardDetails(){
-        
+
         this.hoverattribute=''
         this.hoverstType =''
         this.hovermType= ''
-      
+
         if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
           this.hovermonster='False';
           this.hoverattribute="assets/cardstats/TRAP.png";
-          
+
           switch (this.hoveredCard?.cardtype) {
             case "Normal Trap":
                 this.hoverstType = "assets/cardstats/Normal.png";
@@ -146,12 +151,12 @@ export class BindersComponent implements OnInit {
                 break;
         }
         }
-      
+
         else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
         this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
           this.hovermonster='False';
           this.hoverattribute="assets/cardstats/SPELL.png";
-          
+
           switch (this.hoveredCard?.cardtype) {
             case "Normal Spell":
                 this.hoverstType = "assets/cardstats/Normal.png";
@@ -176,9 +181,9 @@ export class BindersComponent implements OnInit {
                 break;
         }
         }
-      
-      
-        
+
+
+
         else{
           this.hovermonster='True';
           switch(this.hoveredCard?.attribute){
@@ -206,10 +211,10 @@ export class BindersComponent implements OnInit {
             default:
                 this.hoverattribute = "assets/cardstats/EARTH.png";
                 break;
-            
-          
+
+
           }
-      
+
           switch (this.hoveredCard?.type) {
             case "Aqua":
                 this.hovermType = "assets/monstertypes/Aqua.png";
@@ -229,7 +234,7 @@ export class BindersComponent implements OnInit {
             case "Dragon":
                 this.hovermType = "assets/monstertypes/Dragon.png";
                 break;
-      
+
             case "Fairy":
                 this.hovermType = "assets/monstertypes/Fairy.png";
                 break;
@@ -248,7 +253,7 @@ export class BindersComponent implements OnInit {
             case "Plant":
                 this.hovermType = "assets/monstertypes/Plant.png";
                 break;
-      
+
             case "Psychic":
                 this.hovermType = "assets/monstertypes/Psychic.png";
                 break;
@@ -267,7 +272,7 @@ export class BindersComponent implements OnInit {
             case "Spellcaster":
                 this.hovermType = "assets/monstertypes/Spellcaster.png";
                 break;
-      
+
             case "Thunder":
                 this.hovermType = "assets/monstertypes/Thunder.png";
                 break;
@@ -280,17 +285,17 @@ export class BindersComponent implements OnInit {
             case "Zombie":
                 this.hovermType = "assets/monstertypes/Zombie.png";
                 break;
-            
+
             default:
                 this.hovermType = "assets/monstertypes/Zombie.png";
                 break;
         }
-      
-      
-      
-      
+
+
+
+
         }
-        
+
       }
-  
+
 }

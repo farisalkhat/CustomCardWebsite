@@ -153,6 +153,8 @@ export class DraftFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this.draftMode = this.customcardsService.getDraftType();
     this.customEnabled = this.customcardsService.getCustomEnabled();
     console.log(this.draftMode);
@@ -203,7 +205,7 @@ export class DraftFormComponent implements OnInit {
     // this.customcardsService.getCustomCardsByCreator('charge301').subscribe(
     //   res => {
     //     if(res){}
-    //     this.richie = res;  
+    //     this.richie = res;
     //   }
     // )
     // this.customcardsService.getCustomSpellsTraps().subscribe(
@@ -246,8 +248,8 @@ export class DraftFormComponent implements OnInit {
     // )
     // this.customcardsService.getCustomCardsByTag('Type-Generic').subscribe(
     //   res => {
-    //     if(res){        
-    //       this.genericT = res;  
+    //     if(res){
+    //       this.genericT = res;
 
 
 
@@ -277,7 +279,10 @@ export class DraftFormComponent implements OnInit {
 
 
   }
-
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
   goToLink(url: string) {
 
     let new_url = ''
@@ -763,7 +768,7 @@ export class DraftFormComponent implements OnInit {
   }
 
 
-  randomIntFromInterval(min: number, max: number) { // min and max included 
+  randomIntFromInterval(min: number, max: number) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 

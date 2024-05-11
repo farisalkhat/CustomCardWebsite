@@ -140,7 +140,8 @@ export class PackMakerComponent implements OnInit, OnDestroy {
   done:boolean = false;
   ngOnInit(): void {
     this.editor = new Editor();
-
+    const current = new Date();
+    this.timestamp = current.getTime();
     if (this._authService.loggedIn()){
 
       this._authService.getUser().subscribe(
@@ -349,6 +350,10 @@ export class PackMakerComponent implements OnInit, OnDestroy {
 
 
     )
+  }
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
   }
   hideloader() {
     var div = document.getElementById('Loading')

@@ -33,10 +33,13 @@ export class CardDetailsComponent implements OnInit {
   unlimited:boolean = true;
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this.route.paramMap.subscribe((paramMap)=>{
       this.cardid = Number(paramMap.get('cardid'));
       this.customcardService.getCardDetails(this.cardid).subscribe(
         (data:any)=>{
+          this.customcardService.updateCardViews(this.cardid).subscribe()
           this.carddetails = data;
           this.card = this.carddetails['carddetails']
           this.tags = this.carddetails['tags']
@@ -57,18 +60,21 @@ export class CardDetailsComponent implements OnInit {
                 this.tags.splice(tag,1)
             }
 
-            
+
             console.log(tag)
           }
           console.log(this.carddetails);
           this.showDetails()
-        } 
+        }
       )
     })
 
 
   }
-
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
   goToLink(url: string){
     const newurl = 'https://www.duelingbook.com/card?id='+url
     window.open(newurl, "_blank");
@@ -83,7 +89,7 @@ showDetails(){
   if(this.card?.cardtype=="Normal Trap" || this.card?.cardtype=="Counter Trap" || this.card?.cardtype=="Continuous Trap"){
     this.monster='False';
     this.attribute="assets/cardstats/TRAP.png";
-    
+
     switch (this.card?.cardtype) {
       case "Normal Trap":
           this.stType = "assets/cardstats/Normal.png";
@@ -104,7 +110,7 @@ showDetails(){
   this.card?.cardtype=="Ritual Spell" || this.card?.cardtype=="Field Spell" || this.card?.cardtype=="Equip Spell" ){
     this.monster='False';
     this.attribute="assets/cardstats/SPELL.png";
-    
+
     switch (this.card?.cardtype) {
       case "Normal Spell":
           this.stType = "assets/cardstats/Normal.png";
@@ -131,7 +137,7 @@ showDetails(){
   }
 
 
-  
+
   else{
     this.monster='True';
     switch(this.card?.attribute){
@@ -159,8 +165,8 @@ showDetails(){
       default:
           this.attribute = "assets/cardstats/EARTH.png";
           break;
-      
-    
+
+
     }
 
     switch (this.card?.type) {
@@ -233,7 +239,7 @@ showDetails(){
       case "Zombie":
           this.mType = "assets/monstertypes/Zombie.png";
           break;
-      
+
       default:
           this.mType = "assets/monstertypes/Zombie.png";
           break;
@@ -243,7 +249,7 @@ showDetails(){
 
 
   }
-  
+
 }
 confirmDelete(){
     if(this._authService.adminRole()){
@@ -253,7 +259,7 @@ confirmDelete(){
         else{
             let text = "Are you sure you want to delete this card?";
             if (confirm(text) == true) {
-    
+
                 this.customcardService.deleteCard(this.card).subscribe(
                     res=>{this.router.navigate(['/deck-editor']);},
                     err=>{this.router.navigate(['/deck-editor']);}

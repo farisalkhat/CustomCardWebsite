@@ -64,6 +64,10 @@ import { AboutsiteComponent } from './aboutsite/aboutsite.component';
 import { DatePipe } from '@angular/common';
 import { HoverCardComponent } from './hover-card/hover-card.component';
 import { DustingCollectionComponent } from './collections/dusting-collection/dusting-collection.component';
+import { UploadCardImagesComponent } from './admin/upload-card-images/upload-card-images.component';
+import { SubmitDeckComponent } from './deck-editor/submit-deck/submit-deck.component';
+import { PlayerSearchComponent } from './player/player-search/player-search.component';
+import { PlayerHomeComponent } from './player/player-home/player-home.component';
 
 @NgModule({
   declarations: [
@@ -123,7 +127,11 @@ import { DustingCollectionComponent } from './collections/dusting-collection/dus
     FormatsComponent,
     AboutsiteComponent,
     HoverCardComponent,
-    DustingCollectionComponent
+    DustingCollectionComponent,
+    UploadCardImagesComponent,
+    SubmitDeckComponent,
+    PlayerSearchComponent,
+    PlayerHomeComponent
   ],
   imports: [
     HttpClientModule,

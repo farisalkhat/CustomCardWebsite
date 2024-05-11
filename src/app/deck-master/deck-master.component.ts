@@ -32,9 +32,11 @@ export class DeckMasterComponent implements OnInit {
   cards:Card[]=[]
   state:string='default'
   randomCards:Card[]=[]
-  DMCount = 0 
+  DMCount = 0
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this.customcardsService.getDeckMasters().subscribe(
       res => {
         if(res){}
@@ -43,7 +45,11 @@ export class DeckMasterComponent implements OnInit {
         this.shuffleCards()
       }
     )
-    
+
+  }
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
   }
 
 
@@ -77,10 +83,10 @@ export class DeckMasterComponent implements OnInit {
       }
   }
 
-    randomIntFromInterval(min:number, max:number) { // min and max included 
+    randomIntFromInterval(min:number, max:number) { // min and max included
       return Math.floor(Math.random() * (max - min + 1) + min)
     }
-  
+
 
 
     goToLink(url: string){

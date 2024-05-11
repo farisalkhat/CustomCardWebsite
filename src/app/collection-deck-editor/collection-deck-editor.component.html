@@ -243,7 +243,7 @@
                     <button *ngIf="card!=undefined" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card)"  (click)="goToLink(card.id)" >
 
                         <div class="relative"*ngIf="card.rarity=='common'">
-                            <img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'>
+                            <img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'>
                             <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                         </div>
 
@@ -251,7 +251,7 @@
                             <img class = " smallcard sparkle" *ngIf="card.rarity=='secret'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/giphy.gif'>
                             <img class = "smallcard sparkle" *ngIf="card.rarity=='super'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/super.gif'>
                             <img class = "smallcard sparkle" *ngIf="card.rarity=='ultra'" src ='https://raw.githubusercontent.com/farisalkhat/CustomCardWebsite/master/src/assets/effects/fireworks.gif'>
-                            <img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'>
+                            <img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'>
                             <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                         </div>
                     </button>
@@ -274,7 +274,7 @@
 
 
         <!-- <div class="col-lg-4 cardeffect">
-            <img href='' (click)="goToLink(card.id)" class="bigcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'>
+            <img href='' (click)="goToLink(card.id)" class="bigcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'>
             <b><p *ngIf="monster=='True'">
                 <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}
             </p></b>
@@ -325,7 +325,7 @@
         <div class="col-lg-12">
             <h2>Monsters ({{monsterCounter}})</h2>
             <span *ngFor = "let card of mainDeck">
-                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Monster')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Monster')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -333,28 +333,28 @@
         <div class="col-lg-12">
             <h2>Spells ({{spellCounter}})</h2>
             <span *ngFor = "let card of mainDeck">
-                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Spell')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Spell')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Traps ({{trapCounter}})</h2>
             <span *ngFor = "let card of mainDeck">
-                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Trap')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" *ngIf="card.cardtype.includes('Trap')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Side Deck ({{sideCounter}})</h2>
             <span *ngFor = "let card of sideDeck">
-                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (contextmenu)="rightDeleteSideCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (contextmenu)="rightDeleteSideCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Extra ({{edCounter}})</h2>
             <span *ngFor = "let card of extraDeck">
-                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"  (contextmenu)="rightDeleteDraftCard($event,card)" (click)="selectDraftCard(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 

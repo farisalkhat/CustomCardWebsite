@@ -1,0 +1,23 @@
+a:hover {
+    cursor: pointer;
+  }
+  a {
+    color: #e3e3e3 !important;
+    text-decoration: none !important;
+  }
+  a:hover {
+    color: #055734 !important;
+  }
+  .container {
+    width: 50%;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+  
+  p {
+    text-align: center;
+  }
+  

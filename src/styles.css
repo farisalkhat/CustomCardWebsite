@@ -173,3 +173,15 @@ button:hover{
 
 
 
+.article-card {
+  margin: 5px;
+  padding: auto;
+  cursor: pointer;
+  position: relative;
+  border-color: black;
+  border-radius: 0%;
+  transition:.5s;
+}
+.article-card:hover{
+  transform:scale(1.05);
+}

@@ -38,6 +38,12 @@ a {
 .small-card:hover {
   cursor: pointer;
   opacity: 1;
+  transform:scale(1.05);
+}
+
+.card{
+  border:0;
+  height: 250px;
 }
 
 .newbie .card h1 {
@@ -56,8 +62,18 @@ a {
 }
 .newbie-outline{
 
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 2px 2px 0 #000;
 
+}
+
+.strokeme
+{
+    color: white;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
 }
 h1 {
   font-size: 3.5em;
@@ -66,15 +82,15 @@ h1 {
 }
 .newbie {
   background-color:   #075433;
-  background-image: url("/assets/images/Prisman-Render.png");
+  background-image: url("/assets/images/collage.png");
   background-repeat: no-repeat;
   background-position: right;
-  height: 250px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background-size: 250px;
+  background-size:     cover;
   border-radius: 0.85rem !important;
-  font-color: black;
+
+}
+.newbie{
+  background-image: url("/assets/images/collage.png");
 }
 
 .newbie-crop {
@@ -105,12 +121,7 @@ h1 {
   background-color: blue;
 }
 
-.small-card {
-  width: 325px;
-  height: 75px;
-  opacity: 0.85;
-  transition: 0.5s;
-}
+
 
 .row-small {
   width: 90%;
@@ -122,14 +133,20 @@ h1 {
   width: 60%;
 }
 .crop {
-  width: 325px;
-  height: 75px;
+  width: 350px;
+  height: 150px;
   overflow: hidden;
   object-fit: cover;
 }
+.small-card {
+  width: 350px;
+  height: 150px;
+  opacity: 0.85;
+  transition: 0.5s;
+}
 .crop img {
   width: 133%;
-  margin: -170px 6000px 0px -52px;
+  margin: -150px 6000px 0px -58px;
   background-color: #000;
 }
 .smaller {
@@ -141,6 +158,8 @@ h1 {
 }
 .card-title {
   color: #e3e3e3;
+  height:40px;
+  margin-bottom:20px;
 }
 .carousel-item {
   cursor: pointer;
@@ -156,19 +175,20 @@ h1 {
 .card-img-overlay {
   color: white;
   font-family: "Oswald", sans-serif;
-  font-size: 2.5em;
+  font-size: 3.0em;
   padding: 0;
+  padding-top:20px;
 }
 p {
   color: #e3e3e3;
 }
 
 .overlay-div {
-  width: 325px;
-  height: 75px;
+  width: 350px;
+  height: 150px;
   position: absolute;
   background-color: #000;
-  opacity: 0.4;
+  opacity: 0.2;
   transition: 0.3s;
 }
 .overlay-div:hover {
@@ -177,6 +197,22 @@ p {
 
 .row {
   margin-top: 10px;
+}
+
+@media(min-width:1500px){
+
+  .crop {
+    width: 350px;
+    height: 150px;
+    overflow: hidden;
+    object-fit: cover;
+  }
+  .small-card {
+    width: 350px;
+    height: 150px;
+    opacity: 0.85;
+    transition: 0.5s;
+  }
 }
 
 @media (max-width: 768px) {
@@ -195,19 +231,31 @@ p {
 }
 
 .card-img-top {
-  width: 300px;
-  height: 150px;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+.card-img-top-decklist {
+  width: 100%;
+  height: 250px;
   object-fit: cover;
 }
 
 .article-card {
+  
   margin: 5px;
   padding: auto;
   cursor: pointer;
   position: relative;
   border-color: black;
   border-radius: 0%;
+  transition:.5s;
+  width:100%;
 }
+.article-card:hover{
+  transform:scale(1.05);
+}
+
 
 .article-label {
   width: 100px;
@@ -235,6 +283,7 @@ p {
   bottom: 0;
   left: 0;
   width: 100%;
+
   padding: 2px;
   margin: 0;
 }
@@ -248,5 +297,35 @@ h5 {
   color: #ededed;
 }
 h4{
-  color:#1f1f1f;
+  color:#ededed;
+  font-size:20px;
+  
+}
+.alert-padding{
+  padding-bottom:1000px;
+}
+
+.alert{
+  height:35px;
+  width:100%;
+  background-color: #075433;
+  padding: .3rem 0rem 1rem;
+  margin-top:3px;
+}
+.card-body{
+  background-color: rgba(0, 0, 0, .65);
+}
+
+
+.notice{
+  border:1px solid transparent;
+  border-radius:.25rem;
+  position:relative;
+  margin-bottom:1rem;
+  height:35px;
+  width:100%;
+  background-color:#075433;
+  padding:.3rem 0rem 1rem;
+  margin-top:3px;
+  text-align: center;
 }

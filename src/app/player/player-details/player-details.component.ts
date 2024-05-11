@@ -15,7 +15,7 @@ export class PlayerDetailsComponent implements OnInit {
 
 
 
-  
+
   constructor(public authService: AuthService, public route:ActivatedRoute,public customcardsService:CustomcardsService) { }
   page="Profile"
   userDetails!:UserDetails;
@@ -24,7 +24,7 @@ export class PlayerDetailsComponent implements OnInit {
   packID!:number;
 
   userPackCollection!:ChecklistCard[];
-  
+
   loggedInID!:number;
 
   packs:PackButton[] = [];
@@ -36,6 +36,8 @@ export class PlayerDetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this.page="Profile"
 
     if (this.authService.loggedIn()){
@@ -58,7 +60,7 @@ export class PlayerDetailsComponent implements OnInit {
         (data:any)=>{
           this.userDetails = data;
           console.log(this.userDetails);
-        } 
+        }
       )
     })
 
@@ -73,11 +75,15 @@ export class PlayerDetailsComponent implements OnInit {
     )
 
   }
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
 
 
   goToLink(link:string){
     let sublink = link.substring(0,28)
-    
+
     if(link.substring(0,28).trim()=='https://www.duelingbook.com'){
       window.open(link, "_blank");
     }
@@ -95,7 +101,7 @@ export class PlayerDetailsComponent implements OnInit {
       res => {
         if(res){}
           this.userPackCollection = res;
-          
+
           this.packTotal = this.userPackCollection.length
           this.packOwned = 0
 
@@ -105,8 +111,8 @@ export class PlayerDetailsComponent implements OnInit {
             }
           }
       }
-  
-  
+
+
     )
   }
 }

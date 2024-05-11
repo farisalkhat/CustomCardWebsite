@@ -1,0 +1,266 @@
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alert {
+  text-align: center;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+}
+.pack {
+  width: 225px;
+  cursor: pointer;
+}
+.card-text {
+  font-size: x-large;
+  font-weight: 400;
+}
+.movedown{
+  margin-top:11px;
+}
+button {
+  padding: 5px;
+  margin: 3px;
+  font-family: "Noto Sans", sans-serif !important;
+  font-size: 1.2em;
+}
+
+.text-center {
+  margin-top: 20px;
+}
+a {
+  color: #e3e3e3;
+}
+
+.small-card:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.newbie .card h1 {
+  text-shadow: 3px 3px 0px black !important;
+}
+.newbie .card .card-text {
+  text-shadow: 3px 3px 0px black !important;
+  font-size: 2em;
+  color: white !important;
+}
+.newbie p {
+  color: white !important;
+}
+.newbie h1 {
+  color: white !important;
+}
+.newbie-outline {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+h1 {
+  font-size: 3.5em;
+  font-family: "Noto Sans", sans-serif !important;
+  font-weight: 600;
+}
+.newbie {
+  background-color: #075433;
+  background-image: url("/assets/images/Prisman-Render.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  height: 250px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-size: 250px;
+  border-radius: 0.85rem !important;
+  font-color: black;
+}
+
+.newbie-crop {
+  height: 300px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.newbie-crop img {
+  width: 1%;
+  margin: -170px 6000px 0px -52px;
+  background-color: #000;
+}
+
+.article-label {
+  width: 100px;
+  height: 50px;
+}
+
+.newbie-overlay-div {
+  width: 100%;
+  height: 300px;
+  position: absolute;
+  background-color: #000;
+  opacity: 0.4;
+  transition: 0.3s;
+}
+.newbie-overlay-div:hover {
+  background-color: blue;
+}
+
+.small-card {
+  width: 325px;
+  height: 75px;
+  opacity: 0.85;
+  transition: 0.5s;
+}
+
+.row-small {
+  width: 90%;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+}
+.container-fluid {
+  width: 60%;
+}
+.crop {
+  width: 325px;
+  height: 75px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.crop img {
+  width: 133%;
+  margin: -170px 6000px 0px -52px;
+  background-color: #000;
+}
+.smaller {
+  width: 250px;
+}
+.cotd {
+  width: 175px;
+  margin: 5px 0 5px 0;
+}
+.card-title {
+  color: #e3e3e3;
+}
+.carousel-item {
+  cursor: pointer;
+}
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.7);
+}
+.carousel-item > img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.card-img-overlay {
+  color: white;
+  font-family: "Oswald", sans-serif;
+  font-size: 2.5em;
+  padding: 0;
+}
+p {
+  color: #e3e3e3;
+}
+
+.overlay-div {
+  width: 325px;
+  height: 75px;
+  position: absolute;
+  background-color: #000;
+  opacity: 0.4;
+  transition: 0.3s;
+}
+.overlay-div:hover {
+  background-color: red;
+}
+
+.row {
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .card .card-text {
+    text-shadow: 3px 3px 0px black !important;
+    font-size: 1em;
+  }
+  h1 {
+    font-size: 2.5em;
+    font-family: "Noto Sans", sans-serif !important;
+    font-weight: 600;
+  }
+  .newbie {
+    height: 200px;
+  }
+}
+.overlay-div {
+  width: 325px;
+  height: 75px;
+  position: absolute;
+  background-color: #000;
+  left: -100px;
+  opacity: 0.4;
+  transition: 0.3s;
+}
+.card-img-top {
+  width: 300px;
+  height: 150px;
+  object-fit: fill;
+}
+.crop {
+  width: 310px;
+  height: 150px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.article-card {
+  margin: 5px;
+  padding: auto;
+  cursor: pointer;
+  position: relative;
+  border-color: black;
+  border-radius: 0%;
+}
+
+.article-label {
+  width: 100px;
+  height: 25px;
+  background-color: purple;
+  position: absolute;
+  top: -10px;
+  left: -20px;
+}
+
+.article-label-shadow {
+  color: black;
+  border: 1px solid;
+  box-shadow: 3px 4px;
+}
+
+.article-label-text {
+  color: #e3e3e3;
+  text-align: center;
+}
+
+.article-info-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 310px;
+  padding: 2px;
+  margin: 0;
+}
+.article-card-text {
+  color: #ededed;
+  font-family: Roboto;
+  font-size: 14px;
+}
+
+h5 {
+  color: #ededed;
+}
+h4 {
+  color: #1f1f1f;
+}

@@ -52,6 +52,8 @@ export class PlayerCollectionComponent implements OnInit {
   @Input() userId!:number;
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this.customcardsService.getCollectionCardsByCreatorID(this.userId).subscribe(
       res => {
         if(res){
@@ -130,6 +132,10 @@ export class PlayerCollectionComponent implements OnInit {
 
 
     }
+    timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
     goToLink(url: number){
 
       let new_url =''

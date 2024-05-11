@@ -17,7 +17,7 @@
       <button class="btn btn-warning" *ngIf="article?.author==id" routerLink="/articles/edit/{{articleid}}">Edit</button></h1>
     
     <h2>{{article?.header}}</h2>
-    <p>Article written by <a routerLink="/players/{{article?.author}}">{{article?.username}}</a> </p>
+    <p>Article written by <a routerLink="/players/{{article?.author}}">{{article?.username}}</a> | Views: {{article?.views}} </p>
     
 
     <span [innerHTML]="article.body"></span>

@@ -246,7 +246,7 @@
 
                 <span *ngFor = "let card of currentCards">
 
-                    <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card.id)"  (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                    <button (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card.id)"  (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
 
                 </span>
 
@@ -260,7 +260,7 @@
 
 
         <!-- <div class="col-lg-4 cardeffect">
-            <img class="bigcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'>
+            <img class="bigcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'>
             <b><p *ngIf="monster=='True'">
                 <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}
             </p></b>
@@ -303,7 +303,7 @@
         <div class="col-lg-12">
             <h2>Monsters</h2>
             <span *ngFor = "let card of currentDraft">
-                <button class="btn btn-default" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" *ngIf="card.cardtype.includes('Monster')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                <button class="btn btn-default" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" *ngIf="card.cardtype.includes('Monster')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -311,21 +311,21 @@
         <div class="col-lg-12">
             <h2>Spells</h2>
             <span *ngFor = "let card of currentDraft">
-                <button class="btn btn-default" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" *ngIf="card.cardtype.includes('Spell')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                <button class="btn btn-default" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" *ngIf="card.cardtype.includes('Spell')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Traps</h2>
             <span *ngFor = "let card of currentDraft">
-                <button class="btn btn-default" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" *ngIf="card.cardtype.includes('Trap')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                <button class="btn btn-default" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" *ngIf="card.cardtype.includes('Trap')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
         <div class="col-lg-12">
             <h2>Extra</h2>
             <span *ngFor = "let card of currentDraft">
-                <button class="btn btn-default" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" *ngIf="card.cardtype.includes('Fusion')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                <button class="btn btn-default" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" *ngIf="card.cardtype.includes('Fusion')" (contextmenu)="rightDeleteDraftCard($event,card)" (click)="showDetails(card)" ><img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 

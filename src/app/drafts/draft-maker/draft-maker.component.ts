@@ -276,6 +276,8 @@ export class DraftMakerComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     if (this._authService.loggedIn()){
 
       this._authService.getUser().subscribe(
@@ -344,6 +346,10 @@ export class DraftMakerComponent implements OnInit {
 
 
 
+  }
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
   }
   hideloader() {
     var div = document.getElementById('Loading')

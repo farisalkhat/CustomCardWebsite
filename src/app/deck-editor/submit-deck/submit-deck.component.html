@@ -1,0 +1,12 @@
+<form [formGroup]="articleInfo" >
+<div class="padup NgxEditor__Wrapper">
+    <ngx-editor-menu  [toolbar]="toolbar" [editor]="editor"> </ngx-editor-menu>
+    <ngx-editor
+    formControlName="editorContent"
+      [editor]="editor"
+      [ngModel]="html"
+      [disabled]="false"
+      [placeholder]="'Type here...'"
+    ></ngx-editor>
+  </div>
+</form>

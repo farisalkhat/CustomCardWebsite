@@ -48,8 +48,8 @@ export class DecklistDetailsComponent implements OnInit {
 
 
   this.getHoveredCardDetails()}
-  
-  
+
+
   mouseHovering(card: Card, e: MouseEvent) {
     const final = {} as HoveredCardDetails;
     if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
@@ -62,10 +62,10 @@ export class DecklistDetailsComponent implements OnInit {
   mouseLeft() {
     this.customcardService.DisableHoveredCard();
   }
-  
-  
-  
-  
+
+
+
+
 
   getHoveredCardDetails(){
 
@@ -241,7 +241,8 @@ export class DecklistDetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    const current = new Date();
+    this.timestamp = current.getTime();
     if (this._authService.loggedIn()){
 
       this._authService.getUser().subscribe(
@@ -263,7 +264,10 @@ export class DecklistDetailsComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap)=>{
       this.deckid = Number(paramMap.get('deckid'));
       this.customcardService.getDecklist(this.deckid).subscribe(
-        (data:any)=>{this.decklist=data;
+        (data:any)=>{
+
+          this.customcardService.updateDecklistViews(this.deckid).subscribe()
+          this.decklist=data;
 
           this.decklist.sort((a, b) =>
 
@@ -334,7 +338,10 @@ export class DecklistDetailsComponent implements OnInit {
 
 
   }
-
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
 
   goToLink(url: string){
 
@@ -414,7 +421,14 @@ download(){
   this.customcardService.editDeck(true);
   this.customcardService.setEditDeckID(this.deckid);
   this.customcardService.setEditDeckName(this.decklistinfo.name)
-  this.customcardService.uploadDecklist([],[],[])
+
+  let mainDeck = this.decklist.filter((card)=>card.deck==='maindeck')
+  let extraDeck = this.decklist.filter((card)=>card.deck==='extradeck')
+  let sidedeck = this.decklist.filter((card)=>card.deck==='sidedeck')
+
+
+
+  this.customcardService.uploadDecklist(mainDeck,sidedeck,extraDeck);
   this._router.navigate(['/deck-editor']);
 }
 }

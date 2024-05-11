@@ -49,6 +49,7 @@ export interface Article extends Document {
   modification_time: string
   tag: string;
   username: string;
+  views:number;
 
 }
 export interface SiteData extends Document {
@@ -70,7 +71,8 @@ export interface Card extends Document {
   effect: string;
   creator: string;
   tag: string;
-  drive_id: string
+  drive_id: string;
+  views:number;
 }
 
 export interface DraftCard extends Document, Card {
@@ -127,6 +129,9 @@ export interface Decklist {
   extraDeck: string[];
 
   decklistid?: number;
+  body:string;
+  thumbnail:number;
+  label:string;
 }
 
 export interface importDecklist {
@@ -135,6 +140,11 @@ export interface importDecklist {
   description: string;
   creator: string;
   creatorid: number;
+  views:number;
+  label:string;
+  thumbnail:number;
+  body:any;
+
 }
 
 export interface Pack {
@@ -198,6 +208,7 @@ export interface PackCard extends Document {
   tag: string;
   rarity: string;
   drive_id: string;
+  views:number;
 }
 
 
@@ -503,9 +514,18 @@ export class CustomcardsService {
   getMatchesFromUser(id: number) {
     return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/matches/duelist/${id}`);
   }
+  getRecentDecklists(){
+    return this.http.get<any[]>('https://farisalkhat.com/theattic/api/yugioh/recent-decklists');
+  }
 
   getPlayers() {
     return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/players`);
+  }
+  getPlayersMostDecks() {
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/players-most-decks`);
+  }
+  getPlayersMostDeckViews() {
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/players-most-deck-views`);
   }
 
   getMatches() {
@@ -664,6 +684,11 @@ export class CustomcardsService {
     )
   }
 
+  uploadCardImage(formData: FormData) {
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/uploadcardimage', formData
+    )
+  }
+
 
 
 
@@ -761,6 +786,24 @@ export class CustomcardsService {
   updateArticle(article: ArticleUpdate) {
     return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/updateArticle`, article);
   }
+
+  updateProfileViews(id:number) {
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/update-profile-views`, id);
+  }
+  updateDecklistViews(id:number) {
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/update-decklist-views`, id);
+  }
+  updateCardViews(id:number) {
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/update-card-views`, id);
+  }
+  updateArticleViews(id:number) {
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/update-article-views`, id);
+  }
+
+
+
+
+
   deleteArticle(article: Article) {
     return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/deleteArticle`, article);
   }
@@ -774,6 +817,16 @@ export class CustomcardsService {
   @Output() disableHoverCardEvent = new EventEmitter<boolean>();
   DisableHoveredCard() {
     this.disableHoverCardEvent.emit(false);
+  }
+
+  @Output() provideDecklistDetailsEvent = new EventEmitter<number>();
+  SendDeckListDetails(){
+    this.provideDecklistDetailsEvent.emit(1);
+  }
+
+  @Output() receiveDecklistDetailsEvent = new EventEmitter<string>();
+  ReceiveDeckListDetails(msg:any){
+    this.receiveDecklistDetailsEvent.emit(msg);
   }
 
 

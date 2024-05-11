@@ -1,0 +1,19 @@
+<div class="container">
+
+    <div class="d-flex justify-content-left">
+      <div id="Loading" class="spinner-border" role="status">
+        <span class="sr-only"></span>
+      </div>
+    </div>
+    <h1>Search Results</h1>
+    <div class="row">
+      <div *ngFor="let user of searchResultsFromParent" class="col-auto">
+        <a routerLink='/players/{{user.id}}'>
+        <img class="avatar" src='https://images.theatticygo.com/profile-images/{{user?.profile_image}}.png' />
+        <p>{{user.username}}</p>
+      </a>
+      </div>
+    </div>
+
+  </div>
+  

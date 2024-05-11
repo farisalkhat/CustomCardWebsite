@@ -23,10 +23,10 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
   username:string | undefined;
   id!:number;
   currency!:number;
-  editor!: Editor;
 
   tag:string | undefined;
 
+  editor!: Editor;
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -38,6 +38,7 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
   html!: 'asdasd';
+  theInnerHTML!:any;
   articleInfo = new FormGroup({
     title: new FormControl(undefined,[
       Validators.required,
@@ -52,7 +53,6 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
     tag: new FormControl(undefined,
       [Validators.required])
   })
-  theInnerHTML!:any;
   submitVerified = false;
   submitted = false;
   submitfail: boolean = false;

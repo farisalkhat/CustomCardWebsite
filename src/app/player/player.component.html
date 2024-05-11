@@ -1,70 +1,12 @@
 <div class="container">
-
-  <div class="d-flex justify-content-center">
-    <div id="Loading" class="spinner-border" role="status">
-      <span class="sr-only"></span>
+  <div class="row" (keydown.enter)="submitSearch()">
+    <div class="row">
+        <label for="Name">Search by username</label>
+        <input class="form-control" type="text" [(ngModel)] = "searchName">
+        <button class="btn btn-success" (click)="submitSearch()">Search</button>
     </div>
   </div>
-  <h1>TheAtticYGO Staff</h1>
-  <div class="row">
-    <div *ngFor="let user of staff" class="col-auto">
-      <a routerLink='/players/{{user.id}}'>
-      <img class="avatar" src='https://images.theatticygo.com/profile-images/{{user?.profile_image}}.png' />
-      <p>{{user.username}}</p>
-    </a>
-    </div>
-  </div>
-  <h1>Newest Users</h1>
-  <div class="row">
-    <div *ngFor="let user of newestUsers" class="col-auto">
-      <a routerLink='/players/{{user.id}}'>
-        <img class="avatar" src='https://images.theatticygo.com/profile-images/{{user?.profile_image}}.png' />
-        <p class="center">{{user.username}}</p>
-      </a>
-
-    </div>
-  </div>
-
-
-
-  <h1>Users with the Most Deck Views</h1>
-  <h1>Users with the Most Decks</h1>
-  <h1>Users with the Most Followers</h1>
-
-
-  <!-- <h3>Newest Users</h3>
-  <table class="table table-dark table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Player</th>
-        <th scope="col">Role</th>
-
-      </tr>
-    </thead>
-    <tbody *ngFor="let player of players ">
-      <tr>
-        <td> <a routerLink='/players/{{player.id}}'>{{player?.username}}</a></td>
-        <td> {{player?.role}}</td>
-
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>Staff</h3>
-  <table class="table table-dark table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Player</th>
-        <th scope="col">Role</th>
-
-      </tr>
-    </thead>
-    <tbody *ngFor="let player of players ">
-      <tr>
-        <td> <a routerLink='/players/{{player.id}}'>{{player?.username}}</a></td>
-        <td> {{player?.role}}</td>
-
-      </tr>
-    </tbody>
-  </table> -->
 </div>
+
+<app-player-home *ngIf="searchPage===false"></app-player-home>
+<app-player-search [searchResultsFromParent]="playerSearchResults" *ngIf="searchPage===true"></app-player-search>

@@ -27,7 +27,7 @@ export class StructureDeckDetailsComponent implements OnInit {
   hoverstType!:string;
   hovermType!:string;
   leftPosition = 100
-  rightPosition = 100 
+  rightPosition = 100
 
   deckInfo!:any;
   constructor(private _router:Router, private _authService:AuthService, private route: ActivatedRoute, private customcardService: CustomcardsService) { }
@@ -48,15 +48,15 @@ export class StructureDeckDetailsComponent implements OnInit {
 
 
   getHoveredCardDetails(){
-    
+
     this.hoverattribute=''
     this.hoverstType =''
     this.hovermType= ''
-  
+
     if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
       this.hovermonster='False';
       this.hoverattribute="assets/cardstats/TRAP.png";
-      
+
       switch (this.hoveredCard?.cardtype) {
         case "Normal Trap":
             this.hoverstType = "assets/cardstats/Normal.png";
@@ -72,12 +72,12 @@ export class StructureDeckDetailsComponent implements OnInit {
             break;
     }
     }
-  
+
     else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
     this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
       this.hovermonster='False';
       this.hoverattribute="assets/cardstats/SPELL.png";
-      
+
       switch (this.hoveredCard?.cardtype) {
         case "Normal Spell":
             this.hoverstType = "assets/cardstats/Normal.png";
@@ -102,9 +102,9 @@ export class StructureDeckDetailsComponent implements OnInit {
             break;
     }
     }
-  
-  
-    
+
+
+
     else{
       this.hovermonster='True';
       switch(this.hoveredCard?.attribute){
@@ -132,10 +132,10 @@ export class StructureDeckDetailsComponent implements OnInit {
         default:
             this.hoverattribute = "assets/cardstats/EARTH.png";
             break;
-        
-      
+
+
       }
-  
+
       switch (this.hoveredCard?.type) {
         case "Aqua":
             this.hovermType = "assets/monstertypes/Aqua.png";
@@ -155,7 +155,7 @@ export class StructureDeckDetailsComponent implements OnInit {
         case "Dragon":
             this.hovermType = "assets/monstertypes/Dragon.png";
             break;
-  
+
         case "Fairy":
             this.hovermType = "assets/monstertypes/Fairy.png";
             break;
@@ -174,7 +174,7 @@ export class StructureDeckDetailsComponent implements OnInit {
         case "Plant":
             this.hovermType = "assets/monstertypes/Plant.png";
             break;
-  
+
         case "Psychic":
             this.hovermType = "assets/monstertypes/Psychic.png";
             break;
@@ -193,7 +193,7 @@ export class StructureDeckDetailsComponent implements OnInit {
         case "Spellcaster":
             this.hovermType = "assets/monstertypes/Spellcaster.png";
             break;
-  
+
         case "Thunder":
             this.hovermType = "assets/monstertypes/Thunder.png";
             break;
@@ -206,21 +206,23 @@ export class StructureDeckDetailsComponent implements OnInit {
         case "Zombie":
             this.hovermType = "assets/monstertypes/Zombie.png";
             break;
-        
+
         default:
             this.hovermType = "assets/monstertypes/Zombie.png";
             break;
     }
-  
-  
-  
-  
+
+
+
+
     }
-    
+
   }
 
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
 
     if (this._authService.loggedIn()){
 
@@ -230,10 +232,10 @@ export class StructureDeckDetailsComponent implements OnInit {
           this.username = res['username']
           this.id = res['id']
             this.currency = res['currency']
-         
+
             this.route.paramMap.subscribe((paramMap)=>{
                 this.deckid = Number(paramMap.get('deckid'));
-          
+
                 this.customcardService.getPackInfoByID(this.deckid).subscribe(
                   res=>{
                       this.deckInfo=res;
@@ -242,10 +244,10 @@ export class StructureDeckDetailsComponent implements OnInit {
               )
                 this.customcardService.getCustomCardsByPack(this.deckid).subscribe(
                   (data:any)=>{this.decklist=data;
-                  
+
                     console.log(this.decklist)
-                    this.decklist.sort((a, b) => 
-                    
+                    this.decklist.sort((a, b) =>
+
                     {
                       if(a.cardtype.includes('Monster')){
                           if(b.cardtype.includes('Spell') || b.cardtype.includes('Trap')){
@@ -258,7 +260,7 @@ export class StructureDeckDetailsComponent implements OnInit {
                               else{
                                   return -1
                               }
-                              
+
                           }
                       }
                       if(a.cardtype.includes('Spell')){
@@ -276,7 +278,7 @@ export class StructureDeckDetailsComponent implements OnInit {
                                   return -1
                               }
                           }
-          
+
                       }
                       if(a.cardtype.includes('Trap')){
                           if(b.cardtype.includes('Monster') || b.cardtype.includes('Spell')){
@@ -291,24 +293,24 @@ export class StructureDeckDetailsComponent implements OnInit {
                               }
                           }
                       }
-                      
+
                       return 1}
-                    
-          
-                    
-                    
-                    
+
+
+
+
+
                     )
                     console.log(this.decklist);
                   }
-                    
+
                 )
-          
+
                 // this.customcardService.getDecklistInfo(this.deckid).subscribe(
                 //   (data:any)=>{this.decklistinfo=data;
                 //   }
                 // )
-          
+
               })
 
         },
@@ -321,14 +323,17 @@ export class StructureDeckDetailsComponent implements OnInit {
     }
 
 
-    
+
 
 
 
 
 
   }
-
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
 
   goToLink(id: string | undefined) {
     const url = this._router.serializeUrl(
@@ -347,22 +352,22 @@ export class StructureDeckDetailsComponent implements OnInit {
 //       this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
 //     }
 
-     
+
 //  }
-//  this.xml_file+="</main><side>"   
+//  this.xml_file+="</main><side>"
 //  for(const card of this.decklist){
 //   if(card.deck=='sidedeck'){
 //     this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
 //   }
-  
+
 //  }
-//  this.xml_file+="</side><extra>"   
- 
+//  this.xml_file+="</side><extra>"
+
 //  for(const card of this.decklist){
 //   if(card.deck=='extradeck'){
 //     this.xml_file+='<card id="' + String(card.id) +'" passcode="">'+card.name+'</card>'
 //   }
-     
+
 //  }
 //  this.xml_file+="</extra></deck>"
 //  console.log(this.xml_file);
@@ -372,8 +377,8 @@ export class StructureDeckDetailsComponent implements OnInit {
 //  FileSaver.saveAs(blob, "cardlist.xml");
 
 
- 
- 
+
+
 
 
 
@@ -384,8 +389,8 @@ addPackToCollection(){
     binderInfo['packid'] = this.deckid;
     binderInfo['creatorid'] = this.id
     binderInfo['binderid'] = this.binderID;
-  
-  
+
+
     this.customcardService.addToCollection(binderInfo).subscribe(
       res=>{
         console.log(res);
@@ -405,7 +410,7 @@ purchase(){
         } else {
             text = "You canceled!";
         }
-    
+
 }
 }
 
@@ -414,7 +419,7 @@ confirmDelete(){
 
           let text = "Are you sure you want to delete this structure deck?";
           if (confirm(text) == true) {
-  
+
               this.customcardService.deletePack(this.deckid).subscribe(
                   res=>{this._router.navigate(['/structure-decks']);},
                   err=>{this._router.navigate(['/structure-decks']);}
@@ -422,7 +427,7 @@ confirmDelete(){
           } else {
               text = "You canceled!";
           }
-      
+
   }
 }
 

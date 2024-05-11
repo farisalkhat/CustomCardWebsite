@@ -54,7 +54,8 @@ export class CollectionsComponent implements OnInit {
   constructor(public customcardsService:CustomcardsService, public authService:AuthService, public router:Router) { }
 
   ngOnInit(): void {
-
+    const current = new Date();
+    this.timestamp = current.getTime();
 
     this.authService.getUser().subscribe(
       res =>{
@@ -88,6 +89,10 @@ export class CollectionsComponent implements OnInit {
     console.log(this.creatorid)
 
     }
+    timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
     goToLink(url: number){
 
       let new_url =''

@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="col-auto">
+    <label  for="customFile">Upload Image</label>
+    <input (change)="onFileSelected($event)" id="cardImages" multiple="true" accept="image/*" formControlName ="cardImages" [ngClass]="{'is-invalid': submitted && f['packImage'].errors}" type="file" class="form-control"  />
+  <button class="btn btn-success" (click) = uploadImages()>Upload Card Images</button>
+
+  <p *ngIf="cardsUploaded===false && firstUpload===true" style="color:red; font-weight:bold;">
+    Cards failed to upload.
+  </p>
+
+  <p *ngIf="cardsUploaded===true" style="color:green; font-weight:bold;">
+    Cards successfully uploaded!
+  </p>
+  </div>
+</div>
+

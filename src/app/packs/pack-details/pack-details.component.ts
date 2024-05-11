@@ -24,6 +24,8 @@ export class PackDetailsComponent implements OnInit {
 
   packid!:number;
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
 
     this.route.paramMap.subscribe((paramMap)=>{
       this.packid = Number(paramMap.get('packid'));
@@ -100,6 +102,11 @@ export class PackDetailsComponent implements OnInit {
     })
 
 
+  }
+
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
   }
 
   mouseHovering(card: PackCard, e: MouseEvent) {

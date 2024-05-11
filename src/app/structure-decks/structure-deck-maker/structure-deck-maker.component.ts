@@ -150,6 +150,8 @@ export class StructureDeckMakerComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this.editor = new Editor();
 
     this.uploadedMain= this.customcardsService.getUploadedMain()
@@ -197,6 +199,10 @@ export class StructureDeckMakerComponent implements OnInit {
 
       }
     )
+  }
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
   }
 
   submitSearch(){
@@ -1331,9 +1337,9 @@ getHoveredCardDetails(){
             formData.append("thumbnail", this.file);
             formData.append("name",finaldata['title'])
             this.customcardsService.submitPack(finaldata).subscribe(res=>{
-              
-            
-            
+
+
+
             formData.append("thumbnail", this.file);
             formData.append("name",res)
             this.customcardsService.uploadPackImage(formData)

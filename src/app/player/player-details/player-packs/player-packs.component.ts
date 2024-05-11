@@ -10,8 +10,10 @@ export class PlayerPacksComponent implements OnInit {
   @Input() userId!:number;
   constructor(public customcardsService: CustomcardsService) { }
 
-  packs!:PackInfo[]; 
+  packs!:PackInfo[];
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this.customcardsService.getPacksbyOwner(this.userId).subscribe(
       res => {
         if(res){
@@ -20,5 +22,8 @@ export class PlayerPacksComponent implements OnInit {
       }
     )
   }
-
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
 }

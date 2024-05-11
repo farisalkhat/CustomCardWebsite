@@ -65,7 +65,7 @@
                 <img src="assets/cardimages/Default.png" />
               </div>
               <div class="face front">
-                <img src='https://images.theatticygo.com/card-images/{{card?.id}}.png'>
+                <img src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'>
               </div>
             </div>
 
@@ -81,7 +81,7 @@
       <span *ngFor="let card of currentDraft">
         <button (click)="goToLink(card.id)" (mouseenter)="mouseHoverDrafted(card,$event)" (mouseleave)="mouseLeft()"
           class=" btn btn-default btncard"><img class="smallcard"
-            src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+            src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
 
       </span>
     </div>
@@ -119,7 +119,7 @@
               </b>
 
 
-            <img class="bigcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'>
+            <img class="bigcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'>
 
             </div>
 
@@ -145,7 +145,7 @@
   <!-- <div class="col-lg-12">
       <h2>Current Cards</h2>
       <span *ngFor = "let card of currentDraft">
-          <img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'>
+          <img class ="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'>
       </span>
     </div> -->
 

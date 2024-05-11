@@ -152,6 +152,8 @@ export class StructureDeckEditorComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this.editor = new Editor();
 
     this.uploadedMain= this.customcardsService.getUploadedMain()
@@ -247,6 +249,10 @@ export class StructureDeckEditorComponent implements OnInit {
 
       }
     )
+  }
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
   }
 
   submitSearch(){

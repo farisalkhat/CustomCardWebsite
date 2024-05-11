@@ -41,6 +41,8 @@ export class CustomcardDbComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this.customcardsService.getCustomCards().subscribe(
       res => {
         if(res){}
@@ -51,24 +53,28 @@ export class CustomcardDbComponent implements OnInit {
 
     )
   }
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
 
   submitSearch(){
     console.log(this.filters)
-    this.cards = [] 
+    this.cards = []
     this.attribute ='';
     this.stType=''
     this.mType='';
     this.monster='None';
     // this.customcardsService.getFilteredCards2().subscribe(
     //   res=>{
-        
+
     //     console.log(res)
     //     this.cards = res;
     //     this.currentPage = 1
     //     this.getCardNumbers(this.currentPage);
     //   },
     //   err=>{console.log(err)}
-    // )                                  
+    // )
     if(this.filters['initial']==''){
         this.filters['cardtype']=='';
         this.filters['defhigh']=='';
@@ -80,8 +86,8 @@ export class CustomcardDbComponent implements OnInit {
         this.filters['atklow']=='';
       }
       if(this.filters['initial']!='Monster'){
-        if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' || 
-        this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' || 
+        if(this.filters['sort']=='c.level ASC' || this.filters['sort']=='c.level DESC' ||
+        this.filters['sort']=='c.ATK ASC' || this.filters['sort']=='c.ATK DESC' ||
         this.filters['sort']=='c.DEF ASC' || this.filters['sort']=='c.DEF DESC'){
           this.filters['sort'] = 'c.name ASC';
         }
@@ -89,7 +95,7 @@ export class CustomcardDbComponent implements OnInit {
 
     this.customcardsService.getFilteredCards(this.filters).subscribe(
       res=>{
-        
+
         console.log(res)
         this.cards = res;
         this.currentPage = 1
@@ -135,7 +141,7 @@ export class CustomcardDbComponent implements OnInit {
     if(this.card?.cardtype=="Normal Trap" || this.card?.cardtype=="Counter Trap" || this.card?.cardtype=="Continuous Trap"){
       this.monster='False';
       this.attribute="assets/cardstats/TRAP.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Trap":
             this.stType = "assets/cardstats/Normal.png";
@@ -156,7 +162,7 @@ export class CustomcardDbComponent implements OnInit {
     this.card?.cardtype=="Ritual Spell" || this.card?.cardtype=="Field Spell" || this.card?.cardtype=="Equip Spell" ){
       this.monster='False';
       this.attribute="assets/cardstats/SPELL.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Spell":
             this.stType = "assets/cardstats/Normal.png";
@@ -183,7 +189,7 @@ export class CustomcardDbComponent implements OnInit {
     }
 
 
-    
+
     else{
       this.monster='True';
       switch(this.card?.attribute){
@@ -211,8 +217,8 @@ export class CustomcardDbComponent implements OnInit {
         default:
             this.attribute = "assets/cardstats/EARTH.png";
             break;
-        
-      
+
+
       }
 
       switch (this.card?.type) {
@@ -285,7 +291,7 @@ export class CustomcardDbComponent implements OnInit {
         case "Zombie":
             this.mType = "assets/monstertypes/Zombie.png";
             break;
-        
+
         default:
             this.mType = "assets/monstertypes/Zombie.png";
             break;
@@ -295,7 +301,7 @@ export class CustomcardDbComponent implements OnInit {
 
 
     }
-    
+
 }
 
 

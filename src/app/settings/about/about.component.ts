@@ -108,6 +108,8 @@ export class AboutComponent implements OnInit {
   constructor(public route:ActivatedRoute, public _authService:AuthService, public customcardsService:CustomcardsService, public _router:Router) { }
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     // this.route.paramMap.subscribe((paramMap)=>{
     //   this.creatorid = String(paramMap.get('creatorid'));
     //   this.customcardsService.getUserPageDetails(Number(this.creatorid)).subscribe(
@@ -162,6 +164,10 @@ export class AboutComponent implements OnInit {
 
 
   }
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
 
 
   saveImages(){
@@ -175,7 +181,7 @@ export class AboutComponent implements OnInit {
 
     this.done=true;
 
-    this.newSettings['about'] = this.aboutMe.controls['about'].value;;
+    this.newSettings['about'] = this.aboutMe.controls['about'].value;
 
     if(this.fileChanged){
       const formData = new FormData();
@@ -196,6 +202,17 @@ export class AboutComponent implements OnInit {
         })
       });
 
+    }
+    else{
+
+      this.newSettings['profile_image'] = "do-not-change"
+      this.customcardsService.editProfileImages(this.newSettings).subscribe(res=>{
+        console.log(this.newSettings['profile_image'])
+        window.location.reload()
+      },
+      err=>{
+        this._router.navigate(['/home'])
+      })
     }
 
 

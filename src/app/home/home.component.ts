@@ -12,13 +12,16 @@ export class HomeComponent implements OnInit {
 
   sitedata!:SiteData
   cotd!:Card
-  latestpack!:PackButton
+  latestpack!:any
   cards!: Card[];
   articles:any[] = [];
   unused_articles:any[] = [];
+  decklists:any[]=[]
   constructor(public datepipe:DatePipe, public _router:Router,public _customCardsService:CustomcardsService) { }
 
   ngOnInit(): void {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this._customCardsService.getArticles().subscribe(
       res=>{this.unused_articles=res
 
@@ -75,6 +78,12 @@ export class HomeComponent implements OnInit {
       res=>{this.latestpack=res; console.log(this.latestpack)},
       err=>{}
     )
+    this._customCardsService.getRecentDecklists().subscribe(res=>{this.decklists=res; console.log(this.decklists)},)
+  }
+
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
   }
 
   goToSealedDraft(){
@@ -104,6 +113,14 @@ export class HomeComponent implements OnInit {
   }
 
 
+  goToPack(id: number | undefined) {
+
+    const url = this._router.serializeUrl(
+      this._router.createUrlTree([`/packs/${id?.toString()}`])
+    );
+
+    window.open(url, '_blank');
+  }
   loadMore(){
     let i = 0;
         while(i!=3){

@@ -33,20 +33,57 @@
 
 
 <div class="container">
-
-
     <div class="row">
-        <div class="col-auto">
+        <div class="col-auto" [formGroup]="deckDetails">
             <label for="Name">Deck Name</label>
-            <input id="drafTitle" class="form-control" type="text" [(ngModel)]="deckname">
+            <input id="drafTitle" class="form-control" type="text" id="deckname" formControlName="deckname" [ngClass]="{'is-invalid': submitted && f['deckname'].errors}" >
+            <div *ngIf="submitted && f['deckname'].errors" class="invalid-feedback">
+                <div *ngIf="f['deckname'].errors['deckname']">
+                  <p class="red">Please write a name for your decklist.</p>
+                </div>
+            </div>
         </div>
 
-        <div class="col-auto">
+        <!-- <div class="col-auto" [formGroup]="deckDetails">
             <label for="Desc">Deck Description</label>
-            <input class="form-control" type="text" [(ngModel)]="deckdescription">
+            <input class="form-control" type="text" id="deckdescription" formControlName="deckdescription" [ngClass]="{'is-invalid': submitted && f['deckdescription'].errors}" >
+            <div *ngIf="submitted && f['deckdescription'].errors" class="invalid-feedback">
+                <div *ngIf="f['deckdescription'].errors['deckdescription']">
+                  <p class="red">Please write a brief description of your Decklist</p>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-auto" [formGroup]="deckDetails">
+            <label for="Name">Deck Label</label>
+            <select class="form-control" id="decklabel" formControlName="decklabel" [ngClass]="{'is-invalid': submitted && f['decklabel'].errors}" >
+                <option value="Meta">Meta Decks</option>
+                <option value="Collection">Collection Format</option>
+                <option value ="Sealed Draft">Sealed Draft Format</option>
+                <option value ="Deck Master">Deck Master Format</option>
+                <option value ="Cube">Cube Format</option>
+                <option value ="Balanced">Balanced Format</option>
+                <option value ="Non-Meta">Non-Meta Decks</option>
+                <option value ="Anime">Anime Decks</option>
+                <option value ="Fun/Casual">Fun/Casual Decks</option>
+
+
+              </select>
+            <div *ngIf="submitted && f['decklabel'].errors" class="invalid-feedback">
+                <div *ngIf="f['decklabel'].errors['decklabel']">
+                  <p class="red">Please select a deck label.</p>
+                </div>
+            </div>
+
+
+
+
         </div>
 
-    </div>
+
+
+
+
+
 
 
     <div class="row" (keydown.enter)="submitSearch()">
@@ -284,7 +321,7 @@
                     <button *ngIf="card!=undefined" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()"
                         class="btn btn-default" (contextmenu)="rightAddCard($event,card)"
                         (click)="goToLink(card?.id)"><img class="smallcard"
-                            src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                            src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
                 </span>
             </span>
 
@@ -294,7 +331,7 @@
                         class="btn btn-default" (contextmenu)="rightAddDraftCard($event,card)"
                         (click)="goToLink(card?.id)">
                         <div class="relative">
-                            <img class="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'>
+                            <img class="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'>
                             <div class="littlenumber position-absolute bottom-0 end-0">{{card.copies}}</div>
                         </div>
                     </button>
@@ -319,7 +356,7 @@
 
 
         <!-- <div class="col-lg-4 cardeffect">
-            <img href='' (click)="goToLink(card.id)" class="bigcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'>
+            <img href='' (click)="goToLink(card.id)" class="bigcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'>
             <b><p *ngIf="monster=='True'">
                 <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}
             </p></b>
@@ -359,12 +396,23 @@
 
     <div *ngIf="this.defaultRules=='default'" class="row">
 
-        <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b> <button class="btn btn-success"
-                (click)="exportList()">Export XML</button>
-            <button class="btn btn-success" (click)="uploadList()" *ngIf="_authService.loggedIn()">Upload
-                Decklist</button><span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
+        <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b>
+            <button class="btn btn-success"(click)="exportList()">Export XML</button>
+            <button  [disabled]="finishedUploading" class="btn btn-success" (click)="uploadList()" *ngIf="_authService.loggedIn()">Upload Decklist</button>
+            <span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
+                <button class="btn btn-success" (click)="ShowDetailedDeckDescription()">Show Detailed Deck Description</button>
+                <button class="btn btn-success" (click)="SetThumbnailMode()">Set Thumbnail</button>
+
 
         </h1>
+        <div *ngIf="decklistinfo==undefined">
+          <app-submit-deck  [hidden]="showdetaileddeckdescription===false"></app-submit-deck>
+        </div>
+        <div *ngIf="decklistinfo">
+          <app-submit-deck [editing]="editing" [html]="decklistinfo.body"  [hidden]="showdetaileddeckdescription===false"></app-submit-deck>
+        </div>
+        <p class="" *ngIf = "setthumbnailmode===true">The next card you right-click will be your thumbnail for your uploaded decklist.</p>
+        <p class="" *ngIf = "detailederror===true">You must put any detailed description.</p>
 
 
 
@@ -375,7 +423,7 @@
                 <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
                     *ngIf="card.cardtype.includes('Monster')" (contextmenu)="rightDeleteCard($event,card)"
                     (click)="goToLink(card?.id)"><img class="smallcard"
-                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -386,7 +434,7 @@
                 <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
                     *ngIf="card.cardtype.includes('Spell')" (contextmenu)="rightDeleteCard($event,card)"
                     (click)="goToLink(card?.id)"><img class="smallcard"
-                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -396,7 +444,7 @@
                 <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
                     *ngIf="card.cardtype.includes('Trap')" (contextmenu)="rightDeleteCard($event,card)"
                     (click)="goToLink(card?.id)"><img class="smallcard"
-                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -405,7 +453,7 @@
             <span *ngFor="let card of sideDeck">
                 <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
                     (contextmenu)="rightDeleteSideCard($event,card)" (click)="goToLink(card?.id)"><img class="smallcard"
-                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -414,7 +462,7 @@
             <span *ngFor="let card of extraDeck">
                 <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
                     (contextmenu)="rightDeleteCard($event,card)" (click)="goToLink(card?.id)"><img class="smallcard"
-                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -423,12 +471,24 @@
 
     <div *ngIf="this.defaultRules=='draft'" class="row">
 
-        <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b> <button class="btn btn-success"
-                (click)="exportList()">Export XML</button>
-            <button class="btn btn-success" (click)="uploadList()" *ngIf="_authService.loggedIn()">Upload
-                Decklist</button><span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
+        <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b>
+            <button class="btn btn-success"(click)="exportList()">Export XML</button>
+            <button  [disabled]="finishedUploading" class="btn btn-success" (click)="uploadList()" *ngIf="_authService.loggedIn()">Upload Decklist</button>
+            <span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
+                <button class="btn btn-success" (click)="ShowDetailedDeckDescription()">Show Detailed Deck Description</button>
+                <button class="btn btn-success" (click)="SetThumbnailMode()">Set Thumbnail</button>
+
 
         </h1>
+        <div *ngIf="decklistinfo==undefined">
+          <app-submit-deck  [hidden]="showdetaileddeckdescription===false"></app-submit-deck>
+        </div>
+        <div *ngIf="decklistinfo">
+          <app-submit-deck [editing]="editing" [html]="decklistinfo.body"  [hidden]="showdetaileddeckdescription===false"></app-submit-deck>
+        </div>
+        <p class="" *ngIf = "setthumbnailmode===true">The next card you right-click will be your thumbnail for your uploaded decklist.</p>
+        <p class="" *ngIf = "detailederror===true">You must put any detailed description.</p>
+
 
 
 
@@ -439,7 +499,7 @@
                 <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
                     *ngIf="card.cardtype.includes('Monster')" (click)="goToLink(card.id)" (contextmenu)="rightDeleteDraftCard($event,card)"
                     ><img class="smallcard"
-                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -450,7 +510,7 @@
                 <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
                     *ngIf="card.cardtype.includes('Spell')" (click)="goToLink(card.id)" (contextmenu)="rightDeleteDraftCard($event,card)"
                     ><img class="smallcard"
-                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -460,7 +520,7 @@
                 <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
                     *ngIf="card.cardtype.includes('Trap')" (click)="goToLink(card.id)" (contextmenu)="rightDeleteDraftCard($event,card)"
                     ><img class="smallcard"
-                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -469,7 +529,7 @@
             <span *ngFor="let card of sideDeck">
                 <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
                     (contextmenu)="rightDeleteSideCard($event,card)" (click)="goToLink(card.id)"><img class="smallcard"
-                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                        src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -478,7 +538,7 @@
             <span *ngFor="let card of extraDeck">
                 <button (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="btn btn-default"
                     (contextmenu)="rightDeleteDraftCard($event,card)" (click)="goToLink(card.id)"><img
-                        class="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png'></button>
+                        class="smallcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'></button>
             </span>
         </div>
 
@@ -492,3 +552,8 @@
 
 
 </div>
+
+
+
+
+

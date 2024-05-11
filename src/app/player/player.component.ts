@@ -8,35 +8,48 @@ import { CustomcardsService } from '../customcards.service';
 })
 export class PlayerComponent implements OnInit {
 
-  constructor(public customcardsService:CustomcardsService) { }
-
+  searchPage:boolean = false
   players:any[]=[];
-
-  staff:any[]=[];
-  newestUsers:any[]=[];
+  playerSearchResults: any[]=[]
+  searchName:string = ""
+  constructor(public customcardsService:CustomcardsService) { }
   ngOnInit(): void {
-
     this.customcardsService.getPlayers().subscribe(
-        res => {
-            this.players = res;
-            this.staff=this.players.filter((user)=>user.role.toLowerCase().includes('admin'))
-            this.hideloader();
-
-            this.newestUsers = this.players.sort((a, b) => (a.id > b.id) ? -1 : ((b.id > a.id) ? 1 : 0))
-            if(this.newestUsers.length>7){
-              this.newestUsers = this.newestUsers.slice(0,7)
-            }
-
-            console.log(this.newestUsers);
-        }
-  )
+      res => {
+          this.players = res;})
+  
+  
   }
-  hideloader() {
-      var div = document.getElementById('Loading')
-      if(div){
-        div.style.display = "none"
-        console.log(div)
-      }
+  
+
+  switchPages(){
+    this.searchPage= !this.searchPage;
+    
+  }
+  submitSearch(){
+    // var div = document.getElementById('Loading')
+    // if(div){
+    //   div.style.display = "block"
+    //   console.log(div)
+    // }
+    console.log(this.searchName.length);
+    console.log(this.searchPage);
+    if(this.searchName.length==0 && this.searchPage==false){
+      return;
+
+    }
+    if(this.searchName.length==0 && this.searchPage==true){
+      this.switchPages()
+      return;
+
+    }
+    else{
+      this.playerSearchResults = this.players.filter((player)=>player.username.toLowerCase().includes(this.searchName.toLowerCase()))
+      this.switchPages();
+    }
+
 
   }
+
+  
 }

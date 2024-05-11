@@ -22,7 +22,14 @@ export class BanlistComponent implements OnInit {
 
 
     )
+    const current = new Date();
+    this.timestamp = current.getTime();
 
+  }
+
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
   }
 
   isHovering: boolean = false;

@@ -1,14 +1,14 @@
 
 <app-hover-card></app-hover-card>
 
-<div class="container-fluid center">
+<div class="container center">
     <!-- <a href="https://farisalkhat.github.io/CustomCardWebsite/cards/2876404"><img class="center" src="https://images.theatticygo.com/profile-images/13BEisqzWP1kXSbvwnCsmdQiuCb_PoId4"></a> -->
     <!-- <img class="center" src="assets/images/Attic2.png"> -->
 
-    <div class="card newbie rounded-7">
+    <div class="card newbie -7">
         <div class="card-body">
           <h1 class="card-title">New to the Attic?</h1>
-          <p class="card-text newbie-outline">Check out our guide to get started, or head to the Decklists and get right into it! </p>
+          <p class="card-text strokeme">Check out our guide to get started, or head to the Decklists and get right into it! </p>
           <button type="button" class="btn btn-success"  routerLink="/articles" routerLinkActive = "active">Get Started</button>
           <button type="button" class="btn btn-outline-light"  routerLink="/decklists" routerLinkActive = "active">Decklists</button>
         </div>
@@ -16,86 +16,87 @@
 
 
 
-    <div class="alert alert-dark" role="alert">
-        <h4 class="">{{sitedata?.packs_opened}} packs opened! {{sitedata?.dosh_spent}} dosh spent!</h4>
+    <div class="notice" >
+            <h4>{{sitedata?.packs_opened}} packs opened! {{sitedata?.dosh_spent}} dosh spent!</h4>
+
       </div>
 
       <div class="row ">
-        <div class="col">
-            <div routerLink="/packs" class="card rounded center small-card">
-                <div class="crop rounded ">
-                    <div class="overlay-div rounded "></div>
+        <div class="col col-md-6 col-xl-4">
+            <div routerLink="/packs" class="card  center small-card">
+                <div class="crop  ">
+                    <div class="overlay-div  "></div>
                     <img src='https://images.theatticygo.com/card-images/2876561.png' >
 
                 </div>
 
                 <div class="card-img-overlay">
-                    <p class="text-center align-self-center mx-auto">Pack Opener </p>
+                    <p class="strokeme text-center align-self-center mx-auto">Pack Opener </p>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div routerLink="/deck-editor" class="card rounded center small-card">
-                <div class="crop rounded">
-                    <div class="overlay-div rounded"></div>
+        <div class="col col-md-6 col-xl-4">
+            <div routerLink="/deck-editor" class="card  center small-card">
+                <div class="crop ">
+                    <div class="overlay-div "></div>
                     <img src='https://images.theatticygo.com/card-images/3466774.png' >
 
                 </div>
 
                 <div class="card-img-overlay">
-                    <p class="text-center align-self-center mx-auto">Deck Editor </p>
+                    <p class="strokeme text-center align-self-center mx-auto">Deck Editor </p>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div routerLink="/decklists" class="card rounded center small-card">
-                <div class="crop rounded">
-                    <div class="overlay-div rounded"></div>
-                    <img src='https://images.theatticygo.com/card-images/2945734.png' >
+        <div class="col col-md-6 col-xl-4">
+            <div routerLink="/decklists" class="card  center small-card">
+                <div class="crop ">
+                    <div class="overlay-div "></div>
+                    <img src='https://images.theatticygo.com/card-images/2876404.png' >
 
                 </div>
 
                 <div class="card-img-overlay">
-                    <p class="text-center align-self-center mx-auto">Decklists </p>
+                    <p class="strokeme text-center align-self-center mx-auto">Decklists </p>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div routerLink="/draft-maker" class="card rounded center small-card">
-                <div class="crop rounded">
-                    <div class="overlay-div rounded"></div>
+        <div class="col col-md-6 col-xl-4">
+            <div routerLink="/draft-maker" class="card  center small-card">
+                <div class="crop ">
+                    <div class="overlay-div "></div>
                     <img src='https://images.theatticygo.com/card-images/2876383.png' >
 
                 </div>
 
                 <div class="card-img-overlay">
-                    <p class="text-center align-self-center mx-auto">Draft Creator </p>
+                    <p class="strokeme text-center align-self-center mx-auto">Draft Creator </p>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div (click)="goToSealedDraft()" class="center card rounded small-card">
-                <div class="crop rounded">
-                    <div class="overlay-div rounded"></div>
+        <div class="col col-md-6 col-xl-4">
+            <div (click)="goToSealedDraft()" class="center card  small-card">
+                <div class="crop ">
+                    <div class="overlay-div "></div>
                     <img src='https://images.theatticygo.com/card-images/2883166.png' >
 
                 </div>
 
                 <div class="card-img-overlay">
-                    <p class="text-center align-self-center mx-auto">Sealed Draft </p>
+                    <p class="strokeme text-center align-self-center mx-auto">Sealed Draft </p>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div routerLink="/articles" class="card rounded center small-card">
-                <div class="crop rounded">
-                    <div class="overlay-div rounded"></div>
+        <div class="col col-md-6 col-xl-4">
+            <div routerLink="/articles" class="card  center small-card">
+                <div class="crop ">
+                    <div class="overlay-div "></div>
                     <img src='https://images.theatticygo.com/card-images/2956848.png' >
 
                 </div>
 
                 <div class="card-img-overlay">
-                    <p class="text-center align-self-center mx-auto">Articles </p>
+                    <p class="strokeme text-center align-self-center mx-auto">Articles </p>
                 </div>
             </div>
         </div>
@@ -104,10 +105,14 @@
       <div class="row">
         <div class="col">
             <h1 class="text-center">Latest Articles</h1>
-            <div class="row">
-              <div *ngFor="let article of articles" class="col-sm-6 col-md-6">
+            <div class="row align-self-center">
 
-                  <div routerLink="/articles/{{article?.id}}" class="card article-card" style="width:302px;">
+
+
+
+
+              <div class="col-sm-6 col-md-4 d-flex justify-content-center"*ngFor="let article of articles" >
+                  <div routerLink="/articles/{{article?.id}}" class="card article-card">
                     <div *ngIf="article?.tag=='Guide'" class="article-label article-label-shadow" style="background-color:purple"><p class="article-label-text">GUIDE</p></div>
                     <div *ngIf="article?.tag=='News'" class="article-label article-label-shadow" style="background-color:rgb(0, 128, 255)"><p class="article-label-text">NEWS</p></div>
                     <div *ngIf="article?.tag=='Tournament'" class="article-label article-label-shadow" style="background-color:rgba(255, 0, 0, 0.786)"><p class="article-label-text">TOURNAMENT</p></div>
@@ -138,64 +143,31 @@
                       </div> -->
                     </div>
 
-              </div>
-            </div>
-
-
-            <div class="row center">
-              <button  (click)="loadMore()"  class="button btn-success btn">Load More</button>
-            </div>
-
-
-
-
-
-
-            <!-- <div class="row">
-
-                <div id="carouselExample" class="carousel slide">
-                    <div class="carousel-inner">
-
-                        <div  routerLink="/articles/{{article.id}}" class="carousel-item active">
-                            <img src="{{article.header_img}}" class="d-block" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>{{article.title}} by {{article.username}}</h5>
-                                <p>{{article.header}}</p>
-                              </div>
-                          </div>
-
-
-                      <div routerLink="/articles/{{article.id}}" *ngFor="let article of articles" class="carousel-item">
-                        <img src="{{article.header_img}}" class="d-block" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>{{article.title}} by <a routerLink="users/{{article.author}}">{{article.username}}</a></h5>
-                            <p>{{article.header}}</p>
-                          </div>
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
 
                 </div>
-        </div> -->
+            </div>
+
+
+
+
+      </div>
+      <div class="row ">
+        <button  (click)="loadMore()"  class="button btn-success btn">Load More</button>
       </div>
     </div>
       <div class="row">
         <div class="col-md-6 col-6">
             <h1 class="text-center">Card of the Day!</h1>
-            <input class="center smaller" type="image" (click)="goToLink(cotd.id)" src="https://images.theatticygo.com/card-images/{{cotd.id}}.png" />
+            <input (mouseenter)="mouseHovering(cotd,$event)" (mouseleave)="mouseLeft()" class="center smaller" type="image" (click)="goToLink(cotd.id)" src="https://images.theatticygo.com/card-images/{{cotd.id}}.png?{{getTimeStamp()}}" />
+
 
         </div>
         <div class="col-md-6 col-6">
             <h1 class="text-center">Latest Pack!</h1>
-            <img    *ngIf="latestpack.pack!='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack" src="https://images.theatticygo.com/pack-images/{{latestpack?.packid}}.png">
-            <img   *ngIf="latestpack.pack=='placeholder'" routerLink="/packs/{{latestpack.packid}}" routerLinkActive = "active" class="center pack"src = 'https://images.theatticygo.com/pack-images/placeholder.png'>
+            <img    *ngIf="latestpack.pack!='placeholder'" (click) = "goToPack(latestpack?.id)" routerLinkActive = "active" class="center pack" src="https://images.theatticygo.com/pack-images/{{latestpack?.pack}}.png">
+            <img   *ngIf="latestpack.pack=='placeholder'" (click) = "goToPack(latestpack?.id)" routerLinkActive = "active" class="center pack"src = 'https://images.theatticygo.com/pack-images/placeholder.png'>
+
+
 
         </div>
 
@@ -205,9 +177,51 @@
 
 
       <div class="row">
-        <div class="col">
             <h1 class="text-center">Featured Decklists</h1>
-        </div>
+
+
+        <div class="col-sm-6 col-md-6 d-flex justify-content-center"*ngFor="let decklist of decklists" >
+            <div routerLink="/decklist/{{decklist?.id}}" class="card article-card" >
+              <div *ngIf="decklist?.label=='Meta'" class="article-label article-label-shadow" style="background-color:purple"><p class="article-label-text">META</p></div>
+              <div *ngIf="decklist?.label=='Collection'" class="article-label article-label-shadow" style="background-color:rgb(255, 145, 0)"><p class="article-label-text">COLLECTION</p></div>
+              <div *ngIf="decklist?.label=='Sealed Draft'" class="article-label article-label-shadow" style="background-color:rgba(255, 0, 0, 0.786)"><p class="article-label-text">SEALED DRAFT</p></div>
+              <div *ngIf="decklist?.label=='Deck Master'" class="article-label article-label-shadow" style="background-color:rgb(16, 154, 57)"><p class="article-label-text">DM</p></div>
+              <div *ngIf="decklist?.label=='Cube'" class="article-label article-label-shadow" style="background-color:rgb(209, 7, 250)"><p class="article-label-text">CUBE</p></div>
+              <div *ngIf="decklist?.label=='Balanced'" class="article-label article-label-shadow" style="background-color:rgb(0, 131, 94)"><p class="article-label-text">BALANCED</p></div>
+              <div *ngIf="decklist?.label=='Non-Meta'" class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">NON-META</p></div>
+              <div *ngIf="decklist?.label=='Anime'" class="article-label article-label-shadow" style="background-color:rgb(5, 78, 180)"><p class="article-label-text">ANIME</p></div>
+              <div *ngIf="decklist?.label=='Fun/Casual'" class="article-label article-label-shadow" style="background-color:rgba(200, 8, 142, 0.977)"><p class="article-label-text">CASUAL</p></div>
+                <div *ngIf="decklist?.label!='Meta'
+                && decklist?.label != 'Collection'
+                && decklist?.label != 'Sealed Draft'
+                && decklist?.label != 'Deck Master'
+                && decklist?.label != 'Cube'
+                && decklist?.label != 'Balanced'
+                && decklist?.label != 'Non-Meta'
+                && decklist?.label != 'Anime'
+                && decklist?.label != 'Fun/Casual' " class="article-label article-label-shadow" style="background-color:gray">
+                <p class="article-label article-label-shadow" style="background-color:gray"class="article-label-text">OTHER</p></div>
+
+
+
+                    <img class="card-img-top-decklist" src='https://images.theatticygo.com/card-images/{{decklist?.thumbnail}}.png?{{getTimeStamp()}}' alt="Card image cap">
+
+                    <div class="article-info-overlay">
+                      <h5 class="card-title">{{decklist.name}}</h5>
+                      <p  class="article-card-text card-text">Submitted By <b>{{decklist.creator}}</b></p>
+
+                    </div>
+
+
+                <!-- <div class="card-body">
+                  <h5 class="card-title">{{article.title}}</h5>
+                  <p class="card-text">{{article.header}}</p>
+                  <p class="card-text">By {{article.username}}</p>
+                </div> -->
+              </div>
+
+
+          </div>
       </div>
 
 
@@ -219,11 +233,11 @@
 
         <h1 class="text-center">Newest Cards</h1>
 
-        <div  *ngFor = "let card of cards"class="col-md-4 col-lg-2 col-4 ">
+        <div  *ngFor = "let card of cards"class="col-md-3 col-xl-2 ">
 
                 <input (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="center cotd  " type="image" routerLink="/cards/{{card.id}}"
 
-                src="https://images.theatticygo.com/card-images/{{card.id}}.png" />
+                src="https://images.theatticygo.com/card-images/{{card.id}}.png?{{getTimeStamp()}}" />
 
 
         </div>

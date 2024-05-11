@@ -61,7 +61,7 @@ export class PackOpenerComponent implements OnInit {
   username!:string;
   id!:number;
   state: string = 'default';
- 
+
   binderName!:string;
   submitted:boolean = false;
   submitfail:boolean = false;
@@ -78,7 +78,7 @@ export class PackOpenerComponent implements OnInit {
     this.queueNextPack()
   }
 
-  
+
   get f(){return this.binderData.controls;}
 
   rotate(){
@@ -117,9 +117,9 @@ export class PackOpenerComponent implements OnInit {
 
 
   queueNextPack(){
-    
 
-    
+
+
     this.currentPack=this.packQueue[0]!;
     this.packQueue = this.packQueue.slice(1)
     console.log(this.packQueue)
@@ -139,63 +139,63 @@ export class PackOpenerComponent implements OnInit {
         this.rareCards = []
         this.commonCards = []
         this.cardsRemaining=9;
-        
+
         if(this.packID!=1){
           if(this.packInfo['packsize']=='small'){
             this.cardsRemaining=3
-  
+
             let counter = 0;
             for(counter; counter!=2;counter++){
               this.ultraCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=6;counter++){
               this.superCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=7;counter++){
               this.secretCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=16;counter++){
               this.rareCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=31;counter++){
               this.commonCards.push(this.cards[counter])
             }
-  
-            
-          
-          
+
+
+
+
           }
           if(this.packInfo['packsize']=='medium'){
             this.cardsRemaining=9
-          
+
             let counter = 0;
             for(counter; counter!=10;counter++){
               this.ultraCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=25;counter++){
               this.superCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=27;counter++){
               this.secretCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=52;counter++){
               this.rareCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=100;counter++){
               this.commonCards.push(this.cards[counter])
             }
-  
-  
-  
-            
+
+
+
+
           }
           if(this.packInfo['packsize']=='large'){
             this.cardsRemaining=13
@@ -203,23 +203,23 @@ export class PackOpenerComponent implements OnInit {
             for(counter; counter!=14;counter++){
               this.ultraCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=34;counter++){
               this.superCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=40;counter++){
               this.secretCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=100;counter++){
               this.rareCards.push(this.cards[counter])
             }
-  
+
             for(counter; counter!=200;counter++){
               this.commonCards.push(this.cards[counter])
             }
-          }          
+          }
         }
 
 
@@ -251,15 +251,15 @@ mouseLeft() {
   this.customcardsService.DisableHoveredCard();
 }
     getHoveredCardDetails(){
-      
+
       this.hoverattribute=''
       this.hoverstType =''
       this.hovermType= ''
-    
+
       if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
         this.hovermonster='False';
         this.hoverattribute="assets/cardstats/TRAP.png";
-        
+
         switch (this.hoveredCard?.cardtype) {
           case "Normal Trap":
               this.hoverstType = "assets/cardstats/Normal.png";
@@ -275,12 +275,12 @@ mouseLeft() {
               break;
       }
       }
-    
+
       else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
       this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
         this.hovermonster='False';
         this.hoverattribute="assets/cardstats/SPELL.png";
-        
+
         switch (this.hoveredCard?.cardtype) {
           case "Normal Spell":
               this.hoverstType = "assets/cardstats/Normal.png";
@@ -305,9 +305,9 @@ mouseLeft() {
               break;
       }
       }
-    
-    
-      
+
+
+
       else{
         this.hovermonster='True';
         switch(this.hoveredCard?.attribute){
@@ -335,10 +335,10 @@ mouseLeft() {
           default:
               this.hoverattribute = "assets/cardstats/EARTH.png";
               break;
-          
-        
+
+
         }
-    
+
         switch (this.hoveredCard?.type) {
           case "Aqua":
               this.hovermType = "assets/monstertypes/Aqua.png";
@@ -358,7 +358,7 @@ mouseLeft() {
           case "Dragon":
               this.hovermType = "assets/monstertypes/Dragon.png";
               break;
-    
+
           case "Fairy":
               this.hovermType = "assets/monstertypes/Fairy.png";
               break;
@@ -377,7 +377,7 @@ mouseLeft() {
           case "Plant":
               this.hovermType = "assets/monstertypes/Plant.png";
               break;
-    
+
           case "Psychic":
               this.hovermType = "assets/monstertypes/Psychic.png";
               break;
@@ -396,7 +396,7 @@ mouseLeft() {
           case "Spellcaster":
               this.hovermType = "assets/monstertypes/Spellcaster.png";
               break;
-    
+
           case "Thunder":
               this.hovermType = "assets/monstertypes/Thunder.png";
               break;
@@ -409,38 +409,39 @@ mouseLeft() {
           case "Zombie":
               this.hovermType = "assets/monstertypes/Zombie.png";
               break;
-          
+
           default:
               this.hovermType = "assets/monstertypes/Zombie.png";
               break;
       }
-    
-    
-    
-    
+
+
+
+
       }
-      
+
     }
   ngOnInit(): void {
-
+    const current = new Date();
+    this.timestamp = current.getTime();
     if (this.authService.loggedIn()){
       this.authService.getUser().subscribe(
         res =>{
           console.log('this is user:'+res['id'])
           this.username = res['username']
           this.id = res['id']
-  
+
           this.sealedmode= this.customcardsService.getSealedDraftMode()
           if(this.sealedmode==false){
             this.customcardsService.getBindersByOwner(this.id).subscribe(res=>{this.binders=res})
           }
-          
+
         })
     }
 
     else{
 
-      
+
     }
 
 
@@ -448,11 +449,16 @@ mouseLeft() {
       console.log(this.cards);
   }
 
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
 
 
-  
 
-  
+
+
+
   goToLink(url: string){
     const newurl = 'https://www.duelingbook.com/card?id='+url
     window.open(newurl, "_blank");
@@ -482,22 +488,22 @@ mouseLeft() {
         if(cardCounter<this.cardsRemaining-2){
           const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
           let newCard = this.commonCards[randID]
-  
+
           while(this.randomCards.findIndex(obj => obj.id === newCard?.id)>-1){
             const randID = this.randomIntFromInterval(0,this.commonCards.length-1)
             newCard = this.commonCards[randID]
           }
-  
+
           this.randomCards.push(newCard)
         }
         if(cardCounter==this.cardsRemaining-2){
           const randID = this.randomIntFromInterval(0,this.rareCards.length-1)
           const newCard = this.rareCards[randID]
-  
-          
+
+
           this.randomCards.push(newCard)
         }
-      
+
         if(cardCounter==this.cardsRemaining-1){
           const randID1 = this.randomIntFromInterval(0,5)
           const randID2 = this.randomIntFromInterval(0,11)
@@ -512,24 +518,24 @@ mouseLeft() {
           if(randID1==0){
             const randID = this.randomIntFromInterval(0,this.superCards.length-1)
             newCard = this.superCards[randID]
-            
+
           }
           if(randID2==0){
             const randID = this.randomIntFromInterval(0,this.ultraCards.length-1)
              newCard = this.ultraCards[randID]
-            
+
           }
           if(randID3==0){
             const randID = this.randomIntFromInterval(0,this.secretCards.length-1)
             newCard = this.secretCards[randID]
           }
-  
+
           this.randomCards.push(newCard)
-        
-          
+
+
         }
         cardCounter++;
-  
+
       }
     }
 
@@ -538,7 +544,7 @@ mouseLeft() {
     this.packsOpened++;
     console.log(this.randomCards);
   }
-  randomIntFromInterval(min:number, max:number) { // min and max included 
+  randomIntFromInterval(min:number, max:number) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
@@ -564,22 +570,22 @@ mouseLeft() {
   openNextPack(){
     this.revealed=false
     this.openedPack = []
-    
-    
+
+
 
     if(this.packsOpened==this.packAmount){
       this.packsOpened = 0;
-      
+
       this.queueNextPack();
     }
     else{
       this.rotate();
       this.shuffleCards();
-      
+
       this.card = undefined;
     }
 
-    
+
   }
 
 
@@ -592,8 +598,8 @@ mouseLeft() {
       this.openedPack.push(card)
     }
 
-    
-    
+
+
     this.currentOpened.sort((a, b) => a.name.localeCompare(b.name))
     this.currentOpened.sort((a, b) => a.creator.localeCompare(b.creator))
 
@@ -618,7 +624,7 @@ mouseLeft() {
     if(this.card?.cardtype=="Normal Trap" || this.card?.cardtype=="Counter Trap" || this.card?.cardtype=="Continuous Trap"){
       this.monster='False';
       this.attribute="assets/cardstats/TRAP.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Trap":
             this.stType = "assets/cardstats/Normal.png";
@@ -639,7 +645,7 @@ mouseLeft() {
     this.card?.cardtype=="Ritual Spell" || this.card?.cardtype=="Field Spell" || this.card?.cardtype=="Equip Spell" ){
       this.monster='False';
       this.attribute="assets/cardstats/SPELL.png";
-      
+
       switch (this.card?.cardtype) {
         case "Normal Spell":
             this.stType = "assets/cardstats/Normal.png";
@@ -666,7 +672,7 @@ mouseLeft() {
     }
 
 
-    
+
     else{
       this.monster='True';
       switch(this.card?.attribute){
@@ -694,8 +700,8 @@ mouseLeft() {
         default:
             this.attribute = "assets/cardstats/EARTH.png";
             break;
-        
-      
+
+
       }
 
       switch (this.card?.type) {
@@ -768,7 +774,7 @@ mouseLeft() {
         case "Zombie":
             this.mType = "assets/monstertypes/Zombie.png";
             break;
-        
+
         default:
             this.mType = "assets/monstertypes/Zombie.png";
             break;
@@ -778,7 +784,7 @@ mouseLeft() {
 
 
     }
-    
+
 }
 
 submitBinder(){
@@ -799,7 +805,7 @@ submitBinder(){
       console.log(res);
       this.router.navigate(['/packs']);
     },
-      
+
     err=>{console.log(err)}
   )
 }
@@ -834,7 +840,7 @@ addToBinder(){
       console.log(res);
       this.router.navigate(['/packs']);
     },
-      
+
     err=>{console.log(err)}
   )
 

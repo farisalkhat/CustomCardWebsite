@@ -45,6 +45,7 @@ export class ArticleDetailsComponent implements OnInit {
       this.articleid = Number(paramMap.get('articleid'));
       this._customCardsService.getArticle(this.articleid).subscribe(
         (data:any)=>{
+          this._customCardsService.updateArticleViews(this.articleid).subscribe()
           this.article = data;
           console.log(this.article);
         } 

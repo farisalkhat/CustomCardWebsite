@@ -11,6 +11,8 @@ export class HoverCardComponent implements OnInit {
   constructor(public customcardService:CustomcardsService) { }
 
   ngOnInit() {
+    const current = new Date();
+    this.timestamp = current.getTime();
     this.customcardService.hoverCardEvent
     .subscribe((data:HoveredCardDetails) => {
       console.log(data);
@@ -28,6 +30,10 @@ export class HoverCardComponent implements OnInit {
     });
 
   }
+  timestamp: number = 0;
+  getTimeStamp(){
+    return this.timestamp;
+  }
   isHovering: boolean = false;
   hoveredCard!:Card;
   hovermonster!:string;
@@ -39,16 +45,16 @@ export class HoverCardComponent implements OnInit {
 
   getHoveredCardDetails(){
 
-    
+
 
     // this.hoverattribute=''
     // this.hoverstType =''
     // this.hovermType= ''
-  
+
     if(this.hoveredCard?.cardtype=="Normal Trap" || this.hoveredCard?.cardtype=="Counter Trap" || this.hoveredCard?.cardtype=="Continuous Trap"){
       this.hovermonster='False';
       this.hoverattribute="assets/cardstats/TRAP.png";
-  
+
       switch (this.hoveredCard?.cardtype) {
         case "Normal Trap":
             this.hoverstType = "assets/cardstats/Normal.png";
@@ -64,12 +70,12 @@ export class HoverCardComponent implements OnInit {
             break;
     }
     }
-  
+
     else if(this.hoveredCard?.cardtype=="Normal Spell" || this.hoveredCard?.cardtype=="Quick Spell" || this.hoveredCard?.cardtype=="Continuous Spell" ||
     this.hoveredCard?.cardtype=="Ritual Spell" || this.hoveredCard?.cardtype=="Field Spell" || this.hoveredCard?.cardtype=="Equip Spell" ){
       this.hovermonster='False';
       this.hoverattribute="assets/cardstats/SPELL.png";
-  
+
       switch (this.hoveredCard?.cardtype) {
         case "Normal Spell":
             this.hoverstType = "assets/cardstats/Normal.png";
@@ -94,9 +100,9 @@ export class HoverCardComponent implements OnInit {
             break;
     }
     }
-  
-  
-  
+
+
+
     else{
       this.hovermonster='True';
       switch(this.hoveredCard?.attribute){
@@ -124,10 +130,10 @@ export class HoverCardComponent implements OnInit {
         default:
             this.hoverattribute = "assets/cardstats/EARTH.png";
             break;
-  
-  
+
+
       }
-  
+
       switch (this.hoveredCard?.type) {
         case "Aqua":
             this.hovermType = "assets/monstertypes/Aqua.png";
@@ -147,7 +153,7 @@ export class HoverCardComponent implements OnInit {
         case "Dragon":
             this.hovermType = "assets/monstertypes/Dragon.png";
             break;
-  
+
         case "Fairy":
             this.hovermType = "assets/monstertypes/Fairy.png";
             break;
@@ -166,7 +172,7 @@ export class HoverCardComponent implements OnInit {
         case "Plant":
             this.hovermType = "assets/monstertypes/Plant.png";
             break;
-  
+
         case "Psychic":
             this.hovermType = "assets/monstertypes/Psychic.png";
             break;
@@ -185,7 +191,7 @@ export class HoverCardComponent implements OnInit {
         case "Spellcaster":
             this.hovermType = "assets/monstertypes/Spellcaster.png";
             break;
-  
+
         case "Thunder":
             this.hovermType = "assets/monstertypes/Thunder.png";
             break;
@@ -198,17 +204,17 @@ export class HoverCardComponent implements OnInit {
         case "Zombie":
             this.hovermType = "assets/monstertypes/Zombie.png";
             break;
-  
+
         default:
             this.hovermType = "assets/monstertypes/Zombie.png";
             break;
     }
-  
-  
-  
-  
+
+
+
+
     }
-  
+
     console.log(this.hoverattribute);
   }
 
@@ -219,8 +225,8 @@ export class HoverCardComponent implements OnInit {
     else if(this.leftPosition>=640){
         this.leftPosition-=300;
       }
-    
-    
+
+
       if(this.rightPosition<-90){
         this.rightPosition+=150;
       }
@@ -233,30 +239,30 @@ export class HoverCardComponent implements OnInit {
       else{
         this.rightPosition -=25;
       }
-      
+
       this.getHoveredCardDetails();
   }
   mouseHovering(card:Card,e:MouseEvent) {
 
     console.log(e.clientX);
     console.log(e.clientY);
-    
+
       this.isHovering = true;
       this.hoveredCard = card
-    
+
       if(e.clientX>=900){
         this.leftPosition = e.clientX-200;
       }
-    
+
       else{
         this.leftPosition = e.clientX+2;
       }
-    
+
       this.rightPosition =e.clientY-170;
-    
+
       console.log("poop");
       this.getHoveredCardDetails();
-    
+
     }
     mouseLeft() {
         this.isHovering = false;
