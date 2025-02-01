@@ -1,0 +1,276 @@
+<div class="container">
+<div class="row">
+    <div class="col-md-3">
+        <div class="card " style="width: 14rem;">
+            <div class="card-header">
+              Effect {{effectCards.length}}
+            </div>
+            <div class="overflow-scroll">
+              <ul *ngFor="let card of effectCards" class=" list-group border-0 list-group-flush">
+                <li class="list-group-item effect ">
+                  <img class = "attribute" *ngIf="card.attribute=='FIRE'" src ="assets/cardstats/FIRE.png">
+                  <img class = "attribute" *ngIf="card.attribute=='WATER'" src ="assets/cardstats/WATER.png">
+                  <img class = "attribute" *ngIf="card.attribute=='EARTH'" src ="assets/cardstats/EARTH.png">
+                  <img class = "attribute" *ngIf="card.attribute=='WIND'" src ="assets/cardstats/WIND.png">
+                  <img class = "attribute" *ngIf="card.attribute=='DARK'" src ="assets/cardstats/DARK.png">
+                  <img class = "attribute" *ngIf="card.attribute=='LIGHT'" src ="assets/cardstats/LIGHT.png">
+                  <img class = "attribute" *ngIf="card.attribute=='DIVINE'" src ="assets/cardstats/DIVINE.png">
+                  
+                    
+                  <img class = "attribute" *ngIf="card.type=='Aqua'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Beast-Warrior'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Dinosaur'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Divine-Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Dragon'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Fairy'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Fiend'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Fish'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Insect'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Machine'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Plant'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Psychic'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Pyro'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Reptile'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Rock'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Sea Serpent'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Spellcaster'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Thunder'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Warrior'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Winged-Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Zombie'" src ="assets/monstertypes/{{card.type}}.png">
+                    <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                  </li>
+              </ul>
+
+            </div>
+          </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="width: 14rem;">
+            <div class="card-header">
+              Spell {{spellCards.length}}
+            </div>
+            <div class="overflow-scroll">
+              <ul *ngFor="let card of spellCards" class=" list-group border-0 list-group-flush">
+                <li class="list-group-item spell ">
+                  <img class = "attribute" *ngIf="card.cardtype=='Normal Spell'" src ="assets/cardstats/Normal.png">
+                  <img class = "attribute" *ngIf="card.cardtype=='Quick Spell'" src ="assets/cardstats/Quick.png">
+                  <img class = "attribute" *ngIf="card.cardtype=='Field Spell'" src ="assets/cardstats/Field.png">
+                  <img class = "attribute" *ngIf="card.cardtype=='Continuous Spell'" src ="assets/cardstats/Continuous.png">
+                  <img class = "attribute" *ngIf="card.cardtype=='Equip Spell'" src ="assets/cardstats/Equip.png">
+                  <img class = "attribute" *ngIf="card.cardtype=='Ritual Spell'" src ="assets/cardstats/Ritual.png">
+                    <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                  </li>
+              </ul>
+
+            </div>
+
+          </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="width: 14rem;">
+            <div class="card-header">
+              Trap {{trapCards.length}}
+            </div>
+            <div class="overflow-scroll">
+
+            
+            <ul *ngFor="let card of trapCards" class=" list-group border-0 list-group-flush">
+              <li class="list-group-item trap ">
+                <img class = "attribute" *ngIf="card.cardtype=='Normal Trap'" src ="assets/cardstats/Normal.png">
+                <img class = "attribute" *ngIf="card.cardtype=='Continuous Trap'" src ="assets/cardstats/Continuous.png">
+                <img class = "attribute" *ngIf="card.cardtype=='Counter Trap'" src ="assets/cardstats/Counter.png">
+                  <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                </li>
+            </ul>
+          </div>
+          </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="width: 14rem;">
+            <div class="card-header">
+              Ritual {{ritualCards.length}}
+            </div>
+            <div class="overflow-scroll">
+              <ul *ngFor="let card of ritualCards" class=" list-group border-0 list-group-flush">
+                <li class="list-group-item ritual ">
+                  <img class = "attribute" *ngIf="card.attribute=='FIRE'" src ="assets/cardstats/FIRE.png">
+                  <img class = "attribute" *ngIf="card.attribute=='WATER'" src ="assets/cardstats/WATER.png">
+                  <img class = "attribute" *ngIf="card.attribute=='EARTH'" src ="assets/cardstats/EARTH.png">
+                  <img class = "attribute" *ngIf="card.attribute=='WIND'" src ="assets/cardstats/WIND.png">
+                  <img class = "attribute" *ngIf="card.attribute=='DARK'" src ="assets/cardstats/DARK.png">
+                  <img class = "attribute" *ngIf="card.attribute=='LIGHT'" src ="assets/cardstats/LIGHT.png">
+                  <img class = "attribute" *ngIf="card.attribute=='DIVINE'" src ="assets/cardstats/DIVINE.png">
+                    
+                  <img class = "attribute" *ngIf="card.type=='Aqua'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Beast-Warrior'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Dinosaur'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Divine-Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Dragon'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Fairy'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Fiend'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Fish'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Insect'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Machine'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Plant'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Psychic'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Pyro'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Reptile'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Rock'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Sea Serpent'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Spellcaster'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Thunder'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Warrior'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Winged-Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                  <img class = "attribute" *ngIf="card.type=='Zombie'" src ="assets/monstertypes/{{card.type}}.png">
+                    <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                  </li>
+              </ul>
+            </div>
+            
+          </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="width: 14rem;">
+            <div class="card-header">
+              Fusion {{fusionCards.length}}
+            </div>
+            <div class="overflow-scroll">
+            <ul *ngFor="let card of fusionCards" class=" list-group border-0 list-group-flush">
+              <li class="list-group-item fusion ">
+                <img class = "attribute" *ngIf="card.attribute=='FIRE'" src ="assets/cardstats/FIRE.png">
+                <img class = "attribute" *ngIf="card.attribute=='WATER'" src ="assets/cardstats/WATER.png">
+                <img class = "attribute" *ngIf="card.attribute=='EARTH'" src ="assets/cardstats/EARTH.png">
+                <img class = "attribute" *ngIf="card.attribute=='WIND'" src ="assets/cardstats/WIND.png">
+                <img class = "attribute" *ngIf="card.attribute=='DARK'" src ="assets/cardstats/DARK.png">
+                <img class = "attribute" *ngIf="card.attribute=='LIGHT'" src ="assets/cardstats/LIGHT.png">
+                  <img class = "attribute" *ngIf="card.attribute=='DIVINE'" src ="assets/cardstats/DIVINE.png">
+                  
+                <img class = "attribute" *ngIf="card.type=='Aqua'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Beast-Warrior'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Dinosaur'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Divine-Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Dragon'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Fairy'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Fiend'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Fish'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Insect'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Machine'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Plant'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Psychic'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Pyro'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Reptile'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Rock'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Sea Serpent'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Spellcaster'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Thunder'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Warrior'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Winged-Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Zombie'" src ="assets/monstertypes/{{card.type}}.png">
+                  <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                </li>
+            </ul>
+          </div>
+          </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="width: 14rem;">
+            <div class="card-header">
+              Synchro {{synchroCards.length}}
+            </div>
+            <div class="overflow-scroll">
+            <ul *ngFor="let card of synchroCards" class=" list-group border-0 list-group-flush">
+              <li class="list-group-item synchro ">
+                <img class = "attribute" *ngIf="card.attribute=='FIRE'" src ="assets/cardstats/FIRE.png">
+                <img class = "attribute" *ngIf="card.attribute=='WATER'" src ="assets/cardstats/WATER.png">
+                <img class = "attribute" *ngIf="card.attribute=='EARTH'" src ="assets/cardstats/EARTH.png">
+                <img class = "attribute" *ngIf="card.attribute=='WIND'" src ="assets/cardstats/WIND.png">
+                <img class = "attribute" *ngIf="card.attribute=='DARK'" src ="assets/cardstats/DARK.png">
+                <img class = "attribute" *ngIf="card.attribute=='LIGHT'" src ="assets/cardstats/LIGHT.png">
+                  <img class = "attribute" *ngIf="card.attribute=='DIVINE'" src ="assets/cardstats/DIVINE.png">
+                  
+                <img class = "attribute" *ngIf="card.type=='Aqua'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Beast-Warrior'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Dinosaur'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Divine-Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Dragon'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Fairy'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Fiend'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Fish'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Insect'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Machine'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Plant'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Psychic'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Pyro'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Reptile'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Rock'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Sea Serpent'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Spellcaster'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Thunder'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Warrior'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Winged-Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Zombie'" src ="assets/monstertypes/{{card.type}}.png">
+                  <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                </li>
+            </ul>
+          </div>
+          </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="width: 14rem;">
+            <div class="card-header">
+              XYZ {{xyzCards.length}}
+            </div>
+            <div class="overflow-scroll">
+            <ul *ngFor="let card of xyzCards" class=" list-group border-0 list-group-flush">
+              <li class="list-group-item xyz ">
+                <img class = "attribute" *ngIf="card.attribute=='FIRE'" src ="assets/cardstats/FIRE.png">
+                <img class = "attribute" *ngIf="card.attribute=='WATER'" src ="assets/cardstats/WATER.png">
+                <img class = "attribute" *ngIf="card.attribute=='EARTH'" src ="assets/cardstats/EARTH.png">
+                <img class = "attribute" *ngIf="card.attribute=='WIND'" src ="assets/cardstats/WIND.png">
+                <img class = "attribute" *ngIf="card.attribute=='DARK'" src ="assets/cardstats/DARK.png">
+                <img class = "attribute" *ngIf="card.attribute=='LIGHT'" src ="assets/cardstats/LIGHT.png">
+                  <img class = "attribute" *ngIf="card.attribute=='DIVINE'" src ="assets/cardstats/DIVINE.png">
+                  
+                <img class = "attribute" *ngIf="card.type=='Aqua'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Beast-Warrior'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Dinosaur'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Divine-Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Dragon'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Fairy'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Fiend'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Fish'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Insect'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Machine'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Plant'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Psychic'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Pyro'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Reptile'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Rock'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Sea Serpent'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Spellcaster'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Thunder'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Warrior'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Winged-Beast'" src ="assets/monstertypes/{{card.type}}.png">
+                <img class = "attribute" *ngIf="card.type=='Zombie'" src ="assets/monstertypes/{{card.type}}.png">
+                  <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                </li>
+            </ul>
+          </div>
+          </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+
+
+</div>
+
+
+
+</div>
+

@@ -1,10 +1,47 @@
 .card{
     background-color: black;
-    width:320px;
+    width:300px;
 }
 
 .card-title{
     color:white;
+    margin:0;
+    margin-left:5px;
+    padding:0;
+    font-weight: bold;
+}
+.card-text{
+    margin:0;
+    margin-left:5px;
+    margin-top:5px;
+    padding:0;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;}
+    
+.baby-avatar{
+    width:10%;
+}
+.baby-card{
+    width:15px;
+    margin-right:4px;
+    height:20px;
+    margin-bottom:4px;  
+}
+.crop {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    object-fit: cover;
+    
+}
+.crop img {
+    width:175%;
+    margin: -175px 0px 0px -90px;
+    background-color: #000;
 }
 
 /* button{
@@ -82,4 +119,4 @@ a{
  }
 
 
-  */
+   */

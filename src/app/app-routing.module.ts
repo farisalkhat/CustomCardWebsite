@@ -47,6 +47,9 @@ import {FormatsComponent} from './formats/formats.component';
 import {AboutsiteComponent} from './aboutsite/aboutsite.component';
 import { DustingCollectionComponent } from './collections/dusting-collection/dusting-collection.component';
 import { UploadCardImagesComponent } from './admin/upload-card-images/upload-card-images.component';
+import { TopCardsComponent } from './top-cards/top-cards.component';
+import { ViewDraftsComponent } from './drafts/view-drafts/view-drafts.component';
+import { ViewDraftDetailsComponent } from './drafts/view-draft-details/view-draft-details.component';
 
 const routes: Routes = [
   {
@@ -147,7 +150,18 @@ component:AboutsiteComponent},
 {path:'collections/dusting',
 component:DustingCollectionComponent},
 {path:'admin/upload-card-images',
-component:UploadCardImagesComponent}
+component:UploadCardImagesComponent},
+{path:'top-cards',
+  component:TopCardsComponent
+},
+{
+  path:'drafts/draftlists',
+  component:ViewDraftsComponent
+},
+{
+  path:'drafts/draftlists/:draftid',
+  component:ViewDraftDetailsComponent
+}
 
 
 

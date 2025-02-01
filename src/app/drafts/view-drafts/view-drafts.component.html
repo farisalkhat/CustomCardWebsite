@@ -1,0 +1,83 @@
+<div class="container ">
+
+
+
+    <div class="row">
+      <div *ngFor = "let draft of drafts" class="col-sm-6 col-md-4">
+
+        <div class="col">
+          <div class="card" >
+            <div class="crop">
+              <img src='https://images.theatticygo.com/card-images/{{draft?.draftimage}}.png' >
+            </div>
+            
+            <div class="card-body">
+              <h5 class="card-title">{{draft.title}}</h5>
+              
+              <p class="card-text">This draft is focused on being an introduction to the concepts of The Attic Format!</p>
+ 
+
+              <p class="card-text"><i class="bi-calendar"></i>{{draft.creationdate}}</p>
+              <p class="card-text">
+                <img class="baby-card"src="assets/cardimages/yugioh_card_icon.png">{{draft.cardtotal}} cards 
+                <i class="bi-eye"></i>{{draft.views}} views
+              </p>
+              <p class="card-text">
+                Created by  
+                <a routerLink="/players/{{draft.ownerid}}">
+                  <img class="baby-avatar" src='https://images.theatticygo.com/profile-images/{{draft?.profile_image}}.png' />
+                  {{draft.username}}
+                </a>
+              </p>
+              
+              <button class="btn btn-success"routerLink="/drafts/draftlists/{{draft.id}}">>></button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+<!-- <div class="container justify-content-center">
+
+
+
+        <div class="row">
+          <div *ngFor = "let draft of drafts" class="col-auto">
+
+            <a routerLink="/draft-form/{{draft.id}}">
+              <div class="card ">
+                <div class="crop ">
+                  <div class="overlay-div "></div>
+                  <img src='https://images.theatticygo.com/card-images/{{draft?.draftimage}}.png' >
+
+                </div>
+
+                <div class="card-img-overlay">
+                  <h5 class="text-center align-self-center mx-auto">{{draft.title}} {{draft.id}} </h5>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+</div> -->

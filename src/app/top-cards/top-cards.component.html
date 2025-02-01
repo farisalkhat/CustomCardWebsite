@@ -1,0 +1,15 @@
+<div class="container">
+
+  <div class="row">
+    <div  *ngFor = "let card of top_cards"class="col-md-3 col-xl-2 ">
+
+      <input (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="card" type="image" routerLink="/cards/{{card.id}}"
+
+      src="https://images.theatticygo.com/card-images/{{card.id}}.png?{{getTimeStamp()}}" />
+
+
+</div>
+
+
+
+</div>

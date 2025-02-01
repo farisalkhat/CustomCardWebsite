@@ -1,7 +1,5 @@
 .navbar-default {
-  background-color: 
-  #222222
-  ;
+  background-color: #222222;
   background-image: none;
   background-repeat: no-repeat;
 }
@@ -10,9 +8,12 @@ nav {
 }
 
 body {
-  background: #16181C !important;
+  background: #16181c !important;
 }
-
+i{
+  color:white;
+  margin-right:5px;
+}
 .container {
   margin-top: 10px;
 }
@@ -28,44 +29,39 @@ body {
   width: 50%;
 }
 
-
 label {
   color: #e3e3e3;
 }
 
-ngx-editor p{
-  color:black;
+ngx-editor p {
+  color: black;
 }
 
 ngx-editor ul {
-  color:black;
+  color: black;
 }
 
 ngx-editor h1 {
   font-family: "Oswald", sans-serif;
-  color:black;
+  color: black;
 }
 ngx-editor h2 {
   font-family: "Oswald", sans-serif;
-  color:black;
+  color: black;
 }
 ngx-editor h3 {
   font-family: "Oswald", sans-serif;
-  color:black;
+  color: black;
 }
 ngx-editor h4 {
   font-family: "Oswald", sans-serif;
-  color:black;
+  color: black;
 }
 
 ngx-editor label {
   font-family: "Oswald", sans-serif;
-  color:black;
+  color: black;
 }
-
-
-
-
 
 p {
   color: #e3e3e3;
@@ -73,7 +69,6 @@ p {
 ul {
   color: #e3e3e3;
 }
-
 
 h2 {
   font-family: "Oswald", sans-serif;
@@ -101,14 +96,10 @@ label {
 .btn-success {
   font-family: "Oswald", sans-serif;
   color: #e3e3e3;
-  background-color: #16181C !important;
+  background-color: #16181c !important;
   border-color: #198754;
   /* background-color: #1f1a1f !important; */
 }
-
-
-
-
 
 button {
   padding: 5px;
@@ -125,7 +116,7 @@ nav {
 h1 {
   font-family: "Oswald", sans-serif;
   font-size: x-large;
-  color: #e3e3e3 ;
+  color: #e3e3e3;
 }
 .hovering {
   background-color: rgba(5, 163, 90, 0.858);
@@ -157,8 +148,18 @@ h1 {
 }
 a {
   text-decoration: none !important;
-  color:#198754 !important;
+  color: #198754 !important;
 }
+
+.nav {
+  text-decoration: none !important;
+  color: #198754 !important;
+}
+.nav-link {
+  text-decoration: none !important;
+  color: #198754 !important;
+}
+
 a:hover {
   color: #055734 !important;
 }
@@ -166,12 +167,10 @@ a:hover {
   background-color: blue !important;
 }
 
-button:hover{
+button:hover {
   color: #055734 !important;
   transition: 0.3s;
 }
-
-
 
 .article-card {
   margin: 5px;
@@ -180,8 +179,8 @@ button:hover{
   position: relative;
   border-color: black;
   border-radius: 0%;
-  transition:.5s;
+  transition: 0.5s;
 }
-.article-card:hover{
-  transform:scale(1.05);
+.article-card:hover {
+  transform: scale(1.05);
 }

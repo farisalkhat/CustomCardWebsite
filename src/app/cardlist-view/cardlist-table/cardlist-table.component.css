@@ -1,0 +1,45 @@
+.effect{
+    background-color:#B38F7E;
+}
+.spell{
+    background-color:#78AAA1
+}
+.trap{
+    background-color:#F5D2EA 
+}
+.ritual{
+    background-color:#8798B1
+}
+.fusion{
+    background-color:#9E8BC0
+}
+.xyz{
+    background-color:#A6A6A6
+}
+.synchro{
+    background-color:#E3E7E8
+}
+
+.card{
+    margin:2px;
+    height:300px;
+}
+
+.list-group-item{
+    padding:2px;
+}
+.attribute{
+    width: 20px;
+    height:20px;
+    margin-right:2px;
+}
+a:link,:visited{
+    color:black !important;
+}
+a{
+    color:black !important;
+}
+a:hover{
+    color:green !important;
+    cursor: pointer;
+}

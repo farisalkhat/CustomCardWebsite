@@ -558,7 +558,7 @@ export class CustomcardsService {
     return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/draft/${name}`);
   }
   getDrafts() {
-    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/drafts`);
+    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/drafts`);
   }
 
   getPacks() {
@@ -580,10 +580,12 @@ export class CustomcardsService {
     return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/packs/owner/${id}`);
   }
 
-
+  getDraftByID(id: number) {
+    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/customcards/draft/${id}`);
+  }
 
   getDraftCardsbyID(id: number) {
-    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/draft/${id}`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/draft/cards/${id}`);
   }
 
   deleteDecklists(id: number) {
@@ -735,6 +737,9 @@ export class CustomcardsService {
 
   getCardDetails(id: number) {
     return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/customcards/cards/details/${id}`);
+  }
+  getTopCards() {
+    return this.http.get<any>(`http://127.0.0.1:8080/api/yugioh/top-cards`);
   }
 
   getUserPageDetails(id: number) {

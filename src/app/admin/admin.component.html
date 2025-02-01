@@ -1,16 +1,65 @@
 <div class="container">
+    <div class="d-flex justify-content-center">
+        <div id="Loading" class="spinner-border" role="status">
+          <span class="sr-only"></span>
+        </div>
+      </div>
 
     <div class="row">
-        <div class="col">
-            <button (click) = "updateCOTD()" class="btn btn-success">Randomize Card of the Day</button>
-            <button class="btn btn-success" routerLink="/editor">Create Article</button>
-            <button class="btn btn-success" routerLink="/database">Update Database</button>
+        <div class="row">
+            <h1>Admin Dashboard</h1>
+        </div>
+        <!-- <div class="row">
+            <div class="col">
+                <button class="btn-success button btn">Events</button>
+                <button class="btn-success button btn">Events</button>
+                <button class="btn-success button btn">Events</button>
+                <button class="btn-success button btn">Events</button>
+            </div>
+        </div> -->
 
-            <button class="btn btn-success" routerLink="/pack-maker">Pack Maker</button>
-            <button class="btn btn-success" routerLink="/pack-editor">Pack Editor</button>
-            <button class="btn btn-success" routerLink="/structure-deck-maker">Deck Maker</button>
-            <button class="btn btn-success" routerLink="/admin/upload-card-images">Upload Card Images</button>
+        <div class="row">
+            <div class="col">
+                <h2>Site Settings</h2>
+                <button (click) = "updateCOTD()" class="btn btn-success">Randomize Card of the Day</button>
+                <button class="btn btn-success" routerLink="/editor">Create Article</button>
+                
+                
+    
+            </div>
+    
+            <div class="col">
+                <h2>Shop Settings</h2>
+                <button class="btn btn-success" routerLink="/pack-maker">Pack Maker</button>
+                <button class="btn btn-success" routerLink="/structure-deck-maker">Deck Maker</button>
+                <button class="btn btn-success" routerLink="/pack-editor">Pack Editor</button>
+                
+            </div>
+            <div class="col">
+                <h2>Database Settings</h2>
+    
+                <button class="btn btn-success" routerLink="/database">Update Database</button>
+                <button class="btn btn-success" routerLink="/admin/upload-card-images">Upload Card Images</button>
+    
+    
+            </div>
 
         </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <h2>The Team</h2>
+                <div *ngFor="let user of staff" class="col-auto">
+                    <a routerLink='/players/{{user.id}}'>
+                    {{user.username}}
+                  </a>
+                  </div>
+            </div>
+            <div class="col-lg-2">
+                <h2>Events</h2>
+                <p>TBA</p>
+            </div>
+        </div>
+
     </div>
 </div>

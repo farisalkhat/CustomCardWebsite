@@ -1,0 +1,15 @@
+<div class="container">
+
+
+  <ul class="list-group list-group-flush" >
+    <li *ngFor="let card of cardlist" class="list-group-item">
+      <a (click)="goToLink(card.id)">{{card.name}}
+      </a>   
+    </li>
+  </ul>
+
+
+
+</div>
+
+

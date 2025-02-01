@@ -68,6 +68,15 @@ import { UploadCardImagesComponent } from './admin/upload-card-images/upload-car
 import { SubmitDeckComponent } from './deck-editor/submit-deck/submit-deck.component';
 import { PlayerSearchComponent } from './player/player-search/player-search.component';
 import { PlayerHomeComponent } from './player/player-home/player-home.component';
+import { ViewDraftsComponent } from './drafts/view-drafts/view-drafts.component';
+import { TopCardsComponent } from './top-cards/top-cards.component';
+import { ViewDraftDetailsComponent } from './drafts/view-draft-details/view-draft-details.component';
+import { CardlistViewComponent } from './cardlist-view/cardlist-view.component';
+import { CardlistTableComponent } from './cardlist-view/cardlist-table/cardlist-table.component';
+import { CardlistTextviewComponent } from './cardlist-view/cardlist-textview/cardlist-textview.component';
+import { CardlistImageviewComponent } from './cardlist-view/cardlist-imageview/cardlist-imageview.component';
+import { CardlistChangelogComponent } from './cardlist-view/cardlist-changelog/cardlist-changelog.component';
+import { CardlistReportComponent } from './cardlist-view/cardlist-report/cardlist-report.component';
 
 @NgModule({
   declarations: [
@@ -131,7 +140,16 @@ import { PlayerHomeComponent } from './player/player-home/player-home.component'
     UploadCardImagesComponent,
     SubmitDeckComponent,
     PlayerSearchComponent,
-    PlayerHomeComponent
+    PlayerHomeComponent,
+    ViewDraftsComponent,
+    TopCardsComponent,
+    ViewDraftDetailsComponent,
+    CardlistViewComponent,
+    CardlistTableComponent,
+    CardlistTextviewComponent,
+    CardlistImageviewComponent,
+    CardlistChangelogComponent,
+    CardlistReportComponent
   ],
   imports: [
     HttpClientModule,

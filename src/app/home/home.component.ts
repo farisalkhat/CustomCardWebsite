@@ -9,7 +9,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+ 
   sitedata!:SiteData
   cotd!:Card
   latestpack!:any
@@ -40,7 +40,8 @@ export class HomeComponent implements OnInit {
         }
 
         let i = 0;
-        while(i!=4){
+        let min = Math.min(4,this.unused_articles.length)
+        while(i!=min){
           let article = this.unused_articles.shift();
           this.articles.push(article);
           console.log(this.articles);

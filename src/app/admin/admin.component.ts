@@ -13,6 +13,8 @@ export class AdminComponent implements OnInit {
   username:string | undefined;
   id:number | undefined
   currency!:number;
+  players:any[]=[];
+  staff:any[]=[];
 
   constructor(public _ccService:CustomcardsService, public _authService:AuthService,public router:Router) { }
 
@@ -32,6 +34,15 @@ export class AdminComponent implements OnInit {
         this.router.navigate(['/home'])
       }
       )
+      this._ccService.getPlayers().subscribe(
+        res => {
+            this.players = res;
+            this.staff=this.players.filter((user)=>user.role.toLowerCase().includes('admin'))
+            this.hideloader();
+            console.log(this.staff)
+
+        }
+  )
 
     }
     else{
@@ -49,4 +60,13 @@ export class AdminComponent implements OnInit {
       err=>{}
     )
   }
+
+  hideloader() {
+    var div = document.getElementById('Loading')
+    if(div){
+      div.style.display = "none"
+      console.log(div)
+    }
+
+}
 }

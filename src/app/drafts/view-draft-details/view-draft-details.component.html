@@ -1,0 +1,29 @@
+<div class="container">
+
+
+  <div class="row justify-content-center">
+    <div class="card">
+      <div class="crop">
+        <img src='https://images.theatticygo.com/card-images/{{draftInfo?.draftimage}}.png' >
+      </div>
+    </div>
+
+    <h1 class="text-center">{{draftInfo.title}}</h1>
+  <h2 class="text-center">A {{draftSize}} card draft made by
+
+
+
+    <a routerLink="/players/{{draftInfo.ownerid}}">{{draftInfo.username}}
+    <img class="avatar" src='https://images.theatticygo.com/profile-images/{{draftInfo?.profile_image}}.png' /></a></h2>
+
+    <button routerLink="/draft-form/{{draftInfo.id}}" class="btn btn-success">DRAFT</button>
+  </div>
+
+
+
+
+
+  <app-cardlist-view [cardlist] = "cards"></app-cardlist-view>
+
+
+</div>

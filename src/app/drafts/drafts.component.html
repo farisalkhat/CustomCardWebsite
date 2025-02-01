@@ -1,19 +1,49 @@
 
+<div class="container">
+
+  <h1>Welcome to the Draft Format!</h1>
+  <h4>For info about how drafts work, click here.</h4>
+
+
+<div class="row">
+
+  <div class="col"><div class="card" >
+    <img src="https://ms.yugipedia.com//thumb/2/2b/JiraiGumo-MADU-EN-VG-artwork.png/413px-JiraiGumo-MADU-EN-VG-artwork.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">View Drafts</h5>
+      <p class="card-text">See public drafts created by everyone here! </p>
+      <a href="/drafts/draftlists" >Explore >></a>
+    </div>
+  </div></div>
+  <div class="col"><div class="card">
+    <img src="https://ms.yugipedia.com//f/f3/Blocker-TF05-JP-VG-artwork.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Create a Draft</h5>
+      <p class="card-text">Create your own draft to play with friends!</p>
+      <a routerLink="/draft-maker" >Create >></a>
+    </div>
+  </div></div>
+  <div class="col"><div class="card">
+    <img src="https://uploads1.yugioh.com/card_images/246/detail/Beaver-Warrior.jpg?1375127004" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">My Drafts</h5>
+      <p class="card-text">View and Modify your drafts to perfection!</p>
+      <a routerLink="/draftmode" >Edit >></a>
+    </div>
+  </div></div>
+</div>
+
+</div>
+
+<!-- 
 
 
 <div class="container justify-content-center">
-    <!-- <button type="button" class="btn btn-success"  *ngIf="_authService.loggedIn()" routerLink="/draft-maker" routerLinkActive = "active">Create a Draft List</button>
-    <button type="button" class="btn btn-success"  *ngIf="_authService.loggedIn()" (click) ="editDraft(true)" routerLink="/draftmode" routerLinkActive = "active">Edit a Draft List</button> -->
-
-    <!-- <button type="button" class="btn btn-success"  (click) ="setDraft('default')"   routerLink="/draft-form" routerLinkActive = "active">Start a Draft</button>
-
-    <button type="button" class="btn btn-success"  (click) ="setDraft('generic')" routerLink="/draft-form" routerLinkActive = "active">Start a Generic Draft</button> -->
 
 
 
         <div class="row">
           <div *ngFor = "let draft of drafts" class="col-auto">
-            <!-- (click)="setCustomDraft(draft.id)" -->
 
             <a routerLink="/draft-form/{{draft.id}}">
               <div class="card ">
@@ -35,82 +65,11 @@
 
 
 
-      <!-- <button class="btn btn-success" (click)="setCustomDraft(draft.title)" routerLink="/draft-form" routerLinkActive = "active">{{draft.title}}</button> -->
-
 
 
 
 </div>
 
+ -->
 
 
-
-<!-- <div class="container">
-    <form [formGroup] = "draftData" (ngSubmit) = "onSubmit()">
-
-        <div class="form-row">
-            <div class="col">
-              <div class="form-group">
-                <label for="draftTitle">Draft Title</label>
-                <input id="draftTitle" type="text" class="form-control" formControlName="draftTitle" [ngClass]="{'is-invalid': submitted && f['draftTitle'].errors}" placeholder="Game Title">
-                <div *ngIf="submitted && f['draftTitle'].errors" class="invalid-feedback">
-                    <div *ngIf="f['draftTitle'].errors['required']">
-                      <p class="red">Umm Game Title required idiot.</p>
-                    </div>
-                </div>
-              </div>
-            </div>
-
-
-
-            <div class="col">
-              <div class="form-group">
-                <label for="totalPlayers">Total Players</label>
-                        <select class="form-control"  id="totalPlayers" [ngClass]="{'is-invalid': submitted && f['totalPlayers'].errors}" formControlName="totalPlayers">
-                          <option value = 2>2</option>
-                          <option value = 3>3</option>
-                          <option value = 4>4</option>
-                        </select>
-                        <div *ngIf="submitted && f['totalPlayers'].errors" class="invalid-feedback">
-                          <div *ngIf="f['totalPlayers'].errors['required']">
-                            <p class="red">Player amount required.</p>
-                          </div>
-                      </div>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-            <app-gameform #gameForm [submitted] = "submitted" [match] = "gameData"></app-gameform>
-            <button class="btn btn-primary" type="submit">Submit</button>
-
-
-
-            <div *ngIf="submitfail && submitted" class="submit-text-fail" >
-              Submission failed! Fix errors above.
-            </div>
-
-            <div *ngIf="!submitfail && submitted" class="submit-text-success">
-              Match submitted!
-            </div>
-
-
-
-          </form>
-
-
-</div> -->

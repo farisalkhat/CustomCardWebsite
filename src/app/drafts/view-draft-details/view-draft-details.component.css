@@ -1,0 +1,29 @@
+.crop {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.crop img {
+  width: 175%;
+  margin: -175px 0px 0px -90px;
+  background-color: #000;
+  margin-bottom: 20px;
+}
+.btn-success {
+  width: 250px;
+}
+.card {
+  background-color: transparent;
+  width: 350px;
+}
+
+.card-title {
+  color: white;
+}
+.avatar {
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
