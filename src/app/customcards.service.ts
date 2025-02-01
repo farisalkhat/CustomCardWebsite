@@ -558,7 +558,7 @@ export class CustomcardsService {
     return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/draft/${name}`);
   }
   getDrafts() {
-    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/drafts`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/drafts`);
   }
 
   getPacks() {
@@ -581,7 +581,7 @@ export class CustomcardsService {
   }
 
   getDraftByID(id: number) {
-    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/customcards/draft/${id}`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/draft/${id}`);
   }
 
   getDraftCardsbyID(id: number) {
@@ -739,7 +739,7 @@ export class CustomcardsService {
     return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/customcards/cards/details/${id}`);
   }
   getTopCards() {
-    return this.http.get<any>(`http://127.0.0.1:8080/api/yugioh/top-cards`);
+    return this.http.get<any>(`https://farisalkhat.com/theattic/api/yugioh/top-cards`);
   }
 
   getUserPageDetails(id: number) {
