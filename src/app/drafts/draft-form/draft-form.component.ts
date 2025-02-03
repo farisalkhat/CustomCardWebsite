@@ -35,7 +35,7 @@ export class DraftFormComponent implements OnInit {
   draftMode: string = "generic"
   customEnabled: boolean = false;
 
-  cards!: Card[];
+  cards!: any[];
   draftid!: number;
 
   database!: Card[];
@@ -135,7 +135,7 @@ export class DraftFormComponent implements OnInit {
       this.draftCardSelected = false;
       if (this.cardsRemaining <= 0) {
         this.round++;
-        if (this.round >= 5) { this.clearCards(); }
+        if (this.round >= 4) { this.CompleteDraft(); }
         else { this.cardsRemaining = 15; this.shuffleCards() }
       }
       else {
@@ -147,31 +147,50 @@ export class DraftFormComponent implements OnInit {
 
   }
 
-  clearCards() {
+  CompleteDraft() {
     this.randomCards = undefined;
+    console.log(this.currentDraft)
+    let data: { 
+      draftID: number,
+      cards: DraftCard[],
+    } = { draftID: this.draftid, cards: this.currentDraft };
+
+    console.log(data.cards)
+    data.cards = data.cards.filter((value, index, self) =>
+      index === self.findIndex((t) => (
+        t.name === value.name
+      ))
+    )
+    console.log(data.cards)
+
+    this.customcardsService.updateDraftCardViews(data).subscribe(
+      res=>{console.log(res)},
+      err=>{console.log(err)}
+    )
+
   }
 
 
   ngOnInit(): void {
     const current = new Date();
     this.timestamp = current.getTime();
-    this.draftMode = this.customcardsService.getDraftType();
-    this.customEnabled = this.customcardsService.getCustomEnabled();
-    console.log(this.draftMode);
-    console.log(this.draftMode);
-    console.log(this.draftMode);
-    console.log(this.customEnabled)
-
-
 
     this.route.paramMap.subscribe((paramMap) => {
       this.draftid = Number(paramMap.get('draftid'))
+      console.log("This is draft id: " + this.draftid)
       this.customcardsService.getCustomCardsByDraft(this.draftid).subscribe(
         res => {
           this.customDraft = res;
-          this.cards = res;
-          console.log(this.customDraft);
+          this.cards = (res as any).cards
+          if(this.cards.length == 0){
+            this.router.navigate(['/drafts/draftlists'])
+          }
+          console.log(this.customDraft)
           this.shuffleCards()
+        },
+        err=>{console.log(err)
+          
+
         }
       )
 
@@ -588,62 +607,7 @@ export class DraftFormComponent implements OnInit {
         }
 
         break;
-      case "afres":
-        while (cardCounter < this.cardsRemaining) {
-          const randID = this.randomIntFromInterval(0, this.afres.length - 1)
-          const newCard = this.afres[randID]
-          this.randomCards.push(newCard)
-          cardCounter++;
-        }
-        this.shuffleStyle = "nothing"
-        break;
-      case "gergoos":
-        while (cardCounter < this.cardsRemaining) {
-          const randID = this.randomIntFromInterval(0, this.gergoos.length - 1)
-          const newCard = this.gergoos[randID]
-          this.randomCards.push(newCard)
-          cardCounter++;
-        }
-        this.shuffleStyle = "nothing"
-        break;
-      case "swampus":
-        while (cardCounter < this.cardsRemaining) {
-          const randID = this.randomIntFromInterval(0, this.swampus.length - 1)
-          const newCard = this.swampus[randID]
-          this.randomCards.push(newCard)
-          cardCounter++;
-        }
-        this.shuffleStyle = "nothing"
-        break;
-      case "richie":
-        while (cardCounter < this.cardsRemaining) {
-          const randID = this.randomIntFromInterval(0, this.richie.length - 1)
-          const newCard = this.richie[randID]
-          this.randomCards.push(newCard)
-          cardCounter++;
-        }
-        this.shuffleStyle = "nothing"
-        break;
-
-      case "spells":
-        console.log("IN CASE SPELLS");
-        while (cardCounter < this.cardsRemaining) {
-          const randID = this.randomIntFromInterval(0, this.spells.length - 1)
-          const newCard = this.spells[randID]
-          this.randomCards.push(newCard)
-          cardCounter++;
-        }
-        this.shuffleStyle = "nothing"
-        break;
-
-      case "traps":
-        console.log("IN CASE traps");
-        while (cardCounter < this.cardsRemaining) {
-          const randID = this.randomIntFromInterval(0, this.traps.length - 1)
-          const newCard = this.traps[randID]
-          this.randomCards.push(newCard)
-          cardCounter++;
-        }
+      
         this.shuffleStyle = "nothing"
         break;
 
@@ -665,6 +629,7 @@ export class DraftFormComponent implements OnInit {
         while (cardCounter < this.cardsRemaining) {
           const randID = this.randomIntFromInterval(0, this.cards.length - 1)
           const newCard = this.cards[randID]
+          console.log("NEW CARD: " + newCard)
           this.randomCards.push(newCard)
           cardCounter++;
         }

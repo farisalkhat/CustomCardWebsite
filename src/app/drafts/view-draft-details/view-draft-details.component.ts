@@ -12,27 +12,32 @@ export class ViewDraftDetailsComponent implements OnInit {
   draft:any = {};
   draftInfo:any;
   customDraft: [] = [];
-  cards!: Card[];
+  cards!: any[];
   draftSize:number = 0;
   constructor(private route: ActivatedRoute, public router: Router, private customcardsService: CustomcardsService) { }
 
-  effectCards!:Card[];
-  xyzCards!:Card[];
-  fusionCards!:Card[];
-  ritualCards!:Card[];
-  synchroCards!:Card[];
-  spellCards!:Card[];
-  trapCards!:Card[];
+  effectCards!:any[];
+  xyzCards!:any[];
+  fusionCards!:any[];
+  ritualCards!:any[];
+  synchroCards!:any[];
+  spellCards!:any[];
+  trapCards!:any[];
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap) => {
       this.draftid = Number(paramMap.get('draftid'))
       this.customcardsService.getDraftByID(this.draftid).subscribe(
         res => {
+            console.log(res)
           this.draft = res;
           this.draftInfo = this.draft['draft_info']
           this.cards = this.draft['cards']
           this.draftSize = this.cards.length;
+
+          if(this.cards.length == 0){
+            this.router.navigate(['/drafts/draftlists'])
+          }
 
 
 
@@ -91,8 +96,8 @@ export class ViewDraftDetailsComponent implements OnInit {
 
 
             )
-
-
+            
+            this.customcardsService.updateDraftviews(this.draftid).subscribe()
         }
       )
 

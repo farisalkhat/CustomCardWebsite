@@ -791,9 +791,15 @@ export class CustomcardsService {
   updateArticle(article: ArticleUpdate) {
     return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/updateArticle`, article);
   }
+  updateDraftCardViews(data:{}){  
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/update-draft-card-views`,data);
+  }
 
   updateProfileViews(id:number) {
     return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/update-profile-views`, id);
+  }
+  updateDraftviews(id:number) {
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/update-draft-views`, id);
   }
   updateDecklistViews(id:number) {
     return this.http.post<any>(`https://farisalkhat.com/theattic/api/yugioh/update-decklist-views`, id);
