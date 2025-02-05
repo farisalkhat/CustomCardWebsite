@@ -77,6 +77,8 @@ import { CardlistTextviewComponent } from './cardlist-view/cardlist-textview/car
 import { CardlistImageviewComponent } from './cardlist-view/cardlist-imageview/cardlist-imageview.component';
 import { CardlistChangelogComponent } from './cardlist-view/cardlist-changelog/cardlist-changelog.component';
 import { CardlistReportComponent } from './cardlist-view/cardlist-report/cardlist-report.component';
+import { DraftEditorComponent } from './drafts/draft-editor/draft-editor.component';
+import { LazyImageDirective } from './lazy-image.directive';
 
 @NgModule({
   declarations: [
@@ -149,7 +151,9 @@ import { CardlistReportComponent } from './cardlist-view/cardlist-report/cardlis
     CardlistTextviewComponent,
     CardlistImageviewComponent,
     CardlistChangelogComponent,
-    CardlistReportComponent
+    CardlistReportComponent,
+    DraftEditorComponent,
+    LazyImageDirective
   ],
   imports: [
     HttpClientModule,

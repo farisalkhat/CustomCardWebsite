@@ -50,6 +50,7 @@ import { UploadCardImagesComponent } from './admin/upload-card-images/upload-car
 import { TopCardsComponent } from './top-cards/top-cards.component';
 import { ViewDraftsComponent } from './drafts/view-drafts/view-drafts.component';
 import { ViewDraftDetailsComponent } from './drafts/view-draft-details/view-draft-details.component';
+import { DraftEditorComponent } from './drafts/draft-editor/draft-editor.component';
 
 const routes: Routes = [
   {
@@ -132,6 +133,9 @@ component:EditorComponent},
 component:ArticleDetailsComponent},
 {path:'articles/edit/:articleid',
 component:ArticleEditComponent},
+{path:'drafts/edit/:draftid',
+  component:DraftEditorComponent
+},
 {path:'structure-decks',
 component:StructureDecksComponent},
 {path:'structure-deck-maker',

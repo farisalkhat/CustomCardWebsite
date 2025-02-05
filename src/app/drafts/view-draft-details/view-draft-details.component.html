@@ -16,14 +16,14 @@
     <a routerLink="/players/{{draftInfo.ownerid}}">{{draftInfo.username}}
     <img class="avatar" src='https://images.theatticygo.com/profile-images/{{draftInfo?.profile_image}}.png' /></a></h2>
 
-    <button routerLink="/draft-form/{{draftInfo.id}}" class="btn btn-success">DRAFT</button>
+    <button routerLink="/draft-form/{{draftid}}" class="btn btn-success">DRAFT</button>
   </div>
 
 
 
 
 
-  <app-cardlist-view [cardlist] = "cards" [draftsCompleted]="draftInfo.draftscompleted"></app-cardlist-view>
+  <app-cardlist-view [cardlist] = "cards" [draftsCompleted]="draftInfo.draftscompleted" [modifications]="modifications"></app-cardlist-view>
 
 
 </div>

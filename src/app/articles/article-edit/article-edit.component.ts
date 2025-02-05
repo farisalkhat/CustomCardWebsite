@@ -25,7 +25,7 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
   currency!:number;
 
   tag:string | undefined;
-
+ 
   editor!: Editor;
   toolbar: Toolbar = [
     ['bold', 'italic'],

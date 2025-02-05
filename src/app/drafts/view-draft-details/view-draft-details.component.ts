@@ -11,6 +11,7 @@ export class ViewDraftDetailsComponent implements OnInit {
   draftid!: number;
   draft:any = {};
   draftInfo:any;
+  modifications:any
   customDraft: [] = [];
   cards!: any[];
   draftSize:number = 0;
@@ -33,6 +34,7 @@ export class ViewDraftDetailsComponent implements OnInit {
           this.draft = res;
           this.draftInfo = this.draft['draft_info']
           this.cards = this.draft['cards']
+          this.modifications = this.draft['modifications']
           this.draftSize = this.cards.length;
 
           if(this.cards.length == 0){
@@ -104,7 +106,7 @@ export class ViewDraftDetailsComponent implements OnInit {
 
     });
   }
-
+ 
 
   FilterCards(){
     this.effectCards = this.cards.filter((card)=>card.cardtype.includes('Effect'));

@@ -1,1 +1,43 @@
-<h4>2/1/2025</h4>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 justify-content-center">
+            <h2>Changelog</h2>
+            <div class="card">
+                <div class="overflow-scroll">
+                    <ul *ngFor="let modification of getModificationKeys()" class=" list-group border-0 list-group-flush">
+                        <li><span style="text-align:left;" class="badge-date badge bg-primary"> 
+                            {{modification}}
+                        </span></li>
+                        <li *ngFor="let card of sorted_modifications[modification]" class="list-group-item effect ">
+                        <p style="text-align:left;">
+                        
+    
+                            
+                        <a (click)="goToLink(card.id)">{{ card.name | slice:0:40 }}{{card.name.length > 40 ? '...' : ''}}</a>
+                        <span *ngIf="card.status=='ADDED'"  class="badge-status badge bg-success"> 
+                            {{card.status}}
+                        </span>
+                        <span *ngIf="card.status=='REMOVED'"  class="badge-status badge bg-danger"> 
+                            {{card.status}}
+                        </span>
+                        
+
+                    </p>
+                        
+                        
+                        
+                        
+                        </li>
+                    </ul>
+      
+                  </div>
+                
+                
+      </div>
+      
+    </div>
+
+    </div>
+    
+    </div>
+    

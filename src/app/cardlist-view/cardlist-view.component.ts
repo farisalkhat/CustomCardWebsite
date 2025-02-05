@@ -10,6 +10,7 @@ export class CardlistViewComponent implements OnInit {
 
   @Input() cardlist: any[]=[]
   @Input() draftsCompleted: number=0
+  @Input() modifications: any[]=[]
   constructor() { }
 
   ngOnInit(): void {

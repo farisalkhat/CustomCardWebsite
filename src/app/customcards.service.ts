@@ -114,6 +114,7 @@ export interface Draft {
   cardIDs: string[];
   ownerid: number;
   draftimage: string;
+  description: string;
 }
 
 export interface Decklist {
@@ -558,7 +559,7 @@ export class CustomcardsService {
     return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/draft/${name}`);
   }
   getDrafts() {
-    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/drafts`);
+    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/drafts`);
   }
 
   getPacks() {
@@ -581,7 +582,7 @@ export class CustomcardsService {
   }
 
   getDraftByID(id: number) {
-    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/draft/${id}`);
+    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/customcards/draft/${id}`);
   }
 
   getDraftCardsbyID(id: number) {
@@ -639,6 +640,7 @@ export class CustomcardsService {
 
 
 
+
   getFilteredCards(data: any) {
     return this.http.post<Card[]>('https://farisalkhat.com/theattic/api/yugioh/searchresult', data);
   }
@@ -650,13 +652,13 @@ export class CustomcardsService {
     console.log("help!")
     return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/submitdeck', decklist);
   }
-  submitDraft(draft: Draft) {
-    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/submitdraft', draft
+  submitDraft(draft: any) {
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/submitdraft', draft
     )
   }
 
-  resubmitDraft(draft: Draft) {
-    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/editdraft', draft
+  resubmitDraft(draft: any) {
+    return this.http.post<any>('http://127.0.0.1:8080/api/yugioh/editdraft', draft
     )
   }
 
@@ -676,6 +678,16 @@ export class CustomcardsService {
   deletePack(id: number) {
     return this.http.post<any>(`https://farisalkhat.com/theattic/api/delete-pack`, id);
   }
+
+  deleteDraft(id: number) {
+    const draftID = new FormData();
+    draftID.append('draftid', id.toString())
+    return this.http.post<any>(`http://127.0.0.1:8080/api/yugioh/delete-draft`, draftID);
+  }
+
+
+
+
   uploadPackImage(formData: FormData) {
     return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/uploadpackimage', formData
     )

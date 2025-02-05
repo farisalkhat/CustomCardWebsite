@@ -1,0 +1,41 @@
+.card{
+    margin:2px;
+    height:300px;
+    width: 100%;
+}
+
+.small{
+    width:100%;
+}
+.list-group-item{
+    padding:2px;
+}
+.attribute{
+    width: 20px;
+    height:20px;
+    margin-right:2px;
+}
+a:link,:visited{
+    color:black !important;
+}
+a{
+    color:black !important;
+}
+a:hover{
+    color:green !important;
+    cursor: pointer;
+}
+
+p{
+    margin:0;
+    padding: 2px;
+    color:black !important;
+}
+.badge-status{
+    margin-right: 10px;
+    margin-left:5px;
+    color:white !important;
+}
+.badge-date{
+    margin-left:4px;
+}

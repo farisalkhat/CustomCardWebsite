@@ -3,7 +3,7 @@
 
 
     <div class="row">
-      <div *ngFor = "let draft of drafts" class="col-sm-6 col-md-4">
+      <div *ngFor = "let draft of drafts" class="col-sm-6 col-md-3">
 
         <div class="col">
           <div class="card" >
@@ -14,8 +14,8 @@
             <div class="card-body">
               <h5 class="card-title">{{draft.title}}</h5>
               
-              <p class="card-text">This draft is focused on being an introduction to the concepts of The Attic Format!</p>
- 
+              <p class="card-text" [innerHTML]="draft.description"></p>
+              
 
               <p class="card-text"><i class="bi-calendar"></i>{{draft.creationdate}}</p>
               <p class="card-text">
