@@ -3,22 +3,40 @@
 
 
 
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-lg-4 cardeffect">
         <img href='' (click)="goToLink(card.id)" class="bigcard" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'>
     </div>
 
-        <div class="col">
+        <div class="col-lg-6">
             <div class="row">
-                <h1>{{card?.name}}</h1>
-                <h4 *ngIf="monster=='False'"><img class="type" src={{stType}}> {{card?.cardtype}} </h4>
-                <h4 *ngIf="monster=='True'"> {{card?.cardtype}} </h4>
-                <b><p *ngIf="monster=='True'">
-                    <img class="attribute" src={{attribute}}> {{card?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{card?.level}}
-                </p></b>
+              <span>
+                <h1 class="border-bottom border-white">
+                  {{card?.name}}    
+                </h1>
+              </span>
+                
+
+
+                
+
+
+                <b>
+                  <p *ngIf="monster=='False'">
+                    <span class="border-bottom border-white" *ngIf="monster=='False'"><img class="type" src={{stType}}> {{card?.cardtype}} </span>
+                  </p>
+                  <p class="border border-top-0 border-start-0 border-end-0 border-white" *ngIf="monster=='True'">
+                    <span class="border border-bottom-0 border-top-0 border-start-0 border-white"><img class="attribute" src={{attribute}}> {{card?.attribute}}</span>
+                    <span class="border border-bottom-0 border-top-0 border-white"><img class="type" src={{mType}}> {{card?.type}}</span>
+                    <span class="border border-bottom-0 border-top-0 border-end-0 border-white">{{card?.cardtype}}</span>
+                        
+                  </p>
+                </b>
+                 
+
 
                 <p *ngIf="monster=='False'">
-                    <img class="attribute" src={{attribute}}> {{card?.attribute}}
+                  <span class="border border-top-0 border-white"><img class="attribute" src={{attribute}}> {{card?.attribute}}</span>
                 </p>
 
 
@@ -27,20 +45,29 @@
 
                 <b>
 
-                    <p *ngIf="monster=='True'"><img class="type" src={{mType}}> {{card?.type}}</p>
+                    
 
 
-                    <p *ngIf="monster=='True'">ATK/{{card?.atk}}  DEF/{{card?.def}}</p>
-                    <p> {{card?.effect}}</p>
-                    <p>ID: {{card?.id}}</p>
-                    <p>Creator: {{card?.creator}}</p>
-                    <p>Tags: <span *ngFor ="let tag of tags">{{tag.tag}}, </span></p>
-                    <p *ngIf="unlimited==true">Status: Unlimited</p>
-                    <p *ngIf="limited==true">Status: Limited</p>
-                    <p *ngIf="semilimited==true">Status: Semi-Limited</p>
-                    <p *ngIf="banned==true">Status: BANNED</p>
+                    <p>Effect:</p>
+                    <p class="border border-white rounded"> {{card?.effect}}</p>
+                    <p class="monsterstats border border-start-0 border-end-0 border-top-0" *ngIf="monster=='True'">
+                      <span style="padding-left:0px;" class="border border-top-0 border-bottom-0 border-start-0 border-white"><img class="star" src="assets/cardstats/Star.png"> Level {{card?.level}}</span>
+                      <span class="border border-top-0 border-bottom-0 border-start-0 border-white">ATK: {{card?.atk}} </span>
+                      <span class="border border-top-0 border-bottom-0 border-start-0 border-white">DEF: {{card?.def}} </span>
+                    </p>
+                    
+                    <!-- <p>Tags: <span *ngFor ="let tag of tags">{{tag.tag}}, </span></p> -->
 
-                    <p>Views: {{card?.views}}</p>
+                    <p class="border border-start-0 border-end-0 border-top-0">
+                      <!-- <span class="border border-top-0 border-bottom-0 border-start-0 border-white">ID: {{card?.id}}</span> -->
+                      <span style="padding-left:0px !important;" class="border border-top-0 border-bottom-0 border-start-0 border-white">  Creator: {{card?.creator}}</span>
+                      <span class="border border-top-0 border-bottom-0 border-start-0 border-white" *ngIf="unlimited==true">Status: Unlimited</span>
+                      <span class="border border-top-0 border-bottom-0 border-start-0 border-white" *ngIf="limited==true">Status: Limited</span>
+                      <span class="border border-top-0 border-bottom-0 border-start-0 border-white" *ngIf="semilimited==true">Status: Semi-Limited</span>
+                      <span class="border border-top-0 border-bottom-0 border-start-0 border-white" *ngIf="banned==true">Status: BANNED</span>
+
+                      <span class="border border-top-0 border-bottom-0 border-start-0 border-white">Views: {{card?.views}}</span>
+                  </p>
                 </b>
 
             </div>
@@ -50,16 +77,16 @@
 
             <div class="row">
               <div class="col">
-                <h1>Released In:</h1>
-                <h3 *ngIf="carddetails['packdetails'].length>0">
+                <h3>Released In:</h3>
+                <b *ngIf="carddetails['packdetails'].length>0">
                   <p class="text-capitalize" *ngFor="let pack of carddetails['packdetails']">
                     {{pack.rarity}} : <a class="text-decoration-none" routerLink="/packs/{{pack.id}}">{{pack.title}}</a>
 
-                </p></h3>
+                  </b>
               </div>
 
               <div class="col">
-                <h1>Usage Stats</h1>
+                <h3>Usage Stats</h3>
                 <b *ngIf="carddetails['card-stats'].length>0">
               <p >Used In {{carddetails['card-stats'][0]['percentage']}}% of Decks</p>
               <p>3x: {{ carddetails['ratios'][0]['percentage'] }}%</p>
@@ -78,56 +105,59 @@
             </div>
 
             <div class="row">
-              <h1>Recent Decklists</h1>
+              <div class="col">
+                <h3>Recent Decklists</h3>
 
-              <div class="row" *ngIf="carddetails['recent-card-decklists'].length>0">
-              <div *ngFor="let decklist of carddetails['recent-card-decklists']" class="col-sm-6 col-md-6">
-
-                <div routerLink="/decklist/{{decklist?.id}}" class="card article-card" style="width:302px;">
-                  <div *ngIf="decklist?.label=='Meta'" class="article-label article-label-shadow" style="background-color:purple"><p class="article-label-text">META</p></div>
-                  <div *ngIf="decklist?.label=='Collection'" class="article-label article-label-shadow" style="background-color:rgb(0, 128, 255)"><p class="article-label-text">COLLECTION</p></div>
-                  <div *ngIf="decklist?.label=='Sealed Draft'" class="article-label article-label-shadow" style="background-color:rgba(255, 0, 0, 0.786)"><p class="article-label-text">SEALED DRAFT</p></div>
-                  <div *ngIf="decklist?.label=='Deck Master'" class="article-label article-label-shadow" style="background-color:rgb(16, 154, 57)"><p class="article-label-text">DECK MASTER</p></div>
-                  <div *ngIf="decklist?.label=='Cube'" class="article-label article-label-shadow" style="background-color:rgb(250, 120, 7)"><p class="article-label-text">CUBE</p></div>
-                  <div *ngIf="decklist?.label=='Balanced'" class="article-label article-label-shadow" style="background-color:rgb(248, 49, 162)"><p class="article-label-text">BALANCED</p></div>
-                  <div *ngIf="decklist?.label=='Non-Meta'" class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">NON-META</p></div>
-                  <div *ngIf="decklist?.label=='Anime'" class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">ANIME</p></div>
-                  <div *ngIf="decklist?.label=='Fun/Casual'" class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">CASUAL</p></div>
-                  <div *ngIf="decklist?.label!='Meta'
-                  && decklist?.label != 'Collection'
-                  && decklist?.label != 'Sealed Draft'
-                  && decklist?.label != 'Deck Master'
-                  && decklist?.label != 'Cube'
-                  && decklist?.label != 'Balanced'
-                  && decklist?.label != 'Non-Meta'
-                  && decklist?.label != 'Anime'
-                  && decklist?.label != 'Fun/Casual' " class="article-label article-label-shadow" style="background-color:gray">
-                  <p class="article-label article-label-shadow" style="background-color:gray"class="article-label-text">OTHER</p></div>
-                  <div class="crop ">
-
-                    <img src='https://images.theatticygo.com/card-images/{{decklist?.thumbnail}}.png?{{getTimeStamp()}}' alt="Card image cap">
-
-                    <div class="article-info-overlay">
-                      <h5 class="card-title">{{decklist.name}}</h5>
-                      <p  class="article-card-text card-text">Submitted By <b>{{decklist.creator}}</b></p>
-
+                <div class="row" *ngIf="carddetails['recent-card-decklists'].length>0">
+                <div *ngFor="let decklist of carddetails['recent-card-decklists']" class="col-sm-6 col-md-6">
+  
+                  <div routerLink="/decklist/{{decklist?.id}}" class="card article-card" style="width:302px;">
+                    <div *ngIf="decklist?.label=='Meta'" class="article-label article-label-shadow" style="background-color:purple"><p class="article-label-text">META</p></div>
+                    <div *ngIf="decklist?.label=='Collection'" class="article-label article-label-shadow" style="background-color:rgb(0, 128, 255)"><p class="article-label-text">COLLECTION</p></div>
+                    <div *ngIf="decklist?.label=='Sealed Draft'" class="article-label article-label-shadow" style="background-color:rgba(255, 0, 0, 0.786)"><p class="article-label-text">SEALED DRAFT</p></div>
+                    <div *ngIf="decklist?.label=='Deck Master'" class="article-label article-label-shadow" style="background-color:rgb(16, 154, 57)"><p class="article-label-text">DECK MASTER</p></div>
+                    <div *ngIf="decklist?.label=='Cube'" class="article-label article-label-shadow" style="background-color:rgb(250, 120, 7)"><p class="article-label-text">CUBE</p></div>
+                    <div *ngIf="decklist?.label=='Balanced'" class="article-label article-label-shadow" style="background-color:rgb(248, 49, 162)"><p class="article-label-text">BALANCED</p></div>
+                    <div *ngIf="decklist?.label=='Non-Meta'" class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">NON-META</p></div>
+                    <div *ngIf="decklist?.label=='Anime'" class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">ANIME</p></div>
+                    <div *ngIf="decklist?.label=='Fun/Casual'" class="article-label article-label-shadow" style="background-color:gray"><p class="article-label-text">CASUAL</p></div>
+                    <div *ngIf="decklist?.label!='Meta'
+                    && decklist?.label != 'Collection'
+                    && decklist?.label != 'Sealed Draft'
+                    && decklist?.label != 'Deck Master'
+                    && decklist?.label != 'Cube'
+                    && decklist?.label != 'Balanced'
+                    && decklist?.label != 'Non-Meta'
+                    && decklist?.label != 'Anime'
+                    && decklist?.label != 'Fun/Casual' " class="article-label article-label-shadow" style="background-color:gray">
+                    <p class="article-label article-label-shadow" style="background-color:gray"class="article-label-text">OTHER</p></div>
+                    <div class="crop ">
+  
+                      <img src='https://images.theatticygo.com/card-images/{{decklist?.thumbnail}}.png?{{getTimeStamp()}}' alt="Card image cap">
+  
+                      <div class="article-info-overlay">
+                        <h5 class="card-title">{{decklist.name}}</h5>
+                        <p  class="article-card-text card-text">Submitted By <b>{{decklist.creator}}</b></p>
+  
+                      </div>
+                      </div>
+  
+                      <!-- <div class="card-body">
+                        <h5 class="card-title">{{article.title}}</h5>
+                        <p class="card-text">{{article.header}}</p>
+                        <p class="card-text">By {{article.username}}</p>
+                      </div> -->
                     </div>
-                    </div>
-
-                    <!-- <div class="card-body">
-                      <h5 class="card-title">{{article.title}}</h5>
-                      <p class="card-text">{{article.header}}</p>
-                      <p class="card-text">By {{article.username}}</p>
-                    </div> -->
+  
+  
                   </div>
-
-
                 </div>
+  
+                <span *ngIf="carddetails['recent-card-decklists'].length==0">
+                  <b><p>Not in any decklists :(</p></b>
+                  </span>
               </div>
-
-              <span *ngIf="carddetails['recent-card-decklists'].length==0">
-                <b><p>Not in any decklists :(</p></b>
-                </span>
+              
 
             </div>
 

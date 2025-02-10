@@ -267,3 +267,32 @@ p {
   font-family: Roboto;
   font-size: 14px;
 }
+
+p{
+  font-size: large;
+  margin:0;
+  margin-bottom:3px;
+  padding:0;
+}
+
+.vr{
+  width:3px;
+  background-color:white;
+}
+.border{
+  padding:5px;
+
+}
+.monsterstats{
+  font-size:x-large;
+}
+
+h1{
+  margin:0;
+  margin-bottom:3px;
+}
+h4{
+  padding:0;
+  margin:0;
+  margin-bottom:3px;
+}

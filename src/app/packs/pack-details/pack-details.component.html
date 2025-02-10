@@ -1,7 +1,8 @@
 <app-hover-card></app-hover-card>
 
 <h1 class="text-center">{{packInfo.title}}</h1>
-<h4 class="text-center">Created by <a routerLink="/players/{{packInfo.creatorid}}">{{packInfo.creator}}</a> |
+<h4 class="text-center">
+    <!-- Created by <a routerLink="/players/{{packInfo.creatorid}}">{{packInfo.creator}}</a> | -->
     Pack Size: <span *ngIf="packInfo.packsize=='large'">200 cards, 13 per pack</span>
     <span *ngIf="packInfo.packsize=='medium'">100 cards, 9 per pack</span>
     <span *ngIf="packInfo.packsize=='small'">31 cards, 3 per pack</span>
