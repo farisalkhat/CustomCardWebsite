@@ -1,10 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { AddToBinder, Binder, BinderInfo, Card, CustomcardsService, HoveredCardDetails, Pack, PackCard, PackInfo, PackSelectedData } from 'src/app/customcards.service';
+import { CanComponentDeactivate } from 'src/app/deactivate-component.guard';
 
 @Component({
   selector: 'app-pack-opener',
@@ -29,8 +30,18 @@ import { AddToBinder, Binder, BinderInfo, Card, CustomcardsService, HoveredCardD
     ])
   ]
 })
-export class PackOpenerComponent implements OnInit {
+export class PackOpenerComponent implements OnInit,CanComponentDeactivate {
 
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    
+    console.log("Packs opened: " + this.packsOpened)
+    return confirm('You have unsaved changes. Do you want to leave?');
+    return true;
+  }
+
+
+
+   
   constructor(public authService:AuthService, private customcardsService:CustomcardsService,private route: ActivatedRoute, private router:Router) { }
   cards!: PackCard[];
   card: PackCard | undefined;
@@ -47,7 +58,7 @@ export class PackOpenerComponent implements OnInit {
   superCards: PackCard[] = [];
   ultraCards: PackCard[] = [];
   secretCards: PackCard[] = [];
-
+  @Output() packsopened = new EventEmitter<any[]>();
   packsOpened = 0; //Total Packs opened since starting the pack simulator
   packAmount = 0; //Total amount of packs that need to be opened
   packID!:number;
@@ -455,7 +466,11 @@ mouseLeft() {
   }
 
 
-
+  goToLinkRevealed(url: string){
+    if(this.state!="flipped"){return;}
+    const newurl = 'https://www.duelingbook.com/card?id='+url
+    window.open(newurl, "_blank");
+}
 
 
 
@@ -560,9 +575,11 @@ mouseLeft() {
     this.addPackToCollection()
     this.currentOpened.sort((a, b) => a.name.localeCompare(b.name))
     this.currentOpened.sort((a, b) => a.creator.localeCompare(b.creator))
+    this.packsopened.emit([this.packsOpened,this.packID,this.id,false])
 
     if(this.packQueue.length==0 && this.packsOpened==this.packAmount){
       this.finishedPacks=true;
+      this.packsopened.emit([this.packsOpened,this.packID,this.id,true])
       return
     }
   }
@@ -570,10 +587,11 @@ mouseLeft() {
   openNextPack(){
     this.revealed=false
     this.openedPack = []
-
+    this.packsopened.emit([this.packsOpened,this.packID,this.id,false])
 
 
     if(this.packsOpened==this.packAmount){
+      this.packsopened.emit([this.packsOpened,this.packID,this.id,true])
       this.packsOpened = 0;
 
       this.queueNextPack();
@@ -848,3 +866,5 @@ addToBinder(){
 }
 
 }
+
+

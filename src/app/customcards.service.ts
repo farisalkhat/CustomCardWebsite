@@ -565,6 +565,9 @@ export class CustomcardsService {
   getPacks() {
     return this.http.get<PackButton[]>(`https://farisalkhat.com/theattic/api/yugioh/packs`);
   }
+  getEvents() {
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/events`);
+  }
   getStructureDecks() {
     return this.http.get<PackButton[]>(`https://farisalkhat.com/theattic/api/yugioh/structure-decks`);
   }
@@ -589,8 +592,9 @@ export class CustomcardsService {
     return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/draft/cards/${id}`);
   }
 
-  deleteDecklists(id: number) {
-    return this.http.post<any>(`https://farisalkhat.com/theattic/api/delete-decklists`, id);
+  deleteDecklists(deckid: number,userid:number) {
+    let data = {userid,deckid}
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/delete-decklists`, data);
 
   }
 
@@ -675,8 +679,9 @@ export class CustomcardsService {
     )
   }
 
-  deletePack(id: number) {
-    return this.http.post<any>(`https://farisalkhat.com/theattic/api/delete-pack`, id);
+  deletePack(packid: number,userid:number) {
+    let data = {userid,packid}
+    return this.http.post<any>(`https://farisalkhat.com/theattic/api/delete-pack`, data);
   }
 
   deleteDraft(id: number) {
@@ -703,6 +708,11 @@ export class CustomcardsService {
     )
   }
 
+  uploadPackEvent(data:any) {
+    return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/upload-pack-event', data
+    )
+  }
+
 
 
 
@@ -715,7 +725,7 @@ export class CustomcardsService {
     return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/submitbinder', binderInfo
     )
   }
-
+ 
   addToBinder(addToBinder: AddToBinder) {
     return this.http.post<any>('https://farisalkhat.com/theattic/api/yugioh/addtobinder', addToBinder
     )

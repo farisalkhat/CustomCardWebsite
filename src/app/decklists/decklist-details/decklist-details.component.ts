@@ -407,7 +407,7 @@ download(){
  }
 
  delete(){
-  this.customcardService.deleteDecklists(this.deckid).subscribe(
+  this.customcardService.deleteDecklists(this.deckid,this.id).subscribe(
     res =>{
       this._router.navigate(['/decklists']);
     },

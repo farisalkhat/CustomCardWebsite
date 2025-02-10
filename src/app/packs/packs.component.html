@@ -124,5 +124,5 @@
     </div>
 </div>
 
-<app-pack-opener [packQueue] = "packTrackerArray" *ngIf="openingPacks==true"></app-pack-opener>
+<app-pack-opener (packsopened)="checkPackSubmission($event)"  [packQueue] = "packTrackerArray" *ngIf="openingPacks==true"></app-pack-opener>
 

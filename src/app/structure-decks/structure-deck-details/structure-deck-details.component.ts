@@ -420,7 +420,7 @@ confirmDelete(){
           let text = "Are you sure you want to delete this structure deck?";
           if (confirm(text) == true) {
 
-              this.customcardService.deletePack(this.deckid).subscribe(
+              this.customcardService.deletePack(this.deckid,this.id).subscribe(
                   res=>{this._router.navigate(['/structure-decks']);},
                   err=>{this._router.navigate(['/structure-decks']);}
               )
@@ -432,7 +432,7 @@ confirmDelete(){
 }
 
     delete(){
-    this.customcardService.deletePack(this.deckid).subscribe(
+    this.customcardService.deletePack(this.deckid,this.id).subscribe(
         res =>{
         this._router.navigate(['/structure-decks']);
         },

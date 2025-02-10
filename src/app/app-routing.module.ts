@@ -51,6 +51,7 @@ import { TopCardsComponent } from './top-cards/top-cards.component';
 import { ViewDraftsComponent } from './drafts/view-drafts/view-drafts.component';
 import { ViewDraftDetailsComponent } from './drafts/view-draft-details/view-draft-details.component';
 import { DraftEditorComponent } from './drafts/draft-editor/draft-editor.component';
+import { DeactivateComponentGuard } from './deactivate-component.guard';
 
 const routes: Routes = [
   {
@@ -71,6 +72,12 @@ const routes: Routes = [
   component:CustomcardDbComponent
 },
 
+{
+  path:'pack-opener',
+  component:PackOpenerComponent,
+  canDeactivate:[DeactivateComponentGuard]
+},
+  
 {path:'drafts',
 component:DraftsComponent},
 {path:'draftmode',
@@ -88,7 +95,8 @@ component:ArticlesComponent},
 {path:'binders',
 component:BindersComponent},
 {path:'packs',
-component:PacksComponent},
+component:PacksComponent,
+canDeactivate:[DeactivateComponentGuard]},
 {path:'pack-maker',
 component:PackMakerComponent},
 {path:'deck-editor',

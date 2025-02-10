@@ -2,11 +2,51 @@ button{
     margin:1px;
 }
 
-a{
+.admins{
     font-weight: bold;
     font-size: large;
 }
 h2{
     padding-top: 10px;
     padding-bottom: 5px;
+}
+
+
+
+li{
+    color:white !important
+}
+ul{
+    padding:0;
+    margin:0;
+}
+
+.badge{
+    margin-right:5px;
+}
+.bg-article{
+    background-color: coral;
+}
+.bg-pack{
+    background-color:crimson;
+}
+.bg-decklist{
+    background-color:deeppink;
+}
+.bg-structure-deck{
+    background-color:mediumturquoise;
+}
+.bg-draft{
+    background-color: cadetblue;
+}
+
+.hover{
+    cursor: pointer;
+}
+.hover:hover{
+    color:green
+}
+
+.hover-bg{
+    cursor: pointer;
 }

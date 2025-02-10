@@ -2,13 +2,52 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
 import { CustomcardsService, PackButton, PackSelected, PackSelectedData } from '../customcards.service';
+import { Observable } from 'rxjs';
+import { CanComponentDeactivate } from '../deactivate-component.guard';
 
 @Component({
   selector: 'app-packs',
   templateUrl: './packs.component.html',
   styleUrls: ['./packs.component.css']
 })
-export class PacksComponent implements OnInit {
+export class PacksComponent implements OnInit,CanComponentDeactivate {
+
+    canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+      
+      if (this.hasUnsavedChanges()) {
+        let result = confirm('You havent finished opening your packs, are you sure you want to leave?');
+        if(result){
+          if(this.submission[0]>0){
+            let data: { user_id?: any; pack_id?: any; packs_opened?: any } = {}
+            data['user_id'] = this.submission[2]
+            data['pack_id']=this.submission[1]
+            data['packs_opened']=this.submission[0]
+            this.customcardsService.uploadPackEvent(data).subscribe(res=>{console.log(res)})
+          }
+        }
+      }
+      return true;
+    }
+  
+     hasUnsavedChanges(): boolean {
+      if(this.submission[3]==false){
+        return true;
+      }
+      return false;
+      
+     }
+     submission: any[] = [0,0,0,true];
+     checkPackSubmission(submission:any[]):void{
+       this.submission = submission
+       if(this.submission[3]==true){
+        let data: { user_id?: any; pack_id?: any; packs_opened?: any } = {}
+        data['user_id'] = this.submission[2]
+        data['pack_id']=this.submission[1]
+        data['packs_opened']=this.submission[0]
+        this.customcardsService.uploadPackEvent(data).subscribe(res=>{console.log(res)})
+       }
+     }
+  
 placeId: any;
 chosenPack:any;
 
@@ -36,6 +75,10 @@ maximized:boolean = true;
   totalCost:number = 0;
 
   sealedmode:boolean=false
+
+
+  
+
 
   queuePack(pack:PackButton,value:number){
 

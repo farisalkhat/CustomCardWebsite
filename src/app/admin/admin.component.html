@@ -50,16 +50,102 @@
             <div class="col-md-3">
                 <h2>The Team</h2>
                 <div *ngFor="let user of staff" class="col-auto">
-                    <a routerLink='/players/{{user.id}}'>
+                    <a class="admins" routerLink='/players/{{user.id}}'>
                     {{user.username}}
                   </a>
                   </div>
             </div>
-            <div class="col-lg-2">
-                <h2>Events</h2>
-                <p>TBA</p>
-            </div>
-        </div>
+            <div class="col-md-9">
+                <h2>Recent Events</h2>
+                <li   class="bg-transparent list-group-item effect ">
+                    <span  (click)="filterEvent('article')"  style="text-align:left;" class="hover-bg badge-date badge bg-article"> 
+                        ARTICLE
+                    </span>
+                    <span (click)="filterEvent('decklist')" style="text-align:left;" class="hover-bg badge-date badge bg-decklist"> 
+                        DECKLIST
+                    </span>
+                    <span (click)="filterEvent('pack')" style="text-align:left;" class="hover-bg badge-date badge bg-pack"> 
+                        PACK
+                    </span>
+                    <span (click)="filterEvent('draft')" style="text-align:left;" class="hover-bg badge-date badge bg-draft"> 
+                        DRAFT
+                    </span>
+                    <span (click)="filterEvent('structuredeck')" style="text-align:left;" class="hover-bg badge-date badge bg-structure-deck"> 
+                        STRUCTURE DECK
+                    </span>
 
-    </div>
+
+                        <ul  *ngFor="let event of filteredEventPage" class=" bg-transparent list-group border-0 list-group-flush">
+                            
+                            <li   class="bg-transparent list-group-item effect ">
+                                <span *ngIf="event.article_id!=null" style="text-align:left;" class="badge-date badge bg-article"> 
+                                    ARTICLE
+                                </span>
+                                <span *ngIf="event.decklist_id!=null" style="text-align:left;" class="badge-date badge bg-decklist"> 
+                                    DECKLIST
+                                </span>
+                                <span *ngIf="event.pack_id!=null" style="text-align:left;" class="badge-date badge bg-pack"> 
+                                    PACK
+                                </span>
+                                <span *ngIf="event.draft_id!=null" style="text-align:left;" class="badge-date badge bg-draft"> 
+                                    DRAFT
+                                </span>
+                                <span *ngIf="event.structure_deck_id!=null" style="text-align:left;" class="badge-date badge bg-structure-deck"> 
+                                    STRUCTURE DECK
+                                </span>
+                                
+                                
+                                
+
+                            
+
+
+                                <span *ngIf="event.event_code=='OPEN'">
+
+                                    <a  *ngIf="filter=='none' || filter=='pack'" routerLink="/users/{{event?.user_id}}">{{event.username}}</a> opened the pack <a routerLink="/packs/{{event?.pack_id}}">{{event.title}}</a> {{event.packs_opened}} time(s)!
+                                </span>
+                                <span *ngIf="event.event_code=='MODIFY'">
+                                    <span *ngIf="event.article_id!=null && filter=='none' || filter=='article'"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> edited an article: <a routerLink="/articles/{{event?.article_id}}">{{event.title}}</a></span>
+                                    <span *ngIf="event.decklist_id!=null"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> edited a decklist: <a routerLink="/decklist/{{event?.decklist_id}}">{{event.title}}</a></span>
+                                    <span *ngIf="event.pack_id!=null && filter=='none' || filter=='pack'"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> edited a pack: <a routerLink="/packs/{{event?.pack_id}}">{{event.title}}</a></span>
+                                    <span *ngIf="event.draft_id!=null"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> edited a draft: <a routerLink="/drafts/draftlists/{{event?.draft_id}}">{{event.title}}</a></span>
+                                    <span *ngIf="event.structure_deck_id!=null"><a routerLink="/users/{{event?.user_id}}">{{event.username}}</a> edited a structure deck: <a routerLink="/structure-deck-details/{{event?.structure_deck_id}}">{{event.title}}</a></span>
+                                
+                                </span>
+                                <span *ngIf="event.event_code=='CREATE'">
+                                    <span *ngIf="event.article_id!=null"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> created the article: <a routerLink="/articles/{{event?.article_id}}">{{event.title}}</a></span>
+                                    <span *ngIf="event.decklist_id!=null"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> created the decklist: <a routerLink="/decklist/{{event?.decklist_id}}">{{event.title}}</a></span>
+                                    <span *ngIf="event.pack_id!=null"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> created the pack: <a routerLink="/packs/{{event?.pack_id}}">{{event.title}}</a></span>
+                                    <span *ngIf="event.draft_id!=null"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> created a draft: <a routerLink="/drafts/draftlists/{{event?.draft_id}}">{{event.title}}</a></span>
+                                    <span *ngIf="event.structure_deck_id!=null"><a routerLink="/users/{{event?.user_id}}">{{event.username}}</a> created a structure deck:  <a routerLink="/structure-deck-details/{{event?.structure_deck_id}}">{{event.title}}</a></span>
+                                </span>
+                                <span *ngIf="event.event_code=='DELETE'">
+                                    <span *ngIf="event.article_id!=null"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> deleted an article.</span>
+                                    <span *ngIf="event.decklist_id!=null"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> deleted a decklist.</span>
+                                    <span *ngIf="event.pack_id!=null"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> deleted a pack.</span>
+                                    <span *ngIf="event.draft_id!=null"><a  routerLink="/users/{{event?.user_id}}">{{event.username}}</a> deleted a draft.</span>
+                                    <span *ngIf="event.structure_deck_id!=null"><a routerLink="/users/{{event?.user_id}}">{{event.username}}</a> deleted a structure deck.</span>
+                                </span>
+
+                                <span style="float:right">  {{event.event_date}} </span>
+                            </li>
+
+
+                        </ul>
+
+                        
+                            <span class="hover" (click)="prevPage()">Prev </span>
+                            <span class="hover">{{currentPage}}, </span>
+                            <span class="hover"(click)="selectPage(currentPage+1)">{{currentPage+1}}, </span>
+                            <span class="hover"(click)="selectPage(currentPage+2)">{{currentPage+2}}, </span>
+                            <span class="hover"(click)="selectPage(currentPage+3)">{{currentPage+3}}...</span>
+                            <span class="hover" (click)="nextPage()">Next</span>
+                        
+          
+                      </div>
+                    
+                    
+                </div>
+            </div>
+
 </div>

@@ -21,7 +21,7 @@
 
                   <button class="btn btn-default" (click)="showDetails(card)" >
 
-                    <div (click)="goToLink(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="card" [@cardFlip]="this.state">
+                    <div (click)="goToLinkRevealed(card.id)" (mouseenter)="mouseHovering(card,$event)" (mouseleave)="mouseLeft()" class="card" [@cardFlip]="this.state">
                       <div class="face back">
                         <img src="assets/cardimages/Default.png" />
 
@@ -117,7 +117,7 @@
 
 
     </div>
-    <div class="row justify-content-center" *ngIf = "card!= undefined">
+    <!-- <div class="row justify-content-center" *ngIf = "card!= undefined">
       <div class="col-sm-2"><img class="bigcard" href='' routerLink="/cards/{{card.id}}" src='https://images.theatticygo.com/card-images/{{card?.id}}.png?{{getTimeStamp()}}'> </div>
       <div class="col-md-4 cardeffect">
 
@@ -146,7 +146,7 @@
 
       </div>
 
-    </div>
+    </div> -->
 
 
 
