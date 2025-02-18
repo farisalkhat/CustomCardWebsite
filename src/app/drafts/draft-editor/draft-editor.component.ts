@@ -5,13 +5,25 @@ import { Editor, Toolbar } from 'ngx-editor';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Card, CustomcardsService, HoveredCardDetails, Draft } from 'src/app/customcards.service';
 import { toHTML,toDoc } from 'ngx-editor';
+import { Observable, Subject } from 'rxjs';
+import { CanComponentDeactivate } from 'src/app/deactivate-component.guard';
 @Component({
   selector: 'app-draft-editor',
   templateUrl: './draft-editor.component.html',
   styleUrls: ['./draft-editor.component.css']
 })
-export class DraftEditorComponent implements OnInit {
 
+export class DraftEditorComponent implements OnInit,CanComponentDeactivate {
+    canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+        
+
+        let result = confirm('You havent finished opening your packs, are you sure you want to leave?');
+        if(result){
+          this.customcardsService.cardlistEvent.next([])
+        }
+      
+      return true;
+    }
   cards!: Card[];
   currentPage = 1;
   currentCards!:Card[];
@@ -123,7 +135,7 @@ export class DraftEditorComponent implements OnInit {
 
 
 
-
+    this.customcardsService.deleteDraftCardEvent.subscribe((data)=>this.deleteDraftCardEvent(data))
 
 
 
@@ -143,10 +155,14 @@ export class DraftEditorComponent implements OnInit {
             this.customcardsService.getDraftByID(this.draftid).subscribe(
               res => {
                   console.log(res)
-                this.draft = res;
+                this.draft = res; 
                 this.draftInfo = this.draft['draft_info']
                 this.currentDraft = this.draft['cards']
                 this.draftSize = this.cards.length;
+
+                console.log(this.currentDraft)
+                
+                this.emitDraft()
 
                 if(this.draftInfo.ownerid!=this.id){
                   this._router.navigate(['/drafts'])
@@ -213,8 +229,17 @@ export class DraftEditorComponent implements OnInit {
       )
 
 
+      
+
 
   }
+
+  draftEmitter: Subject<Card[]>= new Subject<Card[]>();
+  emitDraft(){
+    this.customcardsService.cardlistEvent.next(this.currentDraft)
+  }
+
+
 
   mouseHovering(card: Card, e: MouseEvent) {
     const final = {} as HoveredCardDetails;
@@ -764,6 +789,7 @@ export class DraftEditorComponent implements OnInit {
         }
       this.currentDraft.push(this.card);
       this.addedDraftCards.push(this.card);
+      this.emitDraft()
       
     }
 
@@ -779,6 +805,7 @@ export class DraftEditorComponent implements OnInit {
         }
       this.currentDraft.push(card);
       this.addedDraftCards.push(card);
+      this.emitDraft()
     }
 
   }
@@ -797,6 +824,7 @@ export class DraftEditorComponent implements OnInit {
       if (index > -1) {
         this.currentDraft.splice(index, 1);
         this.deletedDraftCards.push(this.draftCard);
+        this.emitDraft()
       }
 
 
@@ -908,13 +936,17 @@ export class DraftEditorComponent implements OnInit {
 
   }
 
+  deleteDraftCardEvent(card:any){
+    this.selectDraftCard(card)
+    this.deleteDraftCard()
+  }
 
   rightDeleteDraftCard($event: { preventDefault: () => void; },card:Card){
     this.selectDraftCard(card);
     $event.preventDefault();
     this.deleteDraftCard();
 
-  }
+  } 
 
   randomIntFromInterval(min:number, max:number) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min)

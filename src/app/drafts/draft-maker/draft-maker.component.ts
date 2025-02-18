@@ -119,6 +119,7 @@ export class DraftMakerComponent implements OnInit {
   
     constructor(public route:ActivatedRoute, public _authService:AuthService, public customcardsService:CustomcardsService,private _router:Router) { }
     ngOnInit(): void {
+      this.customcardsService.deleteDraftCardEvent.subscribe((data)=>this.deleteDraftCardEvent(data))
   
   
   
@@ -217,7 +218,10 @@ export class DraftMakerComponent implements OnInit {
   
   
     }
-  
+    deleteDraftCardEvent(card:any){
+      this.selectDraftCard(card)
+      this.deleteDraftCard()
+    }
     mouseHovering(card: Card, e: MouseEvent) {
       const final = {} as HoveredCardDetails;
       if (e.clientX >= 900) { final.leftPosition = e.clientX - 200; }
@@ -756,7 +760,9 @@ export class DraftMakerComponent implements OnInit {
       }
   
   }
-  
+  emitDraft(){
+    this.customcardsService.cardlistEvent.next(this.currentDraft)
+  }
     addCard(){
       if(this.card!=undefined){
         const index = this.currentDraft.findIndex(obj => obj.id === this.card?.id)
@@ -766,6 +772,8 @@ export class DraftMakerComponent implements OnInit {
           }
         this.currentDraft.push(this.card);
         this.addedDraftCards.push(this.card);
+        this.emitDraft()
+        
         
       }
   
@@ -781,6 +789,7 @@ export class DraftMakerComponent implements OnInit {
           }
         this.currentDraft.push(card);
         this.addedDraftCards.push(card);
+        this.emitDraft()
       }
   
     }
@@ -800,6 +809,7 @@ export class DraftMakerComponent implements OnInit {
           this.currentDraft.splice(index, 1);
           this.deletedDraftCards.push(this.draftCard);
         }
+        this.emitDraft()
   
   
         // var draftCardID: number = +this.draftCard.id;
@@ -915,6 +925,7 @@ export class DraftMakerComponent implements OnInit {
       this.selectDraftCard(card);
       $event.preventDefault();
       this.deleteDraftCard();
+      this.emitDraft()
   
     }
   

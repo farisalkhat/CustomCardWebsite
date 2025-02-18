@@ -11,6 +11,8 @@ export class CardlistTextviewComponent implements OnInit {
   constructor(private _router:Router) { }
 
   ngOnInit(): void {
+    console.log("inside cardlist-textview")
+    console.log(this.cardlist)
   }
   goToLink(url: string){
 
@@ -33,4 +35,6 @@ export class CardlistTextviewComponent implements OnInit {
     // const newurl = 'https://www.duelingbook.com/card?id='+url
     // window.open(newurl, "_blank");
   }
+
+  
 }

@@ -118,6 +118,7 @@ export class DraftFormComponent implements OnInit {
   addCard() {
     if (this.card) {
       this.currentDraft.push(this.card);
+      this.emitDraft();
 
 
 
@@ -1133,5 +1134,9 @@ export class DraftFormComponent implements OnInit {
 
 
 
+  }
+
+  emitDraft(){
+    this.customcardsService.cardlistEvent.next(this.currentDraft)
   }
 }

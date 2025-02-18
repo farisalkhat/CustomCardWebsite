@@ -17,11 +17,32 @@ export class CardlistImageviewComponent implements OnInit {
   synchroCards!:Card[];
   spellCards!:Card[];
   trapCards!:Card[];
+  @Input() mode:string="draft"
   ngOnInit(): void {
     const current = new Date();
     this.timestamp = current.getTime();
     this.FilterCards();
+
+    this.customcardsService.cardlistEvent.subscribe((data)=>{
+      this.updateCardlist(data)
+    })
+    this.FilterCards();
   }
+  updateCardlist(data:any){
+    console.log("updateCardlist in Images:")
+    console.log(data)
+    this.cardlist=data
+    if(this.mode!='editor'){
+      this.FilterCards();
+    }
+   }
+
+   rightDeleteDraftCard($event: { preventDefault: () => void; },card:Card){
+    this.customcardsService.deleteDraftCardEvent.next(card)
+    $event.preventDefault();
+    
+
+  } 
 
   mouseHovering(card: Card, e: MouseEvent) {
     const final = {} as HoveredCardDetails;
@@ -48,7 +69,7 @@ export class CardlistImageviewComponent implements OnInit {
     return this.timestamp;
   }
   FilterCards(){
-    this.effectCards = this.cardlist.filter((card)=>card.cardtype.includes('Effect'));
+    this.effectCards = this.cardlist.filter((card)=>card.cardtype.includes('Effect') || card.cardtype.includes('Union'));
     this.xyzCards = this.cardlist.filter((card)=>card.cardtype.includes('Xyz'));
     this.ritualCards = this.cardlist.filter((card)=>card.cardtype.includes('Ritual Monster'));
     this.synchroCards = this.cardlist.filter((card)=>card.cardtype.includes('Synchro'));

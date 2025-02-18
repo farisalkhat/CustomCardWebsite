@@ -39,7 +39,7 @@
                   <img class = "attribute" *ngIf="card.type=='Warrior'" src ="assets/monstertypes/{{card.type}}.png">
                   <img class = "attribute" *ngIf="card.type=='Winged-Beast'" src ="assets/monstertypes/{{card.type}}.png">
                   <img class = "attribute" *ngIf="card.type=='Zombie'" src ="assets/monstertypes/{{card.type}}.png">
-                    <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                    <a (contextmenu)="rightDeleteDraftCard($event,card)"(click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
                   </li>
               </ul>
 
@@ -60,7 +60,7 @@
                   <img class = "attribute" *ngIf="card.cardtype=='Continuous Spell'" src ="assets/cardstats/Continuous.png">
                   <img class = "attribute" *ngIf="card.cardtype=='Equip Spell'" src ="assets/cardstats/Equip.png">
                   <img class = "attribute" *ngIf="card.cardtype=='Ritual Spell'" src ="assets/cardstats/Ritual.png">
-                    <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                    <a (contextmenu)="rightDeleteDraftCard($event,card)" (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
                   </li>
               </ul>
 
@@ -81,7 +81,7 @@
                 <img class = "attribute" *ngIf="card.cardtype=='Normal Trap'" src ="assets/cardstats/Normal.png">
                 <img class = "attribute" *ngIf="card.cardtype=='Continuous Trap'" src ="assets/cardstats/Continuous.png">
                 <img class = "attribute" *ngIf="card.cardtype=='Counter Trap'" src ="assets/cardstats/Counter.png">
-                  <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                  <a (contextmenu)="rightDeleteDraftCard($event,card)" (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
                 </li>
             </ul>
           </div>
@@ -125,7 +125,7 @@
                   <img class = "attribute" *ngIf="card.type=='Warrior'" src ="assets/monstertypes/{{card.type}}.png">
                   <img class = "attribute" *ngIf="card.type=='Winged-Beast'" src ="assets/monstertypes/{{card.type}}.png">
                   <img class = "attribute" *ngIf="card.type=='Zombie'" src ="assets/monstertypes/{{card.type}}.png">
-                    <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                    <a (contextmenu)="rightDeleteDraftCard($event,card)" (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
                   </li>
               </ul>
             </div>
@@ -170,7 +170,7 @@
                 <img class = "attribute" *ngIf="card.type=='Warrior'" src ="assets/monstertypes/{{card.type}}.png">
                 <img class = "attribute" *ngIf="card.type=='Winged-Beast'" src ="assets/monstertypes/{{card.type}}.png">
                 <img class = "attribute" *ngIf="card.type=='Zombie'" src ="assets/monstertypes/{{card.type}}.png">
-                  <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                  <a (contextmenu)="rightDeleteDraftCard($event,card)" (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
                 </li>
             </ul>
           </div>
@@ -214,7 +214,7 @@
                 <img class = "attribute" *ngIf="card.type=='Warrior'" src ="assets/monstertypes/{{card.type}}.png">
                 <img class = "attribute" *ngIf="card.type=='Winged-Beast'" src ="assets/monstertypes/{{card.type}}.png">
                 <img class = "attribute" *ngIf="card.type=='Zombie'" src ="assets/monstertypes/{{card.type}}.png">
-                  <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                  <a (contextmenu)="rightDeleteDraftCard($event,card)" (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
                 </li>
             </ul>
           </div>
@@ -258,16 +258,30 @@
                 <img class = "attribute" *ngIf="card.type=='Warrior'" src ="assets/monstertypes/{{card.type}}.png">
                 <img class = "attribute" *ngIf="card.type=='Winged-Beast'" src ="assets/monstertypes/{{card.type}}.png">
                 <img class = "attribute" *ngIf="card.type=='Zombie'" src ="assets/monstertypes/{{card.type}}.png">
-                  <a (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
+                  <a (contextmenu)="rightDeleteDraftCard($event,card)" (click)="goToLink(card.id)">{{ card.name | slice:0:20 }}{{card.name.length > 20 ? '...' : ''}}</a>
                 </li>
             </ul>
           </div>
           </div>
     </div>
 </div>
-<div class="row justify-content-center">
+<div   class="row justify-content-center">
 
-
+  <div class="col">
+    <div class="chart-container">
+      <canvas  id="monsterType" ></canvas>
+  </div>
+  </div>
+  <div class="col">
+    <div class="chart-container">
+      <canvas  id="cardType" ></canvas>
+  </div>
+  </div>
+  <div class="col">
+    <div class="chart-container">
+      <canvas  id="monsterAttribute" ></canvas>
+  </div>
+  </div>
 </div>
 
 

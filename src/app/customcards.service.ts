@@ -1,6 +1,10 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+
+
+
 
 
 export interface HoveredCardDetails extends Document {
@@ -290,6 +294,10 @@ export interface DuelData {
 
 export class CustomcardsService {
 
+  cardlistEvent: Subject<Object> = new Subject<Object>();
+  deleteDraftCardEvent:Subject<Object> = new Subject<Object>();
+  
+
   setDraft(draftType: string, customDraft: boolean) {
     this.draft = draftType;
     this.customDraft = customDraft;
@@ -530,7 +538,7 @@ export class CustomcardsService {
   }
 
   getMatches() {
-    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/matches`);
+    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/matches`);
   }
   getBanlist() {
     return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/banlist`);

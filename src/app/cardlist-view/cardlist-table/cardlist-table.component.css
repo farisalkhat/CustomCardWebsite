@@ -43,3 +43,7 @@ a:hover{
     color:green !important;
     cursor: pointer;
 }
+
+.chart-container{
+    width:600px;
+}

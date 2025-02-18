@@ -109,7 +109,7 @@ export class ViewDraftDetailsComponent implements OnInit {
  
 
   FilterCards(){
-    this.effectCards = this.cards.filter((card)=>card.cardtype.includes('Effect'));
+    this.effectCards = this.cards.filter((card)=>card.cardtype.includes('Effect')|| card.cardtype.includes('Union'));
     this.xyzCards = this.cards.filter((card)=>card.cardtype.includes('Xyz'));
     this.ritualCards = this.cards.filter((card)=>card.cardtype.includes('Ritual'));
     this.synchroCards = this.cards.filter((card)=>card.cardtype.includes('Synchro'));
