@@ -422,7 +422,7 @@ export class StructureDeckEditorComponent implements OnInit {
     if(this.filters['atklow']!=''){
       if(this.filters['atkhigh']!=''){
         let atklow = Number(this.filters['atklow'])
-        let atkhigh = Number(this.filters['levelhigh'])
+        let atkhigh = Number(this.filters['atkhigh'])
         search_res=search_res.filter((card)=>card.atk >=atklow && card.atk <=atkhigh)
       }
       else{

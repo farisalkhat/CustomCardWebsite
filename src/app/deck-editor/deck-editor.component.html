@@ -1,31 +1,3 @@
-<!-- <div [style.left.px]="leftPosition" [style.top.px]="rightPosition" class="hovering" *ngIf="isHovering===true">
-    <p><b>{{hoveredCard?.name}}<span *ngIf="hovermonster=='False'">/ <img class="type" src={{hoverstType}}> {{hoveredCard?.cardtype}} </span>
-        <span *ngIf="hovermonster=='True'"> /{{hoveredCard?.cardtype}} </span></b></p>
-    <b><p *ngIf="hovermonster=='True'">
-        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}} <img class="star" src="assets/cardstats/Star.png"> {{hoveredCard?.level}}
-    </p></b>
-
-    <span *ngIf="hovermonster=='False'">
-        <img class="attribute" src={{hoverattribute}}> {{hoveredCard?.attribute}}
-    </span>
-
-
-
-
-
-
-    <b>
-
-        <p *ngIf="hovermonster=='True'"><img class="type" src={{hovermType}}> {{hoveredCard?.type}}</p>
-
-
-        <p *ngIf="hovermonster=='True'">ATK/{{hoveredCard?.atk}}  DEF/{{hoveredCard?.def}}</p>
-        <p> {{hoveredCard?.effect}}</p>
-        <p>ID: {{hoveredCard?.id}}</p>
-    </b>
-
-</div> -->
-
 
 <app-hover-card></app-hover-card>
 
@@ -34,15 +6,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-auto" [formGroup]="deckDetails">
-            <label for="Name">Deck Name</label>
-            <input id="drafTitle" class="form-control" type="text" id="deckname" formControlName="deckname" [ngClass]="{'is-invalid': submitted && f['deckname'].errors}" >
-            <div *ngIf="submitted && f['deckname'].errors" class="invalid-feedback">
-                <div *ngIf="f['deckname'].errors['deckname']">
-                  <p class="red">Please write a name for your decklist.</p>
-                </div>
-            </div>
-        </div>
+
 
         <!-- <div class="col-auto" [formGroup]="deckDetails">
             <label for="Desc">Deck Description</label>
@@ -53,33 +17,15 @@
                 </div>
             </div>
         </div> -->
-        <div class="col-auto" [formGroup]="deckDetails">
-            <label for="Name">Deck Label</label>
-            <select class="form-control" id="decklabel" formControlName="decklabel" [ngClass]="{'is-invalid': submitted && f['decklabel'].errors}" >
-                <option value="Meta">Meta Decks</option>
-                <option value="Collection">Collection Format</option>
-                <option value ="Sealed Draft">Sealed Draft Format</option>
-                <option value ="Deck Master">Deck Master Format</option>
-                <option value ="Cube Draft">Cube Draft Format</option>
-                <option value ="Balanced">Balanced Format</option>
-                <option value ="Non-Meta">Non-Meta Decks</option>
-                <option value ="Anime">Anime Decks</option>
-                <option value ="Fun/Casual">Fun/Casual Decks</option>
-
-
-              </select>
-            <div *ngIf="submitted && f['decklabel'].errors" class="invalid-feedback">
-                <div *ngIf="f['decklabel'].errors['decklabel']">
-                  <p class="red">Please select a deck label.</p>
-                </div>
-            </div>
 
 
 
 
-        </div>
 
 
+
+
+            
 
 
 
@@ -301,11 +247,110 @@
 
     </div>
 
+    
+<div *ngIf="showDeckButtons" class="col-auto" class="row">
+    <div class="col-auto" [formGroup]="deckDetails">
+        <label for="Name">Deck Name</label>
+        <input id="drafTitle" class="form-control" type="text" id="deckname" formControlName="deckname" [ngClass]="{'is-invalid': submitted && f['deckname'].errors}" >
+        <div *ngIf="submitted && f['deckname'].errors" class="invalid-feedback">
+            <div *ngIf="f['deckname'].errors['deckname']">
+              <p class="red">Please write a name for your decklist.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-auto" [formGroup]="deckDetails">
+        <label for="Name">Deck Label</label>
+        <select class="form-control" id="decklabel" formControlName="decklabel" [ngClass]="{'is-invalid': submitted && f['decklabel'].errors}" >
+            <option value="Meta">Meta Decks</option>
+            <option value="Collection">Collection Format</option>
+            <option value ="Sealed Draft">Sealed Draft Format</option>
+            <option value ="Deck Master">Deck Master Format</option>
+            <option value ="Cube Draft">Cube Draft Format</option>
+            <option value ="Balanced">Balanced Format</option>
+            <option value ="Non-Meta">Non-Meta Decks</option>
+            <option value ="Anime">Anime Decks</option>
+            <option value ="Fun/Casual">Fun/Casual Decks</option>
+
+
+          </select>
+        <div *ngIf="submitted && f['decklabel'].errors" class="invalid-feedback">
+            <div *ngIf="f['decklabel'].errors['decklabel']">
+              <p class="red">Please select a deck label.</p>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+<div class="row">
+    
+    <div *ngIf="showDeckButtons" class="col-auto">
+        <label for="Name">Saved Decks</label>
+        <select  #decklist (change)="SelectedDecklist($event)"  class="form-control" id="saveddecklists" >
+            <option *ngFor="let decklist of decklists " value="{{decklist?.id}}">{{decklist?.name}}</option>
+
+
+          </select>
+
+          <div class="row">
+            <div class="col-auto">
+                <button (click) = "NewDecklist()" class="btn btn-success" >New Deck</button>
+                <button (click) = "LoadDecklist()" class="btn btn-success" >Load Deck</button>
+                
+                <button (click) = "ClearDecklist()" class="btn btn-success" >Clear Deck</button>
+                <button (click) = "SaveDecklist()" class="btn btn-success" >Save Deck</button>
+                <button (click) = "SaveDecklistAs()" class="btn btn-success" >Save Deck As</button>
+                <!-- <button class="btn btn-danger" >Delete Deck</button> -->
+            </div>
+
+          </div>
+
+
+          <div class="row">
+            <div class="col-auto">
+
+                <!-- <button class="btn btn-success" >Import Decklist</button> -->
+            <button class="btn btn-success"(click)="exportList()">Export Decklist</button>
+            <button  [disabled]="finishedUploading" class="btn btn-success" (click)="uploadList()" *ngIf="_authService.loggedIn()">Upload Decklist</button>
+            <span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
+                <!-- <button class="btn btn-success" (click)="ShowDetailedDeckDescription()">Show Detailed Deck Description</button> -->
+                <button class="btn btn-success" (click)="SetThumbnailMode()">Set Thumbnail</button>
+                <div *ngIf="decklistinfo==undefined">
+                    <app-submit-deck  [hidden]="showdetaileddeckdescription===false"></app-submit-deck>
+                  </div>
+                  <div *ngIf="decklistinfo">
+                    <app-submit-deck [editing]="editing" [html]="decklistinfo.body"  [hidden]="showdetaileddeckdescription===false"></app-submit-deck>
+                  </div>
+                  <p class="" *ngIf = "setthumbnailmode===true">The next card you right-click will be your thumbnail for your uploaded decklist.</p>
+                  <p class="" *ngIf = "detailederror===true">You must put any detailed description.</p>
+                  <p class="" *ngIf = "sameNameError===true">You already have a decklist with this name.</p>
+                        
+                      </div>
+                    </div>
+
+
+
+          </div>
+
+
+
+          <div><button (click)="addTo('Main')" class="btn btn-success small text-center">Main Deck</button>
+            <button (click)="addTo('Side')" class="btn btn-success small text-center">Side Deck</button>
+            <button (click)="ToggleDeckButtons()" class="btn btn-success small text-center"> Toggle</button>
+        </div>
+
+
+    
+
+
+</div>
+
+
     <div class="row text-center">
 
-        <div><button (click)="addTo('Main')" class="btn btn-success small text-center">Main Deck</button>
-            <button (click)="addTo('Side')" class="btn btn-success small text-center">Side Deck</button>
-        </div>
+
 
 
 
@@ -396,23 +441,8 @@
 
     <div *ngIf="this.defaultRules=='default'" class="row">
 
-        <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b>
-            <button class="btn btn-success"(click)="exportList()">Export XML</button>
-            <button  [disabled]="finishedUploading" class="btn btn-success" (click)="uploadList()" *ngIf="_authService.loggedIn()">Upload Decklist</button>
-            <span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
-                <button class="btn btn-success" (click)="ShowDetailedDeckDescription()">Show Detailed Deck Description</button>
-                <button class="btn btn-success" (click)="SetThumbnailMode()">Set Thumbnail</button>
-
-
-        </h1>
-        <div *ngIf="decklistinfo==undefined">
-          <app-submit-deck  [hidden]="showdetaileddeckdescription===false"></app-submit-deck>
-        </div>
-        <div *ngIf="decklistinfo">
-          <app-submit-deck [editing]="editing" [html]="decklistinfo.body"  [hidden]="showdetaileddeckdescription===false"></app-submit-deck>
-        </div>
-        <p class="" *ngIf = "setthumbnailmode===true">The next card you right-click will be your thumbnail for your uploaded decklist.</p>
-        <p class="" *ngIf = "detailederror===true">You must put any detailed description.</p>
+        <h1><b>Current Decklist ({{mainDeck.length}}/60) ({{sideDeck.length}}/15)</b></h1>
+            
 
 
 
@@ -477,6 +507,11 @@
             <span *ngIf="uploadCorrectly==false"> Need at least 40 cards to upload.</span>
                 <button class="btn btn-success" (click)="ShowDetailedDeckDescription()">Show Detailed Deck Description</button>
                 <button class="btn btn-success" (click)="SetThumbnailMode()">Set Thumbnail</button>
+                <button (click) = "LoadDecklist()" class="btn btn-success" >Load</button>
+                <button class="btn btn-warning" >Save</button>
+                <button class="btn btn-danger" >Delete</button>
+                
+                
 
 
         </h1>

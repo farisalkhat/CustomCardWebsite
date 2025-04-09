@@ -101,6 +101,10 @@ label {
   /* background-color: #1f1a1f !important; */
 }
 
+.btn{
+  font-family: "Oswald", sans-serif;
+}
+
 button {
   padding: 5px;
   margin: 3px;

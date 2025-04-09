@@ -45,16 +45,9 @@ export class SubmitDeckComponent implements OnInit {
   ngOnInit(): void {
     this.editor = new Editor();
     this.customcardsService.provideDecklistDetailsEvent.subscribe(data=>{
-
-
-      if(this.editing==true){
-        this.theInnerHTML =  this.articleInfo.controls['editorContent'].value;
-        console.log("This is editorContent" + this.articleInfo.controls['editorContent'].value)
-      }
-      else{
-        this.theInnerHTML =  toHTML(this.articleInfo.controls['editorContent'].value);
-      }
-
+      
+      this.theInnerHTML =  (this.articleInfo.controls['editorContent'].value);
+      console.log(this.theInnerHTML)
       this.customcardsService.ReceiveDeckListDetails(this.theInnerHTML);
     })
 

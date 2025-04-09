@@ -125,6 +125,7 @@ export interface Decklist {
   title: string;
   creator: string;
   creatorid: number;
+  public:string;
 
   desc: string;
   decklist: string;
@@ -140,6 +141,7 @@ export interface Decklist {
 }
 
 export interface importDecklist {
+  
   id: number;
   name: string;
   description: string;
@@ -149,6 +151,7 @@ export interface importDecklist {
   label:string;
   thumbnail:number;
   body:any;
+  public: string;
 
 }
 
@@ -538,7 +541,7 @@ export class CustomcardsService {
   }
 
   getMatches() {
-    return this.http.get<any[]>(`http://127.0.0.1:8080/api/yugioh/matches`);
+    return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/matches`);
   }
   getBanlist() {
     return this.http.get<any[]>(`https://farisalkhat.com/theattic/api/yugioh/customcards/banlist`);
@@ -868,6 +871,7 @@ export class CustomcardsService {
   @Output() receiveDecklistDetailsEvent = new EventEmitter<string>();
   ReceiveDeckListDetails(msg:any){
     this.receiveDecklistDetailsEvent.emit(msg);
+    console.log("this is msg:" + msg)
   }
 
 

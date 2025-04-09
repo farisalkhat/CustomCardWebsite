@@ -125,12 +125,18 @@ export class DeckEditorComponent implements OnInit {
 
   detaileddecklistdescription!:any;
   detailederror:boolean = false;
-  showdetaileddeckdescription: boolean = false;
+  sameNameError:boolean = false;
+
+
+  showDeckButtons:boolean = false;
+  showdetaileddeckdescription: boolean = true;
   setthumbnailmode: boolean = false;
   thumbnail:number = 0;
 
   @Input() drafting: boolean = true;
-
+  username!:string;
+  id!:number;
+  decklists!:importDecklist[];
   editing:boolean = false;
   ngOnChanges(changes: SimpleChanges) {
     for (const propName in changes) {
@@ -142,6 +148,9 @@ export class DeckEditorComponent implements OnInit {
   }
 
 
+  ToggleDeckButtons(){
+    this.showDeckButtons=!this.showDeckButtons;
+  }
   GetDeckEditorDetails() {
     this.defaultRules = this.customcardsService.defaultDeckEditor
     this.customcardsService.receiveDecklistDetailsEvent.subscribe((data)=>{
@@ -225,7 +234,6 @@ export class DeckEditorComponent implements OnInit {
           this.deckDetails.controls['decklabel'].setValue(this.decklistinfo.label);
         })
         this.customcardsService.setProcessingDeck(true);
-        this.editing=true;
         console.log("Processing deck set to true.")
 
       }
@@ -282,10 +290,30 @@ export class DeckEditorComponent implements OnInit {
       this.editing=false;
     }
 
+    if (this._authService.loggedIn()){
+      this._authService.getUser().subscribe(
+        res =>{
+          console.log('this is user:'+res['id'])
+          this.username = res['username']
+          this.id = res['id']
+          this.customcardsService.getDecklistsFromUser(this.id).subscribe(
+            res=>{
+              this.decklists=res;
+              console.log(this.decklists)
+            }
+          )
+        }
+          
+          )
+        
+        }
+
     this.GetDeckEditorDetails();
     const current = new Date();
     this.timestamp = current.getTime();
     console.log(this.cards)
+
+
 
   }
 
@@ -357,6 +385,15 @@ export class DeckEditorComponent implements OnInit {
 
     if (this.filters['initial'] == 'Spell') {
       this.filters['monstertype'] = ''
+      this.filters['attribute']= ''
+      this.filters['levellow'] = ''
+      this.filters['levelhigh'] = ''  
+      this.filters['atklow'] = ''
+      this.filters['atkhigh'] = ''
+      this.filters['deflow'] = ''
+      this.filters['defhigh'] = ''
+
+
       if (this.filters['cardtype'] != "Normal Spell" &&
         this.filters['cardtype'] != "Continuous Spell" &&
         this.filters['cardtype'] != "Quick Spell" &&
@@ -369,6 +406,14 @@ export class DeckEditorComponent implements OnInit {
 
     if (this.filters['initial'] == 'Trap') {
       this.filters['monstertype'] = ''
+      this.filters['monstertype'] = ''
+      this.filters['attribute']= ''
+      this.filters['levellow'] = ''
+      this.filters['levelhigh'] = ''  
+      this.filters['atklow'] = ''
+      this.filters['atkhigh'] = ''
+      this.filters['deflow'] = ''
+      this.filters['defhigh'] = ''
       if (this.filters['cardtype'] != "Normal Trap" &&
         this.filters['cardtype'] != "Continuous Trap" &&
         this.filters['cardtype'] != "Counter Trap") {
@@ -1239,6 +1284,7 @@ export class DeckEditorComponent implements OnInit {
     decklist['title'] = this.deckDetails.controls['deckname'].value;
     decklist['desc'] = " ";
     decklist['label']= this.deckDetails.controls['decklabel'].value;
+    decklist['public'] = "true"
 
     this.xml_file = '<?xml version="1.0" encoding="utf-8" ?> <deck name=".TriType"><main>';
 
@@ -1297,7 +1343,6 @@ export class DeckEditorComponent implements OnInit {
             this.customcardsService.setEditDeckID(-1);
             this.customcardsService.setEditDeckName('')
             this.customcardsService.uploadDecklist([],[],[]);
-            this.editing=false;
             this.submitfail = false;
             this._router.navigate(['/decklists']);
           },
@@ -1365,4 +1410,295 @@ export class DeckEditorComponent implements OnInit {
     this.setthumbnailmode = !this.setthumbnailmode;
 
   }
+
+  public:string="false";
+
+
+
+  LoadDecklist() {
+    this.customcardsService.setProcessingDeck(true);
+    this.customcardsService.editDeck(true);
+    this.customcardsService.setEditDeckID(this.selectedDecklist);
+
+    this.customcardsService.getDecklist(this.selectedDecklist).subscribe(
+      res => {
+        console.log(res)
+
+        
+
+        this.deckDetails.setValue({
+          deckname:this.decklistinfo.name,
+          deckdescription:this.decklistinfo.description,
+          decklabel:this.decklistinfo.label,
+        
+        })
+
+
+        // this.deckDetails.controls['deckname'].setValue(res.title);
+        // this.deckDetails.controls['deckdescription'].setValue(res.desc);
+        // this.deckDetails.controls['decklabel'].setValue(res.label);
+        this.thumbnail = this.decklistinfo.thumbnail;
+        this.public = this.decklistinfo.public
+        this.sideDeck = [];
+        this.mainDeck = [];
+        
+        this.extraDeck = [];
+        this.edCounter = 0;
+        this.sideCounter = 0;
+        this.monsterCounter = 0;
+        this.spellCounter = 0;
+        this.trapCounter = 0;
+
+        for (let card in res) {
+          if (res[card]['deck']=='sidedeck'){
+            this.addSideCard(res[card])
+          }
+          else{
+            this.addCard(res[card])
+          }
+
+        }
+
+
+
+      })
+    }
+
+  SaveDecklist() {
+    this.customcardsService.SendDeckListDetails();
+    const decklist = {} as Decklist;
+    decklist['title'] = this.deckDetails.controls['deckname'].value;
+    decklist['desc'] = this.deckDetails.controls['deckdescription'].value;
+    decklist['label']= this.deckDetails.controls['decklabel'].value;
+    decklist['public'] = this.public
+    decklist['thumbnail'] = this.thumbnail
+
+    this.xml_file = '<?xml version="1.0" encoding="utf-8" ?> <deck name=".TriType"><main>';
+
+    const idList1: string[] = []
+    const idList2: string[] = []
+    const idList3: string[] = []
+
+
+
+    for (const card of this.mainDeck) {
+      this.xml_file += '<card id="' + String(card.id) + '" passcode="">' + card.name + '</card>\n'
+      idList1.push(card.id)
+    }
+    this.xml_file += "</main><side>"
+    for (const card of this.sideDeck) {
+      this.xml_file += '<card id="' + String(card.id) + '" passcode="">' + card.name + '</card>\n'
+      idList2.push(card.id)
+    }
+    this.xml_file += "</side><extra>"
+
+    for (const card of this.extraDeck) {
+      this.xml_file += '<card id="' + String(card.id) + '" passcode="">' + card.name + '</card>\n'
+      idList3.push(card.id)
+    }
+    this.xml_file += "</extra></deck>\n"
+
+    decklist['mainDeck'] = idList1;
+    decklist['sideDeck'] = idList2;
+    decklist['extraDeck'] = idList3;
+
+    decklist['decklist'] = this.xml_file;
+    decklist['creator'] = this.creator;
+    decklist['creatorid'] = Number(this.creatorid);
+    decklist['body'] = this.detaileddecklistdescription;
+    if (decklist['body']==undefined){
+      decklist['body']='<p> </p>'
+    }
+
+    if(this.thumbnail==0){
+
+      decklist['thumbnail'] = 3117440;
+    }
+    else{
+      decklist['thumbnail'] = this.thumbnail;
+    }
+
+    console.log(decklist)
+    this.finishedUploading=true;
+    console.log(this.customcardsService.getEditDeckID())
+    if (this.customcardsService.getEditDeckID()!=undefined && this.customcardsService.getEditDeckID()!=-1) {
+      decklist['decklistid'] = this.customcardsService.getEditDeckID()
+      this.customcardsService.resubmitDecklist(decklist)
+        .subscribe(
+          res => {
+            console.log("JOBS DONE");
+            console.log(res);
+
+            this.submitfail = false;
+            this.customcardsService.getDecklistsFromUser(this.id).subscribe(
+              res=>{
+                this.decklists=res;
+                console.log(this.decklists)
+              }
+            )
+            
+          },
+
+          err => { console.log(err) }
+        )
+    }
+    else {
+      console.log("submitting decklist..")
+      this.customcardsService.submitDecklist(decklist)
+        .subscribe(
+          res => {
+            this.submitfail = false;
+            this.customcardsService.getDecklistsFromUser(this.id).subscribe(
+              res=>{
+                this.decklists=res;
+                console.log(this.decklists)
+              }
+            )
+            
+          },
+
+          err => { console.log(err) }
+        )
+
+
+    }
+    
+    
+    
+  }
+  
+  SaveDecklistAs() {
+    this.customcardsService.SendDeckListDetails();
+    const decklist = {} as Decklist;
+    console.log("this is deckname:" + this.deckDetails.controls['deckname'].value)
+    decklist['title'] = this.deckDetails.controls['deckname'].value;
+    decklist['desc'] = this.deckDetails.controls['deckdescription'].value;
+    decklist['label']= this.deckDetails.controls['decklabel'].value;
+    decklist['public'] = "false"
+    decklist['thumbnail'] = this.thumbnail
+    
+
+    let res = this.decklists.filter((deck)=>deck.name==decklist['title'])
+    console.log(res)
+
+    // if (decklist['title']){
+    //   this.sameNameError=true
+    //   return
+    // }
+    // else{
+    //   this.sameNameError=false
+    // }
+
+    this.xml_file = '<?xml version="1.0" encoding="utf-8" ?> <deck name=".TriType"><main>';
+
+    const idList1: string[] = []
+    const idList2: string[] = []
+    const idList3: string[] = []
+
+
+
+    for (const card of this.mainDeck) {
+      this.xml_file += '<card id="' + String(card.id) + '" passcode="">' + card.name + '</card>\n'
+      idList1.push(card.id)
+    }
+    this.xml_file += "</main><side>"
+    for (const card of this.sideDeck) {
+      this.xml_file += '<card id="' + String(card.id) + '" passcode="">' + card.name + '</card>\n'
+      idList2.push(card.id)
+    }
+    this.xml_file += "</side><extra>"
+
+    for (const card of this.extraDeck) {
+      this.xml_file += '<card id="' + String(card.id) + '" passcode="">' + card.name + '</card>\n'
+      idList3.push(card.id)
+    }
+    this.xml_file += "</extra></deck>\n"
+
+    decklist['mainDeck'] = idList1;
+    decklist['sideDeck'] = idList2;
+    decklist['extraDeck'] = idList3;
+
+    decklist['decklist'] = this.xml_file;
+    decklist['creator'] = this.creator;
+    decklist['creatorid'] = Number(this.creatorid);
+    decklist['body'] = this.detaileddecklistdescription;
+    if (decklist['body']==undefined){
+      decklist['body']='<p> </p>'
+    }
+
+
+    if(this.thumbnail==0){
+
+      decklist['thumbnail'] = 3117440;
+    }
+    else{
+      decklist['thumbnail'] = this.thumbnail;
+    }
+
+    this.finishedUploading=true;
+
+      console.log("submitting decklist..")
+      this.customcardsService.submitDecklist(decklist)
+        .subscribe(
+          res => {
+            this.submitfail = false;
+            this._router.navigate(['/decklists']);
+          },
+
+          err => { console.log(err) }
+        )
+
+
+    
+
+
+
+  }
+  NewDecklist(){
+    this.customcardsService.setProcessingDeck(false);
+    this.customcardsService.editDeck(false);
+    this.customcardsService.setEditDeckID(-1);
+    this.customcardsService.setEditDeckName('')
+
+    this.deckDetails.controls['deckname'].setValue('');
+    this.deckDetails.controls['deckdescription'].setValue('');
+    this.deckDetails.controls['decklabel'].setValue('');
+    this.detaileddecklistdescription = '';
+    this.thumbnail = 0;
+    this.public = 'false'
+
+    this.sideDeck = [];
+    this.mainDeck = [];
+    
+    this.extraDeck = [];
+    this.edCounter = 0;
+    this.sideCounter = 0;
+    this.monsterCounter = 0;
+    this.spellCounter = 0;
+    this.trapCounter = 0;
+  }
+  ClearDecklist(){
+    this.sideDeck = [];
+    this.mainDeck = [];
+    
+    this.extraDeck = [];
+    this.edCounter = 0;
+    this.sideCounter = 0;
+    this.monsterCounter = 0;
+    this.spellCounter = 0;
+    this.trapCounter = 0;
+  }
+  DeleteDecklist(){
+
+  }
+
+  selectedDecklist = -1;
+	SelectedDecklist(event:any): void {
+    //console.log(event.target.value);
+		this.selectedDecklist = event.target.value
+    let index:number = event.target["selectedIndex"];
+    this.decklistinfo = this.decklists[index]
+	}
+
+
 }

@@ -52,8 +52,9 @@ export class NavigationComponent implements OnInit {
     this._router.navigate(['/packs'])
   }
   GoToDeckEditor() {
+    this.customcardsService.resetDeck()
     this.customcardsService.SetDeckEditorDefault();
   }
 
-
+ 
 }
